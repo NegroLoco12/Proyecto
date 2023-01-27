@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "68245960055",
+    "project_id": "prodiser-eb21d",
+    "storage_bucket": "prodiser-eb21d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:68245960055:android:1008f30fe617f9053d1d72",
+        "android_client_info": {
+          "package_name": "com.foysaltech.drawersliding"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "68245960055-5n5jtiamgr2q2isqi5evrh0u9hiugeoh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.foysaltech.drawersliding",
+            "certificate_hash": "adbe421e2842319a2cc0edc0b9266242621e9956"
+          }
+        },
+        {
+          "client_id": "68245960055-61dj6o7cv08h1vovvsrrdsjg37q4biq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUmif0e5CZtejvcd_RcM_ogEb2bTGFHZ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "68245960055-61dj6o7cv08h1vovvsrrdsjg37q4biq7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

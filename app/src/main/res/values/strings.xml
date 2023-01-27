@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Prodiser S.A.I.C</string>
+
+
+    <string-array name="ld_activityScreenTitles">
+        <item>Inicio</item>
+        <item>Mis direcciones</item>
+        <item>Mis Pedidos</item>
+        <item>Mi Cuenta</item>
+
+        <item>Carrito</item>
+        <item>¿Quienes Somos?</item>
+        <item>Cerrar Sesión</item>
+        <item>Usuario</item>
+    </string-array>
+
+    <array name="ld_activityScreenIcons">
+        <item>@drawable/ic_home_outline_grey600_24dp</item>
+        <item>@drawable/ic_account_outline_grey600_24dp</item>
+        <item>@drawable/ic_account_outline_grey600_24dp</item>
+        <item>@drawable/ic_account_outline_grey600_24dp</item>
+
+        <item>@drawable/ic_cart_outline_grey600_24dp</item>
+        <item>@drawable/ic_email_outline_grey600_24dp</item>
+        <item>@drawable/ic_logout_grey600_24dp</item>
+        <item></item>
+    </array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

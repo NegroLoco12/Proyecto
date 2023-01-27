@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Button4">
+        <item name="cornerSize">20%</item>
+
+    </style>
+    <style name="Button5">
+        <item name="cornerSize">40%</item>
+
+    </style>
+    <style name="Button2">
+        <item name="cornerSize">10%</item>
+
+    </style>
+
+</resources>
