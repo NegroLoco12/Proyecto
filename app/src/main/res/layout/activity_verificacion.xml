@@ -22,31 +22,33 @@
             android:id="@+id/txt_seis"
             android:layout_width="50dp"
             android:layout_height="90dp"
+            android:background="@drawable/bordes"
             android:ems="10"
-            android:maxLength="1"
-            android:inputType="number"
             android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.213"
+            app:layout_constraintHorizontal_bias="0.218"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.449" />
+            app:layout_constraintVertical_bias="0.451" />
 
         <EditText
             android:id="@+id/txt_cinco"
             android:layout_width="50dp"
             android:layout_height="90dp"
+            android:background="@drawable/bordes"
             android:ems="10"
-            android:maxLength="1"
-            android:inputType="number"
             android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.382"
+            app:layout_constraintHorizontal_bias="0.396"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.449" />
+            app:layout_constraintVertical_bias="0.453" />
 
         <EditText
             android:id="@+id/txt_tres"
@@ -56,27 +58,30 @@
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
+            android:background="@drawable/bordes"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.044"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.449" />
+            app:layout_constraintVertical_bias="0.449"
+            />
 
         <EditText
             android:id="@+id/txt_cuatro"
             android:layout_width="50dp"
             android:layout_height="90dp"
+            android:background="@drawable/bordes"
             android:ems="10"
-            android:maxLength="1"
-            android:inputType="number"
             android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.908"
+            app:layout_constraintHorizontal_bias="0.925"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.449" />
+            app:layout_constraintVertical_bias="0.451" />
 
         <Button
             android:id="@+id/button3"
@@ -97,31 +102,33 @@
             android:id="@+id/txt_uno"
             android:layout_width="50dp"
             android:layout_height="90dp"
+            android:background="@drawable/bordes"
             android:ems="10"
-            android:maxLength="1"
-            android:inputType="number"
             android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.734"
+            app:layout_constraintHorizontal_bias="0.753"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.449" />
+            app:layout_constraintVertical_bias="0.453" />
 
         <EditText
             android:id="@+id/txt_dos"
             android:layout_width="50dp"
             android:layout_height="90dp"
+            android:background="@drawable/bordes"
             android:ems="10"
-            android:maxLength="1"
-            android:inputType="number"
             android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.559"
+            app:layout_constraintHorizontal_bias="0.578"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.449" />
+            app:layout_constraintVertical_bias="0.453" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
