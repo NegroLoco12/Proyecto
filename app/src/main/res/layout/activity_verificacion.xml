@@ -19,12 +19,13 @@
         app:layout_constraintVertical_bias="0.7">
 
         <EditText
-            android:id="@+id/txt_seis2"
+            android:id="@+id/txt_seis"
             android:layout_width="50dp"
             android:layout_height="90dp"
             android:ems="10"
             android:maxLength="1"
             android:inputType="number"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.213"
@@ -33,12 +34,13 @@
             app:layout_constraintVertical_bias="0.449" />
 
         <EditText
-            android:id="@+id/txt_cinco2"
+            android:id="@+id/txt_cinco"
             android:layout_width="50dp"
             android:layout_height="90dp"
             android:ems="10"
             android:maxLength="1"
             android:inputType="number"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.382"
@@ -47,12 +49,13 @@
             app:layout_constraintVertical_bias="0.449" />
 
         <EditText
-            android:id="@+id/txt_tres2"
+            android:id="@+id/txt_tres"
             android:layout_width="50dp"
             android:layout_height="90dp"
             android:ems="10"
-            android:maxLength="1"
+            android:gravity="center"
             android:inputType="number"
+            android:maxLength="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.044"
@@ -61,12 +64,13 @@
             app:layout_constraintVertical_bias="0.449" />
 
         <EditText
-            android:id="@+id/txt_cuatro2"
+            android:id="@+id/txt_cuatro"
             android:layout_width="50dp"
             android:layout_height="90dp"
             android:ems="10"
             android:maxLength="1"
             android:inputType="number"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.908"
@@ -90,12 +94,13 @@
             app:shapeAppearanceOverlay="@style/Button5" />
 
         <EditText
-            android:id="@+id/txt_uno7"
+            android:id="@+id/txt_uno"
             android:layout_width="50dp"
             android:layout_height="90dp"
             android:ems="10"
             android:maxLength="1"
             android:inputType="number"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.734"
@@ -104,12 +109,13 @@
             app:layout_constraintVertical_bias="0.449" />
 
         <EditText
-            android:id="@+id/txt_dos2"
+            android:id="@+id/txt_dos"
             android:layout_width="50dp"
             android:layout_height="90dp"
             android:ems="10"
             android:maxLength="1"
             android:inputType="number"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.559"

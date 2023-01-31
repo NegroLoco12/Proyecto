@@ -377,7 +377,7 @@
                             android:elevation="15dp"
                             android:gravity="center"
 
-                            android:onClick="cargar"
+                            android:onClick="validar_telefono"
                             android:text="Guardar"
                             android:textAllCaps="false"
                             android:textColor="@color/textColor"

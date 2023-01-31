@@ -16,7 +16,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 public class verificacion_phone extends AppCompatActivity {
-private EditText txt_token;
+private EditText txt_uno;
 
     String intenAuth;
     FirebaseAuth mAuth;
@@ -25,12 +25,12 @@ private EditText txt_token;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verificacion);
-        txt_token=findViewById(R.id.txt_uno);
+        txt_uno=findViewById(R.id.txt_uno);
         mAuth=FirebaseAuth.getInstance();
         intenAuth=getIntent().getStringExtra("auth");
     }
     public void lanzar(View v){
-        String codigo=txt_token.getText().toString();
+        String codigo=txt_uno.getText().toString();
         PhoneAuthCredential credential= PhoneAuthProvider.getCredential(intenAuth,codigo);
         iniciarSesion(credential);
 
