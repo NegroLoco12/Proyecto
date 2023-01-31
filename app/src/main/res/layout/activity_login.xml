@@ -385,25 +385,6 @@
                             app:backgroundTint="@color/pinkColor"
                             app:shapeAppearanceOverlay="@style/Button5" />
 
-                        <Button
-                            android:id="@+id/singIn3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="24dp"
-                            android:elevation="15dp"
-                            android:gravity="center"
-
-                            android:onClick="validar_telefono"
-                            android:text="Guardar"
-                            android:textAllCaps="false"
-                            android:textColor="@color/textColor"
-                            android:textSize="17sp"
-                            app:backgroundTint="@color/pinkColor"
-                            app:shapeAppearanceOverlay="@style/Button5" />
-
                     </LinearLayout>
                 </ScrollView>
 
