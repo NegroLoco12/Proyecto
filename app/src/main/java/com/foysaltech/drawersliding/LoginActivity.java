@@ -287,6 +287,7 @@ public class LoginActivity extends AppCompatActivity {
                public void run() {
                     Intent intent=new Intent(LoginActivity.this,verificacion_phone.class);
                     intent.putExtra("auth",s);
+                   intent.putExtra("numero",txt_telefono.getText().toString());
                     startActivity(intent);
                }
            },1000);
