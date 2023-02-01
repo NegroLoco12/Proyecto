@@ -31,7 +31,7 @@ private TextView txt_verificacion;
         mAuth=FirebaseAuth.getInstance();
         intenAuth=getIntent().getStringExtra("auth");
         numero=getIntent().getStringExtra("numero");
-        txt_verificacion.setText("Por favor, escriba el código de verificación enviando al +595"+numero+"");
+        txt_verificacion.setText(" +595 "+numero+"");
 
 
     }
