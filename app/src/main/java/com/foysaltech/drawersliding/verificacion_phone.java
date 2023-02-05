@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,7 +18,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 public class verificacion_phone extends AppCompatActivity {
-private EditText txt_uno;
+private EditText txt_1,txt_2,txt_3,txt_4,txt_5,txt_6;
 private TextView txt_verificacion;
     String intenAuth,numero;
     FirebaseAuth mAuth;
@@ -26,7 +27,12 @@ private TextView txt_verificacion;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verificacion);
-        txt_uno=findViewById(R.id.txt_uno);
+        txt_1=findViewById(R.id.txt_1);
+        txt_2=findViewById(R.id.txt_2);
+        txt_3=findViewById(R.id.txt_3);
+        txt_4=findViewById(R.id.txt_4);
+        txt_5=findViewById(R.id.txt_5);
+        txt_6=findViewById(R.id.txt_6);
         txt_verificacion=findViewById(R.id.txt_verificacion);
         mAuth=FirebaseAuth.getInstance();
         intenAuth=getIntent().getStringExtra("auth");
@@ -36,9 +42,10 @@ private TextView txt_verificacion;
 
     }
     public void lanzar(View v){
-        String codigo=txt_uno.getText().toString();
-        PhoneAuthCredential credential= PhoneAuthProvider.getCredential(intenAuth,codigo);
-        iniciarSesion(credential);
+        String codigo=txt_1.getText().toString()+txt_2.getText().toString()+txt_3.getText().toString()+txt_4.getText().toString()+txt_5.getText().toString()+txt_6.getText().toString();
+        //Toast.makeText(verificacion_phone.this,codigo+"",Toast.LENGTH_LONG).show();
+       PhoneAuthCredential credential= PhoneAuthProvider.getCredential(intenAuth,codigo);
+       iniciarSesion(credential);
 
     }
     private void iniciarSesion(PhoneAuthCredential credential){
