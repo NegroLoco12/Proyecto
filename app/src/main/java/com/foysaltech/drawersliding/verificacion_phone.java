@@ -86,6 +86,7 @@ public class verificacion_phone extends AppCompatActivity {
                                    @Override
                                    public void onComplete(@NonNull Task<Void> task2) {
                                        if (task2.isSuccessful()) {
+
                                            iniciarHome();
                                        }
                                    }
