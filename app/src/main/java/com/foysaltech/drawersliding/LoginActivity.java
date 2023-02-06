@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,12 +15,15 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -48,6 +52,8 @@ import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
 
 public class LoginActivity extends AppCompatActivity {
+    private SpinKitView spinKitView;
+    private Button singIn;
     private  LinearLayout singUpLayout,logInLayout;
     private TextView singUp,logIn,txt_olvidar_clave;
     private EditText txt_nombre, txt_apellido, txt_clave,txt_mail, txt_telefono, eMail,passwords;
@@ -86,6 +92,8 @@ public class LoginActivity extends AppCompatActivity {
         view_apellido=(TextInputLayout) findViewById(R.id.view_apellido);
         view_clave=(TextInputLayout) findViewById(R.id.view_clave);
         txt_olvidar_clave=(TextView) findViewById(R.id.txt_olvidar_clave);
+        spinKitView=(SpinKitView) findViewById(R.id.spin_kit);
+        singIn=(Button) findViewById(R.id.singIn);
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
         mAuth.setLanguageCode("es");
@@ -358,52 +366,10 @@ public class LoginActivity extends AppCompatActivity {
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public void cargar(View v) {
-        if (validar_registro()) {
-            String correo = txt_mail.getText().toString();
-            String clave = txt_clave.getText().toString();
-            String nombre = txt_nombre.getText().toString();
-            String apellido = txt_apellido.getText().toString();
-            int telefono = Integer.parseInt(txt_telefono.getText().toString());
-             mAuth.createUserWithEmailAndPassword(correo, clave).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                  @Override
-                     public void onComplete(@NonNull Task<AuthResult> task) {
-                         if (task.isSuccessful()) {
-                            Map<String, Object> map = new HashMap<>();
-                            map.put("nombre", nombre);
-                            map.put("apellido", apellido);
-                            map.put("telefono", telefono);
-                            map.put("correo", correo);
-                            map.put("clave", clave);
+        ocultar();
+        singIn.setVisibility(View.GONE);
+        spinKitView.setVisibility(View.VISIBLE);
 
-                        String id = mAuth.getCurrentUser().getUid();
-                        mDatabase.child("Usuarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task2) {
-                                if (task2.isSuccessful()) {
-                                            MotionToast.Companion.createColorToast(LoginActivity.this,//Toast Personalizado
-                                            "Registrado",
-                                            "Registrado sin problemas!",
-                                            MotionToastStyle.SUCCESS,
-                                            MotionToast.GRAVITY_BOTTOM,
-                                            MotionToast.LONG_DURATION,
-                                            ResourcesCompat.getFont(LoginActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
-                                            limpiar();
-                                }
-                            }
-                        });
-                    } else {
-                                    MotionToast.Companion.createColorToast(LoginActivity.this,//Toast Personalizado
-                                     "ERROR",
-                                     "No se pudo Registrar",
-                                     MotionToastStyle.ERROR,
-                                     MotionToast.GRAVITY_BOTTOM,
-                                     MotionToast.LONG_DURATION,
-                                     ResourcesCompat.getFont(LoginActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
-                             limpiar();
-                    }
-                }
-            });
-        }
     }
    ////////////////////////////////////////////////////////////////////////////////////////////////////
     private boolean validar_registro() {
@@ -475,6 +441,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     public void ingresar(View v){
+        ocultar();
         if(validar()){
             String usuario, clave;
             usuario = eMail.getText().toString().trim();
@@ -541,5 +508,13 @@ public class LoginActivity extends AppCompatActivity {
     }
     public void prueba(View v){
 
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void ocultar() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imn = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imn.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

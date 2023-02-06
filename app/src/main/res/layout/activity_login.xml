@@ -95,7 +95,7 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="25dp"
-                android:visibility="visible">
+                android:visibility="gone">
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -204,7 +204,7 @@
                 android:orientation="vertical"
 
                 android:padding="15dp"
-                android:visibility="gone">
+                android:visibility="visible">
 
 
                 <ScrollView
@@ -315,17 +315,17 @@
                             app:startIconDrawable="@drawable/ic_telefono">
 
 
-         <com.google.android.material.textfield.TextInputEditText
-             android:id="@+id/txt_telefono"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:ems="10"
-             android:maxLength="9"
-             android:inputType="number"
-             android:textColor="@color/black"
-             android:textSize="15sp"
-             android:textStyle="normal" />
-               </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/txt_telefono"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="number"
+                                android:maxLength="9"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                android:textStyle="normal" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/view_clave"
@@ -376,7 +376,6 @@
                             android:layout_marginEnd="24dp"
                             android:elevation="15dp"
                             android:gravity="center"
-
                             android:onClick="cargar"
                             android:text="Guardar"
                             android:textAllCaps="false"
@@ -384,6 +383,15 @@
                             android:textSize="17sp"
                             app:backgroundTint="@color/pinkColor"
                             app:shapeAppearanceOverlay="@style/Button5" />
+
+                        <com.github.ybq.android.spinkit.SpinKitView
+                            android:id="@+id/spin_kit"
+                            style="@style/SpinKitView.Large.Circle"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:visibility="gone"
+                            app:SpinKit_Color="@color/pinkColor" />
 
                     </LinearLayout>
                 </ScrollView>
