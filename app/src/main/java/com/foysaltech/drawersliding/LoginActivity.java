@@ -128,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -295,7 +295,11 @@ public class LoginActivity extends AppCompatActivity {
                public void run() {
                     Intent intent=new Intent(LoginActivity.this,verificacion_phone.class);
                     intent.putExtra("auth",s);
+                   intent.putExtra("nombre",txt_nombre.getText().toString());
+                   intent.putExtra("apellido",txt_apellido.getText().toString());
                    intent.putExtra("numero",txt_telefono.getText().toString());
+                   intent.putExtra("correo",txt_mail.getText().toString());
+                   intent.putExtra("clave",txt_clave.getText().toString());
                     startActivity(intent);
                }
            },1000);
@@ -369,7 +373,52 @@ public class LoginActivity extends AppCompatActivity {
         ocultar();
         singIn.setVisibility(View.GONE);
         spinKitView.setVisibility(View.VISIBLE);
+        if (validar_registro()) {
+            String correo = txt_mail.getText().toString();
+            String clave = txt_clave.getText().toString();
+            String nombre = txt_nombre.getText().toString();
+            String apellido = txt_apellido.getText().toString();
+            int telefono = Integer.parseInt(txt_telefono.getText().toString());
+            mAuth.createUserWithEmailAndPassword(correo, clave).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("nombre", nombre);
+                        map.put("apellido", apellido);
+                        map.put("telefono", telefono);
+                        map.put("correo", correo);
+                        map.put("clave", clave);
 
+                        String id = mAuth.getCurrentUser().getUid();
+                        mDatabase.child("Usuarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task2) {
+                                if (task2.isSuccessful()) {
+                                    MotionToast.Companion.createColorToast(LoginActivity.this,//Toast Personalizado
+                                            "Registrado",
+                                            "Registrado sin problemas!",
+                                            MotionToastStyle.SUCCESS,
+                                            MotionToast.GRAVITY_BOTTOM,
+                                            MotionToast.LONG_DURATION,
+                                            ResourcesCompat.getFont(LoginActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
+                                    limpiar();
+                                }
+                            }
+                        });
+                    } else {
+                        MotionToast.Companion.createColorToast(LoginActivity.this,//Toast Personalizado
+                                "ERROR",
+                                "No se pudo Registrar",
+                                MotionToastStyle.ERROR,
+                                MotionToast.GRAVITY_BOTTOM,
+                                MotionToast.LONG_DURATION,
+                                ResourcesCompat.getFont(LoginActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
+                        limpiar();
+                    }
+                }
+            });
+        }
     }
    ////////////////////////////////////////////////////////////////////////////////////////////////////
     private boolean validar_registro() {
@@ -477,6 +526,9 @@ public class LoginActivity extends AppCompatActivity {
        }
        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    public void validar_telefono(View v){
+       ocultar();
+       singIn.setVisibility(View.GONE);
+       spinKitView.setVisibility(View.VISIBLE);
         String numero="+595"+txt_telefono.getText().toString();
        PhoneAuthOptions options =
                PhoneAuthOptions.newBuilder(mAuth)
