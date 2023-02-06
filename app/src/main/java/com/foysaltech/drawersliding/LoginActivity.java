@@ -477,9 +477,9 @@ public class LoginActivity extends AppCompatActivity {
     public void ingresar(View v){
         if(validar()){
             String usuario, clave;
-            usuario = eMail.getText().toString();
+            usuario = eMail.getText().toString().trim();
             clave = passwords.getText().toString();
-            mAuth.signInWithEmailAndPassword(usuario,clave).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.signInWithEmailAndPassword(usuario,clave).addOnCompleteListener(LoginActivity.this,new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
@@ -492,7 +492,6 @@ public class LoginActivity extends AppCompatActivity {
                                 MotionToastStyle.WARNING,
                                 MotionToast.GRAVITY_BOTTOM,
                                 MotionToast.LONG_DURATION,
-
                                 ResourcesCompat.getFont(LoginActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
                         eMail.setText("");
                         passwords.setText("");
