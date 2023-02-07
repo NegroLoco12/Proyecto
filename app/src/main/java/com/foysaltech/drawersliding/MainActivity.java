@@ -57,18 +57,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         setContentView(R.layout.activity_main);
 
 
-        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
 
-        if(user!=null){
-                 String nombre=user.getDisplayName();
-
-            Toast.makeText(this, ""+nombre, Toast.LENGTH_LONG).show();
-
-
-            //     mAdapter= new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,mLista);
-           // listView.setAdapter(mAdapter);
-            // Picasso.get().load(user.getPhotoUrl()).placeholder(R.drawable.ic_usuario).into(img);
-        }
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

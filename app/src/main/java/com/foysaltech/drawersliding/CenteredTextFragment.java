@@ -42,9 +42,10 @@ public class CenteredTextFragment extends Fragment {
      textView.setText(text);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                  Intent intent=new Intent(getContext(),LoginActivity.class);
+                     FirebaseAuth.getInstance().signOut();
+                     Intent intent=new Intent(getContext(),LoginActivity.class);
                      startActivity(intent);
+
             }
         });
     }
