@@ -20,6 +20,7 @@ public class SimpleItem extends DrawerItem<SimpleItem.ViewHolder> {
 
     private Drawable icon;
     private String title;
+    private int a;
 
     public SimpleItem(Drawable icon, String title) {
         this.icon = icon;
@@ -27,8 +28,10 @@ public class SimpleItem extends DrawerItem<SimpleItem.ViewHolder> {
         String name=user.getDisplayName();
         if(title.equals("Usuario")){
             this.title = "Bienvenido "+ name+" !" ;
+            this.a=1;
         }else{
             this.title = title;
+            this.a=0;
         }
     }
 
@@ -37,12 +40,11 @@ public class SimpleItem extends DrawerItem<SimpleItem.ViewHolder> {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v;
-        if(this.title.equals("Bienvenido Matias Moral !")){
+        if(this.a==1){
             v= inflater.inflate(R.layout.item_option2, parent, false);
         }else{
              v = inflater.inflate(R.layout.item_option, parent, false);
         }
-
         return new ViewHolder(v);
     }
 

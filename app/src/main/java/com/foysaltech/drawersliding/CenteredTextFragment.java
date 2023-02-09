@@ -20,6 +20,7 @@ public class CenteredTextFragment extends Fragment {
     private static final String EXTRA_TEXT = "text";
 
     public static CenteredTextFragment createFor(String text) {
+
         CenteredTextFragment fragment = new CenteredTextFragment();
         Bundle args = new Bundle();
         args.putString(EXTRA_TEXT, text);
@@ -30,6 +31,7 @@ public class CenteredTextFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_text, container, false);
     }
 
@@ -38,13 +40,16 @@ public class CenteredTextFragment extends Fragment {
         Bundle args = getArguments();
         final String text = args != null ? args.getString(EXTRA_TEXT) : "";
         TextView textView = view.findViewById(R.id.cabecera);
+        if (text.equals("Usuario")){
+                  FirebaseAuth.getInstance().signOut();
+                 Intent intent=new Intent(getContext(),LoginActivity.class);
+                 startActivity(intent);
 
+}
      textView.setText(text);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                     FirebaseAuth.getInstance().signOut();
-                     Intent intent=new Intent(getContext(),LoginActivity.class);
-                     startActivity(intent);
+
 
             }
         });

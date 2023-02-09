@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
 
     private static final int POS_DASHBOARD = 0;
     private static final int POS_ACCOUNT = 1;
-    private static final int POS_MESSAGES = 2;
     private static final int POS_CART = 2;
     private static final int POS_SOMOS = 3;
     private static final int POS_LOGOUT = 4;
@@ -73,15 +74,15 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         screenTitles = loadScreenTitles();
 
         DrawerAdapter adapter = new DrawerAdapter(Arrays.asList(
-                createItemFor(POS_DASHBOARD).setChecked(true),
-                createItemFor(POS_ACCOUNT),
+                createItemFor(0).setChecked(true),
+                createItemFor(1),
 
-                createItemFor(POS_CART),
-                createItemFor(POS_SOMOS),
-                createItemFor(POS_LOGOUT1),
-                createItemFor(POS_LOGOUT),
-                new SpaceItem(25),
-                createItemFor(POS_LOGOUT2)));
+                createItemFor(2),
+                createItemFor(3),
+                createItemFor(4),
+                createItemFor(5),
+                new SpaceItem(10),
+                createItemFor(6)));
         adapter.setListener(this);
 
         RecyclerView list = findViewById(R.id.list);
@@ -104,16 +105,19 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     @Override
     public void onItemSelected(int position) {
         if (position == POS_LOGOUT) {
-         //   FirebaseAuth.getInstance().signOut();
-        //    Intent intent=new Intent(MainActivity.this,LoginActivity.class);
-      //      startActivity(intent);
-           // finish();
+            Toast.makeText(MainActivity.this,"NO Crear",Toast.LENGTH_LONG).show();
+            Fragment selectedScreen = CenteredTextFragment.createFor(screenTitles[position]);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
         }
-
+        if (position == POS_LOGOUT1) {
+            Toast.makeText(MainActivity.this,"NO Crear",Toast.LENGTH_LONG).show();
+            Fragment selectedScreen = new BlankFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
+        }
         slidingRootNav.closeMenu();
-        Fragment selectedScreen = CenteredTextFragment.createFor(screenTitles[position]);
-        showFragment(selectedScreen);
-
+      // Fragment selectedScreen = new BlankFragment();
+               //CenteredTextFragment.createFor(screenTitles[position]);
+     //  showFragment(selectedScreen);
     }
 
     private void showFragment(Fragment fragment) {
