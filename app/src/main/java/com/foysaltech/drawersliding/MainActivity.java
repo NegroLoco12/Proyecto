@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 createItemFor(3),
                 createItemFor(4),
                 createItemFor(5),
-                new SpaceItem(10),
+
                 createItemFor(6)));
         adapter.setListener(this);
 
@@ -104,25 +104,30 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
 
     @Override
     public void onItemSelected(int position) {
-        if (position == POS_LOGOUT) {
-            Toast.makeText(MainActivity.this,"NO Crear",Toast.LENGTH_LONG).show();
+        if (position == POS_DASHBOARD) {
             Fragment selectedScreen = CenteredTextFragment.createFor(screenTitles[position]);
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
         }
-        if (position == POS_LOGOUT1) {
-            Toast.makeText(MainActivity.this,"NO Crear",Toast.LENGTH_LONG).show();
-            Fragment selectedScreen = new BlankFragment();
+        if (position == POS_SOMOS) {
+
+            Fragment selectedScreen = new CuentaFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
         }
-        slidingRootNav.closeMenu();
-      // Fragment selectedScreen = new BlankFragment();
-               //CenteredTextFragment.createFor(screenTitles[position]);
-     //  showFragment(selectedScreen);
+        if (position == POS_LOGOUT2) {
+
+            FirebaseAuth.getInstance().signOut();
+            Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+            finish();
+        }
+
+     slidingRootNav.closeMenu();
+
+
     }
 
     private void showFragment(Fragment fragment) {
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
     }
 
     @SuppressWarnings("rawtypes")
