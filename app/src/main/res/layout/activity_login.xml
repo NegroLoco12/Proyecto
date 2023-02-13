@@ -157,6 +157,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginRight="5dp"
                     android:text="¿Olvidaste tu contraseña?"
                     android:textAlignment="textEnd"
                     android:textColor="#616161"
@@ -190,7 +191,7 @@
 
                     android:layout_marginTop="20dp"
                     android:src="@drawable/ic_google"
-                    android:visibility="visible" />
+                    android:visibility="invisible" />
 
             </LinearLayout>
 

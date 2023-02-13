@@ -291,7 +291,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
             //si es que falla
-                Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                MotionToast.Companion.createColorToast(LoginActivity.this,//Toast Personalizado
+                        "Advertencia",
+                        "Problemas con el Nro de Teléfono",
+                        MotionToastStyle.WARNING,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(LoginActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
+                singIn.setVisibility(View.VISIBLE);
+                spinKitView.setVisibility(View.GONE);
             }
 
             @Override
@@ -360,6 +368,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+    //////////////////////////////////////////////////////////////////////////////////////////
     public void crear(String email, String nombres){
         Map<String, Object> map = new HashMap<>();
         map.put("nombre", nombres);
@@ -477,11 +486,11 @@ public class LoginActivity extends AppCompatActivity {
         if(validar()){
             String usuario, clave;
             usuario = eMail.getText().toString().trim();
-            clave = passwords.getText().toString();
+            clave = passwords.getText().toString().trim();
             mAuth.signInWithEmailAndPassword(usuario,clave).addOnCompleteListener(LoginActivity.this,new OnCompleteListener<AuthResult>() {
                 @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
+                public void onComplete(@NonNull Task<AuthResult> task5) {
+                    if (task5.isSuccessful()) {
 
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }else{

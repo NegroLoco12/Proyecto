@@ -7,10 +7,12 @@ import androidx.core.content.res.ResourcesCompat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -29,7 +31,8 @@ import www.sanju.motiontoast.MotionToastStyle;
 public class verificacion_phone extends AppCompatActivity {
     private EditText txt_1,txt_2,txt_3,txt_4,txt_5,txt_6;
     private TextView txt_verificacion;
-
+    private Button button3;
+    private SpinKitView spinKitView;
     private  String intenAuth,nombre,apellido,numero,correo,clave;
     private  FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -45,9 +48,10 @@ public class verificacion_phone extends AppCompatActivity {
         txt_5=findViewById(R.id.txt_5);
         txt_6=findViewById(R.id.txt_6);
         txt_verificacion=findViewById(R.id.txt_verificacion);
+        button3=findViewById(R.id.button3);
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
-
+        spinKitView=(SpinKitView) findViewById(R.id.spin_kit);
         intenAuth=getIntent().getStringExtra("auth");
         nombre=getIntent().getStringExtra("nombre");
         apellido=getIntent().getStringExtra("apellido");
@@ -59,6 +63,9 @@ public class verificacion_phone extends AppCompatActivity {
 
     }
     public void lanzar(View v){
+        button3.setVisibility(View.GONE);
+        spinKitView.setVisibility(View.VISIBLE);
+
         String codigo=txt_1.getText().toString()+txt_2.getText().toString()+txt_3.getText().toString()+txt_4.getText().toString()+txt_5.getText().toString()+txt_6.getText().toString();
         //Toast.makeText(verificacion_phone.this,codigo+"",Toast.LENGTH_LONG).show();
        PhoneAuthCredential credential= PhoneAuthProvider.getCredential(intenAuth,codigo);
@@ -72,8 +79,8 @@ public class verificacion_phone extends AppCompatActivity {
                if(task.isSuccessful()){
                    mAuth.createUserWithEmailAndPassword(correo, clave).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                        @Override
-                       public void onComplete(@NonNull Task<AuthResult> task) {
-                           if (task.isSuccessful()) {
+                       public void onComplete(@NonNull Task<AuthResult> task2) {
+                           if (task2.isSuccessful()) {
                                Map<String, Object> map = new HashMap<>();
                                map.put("nombre", nombre);
                                map.put("apellido", apellido);
@@ -84,8 +91,8 @@ public class verificacion_phone extends AppCompatActivity {
                                String id = mAuth.getCurrentUser().getUid();
                                mDatabase.child("Usuarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                    @Override
-                                   public void onComplete(@NonNull Task<Void> task2) {
-                                       if (task2.isSuccessful()) {
+                                   public void onComplete(@NonNull Task<Void> task3) {
+                                       if (task3.isSuccessful()) {
 
                                            iniciarHome();
                                        }

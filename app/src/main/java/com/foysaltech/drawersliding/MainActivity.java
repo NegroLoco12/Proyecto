@@ -2,6 +2,7 @@ package com.foysaltech.drawersliding;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,9 +24,18 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,8 +46,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener  {
     private CircleImageView img;
 
-
-
+    String aa;
+    private DatabaseReference mDatabase;
     private static final int POS_DASHBOARD = 0;
     private static final int POS_ACCOUNT = 1;
     private static final int POS_CART = 2;
@@ -57,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+mDatabase= FirebaseDatabase.getInstance().getReference();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -92,12 +102,43 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
 
         adapter.setSelected(POS_DASHBOARD);
         ///////////////////////////////////////////////////////////////////////////////
-        DrawerAdapter adapter2 = new DrawerAdapter(Arrays.asList(createItemFor2(7)));
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String name=user.getEmail();
 
-        RecyclerView list2 = findViewById(R.id.list2);
-        list2.setNestedScrollingEnabled(false);
-        list2.setLayoutManager(new LinearLayoutManager(this));
-        list2.setAdapter(adapter2);
+        DatabaseReference correo = mDatabase.child("Usuarios");
+        Query nombre = correo.orderByChild("correo").equalTo(name);
+
+        nombre.addValueEventListener(new ValueEventListener() {
+
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot datos : snapshot.getChildren()) {
+                    try {
+                        String a =     datos.getValue().toString();
+                        JSONObject obj = new JSONObject(a);
+                        aa=obj.getString("nombre");
+                        Toast.makeText(MainActivity.this,aa+"",Toast.LENGTH_LONG).show();
+                        DrawerAdapter adapter2 = new DrawerAdapter(Arrays.asList(createItemFor2(7,aa)));
+
+                        RecyclerView list2 = findViewById(R.id.list2);
+                        list2.setNestedScrollingEnabled(false);
+                        list2.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                        list2.setAdapter(adapter2);
+                    } catch (JSONException e) {
+
+                    }
+
+
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
 
 /////////////////////////////////////////////////////////////////////////////////////
     }
@@ -132,17 +173,19 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
 
     @SuppressWarnings("rawtypes")
     private DrawerItem createItemFor(int position) {
-        return new SimpleItem(screenIcons[position], screenTitles[position])
+        return new SimpleItem(screenIcons[position], screenTitles[position],"")
                 .withIconTint(color(R.color.textColorSecondary))
                 .withTextTint(color(R.color.textColorPrimary))
                 .withSelectedIconTint(color(R.color.colorAccent))
                 .withSelectedTextTint(color(R.color.colorAccent));
     }
     @SuppressWarnings("rawtypes")
-    private DrawerItem createItemFor2(int position) {
-        return new SimpleItem(screenIcons[position], screenTitles[position])
-                .withIconTint(color(R.color.textColorSecondary))
-                .withTextTint(color(R.color.textColorSecondary))
+    private DrawerItem createItemFor2(int position, String Usuario) {
+
+
+        return new SimpleItem(screenIcons[position], screenTitles[position],Usuario)
+                .withIconTint(color(R.color.colorAccent))
+                .withTextTint(color(R.color.colorAccent))
                 .withSelectedIconTint(color(R.color.colorAccent))
                 .withSelectedTextTint(color(R.color.colorAccent));
     }

@@ -7,10 +7,22 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SimpleItem extends DrawerItem<SimpleItem.ViewHolder> {
+    private DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference();
 
     private int selectedItemIconTint;
     private int selectedItemTextTint;
@@ -22,12 +34,15 @@ public class SimpleItem extends DrawerItem<SimpleItem.ViewHolder> {
     private String title;
     private int a;
 
-    public SimpleItem(Drawable icon, String title) {
+
+    public SimpleItem(Drawable icon, String title,String usuario) {
+
+
         this.icon = icon;
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String name=user.getDisplayName();
+
         if(title.equals("Usuario")){
-            this.title = "Bienvenido "+ name+" !" ;
+
+            this.title = "Bienvenido "+ usuario+" !" ;
             this.a=1;
         }else{
             this.title = title;
@@ -35,6 +50,7 @@ public class SimpleItem extends DrawerItem<SimpleItem.ViewHolder> {
         }
     }
 
+//////////////////////////////////////////////////////////////////////////////////////
     @Override
     public ViewHolder createViewHolder(ViewGroup parent) {
 
