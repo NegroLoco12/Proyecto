@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,18 +43,25 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyVi
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView itemName;
+        ImageView img;
+
     public MyViewHolder(@NonNull View itemView) {
         super(itemView);
         itemName=itemView.findViewById(R.id.ItemName);
+        img=(ImageView)itemView.findViewById(R.id.imageView);
     }
         void bindData(final Categorias item) {
 
 
 
-            itemName.setText(item.getNombre());
+            itemName.setText(item.getDescripcion());
+            if (item.getImagen2() != null) {
+            }else{
+
+            img.setImageResource(R.drawable.imagen);
 
 
-
+            }
         }
 }
 }

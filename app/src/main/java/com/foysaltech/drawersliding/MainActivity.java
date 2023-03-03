@@ -95,7 +95,7 @@ mDatabase= FirebaseDatabase.getInstance().getReference();
                 createItemFor(6)));
         adapter.setListener(this);
 
-        RecyclerView list = findViewById(R.id.list);
+        RecyclerView list = findViewById(R.id.lista);
         list.setNestedScrollingEnabled(false);
         list.setLayoutManager(new LinearLayoutManager(this));
         list.setAdapter(adapter);
