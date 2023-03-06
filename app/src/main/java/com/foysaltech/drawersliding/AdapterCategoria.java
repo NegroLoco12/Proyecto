@@ -56,6 +56,7 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyVi
 
             itemName.setText(item.getDescripcion());
             if (item.getImagen2() != null) {
+                img.setImageBitmap(item.getImagen2());
             }else{
 
             img.setImageResource(R.drawable.imagen);

@@ -15,7 +15,7 @@ public class Categorias {
     }
 
     public Bitmap getImagen2() {
-        byte[] byteCode=   Base64.getDecoder().decode(imagen);
+        byte[] byteCode=   Base64.getDecoder().decode(this.imagen);
         imagen2= BitmapFactory.decodeByteArray(byteCode,0,byteCode.length);
         return imagen2;
     }
