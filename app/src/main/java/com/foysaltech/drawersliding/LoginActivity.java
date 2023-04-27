@@ -101,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         txt_olvidar_clave=(TextView) findViewById(R.id.txt_olvidar_clave);
         spinKitView=(SpinKitView) findViewById(R.id.spin_kit);
         singIn=(Button) findViewById(R.id.singIn);
+
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
         mAuth.setLanguageCode("es");

@@ -12,12 +12,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,6 +43,7 @@ public class CenteredTextFragment extends Fragment {
     RecyclerView.Adapter listAdapter;
     private List<Categorias> elements;
     private static final String EXTRA_TEXT = "text";
+    Categorias categorias=new Categorias();
 
     public static CenteredTextFragment createFor(String text) {
 
@@ -84,30 +87,32 @@ public class CenteredTextFragment extends Fragment {
         });
     }
     public void cargar(){
+
         elements = new ArrayList<>();
-        listAdapter = new AdapterCategoria(getContext(), elements);
+        listAdapter = new AdapterCategoria(getContext(), elements, new AdapterCategoria.OnItemClickListener() {
+            @Override
+            public void onItemClick(Categorias item) {
+
+                pasar(item);
+            }
+        });
         contenedorMenu.setHasFixedSize(true);
         contenedorMenu.setLayoutManager(new LinearLayoutManager(getContext()));
         contenedorMenu.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         contenedorMenu.setAdapter(listAdapter);
         mDatabase.child("Categorias").addValueEventListener(new ValueEventListener() {
             @Override
+
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-              //       try {
-                   // String a = dataSnapshot.getValue().toString();
-                //    JSONObject obj = new JSONObject(a);
-                //         String nombre_categoria = obj.getString("descripcion");
 
-                    Categorias categorias=dataSnapshot.getValue(Categorias.class);
+                     categorias=dataSnapshot.getValue(Categorias.class);
+                    categorias.setKey(dataSnapshot.getKey());
                     elements.add(categorias);
 
+                    //   Toast.makeText(getContext(),elements+"",Toast.LENGTH_LONG).show();
 
 
-                    //  } catch (JSONException e) {
-                   //      Log.d("",""+e);
-                   //}
-                    //}
                 }
                  listAdapter.notifyDataSetChanged();
             }
@@ -120,4 +125,12 @@ public class CenteredTextFragment extends Fragment {
 
         });
     }
+    public void pasar(Categorias item){
+
+   // Toast.makeText(getContext(), categorias.getKey(0)+ " ", Toast.LENGTH_LONG).show();
+
+        //FragmentManager manager = getActivity().getSupportFragmentManager();
+       // manager.beginTransaction().replace(R.id.container, new FragmentProducto()).commit();
+    }
+
 }

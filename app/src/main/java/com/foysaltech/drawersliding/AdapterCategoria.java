@@ -14,14 +14,18 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyViewHolder> {
+    private List<Categorias> mData;
     private Context context;
 
-    public AdapterCategoria(Context context, List<Categorias> mData) {
+    final AdapterCategoria.OnItemClickListener listene;
+    public interface OnItemClickListener{
+        void onItemClick(Categorias item);
+    }
+    public AdapterCategoria(Context context, List<Categorias> mData,AdapterCategoria.OnItemClickListener listener ) {
         this.context = context;
         this.mData = mData;
+        this.listene=listener;
     }
-
-    private List<Categorias> mData;
 
     @NonNull
     @Override
@@ -41,7 +45,7 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyVi
     }
 
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public  class MyViewHolder extends RecyclerView.ViewHolder{
         TextView itemName;
         ImageView img;
 
@@ -49,6 +53,7 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyVi
         super(itemView);
         itemName=itemView.findViewById(R.id.ItemName);
         img=(ImageView)itemView.findViewById(R.id.imageView);
+
     }
         void bindData(final Categorias item) {
 
@@ -60,9 +65,15 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyVi
             }else{
 
             img.setImageResource(R.drawable.imagen);
-
-
             }
+            itemView.findViewById(R.id.botton_cardview).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listene.onItemClick(item);
+                }
+            });
+
         }
-}
+    }
+
 }

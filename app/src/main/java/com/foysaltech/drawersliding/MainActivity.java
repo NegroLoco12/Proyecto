@@ -117,7 +117,7 @@ mDatabase= FirebaseDatabase.getInstance().getReference();
                         String a =     datos.getValue().toString();
                         JSONObject obj = new JSONObject(a);
                         aa=obj.getString("nombre");
-                        Toast.makeText(MainActivity.this,aa+"",Toast.LENGTH_LONG).show();
+                       // Toast.makeText(MainActivity.this,aa+"",Toast.LENGTH_LONG).show();
                         DrawerAdapter adapter2 = new DrawerAdapter(Arrays.asList(createItemFor2(7,aa)));
 
                         RecyclerView list2 = findViewById(R.id.list2);
@@ -150,7 +150,6 @@ mDatabase= FirebaseDatabase.getInstance().getReference();
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
         }
         if (position == POS_SOMOS) {
-
             Fragment selectedScreen = new CuentaFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
         }
