@@ -128,9 +128,12 @@ public class CenteredTextFragment extends Fragment {
     public void pasar(Categorias item){
 
    // Toast.makeText(getContext(), categorias.getKey(0)+ " ", Toast.LENGTH_LONG).show();
-
-        //FragmentManager manager = getActivity().getSupportFragmentManager();
-       // manager.beginTransaction().replace(R.id.container, new FragmentProducto()).commit();
+        Bundle bundle=new Bundle();
+        bundle.putString("cod_categoria",item.getKey());
+        bundle.putString("nombre_categoria",item.getDescripcion());
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+       manager.beginTransaction().replace(R.id.container, new FragmentProducto()).commit();
+       getParentFragmentManager().setFragmentResult("key",bundle);
     }
 
 }

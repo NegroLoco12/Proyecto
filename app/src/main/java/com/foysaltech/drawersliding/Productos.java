@@ -1,14 +1,40 @@
 package com.foysaltech.drawersliding;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import java.util.Base64;
 
 public class Productos {
+
+
     String nombre;
     String descripcion;
-    int precio;
+    String precio;
     int codigo;
-    Bitmap imagen;
+    Bitmap imagen2;
+    String imagen;
+
     String dato;
+    public Bitmap getImagen2() {
+        byte[] byteCode=   Base64.getDecoder().decode(this.imagen);
+        imagen2= BitmapFactory.decodeByteArray(byteCode,0,byteCode.length);
+        return imagen2;
+    }
+
+    public void setImagen2(Bitmap imagen2) {
+        this.imagen2 = imagen2;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
@@ -19,13 +45,6 @@ public class Productos {
 
 
 
-    public Bitmap getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(Bitmap imagen) {
-        this.imagen = imagen;
-    }
 
     public String getDato() {
         return dato;
@@ -36,14 +55,7 @@ public class Productos {
     }
 
 
-    public Productos(int codigo,String nombre, String descripcion, int precio, Bitmap imagen,String dato) {
-        this.codigo=codigo;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.imagen=imagen;
-        this.dato=dato;
-    }
+
 
 
     public String getNombre() {
@@ -62,11 +74,11 @@ public class Productos {
         this.descripcion = descripcion;
     }
 
-    public int getPrecio() {
+    public String getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(String precio) {
         this.precio = precio;
     }
 
