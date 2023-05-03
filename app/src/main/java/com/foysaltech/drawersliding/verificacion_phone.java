@@ -63,8 +63,8 @@ public class verificacion_phone extends AppCompatActivity {
 
     }
     public void lanzar(View v){
-        button3.setVisibility(View.GONE);
-        spinKitView.setVisibility(View.VISIBLE);
+    //    button3.setVisibility(View.GONE);
+      //  spinKitView.setVisibility(View.VISIBLE);
 
         String codigo=txt_1.getText().toString()+txt_2.getText().toString()+txt_3.getText().toString()+txt_4.getText().toString()+txt_5.getText().toString()+txt_6.getText().toString();
         //Toast.makeText(verificacion_phone.this,codigo+"",Toast.LENGTH_LONG).show();

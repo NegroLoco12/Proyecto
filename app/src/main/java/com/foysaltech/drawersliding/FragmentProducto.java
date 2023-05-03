@@ -21,17 +21,18 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentProducto extends Fragment {
-TextView txt_cabecera;
+TextView txt_cabecera,txt_codigo_pro;
     RecyclerView contenedorProducto;
     private DatabaseReference mDatabase;
     RecyclerView.Adapter listAdapter;
-    private List<Productos> elements;
+    private List<Productos> elements;    
 Productos productos=new Productos();
 
 
@@ -45,20 +46,13 @@ Productos productos=new Productos();
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                String codigo= result.getString("cod_categoria");
-                String nombre= result.getString("nombre_categoria");
-txt_cabecera.setText(nombre);
-                //   Toast.makeText(getContext(), codigo+ " ", Toast.LENGTH_LONG).show();
-            }
-        });
+
     }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        cargar();
+      //  cargar();
 
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,12 +62,24 @@ txt_cabecera.setText(nombre);
 
         View view=inflater.inflate(R.layout.fragment_productos, container, false);
         contenedorProducto=view.findViewById(R.id.contenedorProducto);
-txt_cabecera=view.findViewById(R.id.txt_cabecera);
+        txt_cabecera=view.findViewById(R.id.txt_cabecera);
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+cargar(result.getString("cod_categoria"));
+                String nombre= result.getString("nombre_categoria");
+                txt_cabecera.setText(nombre);
+                //   Toast.makeText(getContext(), codigo+ " ", Toast.LENGTH_LONG).show();
+            }
+        });
+
         return view;
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void cargar(){
+    public void cargar( String codigo){
 
         elements = new ArrayList<>();
         listAdapter = new AdapterProductos(getContext(), elements, new AdapterProductos.OnItemClickListener() {
@@ -87,7 +93,12 @@ txt_cabecera=view.findViewById(R.id.txt_cabecera);
         contenedorProducto.setLayoutManager(new LinearLayoutManager(getContext()));
         contenedorProducto.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         contenedorProducto.setAdapter(listAdapter);
-        mDatabase.child("Productos").addValueEventListener(new ValueEventListener() {
+        // Toast.makeText(getContext(),codigo+"",Toast.LENGTH_LONG).show();
+
+        DatabaseReference correo = mDatabase.child("Productos");
+        Query nombre = correo.orderByChild("codcategoria").equalTo(codigo);
+
+        nombre.addValueEventListener(new ValueEventListener() {
             @Override
 
             public void onDataChange(@NonNull DataSnapshot snapshot) {

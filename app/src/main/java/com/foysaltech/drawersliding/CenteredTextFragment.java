@@ -132,7 +132,7 @@ public class CenteredTextFragment extends Fragment {
         bundle.putString("cod_categoria",item.getKey());
         bundle.putString("nombre_categoria",item.getDescripcion());
         FragmentManager manager = getActivity().getSupportFragmentManager();
-       manager.beginTransaction().replace(R.id.container, new FragmentProducto()).commit();
+       manager.beginTransaction().replace(R.id.container, new FragmentProducto()).addToBackStack(null).commit();
        getParentFragmentManager().setFragmentResult("key",bundle);
     }
 

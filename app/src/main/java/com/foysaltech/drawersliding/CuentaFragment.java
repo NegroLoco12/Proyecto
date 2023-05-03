@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,6 +38,7 @@ public class CuentaFragment extends Fragment {
     private EditText txt_nombre, txt_apellido,txt_mail, txt_telefono;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference mDatabase;
+    String codigo;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +83,7 @@ public class CuentaFragment extends Fragment {
                         txt_apellido.setText(obj.getString("apellido"));
                         txt_telefono.setText(obj.getString("telefono"));
                         txt_mail.setText(obj.getString("correo"));
+                        codigo=datos.getKey();
                     } catch (JSONException e) {
 
                     }
@@ -96,5 +100,24 @@ public class CuentaFragment extends Fragment {
         });
 
 
+    }
+    public void ediatr(){
+        mDatabase.child("Usuarios").child(codigo).child("nombre").setValue(txt_nombre.getText());
+
+        mDatabase.child("Usuarios").child(codigo).child("apellido").setValue(txt_apellido.getText());
+
+        mDatabase.child("Usuarios").child(codigo).child("telefono").setValue(txt_telefono.getText()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                MotionToast.Companion.createColorToast(getActivity(),//Toast Personalizado
+                        "Exito!",
+                        "Se ha modificado",
+                        MotionToastStyle.SUCCESS,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(getContext(), www.sanju.motiontoast.R.font.helvetica_regular));
+
+            }
+        });
     }
 }

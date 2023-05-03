@@ -46,6 +46,7 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.MyVi
 
     public  class MyViewHolder extends RecyclerView.ViewHolder{
         TextView nombre_producto;
+        TextView descripcion_producto;
         TextView precio_producto;
         ImageView imagen_producto;
 
@@ -53,7 +54,7 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.MyVi
             super(itemView);
             nombre_producto=itemView.findViewById(R.id.nombre_producto);
             precio_producto=itemView.findViewById(R.id.precio_producto);
-
+           descripcion_producto=itemView.findViewById(R.id.descripcion_producto);
             imagen_producto=(ImageView)itemView.findViewById(R.id.imagen_producto);
 
         }
@@ -61,7 +62,8 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.MyVi
 
 
             precio_producto.setText(item.getPrecio()+" ₲ ");
-            nombre_producto.setText(item.getDescripcion());
+            nombre_producto.setText(item.getNombre());
+            descripcion_producto.setText(item.getDescripcion());
             if (item.getImagen2() != null) {
                 imagen_producto.setImageBitmap(item.getImagen2());
             }else{
@@ -77,5 +79,6 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.MyVi
 
         }
     }
+
 
 }

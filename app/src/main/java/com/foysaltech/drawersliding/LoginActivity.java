@@ -457,6 +457,13 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             view_clave.setErrorEnabled(false);
         }
+        if (clave.length()<=5) {
+            view_clave.setError("Debe tener al menos seis caracteres");
+            retorno = false;
+
+        } else {
+            view_clave.setErrorEnabled(false);
+        }
         return retorno;
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
