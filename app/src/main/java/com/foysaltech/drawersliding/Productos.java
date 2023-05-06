@@ -6,8 +6,15 @@ import android.graphics.BitmapFactory;
 import java.util.Base64;
 
 public class Productos {
+    public String getKey() {
+        return key;
+    }
 
+    public void setKey(String key) {
+        this.key = key;
+    }
 
+    String key;
     String nombre;
     String descripcion;
     String precio;

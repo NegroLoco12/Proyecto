@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -71,7 +72,7 @@ Productos productos=new Productos();
         getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-cargar(result.getString("cod_categoria"));
+            cargar(result.getString("cod_categoria"));
                 String nombre= result.getString("nombre_categoria");
                 txt_cabecera.setText(nombre);
                 //   Toast.makeText(getContext(), codigo+ " ", Toast.LENGTH_LONG).show();
@@ -89,7 +90,7 @@ cargar(result.getString("cod_categoria"));
             @Override
             public void onItemClick(Productos item) {
 
-                //pasar(item);
+                pasar(item);
             }
         });
         contenedorProducto.setHasFixedSize(true);
@@ -108,7 +109,7 @@ cargar(result.getString("cod_categoria"));
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                    productos=dataSnapshot.getValue(Productos.class);
-                   // productos.setKey(dataSnapshot.getKey());
+                   productos.setKey(dataSnapshot.getKey());
                   elements.add(productos);
 
                     //   Toast.makeText(getContext(),elements+"",Toast.LENGTH_LONG).show();
@@ -125,6 +126,19 @@ cargar(result.getString("cod_categoria"));
 
 
         });
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void pasar(Productos item){
+
+        // Toast.makeText(getContext(), categorias.getKey(0)+ " ", Toast.LENGTH_LONG).show();
+        Bundle bundle=new Bundle();
+        bundle.putString("cod_producto",item.getKey());
+        bundle.putString("nombre_producto",item.getDescripcion());
+        bundle.putString("descripcion_producto",item.getDescripcion());
+        bundle.putString("precio_producto",item.getDescripcion());
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.container, new FragmentDescripcion()).addToBackStack(null).commit();
+        getParentFragmentManager().setFragmentResult("key",bundle);
     }
 
     @Override

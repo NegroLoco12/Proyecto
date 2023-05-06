@@ -2,21 +2,19 @@ package com.foysaltech.drawersliding;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentDescripcion#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class FragmentDescripcion extends Fragment {
 
     public FragmentDescripcion() {
-        // Required empty public constructor
+
     }
 
     public static FragmentDescripcion newInstance(String param1, String param2) {
@@ -34,7 +32,15 @@ public class FragmentDescripcion extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_descripcion, container, false);
+
+        View view= inflater.inflate(R.layout.fragment_descripcion, container, false);
+        getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+
+                String nombre= result.getString("nombre_categoria");
+              }
+        });
+        return view;
     }
 }
