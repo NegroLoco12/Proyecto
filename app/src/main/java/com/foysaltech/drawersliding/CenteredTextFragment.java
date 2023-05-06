@@ -40,12 +40,17 @@ import javax.mail.MessagingException;
 
 public class CenteredTextFragment extends Fragment implements SearchView.OnQueryTextListener {
     RecyclerView contenedorMenu;
+    RecyclerView contenedorTodo;
     private DatabaseReference mDatabase;
-    RecyclerView.Adapter listAdapter;
+   AdapterCategoria listAdapter;
+   AdapterProductos listaAdapterProducto;
+
     private List<Categorias> elements;
+    private List<Productos> elementsProductos;
     private static final String EXTRA_TEXT = "text";
     Categorias categorias=new Categorias();
-SearchView txtBuscar;
+    Productos productos=new Productos();
+    SearchView txtBuscar;
 
     public static CenteredTextFragment createFor(String text) {
 
@@ -62,6 +67,7 @@ SearchView txtBuscar;
 
                 View view=inflater.inflate(R.layout.fragment_text, container, false);
                 contenedorMenu=view.findViewById(R.id.contenedorMenu);
+        contenedorTodo=view.findViewById(R.id.contenedorTodos);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         return view;
@@ -148,6 +154,56 @@ txtBuscar=view.findViewById(R.id.MenuSearch);
     @Override
     public boolean onQueryTextChange(String newText) {
 
+        if(listaAdapterProducto.filtrado(newText)==false){
+            contenedorTodo.setVisibility(View.GONE);
+
+        }else{
+            contenedorTodo.setVisibility(View.VISIBLE);
+
+        }
         return false;
     }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    public void cargarTodo( ){
+
+        elements = new ArrayList<>();
+        listaAdapterProducto = new AdapterProductos(getContext(), elementsProductos, new AdapterProductos.OnItemClickListener() {
+            @Override
+            public void onItemClick(Productos item) {
+
+                //pasar(item);
+            }
+        });
+        contenedorTodo.setHasFixedSize(true);
+        contenedorTodo.setLayoutManager(new LinearLayoutManager(getContext()));
+        contenedorTodo.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        contenedorTodo.setAdapter(listAdapter);
+        // Toast.makeText(getContext(),codigo+"",Toast.LENGTH_LONG).show();
+
+        mDatabase.child("Productos").addValueEventListener(new ValueEventListener() {
+            @Override
+
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                    productos=dataSnapshot.getValue(Productos.class);
+                    // productos.setKey(dataSnapshot.getKey());
+                    elementsProductos.add(productos);
+
+                    //   Toast.makeText(getContext(),elements+"",Toast.LENGTH_LONG).show();
+
+
+                }
+                listAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
+    }
+
 }
