@@ -102,7 +102,6 @@ txtBuscar=view.findViewById(R.id.MenuSearch);
         listAdapter = new AdapterCategoria(getContext(), elements, new AdapterCategoria.OnItemClickListener() {
             @Override
             public void onItemClick(Categorias item) {
-
                 pasar(item);
             }
         });
