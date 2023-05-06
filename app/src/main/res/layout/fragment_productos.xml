@@ -47,23 +47,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/contenedorProducto"
-            android:layout_width="0dp"
-            android:layout_height="550dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="4dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_cabecera"
-            app:layout_constraintVertical_bias="0.39"
-            tools:listitem="@layout/item_producto" />
-
         <TextView
             android:id="@+id/txt_cabecera"
             android:layout_width="0dp"
@@ -85,6 +68,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/MenuSearchContainer"
             app:layout_constraintVertical_bias="0.001" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="120dp"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/contenedorProducto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_producto" />
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

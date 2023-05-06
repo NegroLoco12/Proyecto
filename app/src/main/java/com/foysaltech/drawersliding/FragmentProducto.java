@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,11 +28,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentProducto extends Fragment {
+public class FragmentProducto extends Fragment implements SearchView.OnQueryTextListener {
 TextView txt_cabecera,txt_codigo_pro;
     RecyclerView contenedorProducto;
     private DatabaseReference mDatabase;
-    RecyclerView.Adapter listAdapter;
+    AdapterProductos listAdapter;
+    SearchView txtBuscar;
     private List<Productos> elements;    
 Productos productos=new Productos();
 
@@ -75,7 +77,8 @@ cargar(result.getString("cod_categoria"));
                 //   Toast.makeText(getContext(), codigo+ " ", Toast.LENGTH_LONG).show();
             }
         });
-
+        txtBuscar=view.findViewById(R.id.MenuSearch);
+        txtBuscar.setOnQueryTextListener(this);
         return view;
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -122,5 +125,16 @@ cargar(result.getString("cod_categoria"));
 
 
         });
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        listAdapter.filtrado(newText);
+        return false;
     }
 }

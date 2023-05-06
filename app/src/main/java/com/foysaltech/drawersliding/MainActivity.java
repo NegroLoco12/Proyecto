@@ -17,11 +17,15 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -55,8 +59,8 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private static final int POS_LOGOUT = 4;
     private static final int POS_LOGOUT1 = 5;
     private static final int POS_LOGOUT2 = 6;
-
-
+    private List<User> elements;
+    User users=new User();
     private String[] screenTitles;
     private Drawable[] screenIcons;
 
@@ -104,29 +108,30 @@ mDatabase= FirebaseDatabase.getInstance().getReference();
         ///////////////////////////////////////////////////////////////////////////////
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String name=user.getEmail();
-
-        DatabaseReference correo = mDatabase.child("Usuarios");
+          DatabaseReference correo = mDatabase.child("Usuarios");
         Query nombre = correo.orderByChild("correo").equalTo(name);
 
         nombre.addValueEventListener(new ValueEventListener() {
 
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                for (DataSnapshot datos : snapshot.getChildren()) {
-                    try {
-                        String a =     datos.getValue().toString();
-                        JSONObject obj = new JSONObject(a);
-                        aa=obj.getString("nombre");
-                       // Toast.makeText(MainActivity.this,aa+"",Toast.LENGTH_LONG).show();
-                        DrawerAdapter adapter2 = new DrawerAdapter(Arrays.asList(createItemFor2(7,aa)));
+                    users=dataSnapshot.getValue(User.class);
+                    // productos.setKey(dataSnapshot.getKey());
+                   // elements.add(users); // try {
+                    //    String a =     datos.getValue().toString();
+                      //  JSONObject obj = new JSONObject(a);
+                      //  aa=obj.getString("nombre");
+                  //    Toast.makeText(MainActivity.this,users.getNombre()+"",Toast.LENGTH_LONG).show();
+                        DrawerAdapter adapter2 = new DrawerAdapter(Arrays.asList(createItemFor2(7,users.getNombre())));
 
                         RecyclerView list2 = findViewById(R.id.list2);
                         list2.setNestedScrollingEnabled(false);
                         list2.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                         list2.setAdapter(adapter2);
-                    } catch (JSONException e) {
+                 //   } catch (JSONException e) {
 
-                    }
+                  //  }
 
 
 
@@ -138,8 +143,11 @@ mDatabase= FirebaseDatabase.getInstance().getReference();
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-
+        BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(
+                MainActivity.this, R.style.BottonSheetDialogTheme
+        );
+View bottomSheetView= LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_botton_sheet,(LinearLayout)findViewById(R.id.bottomShetContainer));
+bottomSheetView.findViewById(R.id.buttonShare).set
 /////////////////////////////////////////////////////////////////////////////////////
     }
 

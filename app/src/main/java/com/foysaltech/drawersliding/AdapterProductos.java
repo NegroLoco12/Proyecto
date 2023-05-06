@@ -10,11 +10,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.MyViewHolder> {
     private List<Productos> mData;
     private Context context;
+
+    private  List<Productos> listaOriginal;
 
     final AdapterProductos.OnItemClickListener listene;
     public interface OnItemClickListener{
@@ -24,6 +28,8 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.MyVi
         this.context = context;
         this.mData = mData;
         this.listene=listener;
+        listaOriginal= new ArrayList<>();
+        listaOriginal.addAll(mData);
     }
 
     @NonNull
@@ -37,7 +43,23 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.bindData(mData.get(position));
     }
-
+    public  boolean filtrado(String txt_buscar){
+        int longitud=txt_buscar.length();
+        boolean a=true;
+        if(longitud==0) {
+            mData.clear();
+            mData.addAll(listaOriginal);
+        }else{
+            List<Productos>collecion=mData.stream().filter(i->i.getDescripcion().toLowerCase().contains(txt_buscar.toLowerCase())).collect(Collectors.toList());
+            mData.clear();
+            mData.addAll(collecion);
+            if(mData.size()==0){
+                a=false;
+            }
+        }
+        notifyDataSetChanged();
+        return a;
+    }
     @Override
     public int getItemCount() {
         return mData.size();

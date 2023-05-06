@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,13 +38,14 @@ import java.util.List;
 import javax.mail.MessagingException;
 
 
-public class CenteredTextFragment extends Fragment {
+public class CenteredTextFragment extends Fragment implements SearchView.OnQueryTextListener {
     RecyclerView contenedorMenu;
     private DatabaseReference mDatabase;
     RecyclerView.Adapter listAdapter;
     private List<Categorias> elements;
     private static final String EXTRA_TEXT = "text";
     Categorias categorias=new Categorias();
+SearchView txtBuscar;
 
     public static CenteredTextFragment createFor(String text) {
 
@@ -71,6 +73,7 @@ public class CenteredTextFragment extends Fragment {
         Bundle args = getArguments();
         final String text = args != null ? args.getString(EXTRA_TEXT) : "";
         TextView textView = view.findViewById(R.id.cabecera);
+txtBuscar=view.findViewById(R.id.MenuSearch);
         if (text.equals("Usuario")){
                   FirebaseAuth.getInstance().signOut();
                  Intent intent=new Intent(getContext(),LoginActivity.class);
@@ -85,6 +88,7 @@ public class CenteredTextFragment extends Fragment {
 
             }
         });
+        txtBuscar.setOnQueryTextListener(this);
     }
     public void cargar(){
 
@@ -136,4 +140,14 @@ public class CenteredTextFragment extends Fragment {
        getParentFragmentManager().setFragmentResult("key",bundle);
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        return false;
+    }
 }

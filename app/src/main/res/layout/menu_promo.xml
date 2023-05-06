@@ -15,7 +15,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#22a4b3"
         android:paddingStart="14dp"
         android:paddingEnd="4dp"
         android:paddingBottom="20dp"
@@ -24,7 +23,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imagen_promo"
             android:layout_width="wrap_content"
             android:layout_height="120dp"
             android:scaleType="centerInside"
@@ -37,13 +36,13 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/tvPizzaMenuHotPromoName"
+            android:id="@+id/txt_nombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Combo de Limpieza"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -55,15 +54,16 @@
 
 
         <TextView
-            android:id="@+id/tvPizzaMenuHotPromoDiscountPrice"
+            android:id="@+id/txt_precio_promo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="8dp"
             android:ellipsize="end"
+            android:foreground="@drawable/txt_promo"
             android:gravity="center_vertical"
             android:maxLines="1"
             android:text="$ 7.98"
-            android:textColor="@color/white"
+            android:textColor="@color/textColorSecondary"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +73,7 @@
             app:layout_constraintVertical_bias="0.564" />
 
         <TextView
-            android:id="@+id/tvPizzaMenuHotPromoPrice"
+            android:id="@+id/txt_descripcion_promo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="8dp"
@@ -81,7 +81,7 @@
             android:gravity="center_vertical"
             android:maxLines="1"
             android:text="$ 5.98"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +91,7 @@
             app:layout_constraintVertical_bias="0.564" />
 
         <ImageButton
-            android:id="@+id/botton_cardview"
+            android:id="@+id/botton_promo"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginStart="8dp"

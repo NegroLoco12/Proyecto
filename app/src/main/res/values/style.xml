@@ -13,5 +13,10 @@
         <item name="cornerSize">10%</item>
 
     </style>
-
+    <style name="BottonSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
+<item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+</style>
+    <style name="BottomSheetStyle" parent="Widget.Design.CollapsingToolbar">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 </resources>
