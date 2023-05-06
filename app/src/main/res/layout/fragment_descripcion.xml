@@ -187,7 +187,7 @@
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:background="@drawable/add_to_cart_background"
-                    android:drawableStart="@drawable/ic_add_white"
+                    android:drawableStart="@drawable/ic_cart_outline_grey600_24dp"
                     android:drawablePadding="8dp"
                     android:gravity="center"
                     android:onClick="agregar"
