@@ -162,7 +162,7 @@
                                 app:boxStrokeColor="#4E4A4A"
                                 app:boxStrokeWidth="1dp"
                                 app:hintTextColor="#4E4A4A"
-                                app:prefixText="+"
+
                                 app:shapeAppearanceOverlay="@style/Button4"
                                 app:startIconDrawable="@drawable/ic_telefono">
 

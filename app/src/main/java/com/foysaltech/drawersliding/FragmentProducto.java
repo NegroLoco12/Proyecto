@@ -133,12 +133,13 @@ Productos productos=new Productos();
         // Toast.makeText(getContext(), categorias.getKey(0)+ " ", Toast.LENGTH_LONG).show();
         Bundle bundle=new Bundle();
         bundle.putString("cod_producto",item.getKey());
-        bundle.putString("nombre_producto",item.getDescripcion());
+        bundle.putString("nombre_producto",item.getNombre());
         bundle.putString("descripcion_producto",item.getDescripcion());
-        bundle.putString("precio_producto",item.getDescripcion());
+        bundle.putString("precio_producto",item.getPrecio());
+        bundle.putString("imagen_producto",item.getImagen());
         FragmentManager manager = getActivity().getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.container, new FragmentDescripcion()).addToBackStack(null).commit();
-        getParentFragmentManager().setFragmentResult("key",bundle);
+        getParentFragmentManager().setFragmentResult("keypro",bundle);
     }
 
     @Override

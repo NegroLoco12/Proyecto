@@ -31,18 +31,20 @@
 
         <TextView
             android:id="@+id/txt_nombre_producto"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
             android:text="TextView"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.115" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/imagen"
@@ -52,24 +54,21 @@
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.52"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.36"
+            app:layout_constraintVertical_bias="0.22000003"
             tools:src="@drawable/ubicacion" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="350dp"
-            android:layout_height="190dp"
-            android:layout_constraintBottom_toBottomOf="parent"
-            android:layout_constraintEnd_toEndOf="parent"
-            android:layout_constraintStart_toStartOf="parent"
-            android:layout_constraintTop_toTopOf="parent"
+            android:layout_height="210dp"
+
             android:layout_gravity="center"
             app:cardCornerRadius="25dp"
             app:cardElevation="20dp"
-            android:cardUseCompatPadding="true"
+            app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -87,44 +86,21 @@
 
                 >
 
-                <TextView
-                    android:id="@+id/txt_descripcion_producto"
-                    android:layout_width="130dp"
-                    android:layout_height="50dp"
-                    android:layout_constraintHorizontal_bias="0.086"
-                    android:layout_constraintVertical_bias="0.42000002"
-                    android:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_constraintEnd_toEndOf="parent"
-                    android:layout_constraintStart_toStartOf="parent"
-                    android:layout_constraintTop_toTopOf="parent"
-                    android:ellipsize="end"
-                    android:text="descripcion"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.588" />
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/QuantityContainer"
                     android:layout_width="100dp"
-                    android:layout_height="32dp"
-                    android:layout_constraintHorizontal_bias="0.845"
-                    android:layout_constraintEnd_toEndOf="parent"
-                    android:layout_constraintStart_toStartOf="parent"
-                    android:layout_constraintTop_toTopOf="parent"
+                    android:layout_height="35dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.934"
+                    app:layout_constraintHorizontal_bias="0.79"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.47000003">
+                    app:layout_constraintVertical_bias="0.26999998">
 
                     <ImageButton
                         android:id="@+id/botton_aumentar"
                         android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_height="35dp"
 
                         android:background="@android:color/transparent"
                         android:src="@drawable/ic_add_detail"
@@ -138,12 +114,13 @@
                     <TextView
                         android:id="@+id/txt_cantidad"
                         android:layout_width="40dp"
-                        android:layout_height="30dp"
+                        android:layout_height="35dp"
                         android:gravity="center"
                         android:maxLength="2"
                         android:text="1"
                         android:textColor="@android:color/black"
-                        android:textSize="25dp"
+
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -154,7 +131,7 @@
                     <ImageButton
                         android:id="@+id/botton_disminuir"
                         android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_height="35dp"
 
                         android:background="@android:color/transparent"
                         android:src="@drawable/ic_minus_detail"
@@ -177,7 +154,7 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.13"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.972" />
@@ -207,6 +184,19 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/txt_descripcion_producto"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="descripcion"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view3"
+            app:layout_constraintVertical_bias="0.566" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

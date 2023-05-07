@@ -39,6 +39,7 @@ public class CuentaFragment extends Fragment {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference mDatabase;
     String codigo;
+    User usuario=new User();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,22 +77,14 @@ public class CuentaFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                for (DataSnapshot datos : snapshot.getChildren()) {
-                    try {
-                       String a =     datos.getValue().toString();
-                        JSONObject obj = new JSONObject(a);
-                       txt_nombre.setText(obj.getString("nombre"));
-                        txt_apellido.setText(obj.getString("apellido"));
-                        txt_telefono.setText(obj.getString("telefono"));
-                        txt_mail.setText(obj.getString("correo"));
-                        codigo=datos.getKey();
-                    } catch (JSONException e) {
-
-                    }
+                   usuario=datos.getValue(User.class);
+                    txt_nombre.setText(usuario.getNombre());
+                   txt_apellido.setText(usuario.getApellido());
+                   txt_telefono.setText(usuario.getTelefono());
+                   txt_mail.setText(usuario.getCorreo());
 
 
-
-
-                 }
+               }
             }
 
             @Override

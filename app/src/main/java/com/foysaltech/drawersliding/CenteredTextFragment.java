@@ -75,7 +75,8 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        cargar();
+       cargar();
+        cargarTodo();
         Bundle args = getArguments();
         final String text = args != null ? args.getString(EXTRA_TEXT) : "";
         TextView textView = view.findViewById(R.id.cabecera);
@@ -165,7 +166,7 @@ txtBuscar=view.findViewById(R.id.MenuSearch);
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     public void cargarTodo( ){
 
-        elements = new ArrayList<>();
+        elementsProductos = new ArrayList<>();
         listaAdapterProducto = new AdapterProductos(getContext(), elementsProductos, new AdapterProductos.OnItemClickListener() {
             @Override
             public void onItemClick(Productos item) {
@@ -176,7 +177,7 @@ txtBuscar=view.findViewById(R.id.MenuSearch);
         contenedorTodo.setHasFixedSize(true);
         contenedorTodo.setLayoutManager(new LinearLayoutManager(getContext()));
         contenedorTodo.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        contenedorTodo.setAdapter(listAdapter);
+        contenedorTodo.setAdapter(listaAdapterProducto);
         // Toast.makeText(getContext(),codigo+"",Toast.LENGTH_LONG).show();
 
         mDatabase.child("Productos").addValueEventListener(new ValueEventListener() {
@@ -193,7 +194,7 @@ txtBuscar=view.findViewById(R.id.MenuSearch);
 
 
                 }
-                listAdapter.notifyDataSetChanged();
+                listaAdapterProducto.notifyDataSetChanged();
             }
 
             @Override
