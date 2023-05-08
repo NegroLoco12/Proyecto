@@ -20,7 +20,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <SearchView
+            <androidx.appcompat.widget.SearchView
                 android:id="@+id/MenuSearch"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
@@ -29,8 +29,6 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/search_edittext_background"
-
-
                 android:inputType="text"
                 android:maxLines="1"
                 android:paddingStart="20dp"

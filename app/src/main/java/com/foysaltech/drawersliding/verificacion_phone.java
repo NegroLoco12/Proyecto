@@ -6,6 +6,8 @@ import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,7 +53,7 @@ public class verificacion_phone extends AppCompatActivity {
         button3=findViewById(R.id.button3);
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
-        spinKitView=(SpinKitView) findViewById(R.id.spin_kit);
+        spinKitView=(SpinKitView) findViewById(R.id.spin_kit2);
         intenAuth=getIntent().getStringExtra("auth");
         nombre=getIntent().getStringExtra("nombre");
         apellido=getIntent().getStringExtra("apellido");
@@ -59,7 +61,89 @@ public class verificacion_phone extends AppCompatActivity {
         correo=getIntent().getStringExtra("correo");
         clave=getIntent().getStringExtra("clave");
         txt_verificacion.setText(" +595 "+numero+"");
+    txt_1.addTextChangedListener(new TextWatcher() {
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+txt_2.requestFocus();
+    }
+});
+        txt_2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                txt_3.requestFocus();
+            }
+        });
+
+        txt_3.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                txt_4.requestFocus();
+            }
+        });
+
+        txt_4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                txt_5.requestFocus();
+            }
+        });
+
+        txt_5.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                txt_6.requestFocus();
+            }
+        });
 
     }
     public void lanzar(View v){

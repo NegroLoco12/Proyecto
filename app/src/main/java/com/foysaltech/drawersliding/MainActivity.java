@@ -143,13 +143,8 @@ mDatabase= FirebaseDatabase.getInstance().getReference();
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(
-                MainActivity.this, R.style.BottonSheetDialogTheme
-        );
-View bottomSheetView= LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_botton_sheet,(LinearLayout)findViewById(R.id.bottomShetContainer));
 
-bottomSheetDialog.setContentView(bottomSheetView);
-bottomSheetDialog.show();
+
 
 /////////////////////////////////////////////////////////////////////////////////////
     }
@@ -164,6 +159,14 @@ bottomSheetDialog.show();
             Fragment selectedScreen = new CuentaFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
         }
+        if (position == POS_ACCOUNT) {
+            BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(
+                    MainActivity.this, R.style.BottonSheetDialogTheme
+            );
+            View bottomSheetView= LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_botton_sheet,(LinearLayout)findViewById(R.id.bottomShetContainer));
+
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();  }
         if (position == POS_LOGOUT2) {
 
             FirebaseAuth.getInstance().signOut();
