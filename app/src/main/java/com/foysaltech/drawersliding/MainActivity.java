@@ -147,12 +147,7 @@ mDatabase= FirebaseDatabase.getInstance().getReference();
                 MainActivity.this, R.style.BottonSheetDialogTheme
         );
 View bottomSheetView= LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_botton_sheet,(LinearLayout)findViewById(R.id.bottomShetContainer));
-bottomSheetView.findViewById(R.id.buttonShare).setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        bottomSheetDialog.dismiss();
-    }
-});
+
 bottomSheetDialog.setContentView(bottomSheetView);
 bottomSheetDialog.show();
 
