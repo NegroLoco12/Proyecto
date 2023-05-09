@@ -97,6 +97,7 @@ txtBuscar=view.findViewById(R.id.MenuSearch);
         });
         txtBuscar.setOnQueryTextListener(this);
     }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void cargar(){
 
         elements = new ArrayList<>();
@@ -135,6 +136,7 @@ txtBuscar=view.findViewById(R.id.MenuSearch);
 
         });
     }
+    //////////////////////////////////////////////////////////////////////////////////////////////
     public void pasar(Categorias item){
 
    // Toast.makeText(getContext(), categorias.getKey(0)+ " ", Toast.LENGTH_LONG).show();
@@ -145,7 +147,7 @@ txtBuscar=view.findViewById(R.id.MenuSearch);
        manager.beginTransaction().replace(R.id.container, new FragmentProducto()).addToBackStack(null).commit();
        getParentFragmentManager().setFragmentResult("key",bundle);
     }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;

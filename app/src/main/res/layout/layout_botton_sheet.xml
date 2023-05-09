@@ -51,7 +51,7 @@ android:textColor="@color/black"
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btDetailAddToCart"
+        android:id="@+id/btnUbi"
         android:layout_width="410dp"
         android:layout_height="50dp"
         android:background="@color/white"

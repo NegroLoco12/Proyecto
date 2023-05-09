@@ -164,9 +164,16 @@ mDatabase= FirebaseDatabase.getInstance().getReference();
                     MainActivity.this, R.style.BottonSheetDialogTheme
             );
             View bottomSheetView= LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_botton_sheet,(LinearLayout)findViewById(R.id.bottomShetContainer));
-
+bottomSheetView.findViewById(R.id.btnUbi).setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Fragment selectedScreen = new MapaFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
+    }
+});
             bottomSheetDialog.setContentView(bottomSheetView);
-            bottomSheetDialog.show();  }
+            bottomSheetDialog.show();
+        }
         if (position == POS_LOGOUT2) {
 
             FirebaseAuth.getInstance().signOut();
