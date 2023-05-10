@@ -57,8 +57,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mapFragment =  (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mapFrag);
-        mapFragment.getMapAsync(this);
 
     }
 
@@ -67,6 +65,14 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_mapa, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        mapFragment =  (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapFrag);
+        mapFragment.getMapAsync(this);
+
+        super.onStart();
     }
 
     @Override
@@ -85,14 +91,14 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
       //  Coordenadas coordenadas = new Coordenadas();
-      //  mMap = googleMap;
+        mMap = googleMap;
         //lat = guardar.pedido.get(0).getLatitud();
        // longitude = guardar.pedido.get(0).getLongitul();
-        //LatLng latLng = new LatLng(lat, longitude);
-        //MarkerOptions markerOptions = new MarkerOptions();
-        //markerOptions.position(latLng);
-        //marker = mMap.addMarker(markerOptions);
-    //    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
+        LatLng latLng = new LatLng(-25.3347732,-57.6026497);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        marker = mMap.addMarker(markerOptions);
+     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

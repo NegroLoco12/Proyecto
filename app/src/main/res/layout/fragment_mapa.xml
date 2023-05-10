@@ -11,11 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="38dp"
-        android:layout_marginEnd="38dp"
         android:layout_marginTop="0dp"
         app:cardCornerRadius="25dp"
-        app:cardElevation="10dp"
+        app:cardElevation="5dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -25,11 +23,12 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="70dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="14dp"
+
+                android:layout_marginEnd="14dp"
                 android:background="@drawable/switch_tumbs"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -38,25 +37,24 @@
                 <TextView
                     android:id="@+id/txt_paso1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="68dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/switch_ubi1"
                     android:gravity="center"
                     android:paddingLeft="15dp"
                     android:paddingTop="5dp"
                     android:paddingRight="15dp"
                     android:paddingBottom="5dp"
-                    android:text="Iniciar"
+                    android:text="Ubicar Punto"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold|normal" />
 
                 <TextView
                     android:id="@+id/txt_paso2"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -64,10 +62,10 @@
                     android:paddingTop="5dp"
                     android:paddingRight="15dp"
                     android:paddingBottom="5dp"
-                    android:text="Registrarse"
+                    android:text="Cargar Datos"
                     android:textAlignment="center"
-                    android:textColor="@color/pinkColor"
-                    android:textSize="16sp"
+                    android:textColor="#c2c2c2"
+                    android:textSize="15sp"
                     android:textStyle="bold|normal" />
 
 
@@ -80,44 +78,36 @@
                 android:background="@color/white"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="25dp"
+
+                android:layout_marginStart="14dp"
+
+                android:layout_marginEnd="14dp"
+
                 android:visibility="visible">
+
 
 
                 <fragment
                     android:id="@+id/mapFrag"
                     class="com.google.android.gms.maps.SupportMapFragment"
-                    android:layout_width="294dp"
-                    android:layout_height="290dp" />
-
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    />
                 <Button
                     android:id="@+id/singIn2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="250dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginEnd="24dp"
                     android:elevation="15dp"
                     android:gravity="center"
-
-                    android:onClick="ingresar"
-                    android:text="Ingresar"
+                    android:layout_marginBottom="8dp"
+                    android:text="Siguiente"
                     android:textAllCaps="false"
                     android:textColor="@color/textColor"
                     android:textSize="17sp"
                     app:backgroundTint="@color/pinkColor"
-                    app:shapeAppearanceOverlay="@style/Button5" />
+                    app:shapeAppearanceOverlay="@style/Button4" />
 
-                <ImageView
-                    android:id="@+id/boton_correo"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_margin="10dp"
-
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/ic_google"
-                    android:visibility="invisible" />
 
             </LinearLayout>
 
