@@ -167,9 +167,10 @@ mDatabase= FirebaseDatabase.getInstance().getReference();
 bottomSheetView.findViewById(R.id.btnUbi).setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
+        bottomSheetDialog.dismiss();
         Fragment selectedScreen = new MapaFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
-        bottomSheetDialog.dismiss();
+
     }
 });
             bottomSheetDialog.setContentView(bottomSheetView);
