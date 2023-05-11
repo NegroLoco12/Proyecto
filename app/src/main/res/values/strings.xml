@@ -18,8 +18,9 @@
         <item>@drawable/ubicacion</item>
         <item>@drawable/ic_account_outline_grey600_24dp</item>
         <item>@drawable/ic_account_outline_grey600_24dp</item>
-        <item>@drawable/ic_cart_outline_grey600_24dp</item>
+
         <item>@drawable/ic_email_outline_grey600_24dp</item>
+        <item>@drawable/ic_cart_outline_grey600_24dp</item>
         <item>@drawable/ic_logout_grey600_24dp</item>
         <item></item>
     </array>

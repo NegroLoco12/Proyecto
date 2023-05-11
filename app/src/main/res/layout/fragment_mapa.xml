@@ -26,81 +26,114 @@
                 android:layout_height="70dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:layout_marginStart="14dp"
+                android:layout_marginStart="28dp"
 
-                android:layout_marginEnd="14dp"
+                android:layout_marginEnd="28dp"
                 android:background="@drawable/switch_tumbs"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-                <TextView
-                    android:id="@+id/txt_paso1"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="68dp"
-                    android:layout_gravity="center"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="15dp"
-                    android:paddingBottom="5dp"
-                    android:text="Ubicar Punto"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold|normal" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txt_paso2"
+                    <TextView
+                        android:id="@+id/ViewPaso1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="33dp"
+                        android:paddingTop="20dp"
+                        android:text="Paso 1" />
+
+                    <TextView
+                        android:id="@+id/txt_paso1"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="5dp"
+                        android:text="Ubicar Punto"
+                        android:textAlignment="center"
+                        android:textColor="#FF018786"
+                        android:textSize="15sp"
+                        android:textStyle="bold|normal" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="15dp"
-                    android:paddingBottom="5dp"
-                    android:text="Cargar Datos"
-                    android:textAlignment="center"
-                    android:textColor="#c2c2c2"
-                    android:textSize="15sp"
-                    android:textStyle="bold|normal" />
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/ViewPaso2"
+                        android:layout_width="match_parent"
+                        android:textColor="#c2c2c2"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="33dp"
+                        android:paddingTop="20dp"
+                        android:text="Paso 2" />
+
+
+                    <TextView
+                        android:id="@+id/txt_paso2"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="5dp"
+                        android:text="Cargar Datos"
+                        android:textAlignment="center"
+                        android:textColor="#c2c2c2"
+                        android:textSize="14sp"
+                        android:textStyle="bold|normal" />
+                </LinearLayout>
 
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/logInLayout"
+                android:id="@+id/seccion1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="14dp"
                 android:background="@color/white"
+
                 android:gravity="center"
+
                 android:orientation="vertical"
 
-                android:layout_marginStart="14dp"
-
-                android:layout_marginEnd="14dp"
-
                 android:visibility="visible">
-
 
 
                 <fragment
                     android:id="@+id/mapFrag"
                     class="com.google.android.gms.maps.SupportMapFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    />
+                    android:layout_width="280dp"
+                    android:layout_height="400dp" />
+
                 <Button
-                    android:id="@+id/singIn2"
+                    android:id="@+id/btn_1"
                     android:layout_width="250dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="8dp"
                     android:elevation="15dp"
                     android:gravity="center"
-                    android:layout_marginBottom="8dp"
                     android:text="Siguiente"
                     android:textAllCaps="false"
                     android:textColor="@color/textColor"
@@ -112,7 +145,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/singUpLayout"
+                android:id="@+id/seccion2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="1dp"
@@ -134,14 +167,14 @@
                         android:orientation="vertical">
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/view_nombre"
+                            android:id="@+id/view_calle1"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="15dp"
                             android:layout_marginTop="4dp"
-                            android:layout_marginRight="5dp"
-                            android:hint="Nombre"
+                            android:layout_marginRight="15dp"
+                            android:hint="Calle Principal"
                             app:boxStrokeColor="#4E4A4A"
                             app:boxStrokeWidth="1dp"
                             app:hintTextColor="#4E4A4A"
@@ -150,7 +183,7 @@
 
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/txt_nombre"
+                                android:id="@+id/txt_calle1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ems="10"
@@ -161,14 +194,14 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/view_apellido"
+                            android:id="@+id/view_calle2"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="15dp"
                             android:layout_marginTop="8dp"
-                            android:layout_marginRight="5dp"
-                            android:hint="Apellido"
+                            android:layout_marginRight="15dp"
+                            android:hint="Calle Secundaria"
                             app:boxStrokeColor="#4E4A4A"
                             app:boxStrokeWidth="1dp"
                             app:hintTextColor="#4E4A4A"
@@ -177,7 +210,7 @@
 
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/txt_apellido"
+                                android:id="@+id/txt_calle2"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ems="10"
@@ -188,14 +221,41 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/view_mail"
+                            android:id="@+id/view_referencia"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="15dp"
                             android:layout_marginTop="8dp"
-                            android:layout_marginRight="5dp"
-                            android:hint="Email"
+                            android:layout_marginRight="15dp"
+                            android:hint="Referencia"
+                            app:boxStrokeColor="#4E4A4A"
+                            app:boxStrokeWidth="1dp"
+                            app:hintTextColor="#4E4A4A"
+                            app:shapeAppearanceOverlay="@style/Button4"
+                            app:startIconDrawable="@drawable/ic_usuario">
+
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/txt_referencia"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="textPersonName|textEmailAddress"
+                                android:textColor="@color/black"
+                                android:textSize="13sp"
+                                android:textStyle="normal" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/view_nro_casa"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="15dp"
+                            android:hint="Número de Casa"
 
                             app:boxStrokeColor="#4E4A4A"
                             app:boxStrokeWidth="1dp"
@@ -205,7 +265,7 @@
 
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/txt_mail"
+                                android:id="@+id/txt_nro_casa"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ems="10"
@@ -216,14 +276,14 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/view_telefono"
+                            android:id="@+id/view_nombre"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="15dp"
                             android:layout_marginTop="8dp"
-                            android:layout_marginRight="5dp"
-                            android:hint="Teléfono"
+                            android:layout_marginRight="15dp"
+                            android:hint="Nombre de la Dirección"
                             app:boxStrokeColor="#4E4A4A"
                             app:boxStrokeWidth="1dp"
                             app:hintTextColor="#4E4A4A"
@@ -233,7 +293,7 @@
 
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/txt_telefono"
+                                android:id="@+id/txt_nombre_direccion"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ems="10"
@@ -245,22 +305,20 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <Button
-                            android:id="@+id/singIn"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:id="@+id/btn_2"
+                            android:layout_width="250dp"
+                            android:layout_height="60dp"
                             android:layout_gravity="center"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="24dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
                             android:elevation="15dp"
                             android:gravity="center"
-                            android:onClick="validar_telefono"
-                            android:text="Guardar"
+                            android:text="Siguiente"
                             android:textAllCaps="false"
                             android:textColor="@color/textColor"
                             android:textSize="17sp"
                             app:backgroundTint="@color/pinkColor"
-                            app:shapeAppearanceOverlay="@style/Button5" />
+                            app:shapeAppearanceOverlay="@style/Button4" />
 
                         <com.github.ybq.android.spinkit.SpinKitView
                             android:id="@+id/spin_kit"

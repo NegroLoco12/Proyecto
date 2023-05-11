@@ -169,6 +169,7 @@ bottomSheetView.findViewById(R.id.btnUbi).setOnClickListener(new View.OnClickLis
     public void onClick(View v) {
         Fragment selectedScreen = new MapaFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
+        bottomSheetDialog.dismiss();
     }
 });
             bottomSheetDialog.setContentView(bottomSheetView);
