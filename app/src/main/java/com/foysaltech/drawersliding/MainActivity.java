@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -13,10 +14,13 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -25,6 +29,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.LocationAvailability;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -49,7 +58,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener  {
     private CircleImageView img;
-
+    public static final int REQUEST_CODE = 1;
     String aa;
     private DatabaseReference mDatabase;
     private static final int POS_DASHBOARD = 0;
@@ -170,6 +179,7 @@ bottomSheetView.findViewById(R.id.btnUbi).setOnClickListener(new View.OnClickLis
         bottomSheetDialog.dismiss();
         Fragment selectedScreen = new MapaFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
+        ObtenerCoordendasActual();
 
     }
 });
@@ -244,5 +254,67 @@ bottomSheetView.findViewById(R.id.btnUbi).setOnClickListener(new View.OnClickLis
             getFragmentManager().popBackStack();
         else
             super.onBackPressed();
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void ObtenerCoordendasActual() {
+
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+        } else {
+
+            getCoordenada();
+        }
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
+    private void getCoordenada() {
+
+        try {
+
+            LocationRequest locationRequest = new LocationRequest();
+            locationRequest.setInterval(1000);
+            locationRequest.setFastestInterval(1000);
+            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            if (ActivityCompat.checkSelfPermission(MainActivity.this
+                    , Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                return;
+            }
+            LocationServices.getFusedLocationProviderClient(MainActivity.this).requestLocationUpdates(locationRequest, new LocationCallback() {
+                @Override
+                public void onLocationAvailability(@NonNull LocationAvailability locationAvailability) {
+                    super.onLocationAvailability(locationAvailability);
+                }
+
+                @Override
+                public void onLocationResult(@NonNull LocationResult locationResult) {
+                    super.onLocationResult(locationResult);
+                    LocationServices.getFusedLocationProviderClient(MainActivity.this).removeLocationUpdates(this);
+                    if (locationResult != null && locationResult.getLocations().size() > 0) {
+                        int latestLocationIndex = locationResult.getLocations().size() - 1;
+                     Ubicaciones ubi=new Ubicaciones();
+
+                       ubi.setLatitudActual( locationResult.getLocations().get(latestLocationIndex).getLatitude());
+                       ubi.setLatitudActual(locationResult.getLocations().get(latestLocationIndex).getLongitude());
+
+                    }
+                }
+            }, Looper.myLooper());
+        } catch (Exception ex) {
+            System.out.println("Error es :" + ex);
+        }
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////7
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //startLocService();
+                } else {
+                    Toast.makeText(MainActivity.this, "Give me permissions", Toast.LENGTH_LONG).show();
+                }
+        }
     }
 }

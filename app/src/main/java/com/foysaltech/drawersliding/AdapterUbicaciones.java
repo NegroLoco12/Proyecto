@@ -60,15 +60,13 @@ public class AdapterUbicaciones  extends RecyclerView.Adapter<AdapterUbicaciones
         }
         void bindData(final Ubicaciones item) {
 
+            ///itemName.setText(item.getDescripcion());
+            //if (item.getImagen2() != null) {
+              //  img.setImageBitmap(item.getImagen2());
+           /// }else{
 
-
-            itemName.setText(item.getDescripcion());
-            if (item.getImagen2() != null) {
-                img.setImageBitmap(item.getImagen2());
-            }else{
-
-                img.setImageResource(R.drawable.imagen);
-            }
+              //  img.setImageResource(R.drawable.imagen);
+            //}
             itemView.findViewById(R.id.botton_promo).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -62,7 +62,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-ObtenerCoordendasActual();
 
     }
 
@@ -106,26 +105,16 @@ ObtenerCoordendasActual();
         super.onStart();
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case 1:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //startLocService();
-                } else {
-                    Toast.makeText(getContext(), "Give me permissions", Toast.LENGTH_LONG).show();
-                }
-        }
-    }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void onMapReady(GoogleMap googleMap) {
-      //  Coordenadas coordenadas = new Coordenadas();
+      Ubicaciones coordenadas = new Ubicaciones();
         mMap = googleMap;
-        //lat = guardar.pedido.get(0).getLatitud();
-       // longitude = guardar.pedido.get(0).getLongitul();
-        LatLng latLng = new LatLng(lat,longitude);
+
+       double latitud = coordenadas.getLatitudActual();
+       double longitu = coordenadas.getLongitulActual();
+        LatLng latLng = new LatLng(latitud,longitu);
         //Toast.makeText(getContext(), lat+""+longitude, Toast.LENGTH_SHORT).show();
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
@@ -134,53 +123,8 @@ ObtenerCoordendasActual();
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void ObtenerCoordendasActual() {
 
 
-        if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-        } else {
 
-            getCoordenada();
-        }
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private void getCoordenada() {
-
-        try {
-
-            LocationRequest locationRequest = new LocationRequest();
-            locationRequest.setInterval(1000);
-            locationRequest.setFastestInterval(1000);
-            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-                return;
-            }
-            LocationServices.getFusedLocationProviderClient(getContext()).requestLocationUpdates(locationRequest, new LocationCallback() {
-                @Override
-                public void onLocationAvailability(@NonNull LocationAvailability locationAvailability) {
-                    super.onLocationAvailability(locationAvailability);
-                }
-
-                @Override
-                public void onLocationResult(@NonNull LocationResult locationResult) {
-                    super.onLocationResult(locationResult);
-                    LocationServices.getFusedLocationProviderClient(getContext()).removeLocationUpdates(this);
-                    if (locationResult != null && locationResult.getLocations().size() > 0) {
-                        int latestLocationIndex = locationResult.getLocations().size() - 1;
-                        Toast.makeText(getContext(), lat+""+longitude, Toast.LENGTH_SHORT).show();
-
-                        lat = locationResult.getLocations().get(latestLocationIndex).getLatitude();
-                        longitude = locationResult.getLocations().get(latestLocationIndex).getLongitude();
-
-                    }
-                    }
-            }, Looper.myLooper());
-        } catch (Exception ex) {
-            System.out.println("Error es :" + ex);
-        }
-    }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

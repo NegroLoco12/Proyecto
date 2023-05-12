@@ -30,4 +30,24 @@ public class Ubicaciones {
     String nombre;
     String calle1;
 
+
+    public Double getLatitudActual() {
+        return latitudActual;
+    }
+
+    public void setLatitudActual(Double latitudActual) {
+        this.latitudActual = latitudActual;
+    }
+
+    public Double getLongitulActual() {
+        return longitulActual;
+    }
+
+    public void setLongitulActual(Double longitulActual) {
+        this.longitulActual = longitulActual;
+    }
+
+    private Double latitudActual;
+    private Double longitulActual;
+
 }
