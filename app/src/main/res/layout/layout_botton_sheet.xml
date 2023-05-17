@@ -41,7 +41,7 @@ android:textColor="@color/black"
             android:textStyle="bold"></androidx.appcompat.widget.AppCompatTextView>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/contenedorProducto"
+            android:id="@+id/contenedorUbicaciones"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -52,7 +52,7 @@ android:textColor="@color/black"
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnUbi"
-        android:layout_width="410dp"
+        android:layout_width="400dp"
         android:layout_height="50dp"
         android:background="@color/white"
         android:drawableStart="@drawable/anadir"
@@ -64,6 +64,8 @@ android:textColor="@color/black"
         android:textAllCaps="false"
         android:textColor="@color/pinkColor"
         android:textSize="15sp"
+        android:layout_marginBottom="5dp"
+        android:elevation="10dp"
  />
 
 </LinearLayout>

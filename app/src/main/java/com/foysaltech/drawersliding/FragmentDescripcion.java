@@ -5,25 +5,31 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.util.Base64;
 
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
+
 
 public class FragmentDescripcion extends Fragment {
- TextView txt_nombre_producto,txt_descripcion_producto,txt_precio_productos,txt_cantidad;
- ImageView imagen;
- int precio_inicial;
+    TextView txt_nombre_producto,txt_descripcion_producto,txt_precio_productos,txt_cantidad;
+     ImageView imagen;
+    int precio_inicial;
+     String codigo_articulo;
     ImageView  button_aumentar, button_disminuir;
-
+    Button btDetailAddToCart;
     DecimalFormat formatea = new DecimalFormat("###,###.##");
 
     public FragmentDescripcion() {
@@ -52,7 +58,7 @@ public class FragmentDescripcion extends Fragment {
         txt_nombre_producto=view.findViewById(R.id.txt_nombre_producto);
         imagen=view.findViewById(R.id.imagen);
         txt_precio_productos=view.findViewById(R.id.txt_precio_productos);
-
+        btDetailAddToCart=view.findViewById(R.id.btDetailAddToCart);
         button_aumentar = view.findViewById(R.id.botton_aumentar);
         button_disminuir = view.findViewById(R.id.botton_disminuir);
         getParentFragmentManager().setFragmentResultListener("keypro", this, new FragmentResultListener() {
@@ -63,6 +69,7 @@ public class FragmentDescripcion extends Fragment {
                 txt_nombre_producto.setText(result.getString("nombre_producto"));
                 txt_precio_productos.setText(result.getString("precio_producto")+" Gs");
                 precio_inicial=Integer.parseInt(result.getString("precio_producto")) ;
+                codigo_articulo=result.getString("cod_producto");
                 Bitmap bitmap;
                 byte[] byteCode=   Base64.getDecoder().decode(result.getString("imagen_producto"));
                 bitmap= BitmapFactory.decodeByteArray(byteCode,0,byteCode.length);
@@ -96,9 +103,35 @@ public class FragmentDescripcion extends Fragment {
                 }
             }
         });
-
+        btDetailAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                agregar();
+            }
+        });
 
 
         return view;
+    }
+    public void agregar(){
+        Pedidos pedidos=new Pedidos();
+        int precio_total=precio_inicial*Integer.parseInt(txt_cantidad.getText().toString());
+        String nombre=txt_nombre_producto.getText().toString();
+        String descripcion=txt_descripcion_producto.getText().toString();
+        int cantidad=Integer.parseInt(txt_cantidad.getText().toString());
+
+        pedidos.setCantidad(cantidad);
+        pedidos.setPrecio_total(precio_total);
+        pedidos.setCodigo(codigo_articulo);
+        Carritos.agregarPedidos(pedidos);
+        MotionToast.Companion.createColorToast(getActivity(),//Toast Personalizado
+                "Exito!",
+                "Se añadió a la lista",
+                MotionToastStyle.SUCCESS,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(getActivity(), www.sanju.motiontoast.R.font.helvetica_regular));
+
+        //   Toast.makeText(activity_descripcion.this,Carritos.pedido.size()+" ", Toast.LENGTH_SHORT).show();
     }
 }

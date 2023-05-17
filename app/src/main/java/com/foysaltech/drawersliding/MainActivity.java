@@ -1,3 +1,4 @@
+
 package com.foysaltech.drawersliding;
 
 import androidx.annotation.ColorInt;
@@ -34,6 +35,7 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -72,15 +74,24 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     User users=new User();
     private String[] screenTitles;
     private Drawable[] screenIcons;
-
     private SlidingRootNav slidingRootNav;
-
+    private RecyclerView contenedorUbi;
+    private RecyclerView list ;
+    Ubicaciones ubicaciones=new Ubicaciones();
+    private FirebaseAuth mAuth;
+    private    AdapterUbicaciones listUbi;
+    private List<Ubicaciones> elementsUbi;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+       // setContentView(R.layout.layout_botton_sheet);
 
-mDatabase= FirebaseDatabase.getInstance().getReference();
+        ObtenerCoordendasActual();
+        mAuth=FirebaseAuth.getInstance();
+        mDatabase= FirebaseDatabase.getInstance().getReference();
+        mAuth.setLanguageCode("es");
+        mDatabase= FirebaseDatabase.getInstance().getReference();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -108,7 +119,7 @@ mDatabase= FirebaseDatabase.getInstance().getReference();
                 createItemFor(6)));
         adapter.setListener(this);
 
-        RecyclerView list = findViewById(R.id.lista);
+         list = findViewById(R.id.lista);
         list.setNestedScrollingEnabled(false);
         list.setLayoutManager(new LinearLayoutManager(this));
         list.setAdapter(adapter);
@@ -117,7 +128,7 @@ mDatabase= FirebaseDatabase.getInstance().getReference();
         ///////////////////////////////////////////////////////////////////////////////
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String name=user.getEmail();
-          DatabaseReference correo = mDatabase.child("Usuarios");
+        DatabaseReference correo = mDatabase.child("Usuarios");
         Query nombre = correo.orderByChild("correo").equalTo(name);
 
         nombre.addValueEventListener(new ValueEventListener() {
@@ -127,20 +138,20 @@ mDatabase= FirebaseDatabase.getInstance().getReference();
 
                     users=dataSnapshot.getValue(User.class);
                     // productos.setKey(dataSnapshot.getKey());
-                   // elements.add(users); // try {
+                    // elements.add(users); // try {
                     //    String a =     datos.getValue().toString();
-                      //  JSONObject obj = new JSONObject(a);
-                      //  aa=obj.getString("nombre");
-                  //    Toast.makeText(MainActivity.this,users.getNombre()+"",Toast.LENGTH_LONG).show();
-                        DrawerAdapter adapter2 = new DrawerAdapter(Arrays.asList(createItemFor2(7,users.getNombre())));
+                    //  JSONObject obj = new JSONObject(a);
+                    //  aa=obj.getString("nombre");
+                    //    Toast.makeText(MainActivity.this,users.getNombre()+"",Toast.LENGTH_LONG).show();
+                    DrawerAdapter adapter2 = new DrawerAdapter(Arrays.asList(createItemFor2(7,users.getNombre())));
 
-                        RecyclerView list2 = findViewById(R.id.list2);
-                        list2.setNestedScrollingEnabled(false);
-                        list2.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                        list2.setAdapter(adapter2);
-                 //   } catch (JSONException e) {
+                    RecyclerView list2 = findViewById(R.id.list2);
+                    list2.setNestedScrollingEnabled(false);
+                    list2.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                    list2.setAdapter(adapter2);
+                    //   } catch (JSONException e) {
 
-                  //  }
+                    //  }
 
 
 
@@ -168,24 +179,28 @@ mDatabase= FirebaseDatabase.getInstance().getReference();
             Fragment selectedScreen = new CuentaFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (position == POS_ACCOUNT) {
+
             BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(
                     MainActivity.this, R.style.BottonSheetDialogTheme
             );
             View bottomSheetView= LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_botton_sheet,(LinearLayout)findViewById(R.id.bottomShetContainer));
-bottomSheetView.findViewById(R.id.btnUbi).setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        bottomSheetDialog.dismiss();
-        Fragment selectedScreen = new MapaFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
-        ObtenerCoordendasActual();
+            contenedorUbi=bottomSheetView.findViewById(R.id.contenedorUbicaciones);
 
-    }
-});
+            bottomSheetView.findViewById(R.id.btnUbi).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomSheetDialog.dismiss();
+                    Fragment selectedScreen = new MapaFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
+                }
+            });
             bottomSheetDialog.setContentView(bottomSheetView);
             bottomSheetDialog.show();
+            cargarUbi();
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (position == POS_LOGOUT2) {
 
             FirebaseAuth.getInstance().signOut();
@@ -193,7 +208,7 @@ bottomSheetView.findViewById(R.id.btnUbi).setOnClickListener(new View.OnClickLis
             finish();
         }
 
-     slidingRootNav.closeMenu();
+        slidingRootNav.closeMenu();
 
 
     }
@@ -292,11 +307,13 @@ bottomSheetView.findViewById(R.id.btnUbi).setOnClickListener(new View.OnClickLis
                     LocationServices.getFusedLocationProviderClient(MainActivity.this).removeLocationUpdates(this);
                     if (locationResult != null && locationResult.getLocations().size() > 0) {
                         int latestLocationIndex = locationResult.getLocations().size() - 1;
-                     Ubicaciones ubi=new Ubicaciones();
-
-                       ubi.setLatitudActual( locationResult.getLocations().get(latestLocationIndex).getLatitude());
-                       ubi.setLatitudActual(locationResult.getLocations().get(latestLocationIndex).getLongitude());
-
+                        Ubicaciones ubi=new Ubicaciones();
+                        double lat=locationResult.getLocations().get(latestLocationIndex).getLatitude();
+                        double longi=locationResult.getLocations().get(latestLocationIndex).getLongitude();
+                        ubi.setLatitudActual(lat );
+                        ubi.setLongitulActual(longi);
+                        ubi.guardarUbi(ubi);
+                        ubi.guardado.get(0).getLatitudActual();
                     }
                 }
             }, Looper.myLooper());
@@ -317,4 +334,51 @@ bottomSheetView.findViewById(R.id.btnUbi).setOnClickListener(new View.OnClickLis
                 }
         }
     }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void cargarUbi( ){
+
+        elementsUbi = new ArrayList<>();
+        listUbi = new AdapterUbicaciones(this, elementsUbi, new AdapterUbicaciones.OnItemClickListener() {
+            @Override
+            public void onItemClick(Ubicaciones item) {
+
+            }
+        });
+        contenedorUbi.setHasFixedSize(true);
+        contenedorUbi.setLayoutManager(new LinearLayoutManager(this));
+        contenedorUbi.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        contenedorUbi.setAdapter(listUbi);
+        // Toast.makeText(getContext(),codigo+"",Toast.LENGTH_LONG).show();
+
+        DatabaseReference correo = mDatabase.child("Direcciones");
+        Query nombre = correo.orderByChild("cod_usuario").equalTo(mAuth.getCurrentUser().getUid());
+
+        nombre.addValueEventListener(new ValueEventListener() {
+            @Override
+
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                    ubicaciones=dataSnapshot.getValue(Ubicaciones.class);
+                    ubicaciones.setKey(dataSnapshot.getKey());
+                    elementsUbi.add(ubicaciones);
+
+                 //   Toast.makeText(getApplicationContext(),elementsUbi+"",Toast.LENGTH_LONG).show();
+
+
+                }
+                listUbi.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 }

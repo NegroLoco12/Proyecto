@@ -1,5 +1,7 @@
 package com.foysaltech.drawersliding;
 
+import java.util.ArrayList;
+
 public class Ubicaciones {
 
     public String getKey() {
@@ -10,13 +12,6 @@ public class Ubicaciones {
         this.key = key;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public String getCalle1() {
         return calle1;
@@ -27,7 +22,16 @@ public class Ubicaciones {
     }
 
     String key;
-    String nombre;
+
+    public String getNombre_direccion() {
+        return nombre_direccion;
+    }
+
+    public void setNombre_direccion(String nombre_direccion) {
+        this.nombre_direccion = nombre_direccion;
+    }
+
+    String nombre_direccion;
     String calle1;
 
 
@@ -49,5 +53,11 @@ public class Ubicaciones {
 
     private Double latitudActual;
     private Double longitulActual;
-
+    public static final ArrayList<Ubicaciones> guardado = new ArrayList<>();
+    public static void guardarUbi(Ubicaciones coordenadas) {
+        guardado.add(coordenadas);
+    }
+    public static void eliminarUbi() {
+        guardado.clear();
+    }
 }

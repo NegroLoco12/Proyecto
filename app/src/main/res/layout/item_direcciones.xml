@@ -18,13 +18,13 @@
         android:background="#00F6FBF7"
         android:paddingStart="14dp"
         android:paddingEnd="4dp"
-        android:paddingBottom="20dp"
+        android:paddingBottom="10dp"
 
         >
 
 
         <ImageView
-            android:id="@+id/imagen_producto"
+            android:id="@+id/imagen_direccion"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="4dp"
@@ -37,7 +37,7 @@
             tools:srcCompat="@drawable/casa" />
 
         <TextView
-            android:id="@+id/nombre_producto"
+            android:id="@+id/nombre_direccion"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -48,18 +48,22 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.35"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.32" />
+            app:layout_constraintVertical_bias="0.18" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
+            android:layout_width="290dp"
+            android:layout_height="32dp"
+            android:lines="2"
+            android:minLines="2"
+            android:text="TextViewjsjsjsjsjjsjjsjssjjsjsjsjhdbhdbdhbdhbddhbdhdbhdbhbdhdbhdbdhbdjdnjdndj"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.28"
+            app:layout_constraintHorizontal_bias="0.68"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />

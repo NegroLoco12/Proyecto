@@ -167,7 +167,6 @@
                     android:drawableStart="@drawable/ic_cart_outline_grey600_24dp"
                     android:drawablePadding="8dp"
                     android:gravity="center"
-                    android:onClick="agregar"
                     android:padding="8dp"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"

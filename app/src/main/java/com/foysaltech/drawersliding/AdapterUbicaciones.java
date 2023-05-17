@@ -1,3 +1,4 @@
+
 package com.foysaltech.drawersliding;
 
 import android.content.Context;
@@ -17,7 +18,7 @@ public class AdapterUbicaciones  extends RecyclerView.Adapter<AdapterUbicaciones
     private List<Ubicaciones> mData;
     private Context context;
 
-    public AdapterUbicaciones(List<Ubicaciones> mData, Context context, OnItemClickListener listene) {
+    public AdapterUbicaciones( Context context,List<Ubicaciones> mData, OnItemClickListener listene) {
         this.mData = mData;
         this.context = context;
         this.listene = listene;
@@ -30,13 +31,13 @@ public class AdapterUbicaciones  extends RecyclerView.Adapter<AdapterUbicaciones
     }
 
 
-        @NonNull
+    @NonNull
     @Override
     public AdapterUbicaciones.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View v= LayoutInflater.from(context).inflate(R.layout.item_direcciones,null,false);
-            return new AdapterUbicaciones.MyViewHolder(v);
+        View v= LayoutInflater.from(context).inflate(R.layout.item_direcciones,null,false);
+        return new AdapterUbicaciones.MyViewHolder(v);
 
-        }
+    }
 
     @Override
     public void onBindViewHolder(@NonNull AdapterUbicaciones.MyViewHolder holder, int position) {
@@ -49,30 +50,34 @@ public class AdapterUbicaciones  extends RecyclerView.Adapter<AdapterUbicaciones
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView itemName;
-        ImageView img;
+        TextView itemName,itemDescripcion;
+        ImageView imagen_direccion;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemName=itemView.findViewById(R.id.ItemName);
-            img=(ImageView)itemView.findViewById(R.id.imagen_promo);
+            itemName=itemView.findViewById(R.id.nombre_direccion);
+            itemDescripcion=itemView.findViewById(R.id.textView2);
+            imagen_direccion=itemView.findViewById(R.id.imagen_direccion);
 
         }
         void bindData(final Ubicaciones item) {
 
-            ///itemName.setText(item.getDescripcion());
-            //if (item.getImagen2() != null) {
-              //  img.setImageBitmap(item.getImagen2());
-           /// }else{
+            itemName.setText(item.getNombre_direccion());
+            itemDescripcion.setText(item.getCalle1());
 
-              //  img.setImageResource(R.drawable.imagen);
+            //if (item.getImagen2() != null) {
+            //  img.setImageBitmap(item.getImagen2());
+            /// }else{
+
+            imagen_direccion.setImageResource(R.drawable.casa);
             //}
-            itemView.findViewById(R.id.botton_promo).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listene.onItemClick(item);
-                }
-            });
+            // itemView.findViewById(R.id.botton_promo).setOnClickListener(new View.OnClickListener() {
+            //   @Override
+            // public void onClick(View v) {
+            //   listene.onItemClick(item);
+            //  }
+            // });
 
         }
     }
