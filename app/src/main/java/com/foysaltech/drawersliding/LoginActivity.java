@@ -149,9 +149,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
        /////////////////////////////////////////////////////////////////////////////////////////////7
-        Animation animation1= AnimationUtils.loadAnimation(this, R.anim.prueba);
-        TextView logo =findViewById(R.id.id_titulo);
-        logo.setAnimation(animation1);
+
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////

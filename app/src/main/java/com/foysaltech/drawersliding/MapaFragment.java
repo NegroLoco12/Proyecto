@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,6 +76,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     private TextInputLayout  view_calle1, view_calle2, view_referencia, view_nro_casa, view_nombre;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+    private ImageView imageView2;
     public MapaFragment() {
 
     }
@@ -117,6 +119,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
         view_referencia=view.findViewById(R.id.view_referencia);
         view_nro_casa=view.findViewById(R.id.view_nro_casa);
         view_nombre=view.findViewById(R.id.view_nombre);
+        imageView2=view.findViewById(R.id.imageView22);
 
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
@@ -131,8 +134,9 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
                 txt_paso2.setBackgroundResource(0);
                 seccion2.setVisibility(View.VISIBLE);
                 seccion1.setVisibility(View.GONE);
-                txt_paso2   .setTextColor(Color.parseColor("#FF018786"));
-                ViewPaso2   .setTextColor(Color.parseColor("#292929"));
+                txt_paso2.setTextColor(Color.parseColor("#FF018786"));
+                ViewPaso2.setTextColor(Color.parseColor("#292929"));
+                imageView2.setImageResource(R.drawable.comprobado_adobe_express);
 
             }
         });
@@ -372,12 +376,18 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
                                 MotionToast.GRAVITY_BOTTOM,
                                 MotionToast.LONG_DURATION,
                                 ResourcesCompat.getFont(getContext(), www.sanju.motiontoast.R.font.helvetica_regular));
-
+                                limpiar();
                     }
                 }
             });
         }
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////
-
+    private void limpiar(){
+       txt_calle1.setText(" ");
+       txt_calle2.setText(" ");
+       txt_nombre_direccion.setText(" ");
+       txt_nro_casa.setText(" ");
+       txt_referencia.setText(" ");
+    }
 }

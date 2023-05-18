@@ -32,7 +32,15 @@
                 android:background="@drawable/switch_tumbs"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:weightSum="2">
+               >
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="40dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/comprobado_adobe_express" />
+
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -45,7 +53,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:paddingLeft="33dp"
+                        android:paddingLeft="3dp"
                         android:paddingTop="20dp"
                         android:text="Paso 1" />
 
@@ -53,25 +61,30 @@
                         android:id="@+id/txt_paso1"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:paddingLeft="15dp"
+
+
                         android:paddingTop="3dp"
-                        android:paddingRight="15dp"
+
                         android:paddingBottom="5dp"
                         android:text="Ubicar Punto"
-                        android:textAlignment="center"
+
                         android:textColor="#FF018786"
                         android:textSize="15sp"
                         android:textStyle="bold|normal" />
                 </LinearLayout>
+                <ImageView
+                    android:id="@+id/imageView22"
+                    android:layout_width="40dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/comprobado_gris" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/ViewPaso2"
                         android:layout_width="match_parent"
@@ -79,7 +92,7 @@
 
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:paddingLeft="33dp"
+                        android:paddingLeft="3dp"
                         android:paddingTop="20dp"
                         android:text="Paso 2" />
 
@@ -88,10 +101,6 @@
                         android:id="@+id/txt_paso2"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:paddingLeft="15dp"
                         android:paddingTop="3dp"
                         android:paddingRight="15dp"
                         android:paddingBottom="5dp"
@@ -119,14 +128,13 @@
 
                 android:visibility="visible">
 
-
                 <fragment
                     android:id="@+id/mapFrag"
                     class="com.google.android.gms.maps.SupportMapFragment"
                     android:layout_width="280dp"
                     android:layout_height="400dp" />
 
-                <Button
+ <Button
                     android:id="@+id/btn_1"
                     android:layout_width="250dp"
                     android:layout_height="60dp"
@@ -164,7 +172,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp">
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/view_calle1"
@@ -178,8 +188,7 @@
                             app:boxStrokeColor="#4E4A4A"
                             app:boxStrokeWidth="1dp"
                             app:hintTextColor="#4E4A4A"
-                            app:shapeAppearanceOverlay="@style/Button4"
-                            app:startIconDrawable="@drawable/ic_usuario">
+                            app:shapeAppearanceOverlay="@style/Button4">
 
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -187,7 +196,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ems="10"
-                                android:inputType="textPersonName|textEmailAddress"
+                                android:inputType="textPersonName|textCapWords"
                                 android:textColor="@color/black"
                                 android:textSize="13sp"
                                 android:textStyle="normal" />
@@ -205,8 +214,7 @@
                             app:boxStrokeColor="#4E4A4A"
                             app:boxStrokeWidth="1dp"
                             app:hintTextColor="#4E4A4A"
-                            app:shapeAppearanceOverlay="@style/Button4"
-                            app:startIconDrawable="@drawable/ic_usuario">
+                            app:shapeAppearanceOverlay="@style/Button4">
 
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -214,7 +222,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ems="10"
-                                android:inputType="textPersonName|textEmailAddress"
+                                android:inputType="textPersonName|textCapWords"
                                 android:textColor="@color/black"
                                 android:textSize="13sp"
                                 android:textStyle="normal" />
@@ -232,8 +240,7 @@
                             app:boxStrokeColor="#4E4A4A"
                             app:boxStrokeWidth="1dp"
                             app:hintTextColor="#4E4A4A"
-                            app:shapeAppearanceOverlay="@style/Button4"
-                            app:startIconDrawable="@drawable/ic_usuario">
+                            app:shapeAppearanceOverlay="@style/Button4">
 
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -241,7 +248,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ems="10"
-                                android:inputType="textPersonName|textEmailAddress"
+                                android:inputType="textPersonName|textCapWords"
                                 android:textColor="@color/black"
                                 android:textSize="13sp"
                                 android:textStyle="normal" />
@@ -260,8 +267,7 @@
                             app:boxStrokeColor="#4E4A4A"
                             app:boxStrokeWidth="1dp"
                             app:hintTextColor="#4E4A4A"
-                            app:shapeAppearanceOverlay="@style/Button4"
-                            app:startIconDrawable="@drawable/ic_sobre">
+                            app:shapeAppearanceOverlay="@style/Button4">
 
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -269,7 +275,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ems="10"
-                                android:inputType="textPersonName|textEmailAddress"
+                                android:inputType="textPersonName|textCapWords"
                                 android:textColor="@color/black"
                                 android:textSize="13sp"
                                 android:textStyle="normal" />
@@ -288,8 +294,7 @@
                             app:boxStrokeWidth="1dp"
                             app:hintTextColor="#4E4A4A"
                             app:prefixText="+595"
-                            app:shapeAppearanceOverlay="@style/Button4"
-                            app:startIconDrawable="@drawable/ic_telefono">
+                            app:shapeAppearanceOverlay="@style/Button4">
 
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -297,7 +302,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ems="10"
-                                android:inputType="number"
+                                android:inputType="textPersonName|textCapWords"
                                 android:maxLength="9"
                                 android:textColor="@color/black"
                                 android:textSize="15sp"
@@ -306,7 +311,7 @@
 
                         <Button
                             android:id="@+id/btn_2"
-                            android:layout_width="250dp"
+                            android:layout_width="230dp"
                             android:layout_height="60dp"
                             android:layout_gravity="center"
                             android:layout_marginTop="8dp"
@@ -319,15 +324,6 @@
                             android:textSize="17sp"
                             app:backgroundTint="@color/pinkColor"
                             app:shapeAppearanceOverlay="@style/Button4" />
-
-                        <com.github.ybq.android.spinkit.SpinKitView
-                            android:id="@+id/spin_kit"
-                            style="@style/SpinKitView.Large.Circle"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center"
-                            android:visibility="gone"
-                            app:SpinKit_Color="@color/pinkColor" />
 
                     </LinearLayout>
                 </ScrollView>
