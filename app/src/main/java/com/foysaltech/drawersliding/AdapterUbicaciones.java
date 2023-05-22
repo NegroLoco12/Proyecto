@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +29,7 @@ public class AdapterUbicaciones  extends RecyclerView.Adapter<AdapterUbicaciones
     final AdapterUbicaciones.OnItemClickListener listene;
 
     public interface OnItemClickListener{
-        void onItemClick(Ubicaciones item);
+        void onItemClick();
     }
 
 
@@ -50,16 +52,20 @@ public class AdapterUbicaciones  extends RecyclerView.Adapter<AdapterUbicaciones
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView itemName,itemDescripcion;
+        TextView itemName,itemDescripcion,txt_contador;
         ImageView imagen_direccion;
-
+        LinearLayout linear_menu;
+ImageView botton_menu_ubi;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+txt_contador=itemView.findViewById(R.id.txt_contador);
             itemName=itemView.findViewById(R.id.nombre_direccion);
             itemDescripcion=itemView.findViewById(R.id.textView2);
             imagen_direccion=itemView.findViewById(R.id.imagen_direccion);
 
+            linear_menu=itemView.findViewById(R.id.linear_menu);
+            botton_menu_ubi=itemView.findViewById(R.id.menu_ubi);
         }
         void bindData(final Ubicaciones item) {
 
@@ -72,12 +78,20 @@ public class AdapterUbicaciones  extends RecyclerView.Adapter<AdapterUbicaciones
 
             imagen_direccion.setImageResource(R.drawable.casa);
             //}
-            // itemView.findViewById(R.id.botton_promo).setOnClickListener(new View.OnClickListener() {
-            //   @Override
-            // public void onClick(View v) {
-            //   listene.onItemClick(item);
-            //  }
-            // });
+            botton_menu_ubi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String a=txt_contador.getText().toString();
+                    if(a.equals("0")){
+                        linear_menu.setVisibility(View.VISIBLE);
+                        txt_contador.setText("1");
+                    }else{
+                        txt_contador.setText("0");
+                        linear_menu.setVisibility(View.GONE);
+
+                    }
+                }
+            });
 
         }
     }

@@ -25,6 +25,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -60,9 +61,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener  {
     private CircleImageView img;
+    private TextView txt_nombre_usu_ubi;
+    private  LinearLayout linear_menu;
     public static final int REQUEST_CODE = 1;
     String aa;
     private DatabaseReference mDatabase;
+    private ImageView botton_menu_ubi;
     private static final int POS_DASHBOARD = 0;
     private static final int POS_ACCOUNT = 1;
     private static final int POS_CART = 2;
@@ -115,8 +119,9 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 createItemFor(3),
                 createItemFor(4),
                 createItemFor(5),
+                createItemFor(6),
 
-                createItemFor(6)));
+                createItemFor(7)));
         adapter.setListener(this);
 
          list = findViewById(R.id.lista);
@@ -143,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                     //  JSONObject obj = new JSONObject(a);
                     //  aa=obj.getString("nombre");
                     //    Toast.makeText(MainActivity.this,users.getNombre()+"",Toast.LENGTH_LONG).show();
-                    DrawerAdapter adapter2 = new DrawerAdapter(Arrays.asList(createItemFor2(7,users.getNombre())));
+                    DrawerAdapter adapter2 = new DrawerAdapter(Arrays.asList(createItemFor2(8,users.getNombre())));
 
                     RecyclerView list2 = findViewById(R.id.list2);
                     list2.setNestedScrollingEnabled(false);
@@ -187,13 +192,15 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             );
             View bottomSheetView= LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_botton_sheet,(LinearLayout)findViewById(R.id.bottomShetContainer));
             contenedorUbi=bottomSheetView.findViewById(R.id.contenedorUbicaciones);
+            txt_nombre_usu_ubi= bottomSheetView.findViewById(R.id.txt_nombre_usu_ubi);
+            txt_nombre_usu_ubi.setText("Hola "+users.getNombre());
 
             bottomSheetView.findViewById(R.id.btnUbi).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     bottomSheetDialog.dismiss();
-                    Fragment selectedScreen = new MapaFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
+                    FragmentManager manager = getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.container, new MapaFragment()).addToBackStack(null).commit();
                 }
             });
             bottomSheetDialog.setContentView(bottomSheetView);
@@ -340,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         elementsUbi = new ArrayList<>();
         listUbi = new AdapterUbicaciones(this, elementsUbi, new AdapterUbicaciones.OnItemClickListener() {
             @Override
-            public void onItemClick(Ubicaciones item) {
+            public void onItemClick() {
 
             }
         });

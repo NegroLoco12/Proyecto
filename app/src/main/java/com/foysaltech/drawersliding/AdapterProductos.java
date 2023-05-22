@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,12 +25,16 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.MyVi
     public interface OnItemClickListener{
         void onItemClick(Productos item);
     }
-    public AdapterProductos(Context context, List<Productos> mData,AdapterProductos.OnItemClickListener listener ) {
+    public AdapterProductos(Context context, List<Productos> mData,List<Productos> listaOriginal,AdapterProductos.OnItemClickListener listener ) {
         this.context = context;
         this.mData = mData;
         this.listene=listener;
         listaOriginal= new ArrayList<>();
         listaOriginal.addAll(mData);
+    }
+    public void setFilter(List<Productos> filtered){
+this.mData=filtered;
+notifyDataSetChanged();
     }
 
     @NonNull

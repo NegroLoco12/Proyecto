@@ -86,7 +86,7 @@ Productos productos=new Productos();
     public void cargar( String codigo){
 
         elements = new ArrayList<>();
-        listAdapter = new AdapterProductos(getContext(), elements, new AdapterProductos.OnItemClickListener() {
+        listAdapter = new AdapterProductos(getContext(), elements,elements, new AdapterProductos.OnItemClickListener() {
             @Override
             public void onItemClick(Productos item) {
 

@@ -6,9 +6,10 @@
         <item>Inicio</item>
         <item>Mis direcciones</item>
         <item>Mis Pedidos</item>
+        <item>Datos de Facturación</item>
         <item>Mi Cuenta</item>
-        <item>¿Quienes Somos?</item>
         <item>Carrito</item>
+        <item>¿Quienes Somos?</item>
         <item>Cerrar Sesión</item>
         <item>Usuario</item>
     </string-array>
@@ -17,8 +18,8 @@
         <item>@drawable/ic_home_outline_grey600_24dp</item>
         <item>@drawable/ubicacion</item>
         <item>@drawable/ic_account_outline_grey600_24dp</item>
+        <item>@drawable/factura</item>
         <item>@drawable/ic_account_outline_grey600_24dp</item>
-
         <item>@drawable/ic_email_outline_grey600_24dp</item>
         <item>@drawable/ic_cart_outline_grey600_24dp</item>
         <item>@drawable/ic_logout_grey600_24dp</item>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,11 +41,12 @@ import javax.mail.MessagingException;
 
 public class CenteredTextFragment extends Fragment implements SearchView.OnQueryTextListener {
     RecyclerView contenedorMenu;
-    RecyclerView contenedorTodo;
+
+    RecyclerView contenedorTodo,contenedorPromo;
     private DatabaseReference mDatabase;
    AdapterCategoria listAdapter;
    AdapterProductos listaAdapterProducto;
-
+private TextView cabecera2;
     private List<Categorias> elements;
     private List<Productos> elementsProductos;
     private static final String EXTRA_TEXT = "text";
@@ -68,6 +70,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
                 View view=inflater.inflate(R.layout.fragment_text, container, false);
                 contenedorMenu=view.findViewById(R.id.contenedorMenu);
         contenedorTodo=view.findViewById(R.id.contenedorTodos);
+        contenedorPromo=view.findViewById(R.id.contenedorPromo);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         return view;
@@ -80,6 +83,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
         Bundle args = getArguments();
         final String text = args != null ? args.getString(EXTRA_TEXT) : "";
         TextView textView = view.findViewById(R.id.cabecera);
+        cabecera2=view.findViewById(R.id.cabecera2);
 txtBuscar=view.findViewById(R.id.MenuSearch);
         if (text.equals("Usuario")){
                   FirebaseAuth.getInstance().signOut();
@@ -155,21 +159,56 @@ txtBuscar=view.findViewById(R.id.MenuSearch);
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        int longitud=newText.length();
+        //filter(newText);
+         if (longitud==0){
 
-        if(listaAdapterProducto.filtrado(newText)==false){
+             //Toast.makeText(getContext(),"ss",Toast.LENGTH_LONG).show();
             contenedorTodo.setVisibility(View.GONE);
+            contenedorMenu.setVisibility(View.VISIBLE);
 
-        }else{
-            contenedorTodo.setVisibility(View.VISIBLE);
+            }
+        if (longitud>0) {
+           if (filter(newText) == false) {
+                contenedorTodo.setVisibility(View.GONE);
+                contenedorMenu.setVisibility(View.VISIBLE);
 
-        }
-        return false;
+            }
+            if (filter(newText)== true) {
+              //  if (longitud != 0) {
+                  contenedorTodo.setVisibility(View.VISIBLE);
+                  contenedorMenu.setVisibility(View.GONE);
+                    // cabecera2.setVisibility(View.GONE);
+               }
+            }
+       // }
+        return true;
     }
+
+    public boolean filter(String Text) {
+        boolean a=true;
+        List<Productos> filetredList=new ArrayList<>();
+        for(Productos productos:elementsProductos){
+            if(productos.getDescripcion().toLowerCase().contains(Text.toLowerCase())){
+                filetredList.add(productos);
+            }
+        }
+        if(filetredList.isEmpty()){
+            a=false;
+        }else{
+           // contenedorTodo.setVisibility(View.GONE);
+           //   contenedorMenu.setVisibility(View.VISIBLE);
+
+            listaAdapterProducto.setFilter(filetredList);
+        }
+        return a;
+    }
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     public void cargarTodo( ){
 
         elementsProductos = new ArrayList<>();
-        listaAdapterProducto = new AdapterProductos(getContext(), elementsProductos, new AdapterProductos.OnItemClickListener() {
+        listaAdapterProducto = new AdapterProductos(getContext(), elementsProductos,elementsProductos, new AdapterProductos.OnItemClickListener() {
             @Override
             public void onItemClick(Productos item) {
 
@@ -192,7 +231,7 @@ txtBuscar=view.findViewById(R.id.MenuSearch);
                     // productos.setKey(dataSnapshot.getKey());
                     elementsProductos.add(productos);
 
-                    //   Toast.makeText(getContext(),elements+"",Toast.LENGTH_LONG).show();
+             //         Toast.makeText(getContext(),elementsProductos+"",Toast.LENGTH_LONG).show();
 
 
                 }
