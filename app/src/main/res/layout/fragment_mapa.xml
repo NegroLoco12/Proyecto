@@ -293,7 +293,7 @@
                             app:boxStrokeColor="#4E4A4A"
                             app:boxStrokeWidth="1dp"
                             app:hintTextColor="#4E4A4A"
-                            app:prefixText="+595"
+
                             app:shapeAppearanceOverlay="@style/Button4">
 
 

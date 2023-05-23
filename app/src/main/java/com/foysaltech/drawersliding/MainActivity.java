@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
@@ -36,6 +38,8 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,9 +59,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener  {
     private CircleImageView img;
@@ -65,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private  LinearLayout linear_menu;
     public static final int REQUEST_CODE = 1;
     String aa;
+    BottomSheetDialog bottomSheetDialog;
     private DatabaseReference mDatabase;
     private ImageView botton_menu_ubi;
     private static final int POS_DASHBOARD = 0;
@@ -187,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (position == POS_ACCOUNT) {
 
-            BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(
+            bottomSheetDialog=new BottomSheetDialog(
                     MainActivity.this, R.style.BottonSheetDialogTheme
             );
             View bottomSheetView= LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_botton_sheet,(LinearLayout)findViewById(R.id.bottomShetContainer));
@@ -199,8 +208,14 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 @Override
                 public void onClick(View v) {
                     bottomSheetDialog.dismiss();
-                    FragmentManager manager = getSupportFragmentManager();
-                    manager.beginTransaction().replace(R.id.container, new MapaFragment()).addToBackStack(null).commit();
+                    MapaFragment fragment1=new MapaFragment();
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.container, fragment1).addToBackStack(null).commit();
+
+                    Bundle data = new Bundle();
+                    data.putString("dato", "Nuevo");
+                    fragment1.setArguments(data);;
+                    bottomSheetDialog.dismiss();
                 }
             });
             bottomSheetDialog.setContentView(bottomSheetView);
@@ -347,8 +362,12 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         elementsUbi = new ArrayList<>();
         listUbi = new AdapterUbicaciones(this, elementsUbi, new AdapterUbicaciones.OnItemClickListener() {
             @Override
-            public void onItemClick() {
-
+            public void onItemClick(Ubicaciones item) {
+borrarUbi(item);
+            }
+            @Override
+            public void onItemClick2(Ubicaciones item) {
+EditarUbi(item);
             }
         });
         contenedorUbi.setHasFixedSize(true);
@@ -385,7 +404,70 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
 
         });
     }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void borrarUbi(Ubicaciones item) {
 
+        mDatabase.child("Direcciones").child(item.getKey()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                MotionToast.Companion.createColorToast(MainActivity.this,//Toast Personalizado
+                        "Exito!",
+                        "Se ha Borrado",
+                        MotionToastStyle.DELETE,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(MainActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
+
+            }
+        });
+        DatabaseReference correo = mDatabase.child("Direcciones");
+        Query nombre = correo.orderByChild("cod_usuario").equalTo(mAuth.getCurrentUser().getUid());
+
+        nombre.addValueEventListener(new ValueEventListener() {
+            @Override
+
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                    ubicaciones=dataSnapshot.getValue(Ubicaciones.class);
+                    ubicaciones.setKey(dataSnapshot.getKey());
+                    elementsUbi.add(ubicaciones);
+
+                    //   Toast.makeText(getApplicationContext(),elementsUbi+"",Toast.LENGTH_LONG).show();
+
+
+                }
+                listUbi.actualizar(elementsUbi);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
+
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+private void EditarUbi(Ubicaciones item) {
+
+    MapaFragment fragment1=new MapaFragment();
+    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    transaction.replace(R.id.container, fragment1).addToBackStack(null).commit();
+    Bundle data = new Bundle();
+    data.putString("dato", "Editar");
+    data.putString("key", item.getKey());
+    data.putString("calle1", item.getCalle1());
+    data.putString("calle2", item.getCalle2());
+    data.putString("nro_casa", item.getNro_casa());
+    data.putString("nombre", item.getNombre_direccion());
+    data.putDouble("latitud", item.getLatitud());
+    data.putDouble("longitud", item.getLongitud());
+    data.putString("referencia", item.getReferencia());
+
+    fragment1.setArguments(data);;
+    bottomSheetDialog.dismiss();
+}
 
 }

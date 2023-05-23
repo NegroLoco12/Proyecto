@@ -23,6 +23,7 @@ public class Ubicaciones {
 
     String key;
 
+
     public String getNombre_direccion() {
         return nombre_direccion;
     }
@@ -32,7 +33,55 @@ public class Ubicaciones {
     }
 
     String nombre_direccion;
-    String calle1;
+    private String calle1;
+    private String referencia;
+
+    public void setNro_casa(String nro_casa) {
+        this.nro_casa = nro_casa;
+    }
+
+    private String nro_casa;
+
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
+    }
+
+    public String getCalle2() {
+        return calle2;
+    }
+
+    public String getNro_casa() {
+        return nro_casa;
+    }
+
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
+    }
+
+    public void setCalle2(String calle2) {
+        this.calle2 = calle2;
+    }
+
+    private String calle2;
+
+    private Double latitud;
+    private Double longitud;
 
 
     public Double getLatitudActual() {

@@ -70,6 +70,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     private LinearLayout seccion1,seccion2;
     private Button btn_siguiente;
     double latitud ;
+    String KeyUbi;
     double longitu ;
     double lat, longitude;
     private LocationManager locationManager;
@@ -121,6 +122,34 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
         view_nombre=view.findViewById(R.id.view_nombre);
         imageView2=view.findViewById(R.id.imageView22);
 
+       String data =getArguments().getString("dato");
+       if(data.equals("Editar")){
+           KeyUbi=getArguments().getString("key");
+           txt_calle1.setText(getArguments().getString("calle1"));
+           txt_calle2.setText(getArguments().getString("calle2"));
+           txt_referencia.setText(getArguments().getString("referencia"));
+           txt_nombre_direccion.setText(getArguments().getString("nombre"));
+           txt_nro_casa.setText(getArguments().getString("nro_casa"));
+           latitud=getArguments().getDouble("latitud");
+           longitu=getArguments().getDouble("longitud");
+
+           view.findViewById(R.id.btn_2).setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {editar_ubi();
+               }
+           });
+       } else if (data.equals("Nuevo")) {
+           latitud = Ubicaciones.guardado.get(0).getLatitudActual();
+           longitu =Ubicaciones.guardado.get(0).getLongitulActual();
+
+           view.findViewById(R.id.btn_2).setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {guardar_ubi();
+               }
+           });
+       }
+
+
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
         mAuth.setLanguageCode("es");
@@ -141,11 +170,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
             }
         });
 
-        view.findViewById(R.id.btn_2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {guardar_ubi();
-            }
-        });
 //////////////////////////////////////////////////////////////////////////////////////////////////////
         txt_calle1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -249,8 +273,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
         this.mMap.setOnMapClickListener(this);
         this.mMap.setOnMapLongClickListener(this);
 
-        latitud = coordenadas.guardado.get(0).getLatitudActual();
-        longitu =coordenadas.guardado.get(0).getLongitulActual();
         LatLng latLng = new LatLng(latitud,longitu);
         //   Toast.makeText(getContext(), latitud+""+longitu, Toast.LENGTH_SHORT).show();
         MarkerOptions markerOptions = new MarkerOptions();
@@ -263,16 +285,16 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
 
     @Override
     public void onMapClick(LatLng latLng) {
-        Ubicaciones ubi=new Ubicaciones();
-        ubi.eliminarUbi();
-        double lat=latLng.latitude;
-        double longi=latLng.longitude;
-        ubi.setLatitudActual(lat );
-        ubi.setLongitulActual(longi);
-        ubi.guardarUbi(ubi);
+       // Ubicaciones ubi=new Ubicaciones();
+       // ubi.eliminarUbi();
+       // double lat=latLng.latitude;
+      //  double longi=latLng.longitude;
+      //  ubi.setLatitudActual(lat );
+      //  ubi.setLongitulActual(longi);
+      //  ubi.guardarUbi(ubi);
         mMap.clear();
-        latitud = ubi.guardado.get(0).getLatitudActual();
-        longitu =ubi.guardado.get(0).getLongitulActual();
+        latitud = latLng.latitude;
+        longitu =latLng.longitude;
         LatLng latLng1 = new LatLng(latitud,longitu);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng1);
@@ -344,16 +366,14 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     public void guardar_ubi(){
         if(validar()){
             String calle1, calle2,nro_casa,referencia,nombre_direccion,cod_usuario;
-            double latitud,longitud;
+
 
             calle1 = txt_calle1.getText().toString();
             calle2 = txt_calle2.getText().toString();
             nro_casa = txt_nro_casa.getText().toString();
             referencia = txt_referencia.getText().toString();
             nombre_direccion = txt_nombre_direccion.getText().toString();
-            latitud=Ubicaciones.guardado.get(0).getLatitudActual();
-            longitud=Ubicaciones.guardado.get(0).getLongitulActual();
-            cod_usuario=mAuth.getCurrentUser().getUid();
+             cod_usuario=mAuth.getCurrentUser().getUid();
 
             Map<String, Object> map = new HashMap<>();
             map.put("calle1", calle1);
@@ -362,7 +382,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
             map.put("referencia", referencia);
             map.put("nombre_direccion", nombre_direccion);
             map.put("latitud", latitud);
-            map.put("longitud", longitud);
+            map.put("longitud", longitu);
             map.put("cod_usuario", cod_usuario);
 
             mDatabase.child("Direcciones").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -390,4 +410,57 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
        txt_nro_casa.setText(" ");
        txt_referencia.setText(" ");
     }
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void editar_ubi(){
+        if(validar()){
+            String calle1, calle2,nro_casa,referencia,nombre_direccion,cod_usuario;
+            double latitud,longitud;
+
+            calle1 = txt_calle1.getText().toString();
+            calle2 = txt_calle2.getText().toString();
+            nro_casa = txt_nro_casa.getText().toString();
+            referencia = txt_referencia.getText().toString();
+            nombre_direccion = txt_nombre_direccion.getText().toString();
+            latitud=Ubicaciones.guardado.get(0).getLatitudActual();
+            longitud=Ubicaciones.guardado.get(0).getLongitulActual();
+            cod_usuario=mAuth.getCurrentUser().getUid();
+            mDatabase.child("Direcciones").child(KeyUbi).child("calle1").setValue(txt_nombre.getText());
+            mDatabase.child("Direcciones").child(KeyUbi).child("calle2").setValue(txt_nombre.getText());
+
+            mDatabase.child("Direcciones").child(KeyUbi).child("latitud").setValue(txt_nombre.getText());
+            mDatabase.child("Direcciones").child(KeyUbi).child("longitud").setValue(txt_nombre.getText());
+
+            mDatabase.child("Direcciones").child(KeyUbi).child("nombre_direccion").setValue(txt_nombre.getText());
+            mDatabase.child("Direcciones").child(KeyUbi).child("nro_casa").setValue(txt_nombre.getText());
+
+            mDatabase.child("Direcciones").child(KeyUbi).child("referencia").setValue(txt_nombre.getText());
+            Map<String, Object> map = new HashMap<>();
+            map.put("calle1", calle1);
+            map.put("calle2", calle2);
+            map.put("nro_casa", nro_casa);
+            map.put("referencia", referencia);
+            map.put("nombre_direccion", nombre_direccion);
+            map.put("latitud", latitud);
+            map.put("longitud", longitud);
+            map.put("cod_usuario", cod_usuario);
+
+            mDatabase.child("Direcciones").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        MotionToast.Companion.createColorToast(getActivity(),
+                                "Registrado",
+                                "Registrado sin problemas!",
+                                MotionToastStyle.SUCCESS,
+                                MotionToast.GRAVITY_BOTTOM,
+                                MotionToast.LONG_DURATION,
+                                ResourcesCompat.getFont(getContext(), www.sanju.motiontoast.R.font.helvetica_regular));
+                        limpiar();
+                    }
+                }
+            });
+        }
+    }
+
 }
