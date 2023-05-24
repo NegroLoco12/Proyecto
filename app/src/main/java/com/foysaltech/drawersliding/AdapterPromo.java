@@ -47,7 +47,7 @@ public class AdapterPromo extends RecyclerView.Adapter<AdapterPromo.MyViewHolder
     public  class MyViewHolder extends RecyclerView.ViewHolder{
         TextView nombre_producto;
         TextView descripcion_producto;
-        TextView precio_producto;
+        TextView precio_producto, descripcion_promo;
         TextView precio_producto_promo;
         ImageView imagen_producto;
 
@@ -57,11 +57,11 @@ public class AdapterPromo extends RecyclerView.Adapter<AdapterPromo.MyViewHolder
             precio_producto=itemView.findViewById(R.id.txt_precio_promo);
             imagen_producto=(ImageView)itemView.findViewById(R.id.imagen_promo);
             precio_producto_promo=itemView.findViewById(R.id.txt_precio_actual_promo);
-
+            descripcion_promo=itemView.findViewById(R.id.txt_descripcion_promo);
         }
         void bindData(final Productos item) {
-
-precio_producto_promo.setText(item.getPrecio_promo()+" ₲ ");
+            descripcion_promo.setText(item.getDescripcion());
+            precio_producto_promo.setText(item.getPrecio_promo()+" ₲ ");
             precio_producto.setText(item.getPrecio()+" ₲ ");
             nombre_producto.setText(item.getNombre());
 //            descripcion_producto.setText(item.getDescripcion());

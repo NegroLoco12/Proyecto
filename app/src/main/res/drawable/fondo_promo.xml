@@ -6,7 +6,6 @@
         android:centerColor="#F0FFFF"
         android:startColor="#F0FFFF"
         android:endColor="#FFFFFF"/>
-    <corners android:bottomLeftRadius="60dp"
-        android:bottomRightRadius="60dp"/>
+  />
 
 </shape>

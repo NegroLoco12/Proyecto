@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.badge.BadgeDrawable;
@@ -35,6 +36,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.mail.MessagingException;
 
@@ -262,11 +265,31 @@ public void cargarPromo( ){
             //pasar(item);
         }
     });
+    LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
     contenedorPromo.setHasFixedSize(true);
     contenedorPromo.setLayoutManager(new LinearLayoutManager(getContext()));
-    contenedorPromo.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+    contenedorPromo.setLayoutManager(layoutManager);
     contenedorPromo.setAdapter(listaAdapterPromo);
-    // Toast.makeText(getContext(),codigo+"",Toast.LENGTH_LONG).show();
+    LinearSnapHelper linearSnapHelper=new LinearSnapHelper();
+    Timer timer= new Timer();
+    timer.schedule(new TimerTask() {
+        @Override
+        public void run() {
+            int primer=layoutManager.findLastCompletelyVisibleItemPosition();
+            int segundo=listaAdapterPromo.getItemCount()-1;
+            if(primer<segundo){
+               String a=layoutManager.findFirstVisibleItemPosition()+" "+(listaAdapterPromo.getItemCount()-1);
+              Log.i(a,a);
+                layoutManager.smoothScrollToPosition(contenedorPromo,new RecyclerView.State(),layoutManager.findFirstVisibleItemPosition()+1);
+            }
+            if(primer==segundo)  {
+                layoutManager.smoothScrollToPosition(contenedorPromo,new RecyclerView.State(),layoutManager.findFirstVisibleItemPosition()-1);
+               String a=layoutManager.findFirstVisibleItemPosition()+"Funcionaaa";
+                  Log.i(a,a);
+//Toast.makeText(getContext(),"a", Toast.LENGTH_LONG).show();
+            }
+        }
+    },0,5000);
 
     DatabaseReference correo = mDatabase.child("Productos");
     Query nombre = correo.orderByChild("estado_promo").equalTo(true);
