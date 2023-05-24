@@ -86,8 +86,6 @@ notifyDataSetChanged();
 
         }
         void bindData(final Productos item) {
-
-
             precio_producto.setText(item.getPrecio()+" ₲ ");
             nombre_producto.setText(item.getNombre());
             descripcion_producto.setText(item.getDescripcion());

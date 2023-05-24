@@ -425,16 +425,16 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
             latitud=Ubicaciones.guardado.get(0).getLatitudActual();
             longitud=Ubicaciones.guardado.get(0).getLongitulActual();
             cod_usuario=mAuth.getCurrentUser().getUid();
-            mDatabase.child("Direcciones").child(KeyUbi).child("calle1").setValue(txt_nombre.getText());
-            mDatabase.child("Direcciones").child(KeyUbi).child("calle2").setValue(txt_nombre.getText());
+            mDatabase.child("Direcciones").child(KeyUbi).child("calle1").setValue(txt_calle1.getText());
+            mDatabase.child("Direcciones").child(KeyUbi).child("calle2").setValue(txt_calle2.getText());
 
-            mDatabase.child("Direcciones").child(KeyUbi).child("latitud").setValue(txt_nombre.getText());
-            mDatabase.child("Direcciones").child(KeyUbi).child("longitud").setValue(txt_nombre.getText());
+           // mDatabase.child("Direcciones").child(KeyUbi).child("latitud").setValue(txt_nombre.getText());
+          //  mDatabase.child("Direcciones").child(KeyUbi).child("longitud").setValue(txt_nombre.getText());
 
-            mDatabase.child("Direcciones").child(KeyUbi).child("nombre_direccion").setValue(txt_nombre.getText());
-            mDatabase.child("Direcciones").child(KeyUbi).child("nro_casa").setValue(txt_nombre.getText());
+            mDatabase.child("Direcciones").child(KeyUbi).child("nombre_direccion").setValue(txt_nombre_direccion);
+            mDatabase.child("Direcciones").child(KeyUbi).child("nro_casa").setValue(txt_nro_casa);
 
-            mDatabase.child("Direcciones").child(KeyUbi).child("referencia").setValue(txt_nombre.getText());
+            mDatabase.child("Direcciones").child(KeyUbi).child("referencia").setValue(txt_referencia);
             Map<String, Object> map = new HashMap<>();
             map.put("calle1", calle1);
             map.put("calle2", calle2);

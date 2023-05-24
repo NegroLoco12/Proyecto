@@ -46,9 +46,13 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
     private DatabaseReference mDatabase;
    AdapterCategoria listAdapter;
    AdapterProductos listaAdapterProducto;
-private TextView cabecera2;
+    private TextView cabecera2;
+
+    AdapterPromo listaAdapterPromo;
     private List<Categorias> elements;
     private List<Productos> elementsProductos;
+
+    private List<Productos> elementsPromo;
     private static final String EXTRA_TEXT = "text";
     Categorias categorias=new Categorias();
     Productos productos=new Productos();
@@ -80,11 +84,12 @@ private TextView cabecera2;
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
        cargar();
         cargarTodo();
+        cargarPromo();
         Bundle args = getArguments();
         final String text = args != null ? args.getString(EXTRA_TEXT) : "";
         TextView textView = view.findViewById(R.id.cabecera);
         cabecera2=view.findViewById(R.id.cabecera2);
-txtBuscar=view.findViewById(R.id.MenuSearch);
+        txtBuscar=view.findViewById(R.id.MenuSearch);
         if (text.equals("Usuario")){
                   FirebaseAuth.getInstance().signOut();
                  Intent intent=new Intent(getContext(),LoginActivity.class);
@@ -246,5 +251,50 @@ txtBuscar=view.findViewById(R.id.MenuSearch);
 
         });
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public void cargarPromo( ){
+
+    elementsPromo= new ArrayList<>();
+    listaAdapterPromo = new AdapterPromo(elementsPromo,getContext(),new AdapterPromo.OnItemClickListener() {
+        @Override
+        public void onItemClick(Productos item) {
+
+            //pasar(item);
+        }
+    });
+    contenedorPromo.setHasFixedSize(true);
+    contenedorPromo.setLayoutManager(new LinearLayoutManager(getContext()));
+    contenedorPromo.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+    contenedorPromo.setAdapter(listaAdapterPromo);
+    // Toast.makeText(getContext(),codigo+"",Toast.LENGTH_LONG).show();
+
+    DatabaseReference correo = mDatabase.child("Productos");
+    Query nombre = correo.orderByChild("estado_promo").equalTo(true);
+
+    nombre.addValueEventListener(new ValueEventListener() {
+        @Override
+
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                productos=dataSnapshot.getValue(Productos.class);
+                // productos.setKey(dataSnapshot.getKey());
+                elementsPromo.add(productos);
+
+                //         Toast.makeText(getContext(),elementsProductos+"",Toast.LENGTH_LONG).show();
+
+
+            }
+            listaAdapterPromo.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+
+
+    });
+}
 
 }

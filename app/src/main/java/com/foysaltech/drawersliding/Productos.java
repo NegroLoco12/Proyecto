@@ -18,6 +18,26 @@ public class Productos {
     String nombre;
     String descripcion;
     String precio;
+
+    public Boolean getEstado_promo() {
+        return estado_promo;
+    }
+
+    public void setEstado_promo(Boolean estado_promo) {
+        this.estado_promo = estado_promo;
+    }
+
+    Boolean estado_promo;
+
+    public String getPrecio_promo() {
+        return precio_promo;
+    }
+
+    public void setPrecio_promo(String precio_promo) {
+        this.precio_promo = precio_promo;
+    }
+
+    String precio_promo;
     int codigo;
     Bitmap imagen2;
     String imagen;
