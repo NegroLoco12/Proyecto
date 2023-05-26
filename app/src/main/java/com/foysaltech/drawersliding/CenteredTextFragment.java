@@ -262,7 +262,7 @@ public void cargarPromo( ){
         @Override
         public void onItemClick(Productos item) {
 
-            //pasar(item);
+            pasar_promo(item);
         }
     });
     LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -275,19 +275,22 @@ public void cargarPromo( ){
     timer.schedule(new TimerTask() {
         @Override
         public void run() {
-            int primer=layoutManager.findLastCompletelyVisibleItemPosition();
-            int segundo=listaAdapterPromo.getItemCount()-1;
+         //   int primer=layoutManager.findLastCompletelyVisibleItemPosition();
+            int primer=0;
+            int segundo=listaAdapterPromo.getItemCount();
             if(primer<segundo){
-               String a=layoutManager.findFirstVisibleItemPosition()+" "+(listaAdapterPromo.getItemCount()-1);
-              Log.i(a,a);
+                primer++;
+               String a=layoutManager.findFirstVisibleItemPosition()+"";
+               String b=(listaAdapterPromo.getItemCount()-1)+"";
+              Log.i(a,b);
                 layoutManager.smoothScrollToPosition(contenedorPromo,new RecyclerView.State(),layoutManager.findFirstVisibleItemPosition()+1);
+                if(primer==segundo)  {
+                    layoutManager.smoothScrollToPosition(contenedorPromo,new RecyclerView.State(),0);
+                    String ab=layoutManager.findFirstVisibleItemPosition()+"Funcionaaa";
+                    Log.i(ab,ab);
+                }
             }
-            if(primer==segundo)  {
-                layoutManager.smoothScrollToPosition(contenedorPromo,new RecyclerView.State(),layoutManager.findFirstVisibleItemPosition()-1);
-               String a=layoutManager.findFirstVisibleItemPosition()+"Funcionaaa";
-                  Log.i(a,a);
-//Toast.makeText(getContext(),"a", Toast.LENGTH_LONG).show();
-            }
+
         }
     },0,5000);
 
@@ -319,5 +322,18 @@ public void cargarPromo( ){
 
     });
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public void pasar_promo(Productos item){
 
+    // Toast.makeText(getContext(), categorias.getKey(0)+ " ", Toast.LENGTH_LONG).show();
+    Bundle bundle=new Bundle();
+    bundle.putString("cod_producto",item.getKey());
+    bundle.putString("nombre_producto",item.getNombre());
+    bundle.putString("descripcion_producto",item.getDescripcion());
+    bundle.putString("precio_producto",item.getPrecio());
+    bundle.putString("imagen_producto",item.getImagen());
+    FragmentManager manager = getActivity().getSupportFragmentManager();
+    manager.beginTransaction().replace(R.id.container, new FragmentDescripcion()).addToBackStack(null).commit();
+    getParentFragmentManager().setFragmentResult("keypro",bundle);
+}
 }

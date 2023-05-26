@@ -4,12 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class AdapterPromo extends RecyclerView.Adapter<AdapterPromo.MyViewHolder> {
@@ -48,8 +50,9 @@ public class AdapterPromo extends RecyclerView.Adapter<AdapterPromo.MyViewHolder
         TextView nombre_producto;
         TextView descripcion_producto;
         TextView precio_producto, descripcion_promo;
-        TextView precio_producto_promo;
+        TextView precio_producto_promo,txt_porciento;
         ImageView imagen_producto;
+        ImageButton botton_promo;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,11 +61,20 @@ public class AdapterPromo extends RecyclerView.Adapter<AdapterPromo.MyViewHolder
             imagen_producto=(ImageView)itemView.findViewById(R.id.imagen_promo);
             precio_producto_promo=itemView.findViewById(R.id.txt_precio_actual_promo);
             descripcion_promo=itemView.findViewById(R.id.txt_descripcion_promo);
+            txt_porciento=itemView.findViewById(R.id.txt_porciento);
+            botton_promo=itemView.findViewById(R.id.botton_promo);
         }
         void bindData(final Productos item) {
+            DecimalFormat formatea = new DecimalFormat("###,###.##");
+
+            int precio1=Integer.parseInt(item.getPrecio());
+            int precio2=Integer.parseInt(item.getPrecio_promo());
+            int descuento=100-(precio2*100/precio1);
+
+            txt_porciento.setText("- "+descuento+"%");
             descripcion_promo.setText(item.getDescripcion());
-            precio_producto_promo.setText(item.getPrecio_promo()+" ₲ ");
-            precio_producto.setText(item.getPrecio()+" ₲ ");
+            precio_producto_promo.setText(formatea.format(Integer.parseInt(item.getPrecio_promo()))+" ₲ ");
+            precio_producto.setText(formatea.format(Integer.parseInt(item.getPrecio()))+" ₲ ");
             nombre_producto.setText(item.getNombre());
 //            descripcion_producto.setText(item.getDescripcion());
             if (item.getImagen2() != null) {
@@ -71,12 +83,12 @@ public class AdapterPromo extends RecyclerView.Adapter<AdapterPromo.MyViewHolder
 
                 imagen_producto.setImageResource(R.drawable.imagen);
             }
-           // itemView.findViewById(R.id.botton_producto).setOnClickListener(new View.OnClickListener() {
-          //      @Override
-           //     public void onClick(View v) {
-           //         listene.onItemClick(item);
-           //     }
-           // });
+            botton_promo.setOnClickListener(new View.OnClickListener() {
+            @Override
+               public void onClick(View v) {
+                   listene.onItemClick(item);
+               }
+           });
 
         }
     }

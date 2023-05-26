@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private String[] screenTitles;
     private Drawable[] screenIcons;
     private SlidingRootNav slidingRootNav;
-    private RecyclerView contenedorUbi;
+    private RecyclerView contenedorUbi,contenedorContri;
     private RecyclerView list ;
     Ubicaciones ubicaciones=new Ubicaciones();
     private FirebaseAuth mAuth;
@@ -222,7 +222,36 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             bottomSheetDialog.show();
             cargarUbi();
         }
+
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (position == 3) {
+
+            bottomSheetDialog=new BottomSheetDialog(
+                    MainActivity.this, R.style.BottonSheetDialogTheme
+            );
+            View bottomSheetView= LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_datos_fac,(LinearLayout)findViewById(R.id.bottomDatosContainer));
+            contenedorContri=bottomSheetView.findViewById(R.id.contenedorContribuyentes);
+
+
+            bottomSheetView.findViewById(R.id.btnContri).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomSheetDialog.dismiss();
+                   // MapaFragment fragment1=new MapaFragment();
+                 //   FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                 //   transaction.replace(R.id.container, fragment1).addToBackStack(null).commit();
+
+                  //  Bundle data = new Bundle();
+                 //   data.putString("dato", "Nuevo");
+                 //   fragment1.setArguments(data);;
+              //      bottomSheetDialog.dismiss();
+                }
+            });
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();
+         //   cargarUbi();
+        }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (position == POS_LOGOUT2) {
 
             FirebaseAuth.getInstance().signOut();
