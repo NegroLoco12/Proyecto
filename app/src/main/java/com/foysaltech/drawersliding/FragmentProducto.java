@@ -75,7 +75,7 @@ Productos productos=new Productos();
             cargar(result.getString("cod_categoria"));
                 String nombre= result.getString("nombre_categoria");
                 txt_cabecera.setText(nombre);
-                //   Toast.makeText(getContext(), codigo+ " ", Toast.LENGTH_LONG).show();
+               Toast.makeText(getContext(), nombre+ " 123", Toast.LENGTH_LONG).show();
             }
         });
         txtBuscar=view.findViewById(R.id.MenuSearch);
@@ -149,7 +149,31 @@ Productos productos=new Productos();
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        listAdapter.filtrado(newText);
-        return false;
+        Toast.makeText(getContext(),  " 123", Toast.LENGTH_LONG).show();
+
+        //int longitud=newText.length();
+       // if (longitud>0) {
+            filter(newText);
+     //   }
+            return true;
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public boolean filter(String Text) {
+        boolean a=true;
+        List<Productos> filetredList=new ArrayList<>();
+        for(Productos productos:elements){
+            if(productos.getDescripcion().toLowerCase().contains(Text.toLowerCase())){
+                filetredList.add(productos);
+            }
+        }
+        if(filetredList.isEmpty()){
+            a=false;
+        }else{
+            // contenedorTodo.setVisibility(View.GONE);
+            //   contenedorMenu.setVisibility(View.VISIBLE);
+
+            listAdapter.setFilter(filetredList);
+        }
+        return a;
     }
 }

@@ -43,24 +43,24 @@ android:layout_marginLeft="155dp"
             android:orientation="horizontal"
             tools:listitem="@layout/item_contribuyentes"
             android:focusableInTouchMode="true"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnContri"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
 
+            android:drawableStart="@drawable/anadir"
+            android:paddingTop="15dp"
+            android:text="Añadir Contribuyente"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/pinkColor"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:elevation="10dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/search_edittext_background"
+            />
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnContri"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
 
-        android:drawableStart="@drawable/anadir"
-        android:paddingTop="15dp"
-        android:text="Añadir Contribuyente"
-android:fontFamily="@font/montserrat_bold"
-        android:textColor="@color/pinkColor"
-        android:textSize="15sp"
-        android:layout_marginBottom="5dp"
-        android:elevation="10dp"
-        android:layout_marginLeft="30dp"
-        android:background="@drawable/search_edittext_background"
- />
 
 </LinearLayout>

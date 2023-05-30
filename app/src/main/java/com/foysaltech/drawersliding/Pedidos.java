@@ -2,7 +2,15 @@ package com.foysaltech.drawersliding;
 
 public class Pedidos {
 
+    public String getNombre() {
+        return nombre;
+    }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    String nombre;
     String codigo;
 
     public int getCantidad() {

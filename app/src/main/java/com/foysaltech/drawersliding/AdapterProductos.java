@@ -48,23 +48,7 @@ notifyDataSetChanged();
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.bindData(mData.get(position));
     }
-    public  boolean filtrado(String txt_buscar){
-        int longitud=txt_buscar.length();
-        boolean a=true;
-        if(longitud==0) {
-            mData.clear();
-            mData.addAll(listaOriginal);
-        }else{
-            List<Productos>collecion=mData.stream().filter(i->i.getDescripcion().toLowerCase().contains(txt_buscar.toLowerCase())).collect(Collectors.toList());
-            mData.clear();
-            mData.addAll(collecion);
-            if(mData.size()==0){
-                a=false;
-            }
-        }
-        notifyDataSetChanged();
-        return a;
-    }
+
     @Override
     public int getItemCount() {
         return mData.size();

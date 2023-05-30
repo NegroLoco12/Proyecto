@@ -280,7 +280,7 @@ public void cargarPromo( ){
             int segundo=listaAdapterPromo.getItemCount();
             if(primer<segundo){
                 primer++;
-               String a=layoutManager.findFirstVisibleItemPosition()+"";
+               String a=Carritos.pedido.size()+"";
                String b=(listaAdapterPromo.getItemCount()-1)+"";
               Log.i(a,b);
                 layoutManager.smoothScrollToPosition(contenedorPromo,new RecyclerView.State(),layoutManager.findFirstVisibleItemPosition()+1);

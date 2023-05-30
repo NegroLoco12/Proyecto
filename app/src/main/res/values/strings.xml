@@ -5,7 +5,7 @@
     <string-array name="ld_activityScreenTitles">
         <item>Inicio</item>
         <item>Mis direcciones</item>
-        <item>Mis Pedidos</item>
+        <item>Historial de Pedidos</item>
         <item>Datos de Facturación</item>
         <item>Mi Cuenta</item>
         <item>Carrito</item>

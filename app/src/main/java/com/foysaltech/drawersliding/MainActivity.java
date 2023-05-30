@@ -189,6 +189,10 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             Fragment selectedScreen = CenteredTextFragment.createFor(screenTitles[position]);
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
         }
+        if (position == 5) {
+            Fragment selectedScreen = new FragmentCarrito();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
+        }
         if (position == POS_SOMOS) {
             Fragment selectedScreen = new CuentaFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();

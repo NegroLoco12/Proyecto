@@ -67,7 +67,7 @@ public class FragmentDescripcion extends Fragment {
 
                 txt_descripcion_producto.setText(result.getString("descripcion_producto"));
                 txt_nombre_producto.setText(result.getString("nombre_producto"));
-                txt_precio_productos.setText(result.getString("precio_producto")+" Gs");
+                txt_precio_productos.setText(formatea.format(Integer.parseInt(result.getString("precio_producto")))+" Gs");
                 precio_inicial=Integer.parseInt(result.getString("precio_producto")) ;
                 codigo_articulo=result.getString("cod_producto");
                 Bitmap bitmap;
@@ -123,6 +123,7 @@ public class FragmentDescripcion extends Fragment {
         pedidos.setCantidad(cantidad);
         pedidos.setPrecio_total(precio_total);
         pedidos.setCodigo(codigo_articulo);
+        pedidos.setNombre(nombre);
         Carritos.agregarPedidos(pedidos);
         MotionToast.Companion.createColorToast(getActivity(),//Toast Personalizado
                 "Exito!",
