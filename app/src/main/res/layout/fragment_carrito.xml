@@ -19,6 +19,7 @@
             android:gravity="center"
             android:text="Carrito"
             android:textSize="20sp"
+            android:elevation="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.521"
@@ -52,7 +53,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="220dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,67 +68,79 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="100dp"
+                    android:id="@+id/txt_descuento_carrito"
+                    android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:text="Total"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.12"
+                    app:layout_constraintHorizontal_bias="0.89"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.32999998" />
 
                 <TextView
                     android:id="@+id/textView12"
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="124dp"
-                    android:text="TextView"
-                    app:layout_constraintBottom_toTopOf="@+id/btnCarrito"
+                    android:text="Descuento"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.128"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.87" />
 
                 <TextView
                     android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
+                    android:layout_width="86dp"
+                    android:layout_height="30dp"
+                    android:text="Total"
+                    android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.123"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.542" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/txt_total_carrito"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
+                    android:layout_height="40dp"
+                    android:text="Sub Total"
+                    android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintHorizontal_bias="0.853"
+                    app:layout_constraintStart_toEndOf="@+id/textView11"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.572" />
 
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
+                    android:text="Sub Total"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.113"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.165" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/txt_sub_total_carrito"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="181dp"
                     android:text="TextView"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView13"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintHorizontal_bias="0.926"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.164" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnCarrito"
@@ -141,9 +154,10 @@
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.496"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.94" />
+                    app:layout_constraintVertical_bias="0.906" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
