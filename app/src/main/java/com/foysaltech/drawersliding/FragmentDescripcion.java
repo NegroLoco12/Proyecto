@@ -27,6 +27,7 @@ public class FragmentDescripcion extends Fragment {
     TextView txt_nombre_producto,txt_descripcion_producto,txt_precio_productos,txt_cantidad;
      ImageView imagen;
     int precio_inicial;
+    Bitmap bitmap;
      String codigo_articulo;
     ImageView  button_aumentar, button_disminuir;
     Button btDetailAddToCart;
@@ -70,7 +71,7 @@ public class FragmentDescripcion extends Fragment {
                 txt_precio_productos.setText(formatea.format(Integer.parseInt(result.getString("precio_producto")))+" Gs");
                 precio_inicial=Integer.parseInt(result.getString("precio_producto")) ;
                 codigo_articulo=result.getString("cod_producto");
-                Bitmap bitmap;
+
                 byte[] byteCode=   Base64.getDecoder().decode(result.getString("imagen_producto"));
                 bitmap= BitmapFactory.decodeByteArray(byteCode,0,byteCode.length);
                 imagen.setImageBitmap(bitmap);
@@ -122,6 +123,7 @@ public class FragmentDescripcion extends Fragment {
 
         pedidos.setCantidad(cantidad);
         pedidos.setPrecio_total(precio_total);
+        pedidos.setImagen(bitmap);
         pedidos.setCodigo(codigo_articulo);
         pedidos.setNombre(nombre);
         Carritos.agregarPedidos(pedidos);

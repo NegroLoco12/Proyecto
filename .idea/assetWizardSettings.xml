@@ -319,8 +319,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="editar" />
-                            <entry key="sourceFile" value="C:\Users\Matias\Downloads\editar.svg" />
+                            <entry key="outputName" value="expediente" />
+                            <entry key="sourceFile" value="C:\Users\Matias\Downloads\expediente.svg" />
                           </map>
                         </option>
                       </PersistentState>

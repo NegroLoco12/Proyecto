@@ -190,14 +190,14 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
         }
         if (position == 6) {
-            Fragment selectedScreen = new FragmentCarrito();
+            Fragment selectedScreen = new FragmentSomos();
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
         }
         if (position == 5) {
             Fragment selectedScreen = new FragmentCarrito();
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
         }
-        if (position == POS_SOMOS) {
+        if (position == 4) {
             Fragment selectedScreen = new CuentaFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
         }
@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
          //   cargarUbi();
         }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (position == POS_LOGOUT2) {
+        if (position == 7) {
 
             FirebaseAuth.getInstance().signOut();
             Intent intent=new Intent(MainActivity.this,LoginActivity.class);

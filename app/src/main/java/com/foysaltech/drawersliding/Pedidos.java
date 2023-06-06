@@ -1,5 +1,7 @@
 package com.foysaltech.drawersliding;
 
+import android.graphics.Bitmap;
+
 public class Pedidos {
 
     public String getNombre() {
@@ -30,6 +32,16 @@ public class Pedidos {
     }
 
     int cantidad;
+
+    public Bitmap getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Bitmap imagen) {
+        this.imagen = imagen;
+    }
+
+    Bitmap imagen;
 
     public int getPrecio_total() {
         return precio_total;

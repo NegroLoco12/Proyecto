@@ -11,9 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.text.DecimalFormat;
 
 public class FragmentCarrito extends Fragment {
 RecyclerView contenedorPedidos;
+TextView txt_sub_total_carrito;
+String precio_final;
     public FragmentCarrito() {
 
     }
@@ -36,6 +41,7 @@ RecyclerView contenedorPedidos;
 
         View view= inflater.inflate(R.layout.fragment_carrito, container, false);
         contenedorPedidos=view.findViewById(R.id.contenedorCarrito);
+        txt_sub_total_carrito=view.findViewById(R.id.txt_sub_total_carrito);
               return  view;
     }
 
@@ -43,21 +49,63 @@ RecyclerView contenedorPedidos;
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         cargar();
+        precio();
     }
 
     public void cargar() {
 
-        AdapterPedidos listAdapter = new AdapterPedidos(Carritos.pedido, getContext(), new AdapterPedidos.OnItemClickListener()  {
+        AdapterPedidos listAdapter = new AdapterPedidos(Carritos.pedido, getContext(), new AdapterPedidos.OnItemClickListener() {
             @Override
-        public void onItemClick(Pedidos item) {
-                //   borrar(item);
-
+            public void onItemClick(Pedidos item) {
+                //borrar(item);
             }
-    });
-
+        }, new AdapterPedidos.OnItemClickListener() {
+            @Override
+            public void onItemClick(Pedidos item) {
+                aumentar(item);
+            }
+        }, new AdapterPedidos.OnItemClickListener() {
+            @Override
+            public void onItemClick(Pedidos item) {
+                disminuir(item);
+            }
+        });
         contenedorPedidos.setHasFixedSize(true);
         contenedorPedidos.setLayoutManager(new LinearLayoutManager(getContext()));
         contenedorPedidos.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         contenedorPedidos.setAdapter(listAdapter);
+    }
+    public void precio() {
+        DecimalFormat formatea = new DecimalFormat("###,###.##");
+        precio_final=formatea.format(Carritos.getPrecioDefinitivo());
+        txt_sub_total_carrito.setText(formatea.format(Carritos.getPrecioDefinitivo()) + " ₲");
+    }
+    public void disminuir(Pedidos item) {
+        if (item.getCantidad() > 1) {
+            Pedidos pedidos = new Pedidos();
+            pedidos.setNombre(item.getNombre());
+          //  pedidos.setDescripcion(item.getDescripcion());
+            pedidos.setCantidad(item.getCantidad() - 1);
+            int cantidad_actual = item.getCantidad() - 1;
+            int precio_unitario = item.getPrecio_total() / item.getCantidad();
+            pedidos.setPrecio_total(precio_unitario * cantidad_actual);
+            pedidos.setCodigo(item.getCodigo());
+            Carritos.agregarPedidos(pedidos);
+            cargar();
+            precio();
+        }
+    }
+    public void aumentar(Pedidos item) {
+        Pedidos pedidos = new Pedidos();
+        pedidos.setNombre(item.getNombre());
+      //  pedidos.setDescripcion(item.getDescripcion());
+        pedidos.setCantidad(item.getCantidad() + 1);
+        int cantidad_actual = item.getCantidad() + 1;
+        int precio_unitario = item.getPrecio_total() / item.getCantidad();
+        pedidos.setPrecio_total(precio_unitario * cantidad_actual);
+        pedidos.setCodigo(item.getCodigo());
+        Carritos.agregarPedidos(pedidos);
+        cargar();
+        precio();
     }
 }
