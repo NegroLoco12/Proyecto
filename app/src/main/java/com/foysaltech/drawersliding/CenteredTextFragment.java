@@ -332,8 +332,10 @@ public void pasar_promo(Productos item){
     bundle.putString("descripcion_producto",item.getDescripcion());
     bundle.putString("precio_producto",item.getPrecio());
     bundle.putString("imagen_producto",item.getImagen());
+
+    bundle.putString("descuento_producto",item.getPrecio_promo());
     FragmentManager manager = getActivity().getSupportFragmentManager();
     manager.beginTransaction().replace(R.id.container, new FragmentDescripcion()).addToBackStack(null).commit();
-    getParentFragmentManager().setFragmentResult("keypro",bundle);
+    getParentFragmentManager().setFragmentResult("keypromo",bundle);
 }
 }

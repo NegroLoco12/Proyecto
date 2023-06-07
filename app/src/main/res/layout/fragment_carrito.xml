@@ -51,7 +51,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btDetailAddToCart"
+            android:id="@+id/borrar_todo"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:background="@drawable/btn_borrar"
@@ -65,6 +65,7 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="16sp"
+            android:onClick="borrar_carrito"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.061"

@@ -77,6 +77,20 @@ public class FragmentDescripcion extends Fragment {
                 imagen.setImageBitmap(bitmap);
               }
         });
+        getParentFragmentManager().setFragmentResultListener("keypromo", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+
+                txt_descripcion_producto.setText(result.getString("descripcion_producto"));
+                txt_nombre_producto.setText(result.getString("nombre_producto"));
+                txt_precio_productos.setText(formatea.format(Integer.parseInt(result.getString("precio_producto")))+" Gs");
+                precio_inicial=Integer.parseInt(result.getString("descuento_producto"));
+                codigo_articulo=result.getString("cod_producto");
+                byte[] byteCode=   Base64.getDecoder().decode(result.getString("imagen_producto"));
+                bitmap= BitmapFactory.decodeByteArray(byteCode,0,byteCode.length);
+                imagen.setImageBitmap(bitmap);
+            }
+        });
         button_aumentar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +138,7 @@ public class FragmentDescripcion extends Fragment {
         pedidos.setCantidad(cantidad);
         pedidos.setPrecio_total(precio_total);
         pedidos.setImagen(bitmap);
+        pedidos.setPrecio_inicial(precio_inicial);
         pedidos.setCodigo(codigo_articulo);
         pedidos.setNombre(nombre);
         Carritos.agregarPedidos(pedidos);

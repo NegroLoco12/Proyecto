@@ -12,7 +12,7 @@ public class Carritos {
             if (dp.getCodigo() == pedidos.getCodigo()) {
                 pedido.set(index, pedidos);
                 b = true;
-                return "El platillo ha sido agregado al carrito, se actualizará la cantidad";
+              //  return "El platillo ha sido agregado al carrito, se actualizará la cantidad";
             }
             index++;
         }

@@ -58,7 +58,22 @@ Productos productos=new Productos();
       //  cargar();
 
     }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Override
+    public void onStart() {
+        getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                cargar(result.getString("cod_categoria"));
+                String nombre= result.getString("nombre_categoria");
+                txt_cabecera.setText(nombre);
+                //   Toast.makeText(getContext(), nombre+ " 123", Toast.LENGTH_LONG).show();
+            }
+        });
+        super.onStart();
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,15 +84,7 @@ Productos productos=new Productos();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-            cargar(result.getString("cod_categoria"));
-                String nombre= result.getString("nombre_categoria");
-                txt_cabecera.setText(nombre);
-            //   Toast.makeText(getContext(), nombre+ " 123", Toast.LENGTH_LONG).show();
-            }
-        });
+
         txtBuscar=view.findViewById(R.id.MenuSearch);
         txtBuscar.setOnQueryTextListener(this);
         return view;

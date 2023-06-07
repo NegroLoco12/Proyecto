@@ -65,7 +65,7 @@ public class AdapterCategoria extends RecyclerView.Adapter<AdapterCategoria.MyVi
 
             img.setImageResource(R.drawable.imagen);
             }
-            itemView.findViewById(R.id.botton_promo).setOnClickListener(new View.OnClickListener() {
+            itemView.findViewById(R.id.imagen_promo).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listene.onItemClick(item);

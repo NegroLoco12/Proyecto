@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +18,7 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.ViewHold
     private List<Pedidos> mData;
 
     private LayoutInflater mInflater;
-    private Context context;
+     Context context;
     final AdapterPedidos.OnItemClickListener listener;
     final AdapterPedidos.OnItemClickListener listener2;
     final AdapterPedidos.OnItemClickListener listener3;
@@ -54,7 +55,7 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.ViewHold
 
         TextView txt_nombre_pedido;
         TextView txt_descripcion_pedido;
-        TextView txt_precio_pedido;
+        TextView txt_precio_pedido,txt_precio_inicial;
         TextView txt_cantidad_pedido;
         TextView txt_id_pedido;
         ImageView imagen;
@@ -65,24 +66,39 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.ViewHold
            // txt_descripcion_pedido=(TextView)itemView.findViewById(R.id.txt_descripcion_pedido);
             txt_precio_pedido=(TextView)itemView.findViewById(R.id.txt_precio_pedido);
             txt_cantidad_pedido=(TextView)itemView.findViewById(R.id.txt_cantidad_pedido);
-imagen=(ImageView) itemView.findViewById(R.id.imagen_pedido);
+            imagen=(ImageView) itemView.findViewById(R.id.imagen_pedido);
+            txt_precio_inicial=(TextView)itemView.findViewById(R.id.txt_pedido_precio_inicial);
 
         }
         void bindData(final Pedidos item) {
             int precio=item.getPrecio_total();
             DecimalFormat formatea = new DecimalFormat("###,###.##");
             txt_nombre_pedido.setText(item.getNombre()+"");
-      //      txt_descripcion_pedido.setText(item.getDescripcion());
-           txt_precio_pedido.setText(formatea.format(precio) + " ₲");
+           txt_precio_pedido.setText("Total ₲ "+formatea.format(precio)  );
           txt_cantidad_pedido.setText(item.getCantidad()+" ");
           imagen.setImageBitmap(item.getImagen());
+            txt_precio_inicial.setText(" ₲ "+item.getPrecio_inicial());
+           // Toast.makeText(context, item.getPrecio_inicial()+"", Toast.LENGTH_SHORT).show();
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+       if(item.getCantidad()==1){
+           itemView.findViewById(R.id.botton_borrar_item).setVisibility(View.VISIBLE);
+           itemView.findViewById(R.id.botton_disminuir_pedido).setVisibility(View.GONE);
+       }else{
+           itemView.findViewById(R.id.botton_disminuir_pedido).setVisibility(View.VISIBLE);
+           itemView.findViewById(R.id.botton_borrar_item).setVisibility(View.GONE);
+       }
             itemView.findViewById(R.id.botton_aumentar_pedido).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener2.onItemClick(item);
+
+                }
+            });
+            itemView.findViewById(R.id.botton_borrar_item).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(item);
                 }
             });
             itemView.findViewById(R.id.botton_disminuir_pedido).setOnClickListener(new View.OnClickListener() {

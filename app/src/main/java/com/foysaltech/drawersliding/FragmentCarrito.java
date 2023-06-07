@@ -57,7 +57,7 @@ String precio_final;
         AdapterPedidos listAdapter = new AdapterPedidos(Carritos.pedido, getContext(), new AdapterPedidos.OnItemClickListener() {
             @Override
             public void onItemClick(Pedidos item) {
-                //borrar(item);
+               borrar(item);
             }
         }, new AdapterPedidos.OnItemClickListener() {
             @Override
@@ -105,6 +105,21 @@ String precio_final;
         pedidos.setPrecio_total(precio_unitario * cantidad_actual);
         pedidos.setCodigo(item.getCodigo());
         Carritos.agregarPedidos(pedidos);
+        cargar();
+        precio();
+    }
+
+
+
+    public void borrar(Pedidos item) {
+        Carritos.pedido.remove(item);
+        cargar();
+        precio();
+    }
+
+
+    public void borrar_carrito(View vieew){
+        Carritos.pedido.clear();
         cargar();
         precio();
     }

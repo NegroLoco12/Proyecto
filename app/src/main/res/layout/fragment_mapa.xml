@@ -322,7 +322,7 @@
                             android:textAllCaps="false"
                             android:textColor="@color/textColor"
                             android:textSize="17sp"
-                            app:backgroundTint="@color/pinkColor"
+                            app:backgroundTint="#32BEA6"
                             app:shapeAppearanceOverlay="@style/Button4" />
 
                     </LinearLayout>

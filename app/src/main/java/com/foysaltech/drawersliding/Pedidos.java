@@ -33,6 +33,16 @@ public class Pedidos {
 
     int cantidad;
 
+    public int getPrecio_inicial() {
+        return precio_inicial;
+    }
+
+    public void setPrecio_inicial(int precio_inicial) {
+        this.precio_inicial = precio_inicial;
+    }
+
+    int precio_inicial;
+
     public Bitmap getImagen() {
         return imagen;
     }

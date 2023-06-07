@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#EEEEEE"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,6 +31,7 @@
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/search_edittext_background"
                 android:padding="8dp"
+                android:elevation="5dp"
                 android:paddingStart="20dp"
                 android:text="Categorias"
                 android:textColor="#007e8d"
@@ -38,9 +39,10 @@
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="10dp"
                 android:id="@+id/contenedorMenu"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="230dp"
 
                 android:orientation="horizontal"
                 android:visibility="visible"
@@ -80,8 +82,6 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/search_edittext_background"
-
-
                 android:inputType="text"
                 android:maxLines="1"
                 android:paddingStart="20dp"
@@ -94,9 +94,9 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" >
+                app:layout_constraintVertical_bias="0.0" />
 
-            </SearchView>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -110,6 +110,7 @@
             android:padding="8dp"
             android:paddingStart="18dp"
             android:text="Promos"
+            android:elevation="5dp"
             android:textColor="#007e8d"
             android:textSize="19sp"
             android:textStyle="bold"
