@@ -282,12 +282,12 @@ public void cargarPromo( ){
                 primer++;
                String a=Carritos.pedido.size()+"";
                String b=(listaAdapterPromo.getItemCount()-1)+"";
-              Log.i(a,b);
+
                 layoutManager.smoothScrollToPosition(contenedorPromo,new RecyclerView.State(),layoutManager.findFirstVisibleItemPosition()+1);
                 if(primer==segundo)  {
                     layoutManager.smoothScrollToPosition(contenedorPromo,new RecyclerView.State(),0);
                     String ab=layoutManager.findFirstVisibleItemPosition()+"Funcionaaa";
-                    Log.i(ab,ab);
+
                 }
             }
 

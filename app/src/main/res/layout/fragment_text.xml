@@ -34,7 +34,7 @@
                 android:elevation="5dp"
                 android:paddingStart="20dp"
                 android:text="Categorias"
-                android:textColor="#007e8d"
+                android:textColor="#32BEA6"
                 android:textSize="19sp"
                 android:textStyle="bold" />
 
@@ -111,7 +111,7 @@
             android:paddingStart="18dp"
             android:text="Promos"
             android:elevation="5dp"
-            android:textColor="#007e8d"
+            android:textColor="#32BEA6"
             android:textSize="19sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

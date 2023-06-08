@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private static final int POS_LOGOUT2 = 6;
     private List<User> elements;
     User users=new User();
+   private AlertDialog dialog;
     private String[] screenTitles;
     private Drawable[] screenIcons;
     private SlidingRootNav slidingRootNav;
@@ -244,15 +246,16 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             bottomSheetView.findViewById(R.id.btnContri).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    bottomSheetDialog.dismiss();
-                   // MapaFragment fragment1=new MapaFragment();
-                 //   FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                 //   transaction.replace(R.id.container, fragment1).addToBackStack(null).commit();
+                    AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
 
-                  //  Bundle data = new Bundle();
-                 //   data.putString("dato", "Nuevo");
-                 //   fragment1.setArguments(data);;
-              //      bottomSheetDialog.dismiss();
+                    View view=getLayoutInflater().inflate(R.layout.custom_dialog_contribuyente,null);
+                    builder.setView(view);
+                    builder.setCancelable(true);
+                    AlertDialog  alertDialog= builder.create();
+                    alertDialog.show();
+                   // alertDialog.setCanceledOnTouchOutside(false);
+                   // bottomSheetDialog.dismiss();
+
                 }
             });
             bottomSheetDialog.setContentView(bottomSheetView);
