@@ -28,6 +28,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -253,7 +254,33 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                     builder.setCancelable(true);
                     AlertDialog  alertDialog= builder.create();
                     alertDialog.show();
-                   // alertDialog.setCanceledOnTouchOutside(false);
+                    String cod_usuario=mAuth.getCurrentUser().getUid();
+                    EditText txt_ruc=view.findViewById(R.id.txt_ruc);
+                    EditText txt_razonsocial=view.findViewById(R.id.txt_razonsocial);
+                    String nombre=txt_razonsocial.getText().toString();
+                    String ruc=txt_ruc.getText().toString();
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("nombre", nombre);
+                    map.put("apellido", ruc);
+                    map.put("cod_cliente", cod_usuario);
+                    String id = mAuth.getCurrentUser().getUid();
+                    mDatabase.child("Contribuyentes").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task2) {
+                            if (task2.isSuccessful()) {
+                                MotionToast.Companion.createColorToast(MainActivity.this,//Toast Personalizado
+                                        "Registrado",
+                                        "Registrado sin problemas!",
+                                        MotionToastStyle.SUCCESS,
+                                        MotionToast.GRAVITY_BOTTOM,
+                                        MotionToast.LONG_DURATION,
+                                        ResourcesCompat.getFont(MainActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
+                                        alertDialog.dismiss();
+                            }
+                        }
+                    });
+
+                    // alertDialog.setCanceledOnTouchOutside(false);
                    // bottomSheetDialog.dismiss();
 
                 }

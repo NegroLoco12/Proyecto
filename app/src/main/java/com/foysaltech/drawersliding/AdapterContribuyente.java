@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,7 +33,7 @@ public class AdapterContribuyente extends RecyclerView.Adapter<AdapterContribuye
 
     @Override
     public void onBindViewHolder(@NonNull AdapterContribuyente.MyViewHolder holder, int position) {
-
+        holder.bindData(mData.get(position));
     }
 
     @Override
@@ -42,13 +41,14 @@ public class AdapterContribuyente extends RecyclerView.Adapter<AdapterContribuye
         return mData.size();
 }
     public  class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView itemName;
-
+        TextView item_nombre,item_ruc;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemName=itemView.findViewById(R.id.ItemName);
-
+            item_nombre=itemView.findViewById(R.id.nombre_contri);
+            item_ruc=itemView.findViewById(R.id.txt_nro_contri);
+        }
+        void bindData(final Contribuyentes item) {
 
         }
     }
