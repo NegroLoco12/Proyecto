@@ -1,22 +1,32 @@
 package com.foysaltech.drawersliding;
 
 public class Contribuyentes {
-    public String getRuc() {
-        return ruc;
+   String documento;
+    String key;
+
+    public String getDocumento() {
+        return documento;
     }
 
-    public void setRuc(String ruc) {
-        this.ruc = ruc;
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
-    public String getNombre() {
-        return Nombre;
+    public String getKey() {
+        return key;
     }
 
-    public void setNombre(String nombre) {
-        Nombre = nombre;
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    private String ruc;
-    private String Nombre;
+    public String getRazon_social() {
+        return razon_social;
+    }
+
+    public void setRazon_social(String razon_social) {
+        this.razon_social = razon_social;
+    }
+
+    String razon_social;
 }

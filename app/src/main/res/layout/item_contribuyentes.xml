@@ -24,7 +24,7 @@
 
 
         <LinearLayout
-            android:id="@+id/linear_menu"
+            android:id="@+id/linear_menu_contri"
             android:layout_width="55dp"
             android:layout_height="35dp"
             android:orientation="horizontal"
@@ -99,7 +99,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <ImageButton
-            android:id="@+id/menu_ubi"
+            android:id="@+id/menu_contri"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginStart="8dp"

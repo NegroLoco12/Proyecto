@@ -94,9 +94,12 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private RecyclerView contenedorUbi,contenedorContri;
     private RecyclerView list ;
     Ubicaciones ubicaciones=new Ubicaciones();
+    Contribuyentes contribuyentes=new Contribuyentes();
     private FirebaseAuth mAuth;
     private    AdapterUbicaciones listUbi;
+    private    AdapterContribuyente listContri;
     private List<Ubicaciones> elementsUbi;
+    private List<Contribuyentes> elementsContri;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -240,11 +243,11 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             bottomSheetDialog=new BottomSheetDialog(
                     MainActivity.this, R.style.BottonSheetDialogTheme
             );
-            View bottomSheetView= LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_datos_fac,(LinearLayout)findViewById(R.id.bottomDatosContainer));
-            contenedorContri=bottomSheetView.findViewById(R.id.contenedorContribuyentes);
+            View bottomSheetView2= LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_datos_fac,(LinearLayout)findViewById(R.id.bottomDatosContainer));
+            contenedorContri=bottomSheetView2.findViewById(R.id.contenedorContribuyentes);
 
 
-            bottomSheetView.findViewById(R.id.btnContri).setOnClickListener(new View.OnClickListener() {
+            bottomSheetView2.findViewById(R.id.btnContri).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
@@ -254,29 +257,35 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                     builder.setCancelable(true);
                     AlertDialog  alertDialog= builder.create();
                     alertDialog.show();
-                    String cod_usuario=mAuth.getCurrentUser().getUid();
-                    EditText txt_ruc=view.findViewById(R.id.txt_ruc);
-                    EditText txt_razonsocial=view.findViewById(R.id.txt_razonsocial);
-                    String nombre=txt_razonsocial.getText().toString();
-                    String ruc=txt_ruc.getText().toString();
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("nombre", nombre);
-                    map.put("apellido", ruc);
-                    map.put("cod_cliente", cod_usuario);
-                    String id = mAuth.getCurrentUser().getUid();
-                    mDatabase.child("Contribuyentes").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    view.findViewById(R.id.btn_guardar_contri).setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task2) {
-                            if (task2.isSuccessful()) {
-                                MotionToast.Companion.createColorToast(MainActivity.this,//Toast Personalizado
-                                        "Registrado",
-                                        "Registrado sin problemas!",
-                                        MotionToastStyle.SUCCESS,
-                                        MotionToast.GRAVITY_BOTTOM,
-                                        MotionToast.LONG_DURATION,
-                                        ResourcesCompat.getFont(MainActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
+                        public void onClick(View v) {
+
+                            String cod_usuario=mAuth.getCurrentUser().getUid();
+                            EditText txt_ruc=view.findViewById(R.id.txt_ruc);
+                            EditText txt_razonsocial=view.findViewById(R.id.txt_razonsocial);
+                            String nombre=txt_razonsocial.getText().toString();
+                            String ruc=txt_ruc.getText().toString();
+                            Map<String, Object> map = new HashMap<>();
+                            map.put("razon_social", nombre);
+                            map.put("documento", ruc);
+                            map.put("cod_cliente", cod_usuario);
+                            String id = mAuth.getCurrentUser().getUid();
+                            mDatabase.child("Contribuyentes").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task2) {
+                                    if (task2.isSuccessful()) {
+                                        MotionToast.Companion.createColorToast(MainActivity.this,//Toast Personalizado
+                                                "Registrado",
+                                                "Registrado sin problemas!",
+                                                MotionToastStyle.SUCCESS,
+                                                MotionToast.GRAVITY_BOTTOM,
+                                                MotionToast.LONG_DURATION,
+                                                ResourcesCompat.getFont(MainActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
                                         alertDialog.dismiss();
-                            }
+                                    }
+                                }
+                            });
                         }
                     });
 
@@ -285,9 +294,9 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
 
                 }
             });
-            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.setContentView(bottomSheetView2);
             bottomSheetDialog.show();
-         //   cargarUbi();
+          cargarContribuyentes();
         }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (position == 7) {
@@ -535,6 +544,53 @@ private void EditarUbi(Ubicaciones item) {
 
     fragment1.setArguments(data);;
     bottomSheetDialog.dismiss();
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public void cargarContribuyentes( ){
+
+    elementsContri = new ArrayList<>();
+    listContri = new AdapterContribuyente(elementsContri, this, new AdapterContribuyente.OnItemClickListener() {
+        @Override
+        public void onItemClick(Contribuyentes item) {
+
+        }
+        public void onItemClick2(Contribuyentes item) {
+
+        }
+    });
+    contenedorContri.setHasFixedSize(true);
+    contenedorContri.setLayoutManager(new LinearLayoutManager(this));
+    contenedorContri.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+    contenedorContri.setAdapter(listContri);
+    // Toast.makeText(getContext(),codigo+"",Toast.LENGTH_LONG).show();
+
+    DatabaseReference correo = mDatabase.child("Contribuyentes");
+    Query nombre = correo.orderByChild("cod_cliente").equalTo(mAuth.getCurrentUser().getUid());
+
+    nombre.addValueEventListener(new ValueEventListener() {
+        @Override
+
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                contribuyentes=dataSnapshot.getValue(Contribuyentes.class);
+                contribuyentes.setKey(dataSnapshot.getKey());
+                elementsContri.add(contribuyentes);
+
+                //   Toast.makeText(getApplicationContext(),elementsUbi+"",Toast.LENGTH_LONG).show();
+
+
+            }
+            listContri.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+
+
+    });
 }
 
 }
