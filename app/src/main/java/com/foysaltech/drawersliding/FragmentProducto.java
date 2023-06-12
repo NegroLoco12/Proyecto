@@ -61,15 +61,15 @@ Productos productos=new Productos();
 
     @Override
     public void onStart() {
-        getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                cargar(result.getString("cod_categoria"));
-                String nombre= result.getString("nombre_categoria");
-                txt_cabecera.setText(nombre);
+      //  getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
+         //   @Override
+          //  public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                cargar(Carritos.cate.get(0).key);
+              //  String nombre= result.getString("nombre_categoria");
+                txt_cabecera.setText(Carritos.cate.get(0).descripcion);
                 //   Toast.makeText(getContext(), nombre+ " 123", Toast.LENGTH_LONG).show();
-            }
-        });
+          //  }
+      //  });
         super.onStart();
     }
 

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -51,7 +52,7 @@ public class AdapterContribuyente extends RecyclerView.Adapter<AdapterContribuye
 }
     public  class MyViewHolder extends RecyclerView.ViewHolder{
         TextView item_nombre,item_ruc,txt_contador;
-        Button botton_borrar_menu,botton_editar_contri,botton_menu_contri;
+        ImageButton botton_borrar_menu,botton_editar_contri,botton_menu_contri;
         LinearLayout linear_menu_contri;
 
         public MyViewHolder(@NonNull View itemView) {

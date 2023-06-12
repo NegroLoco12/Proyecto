@@ -150,14 +150,18 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
     }
     //////////////////////////////////////////////////////////////////////////////////////////////
     public void pasar(Categorias item){
-
+        Carritos.cate.clear();
+    Categorias categorias1=new Categorias();
+    categorias1.setKey(item.getKey());
+        categorias1.setDescripcion(item.getDescripcion());
+    Carritos.agregarCategoria(categorias1);
    // Toast.makeText(getContext(), categorias.getKey(0)+ " ", Toast.LENGTH_LONG).show();
-        Bundle bundle=new Bundle();
-        bundle.putString("cod_categoria",item.getKey());
-        bundle.putString("nombre_categoria",item.getDescripcion());
-        FragmentManager manager = getActivity().getSupportFragmentManager();
+     //   Bundle bundle=new Bundle();
+     //   bundle.putString("cod_categoria",item.getKey());
+     //   bundle.putString("nombre_categoria",item.getDescripcion());
+       FragmentManager manager = getActivity().getSupportFragmentManager();
        manager.beginTransaction().replace(R.id.container, new FragmentProducto()).addToBackStack(null).commit();
-       getParentFragmentManager().setFragmentResult("key",bundle);
+      // getParentFragmentManager().setFragmentResult("key",bundle);
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////
     @Override

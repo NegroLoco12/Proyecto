@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Carritos {
     public static final ArrayList<Pedidos> pedido = new ArrayList<>();
+    public static final ArrayList<Categorias> cate = new ArrayList<>();
 
     public static String agregarPedidos(Pedidos pedidos) {
         int index = 0;
@@ -19,6 +20,12 @@ public class Carritos {
         if (!b) {
             pedido.add(pedidos);
         }
+        return ". . . . ";
+    }
+    public static String agregarCategoria(Categorias categorias) {
+
+            cate.add(categorias);
+
         return ". . . . ";
     }
     public static int getPrecioDefinitivo() {

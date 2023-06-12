@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
     android:layout_width="390dp"
-    android:layout_height="138dp"
+    android:layout_height="110dp"
     android:layout_marginStart="4dp"
     android:layout_marginTop="2dp"
     android:layout_marginBottom="4dp"
@@ -15,7 +15,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="390dp"
-        android:layout_height="128dp"
+        android:layout_height="110dp"
         android:background="#00F6FBF7"
         android:paddingStart="14dp"
         android:paddingEnd="4dp"
@@ -26,8 +26,8 @@
 
         <ImageView
             android:id="@+id/imagen_producto"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="90dp"
             android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/precio_producto"
@@ -44,7 +44,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Combo de Limpieza"
-            android:textColor="@color/black"
+            android:textColor="#009CD7"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +63,8 @@
             android:gravity="center_vertical"
             android:maxLines="1"
             android:text="$ 7.98"
-            android:textColor="@color/black"
+            android:textColor="#00b347"
+            android:layout_marginBottom="8dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -92,18 +93,20 @@
             android:layout_width="220dp"
             android:layout_height="40dp"
 
+            android:layout_marginTop="2dp"
             android:lines="2"
             android:maxLines="1"
             android:minLines="2"
             android:singleLine="false"
             android:text="Combo de Limpieza"
+            android:textColor="#005588"
             android:textSize="12sp"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.68"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/nombre_producto"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -70,7 +71,9 @@ notifyDataSetChanged();
 
         }
         void bindData(final Productos item) {
-            precio_producto.setText(item.getPrecio()+" ₲ ");
+            DecimalFormat formatea = new DecimalFormat("###,###.##");
+
+            precio_producto.setText(formatea.format(Integer.parseInt(item.getPrecio()))+" ₲ ");
             nombre_producto.setText(item.getNombre());
             descripcion_producto.setText(item.getDescripcion());
             if (item.getImagen2() != null) {
