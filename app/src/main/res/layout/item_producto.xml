@@ -44,7 +44,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Combo de Limpieza"
-            android:textColor="#009CD7"
+            android:textColor="@color/textColorPrimary2"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

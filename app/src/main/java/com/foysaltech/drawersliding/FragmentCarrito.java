@@ -17,7 +17,7 @@ import java.text.DecimalFormat;
 
 public class FragmentCarrito extends Fragment {
 RecyclerView contenedorPedidos;
-TextView txt_sub_total_carrito;
+TextView txt_sub_total_carrito,txt_descuento_carrito,txt_total_carrito;
 String precio_final;
     public FragmentCarrito() {
 
@@ -42,6 +42,8 @@ String precio_final;
         View view= inflater.inflate(R.layout.fragment_carrito, container, false);
         contenedorPedidos=view.findViewById(R.id.contenedorCarrito);
         txt_sub_total_carrito=view.findViewById(R.id.txt_sub_total_carrito);
+        txt_descuento_carrito=view.findViewById(R.id.txt_descuento_carrito);
+        txt_total_carrito=view.findViewById(R.id.txt_total_carrito);
               return  view;
     }
 
@@ -79,6 +81,8 @@ String precio_final;
         DecimalFormat formatea = new DecimalFormat("###,###.##");
         precio_final=formatea.format(Carritos.getPrecioDefinitivo());
         txt_sub_total_carrito.setText(formatea.format(Carritos.getPrecioDefinitivo()) + " ₲");
+        txt_descuento_carrito.setText(formatea.format(Carritos.getDescuentoDefinitivo()) + " ₲");
+        txt_total_carrito.setText(formatea.format(Carritos.getSubTotalDefinitivo()) + " ₲");
     }
     public void disminuir(Pedidos item) {
         if (item.getCantidad() > 1) {

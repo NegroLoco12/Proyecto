@@ -15,6 +15,15 @@ public class Pedidos {
     String nombre;
     String codigo;
 
+    public Integer getPrecio_descuento() {
+        return precio_descuento;
+    }
+
+    public void setPrecio_descuento(Integer precio_descuento) {
+        this.precio_descuento = precio_descuento;
+    }
+
+    Integer precio_descuento;
     public int getCantidad() {
         return cantidad;
     }
@@ -32,6 +41,16 @@ public class Pedidos {
     }
 
     int cantidad;
+
+    public int getPrecio_real() {
+        return precio_real;
+    }
+
+    public void setPrecio_real(int precio_real) {
+        this.precio_real = precio_real;
+    }
+
+    int precio_real;
 
     public int getPrecio_inicial() {
         return precio_inicial;

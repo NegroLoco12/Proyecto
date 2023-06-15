@@ -178,19 +178,22 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
              //Toast.makeText(getContext(),"ss",Toast.LENGTH_LONG).show();
             contenedorTodo.setVisibility(View.GONE);
             contenedorMenu.setVisibility(View.VISIBLE);
-
+            contenedorPromo.setVisibility(View.VISIBLE);
+            cabecera2.setVisibility(View.VISIBLE);
             }
         if (longitud>0) {
            if (filter(newText) == false) {
                 contenedorTodo.setVisibility(View.GONE);
                 contenedorMenu.setVisibility(View.VISIBLE);
-
+               contenedorPromo.setVisibility(View.VISIBLE);
+               cabecera2.setVisibility(View.VISIBLE);
             }
             if (filter(newText)== true) {
               //  if (longitud != 0) {
                   contenedorTodo.setVisibility(View.VISIBLE);
                   contenedorMenu.setVisibility(View.GONE);
-                    // cabecera2.setVisibility(View.GONE);
+                contenedorPromo.setVisibility(View.GONE);
+                     cabecera2.setVisibility(View.GONE);
                }
             }
        // }
@@ -328,15 +331,12 @@ public void cargarPromo( ){
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public void pasar_promo(Productos item){
-
-    // Toast.makeText(getContext(), categorias.getKey(0)+ " ", Toast.LENGTH_LONG).show();
     Bundle bundle=new Bundle();
     bundle.putString("cod_producto",item.getKey());
     bundle.putString("nombre_producto",item.getNombre());
     bundle.putString("descripcion_producto",item.getDescripcion());
     bundle.putString("precio_producto",item.getPrecio());
     bundle.putString("imagen_producto",item.getImagen());
-
     bundle.putString("descuento_producto",item.getPrecio_promo());
     FragmentManager manager = getActivity().getSupportFragmentManager();
     manager.beginTransaction().replace(R.id.container, new FragmentDescripcion()).addToBackStack(null).commit();

@@ -12,10 +12,47 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="320dp"
+            android:layout_height="330dp"
             android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <TextView
+                android:id="@+id/cabecera2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/search_edittext_background"
+                android:elevation="5dp"
+                android:padding="8dp"
+                android:paddingStart="18dp"
+                android:text="Promos"
+                android:textColor="#32BEA6"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/contenedorPromo"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:orientation="vertical"
+                tools:listitem="@layout/menu_promo" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
             android:layout_marginTop="14dp"
 
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,8 +67,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/search_edittext_background"
-                android:padding="8dp"
                 android:elevation="5dp"
+                android:padding="8dp"
                 android:paddingStart="20dp"
                 android:text="Categorias"
                 android:textColor="#32BEA6"
@@ -39,10 +76,10 @@
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="10dp"
                 android:id="@+id/contenedorMenu"
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
+                android:layout_marginTop="10dp"
 
                 android:orientation="horizontal"
                 android:visibility="visible"
@@ -101,27 +138,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/cabecera2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/search_edittext_background"
-            android:padding="8dp"
-            android:paddingStart="18dp"
-            android:text="Promos"
-            android:elevation="5dp"
-            android:textColor="#32BEA6"
-            android:textSize="19sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.589" />
-
-        <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,21 +149,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintVertical_bias="0.763" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/contenedorPromo"
-            android:layout_width="0dp"
-            android:layout_height="250dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cabecera2"
-            app:layout_constraintVertical_bias="0.877"
-            tools:listitem="@layout/menu_promo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

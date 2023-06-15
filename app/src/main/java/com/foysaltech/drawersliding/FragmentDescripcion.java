@@ -24,10 +24,11 @@ import www.sanju.motiontoast.MotionToastStyle;
 
 
 public class FragmentDescripcion extends Fragment {
-    TextView txt_nombre_producto,txt_descripcion_producto,txt_precio_productos,txt_cantidad;
+    TextView txt_nombre_producto,txt_descripcion_producto,txt_precio_productos,txt_cantidad,txt_descuento_descripcion;
      ImageView imagen;
-    int precio_inicial;
+    int precio_inicial,precio_real;
     Bitmap bitmap;
+    int descuentito;
      String codigo_articulo;
     ImageView  button_aumentar, button_disminuir;
     Button btDetailAddToCart;
@@ -62,33 +63,38 @@ public class FragmentDescripcion extends Fragment {
         btDetailAddToCart=view.findViewById(R.id.btDetailAddToCart);
         button_aumentar = view.findViewById(R.id.botton_aumentar);
         button_disminuir = view.findViewById(R.id.botton_disminuir);
+        txt_descuento_descripcion= view.findViewById(R.id.txt_descuento_descripcion);
         getParentFragmentManager().setFragmentResultListener("keypro", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-
+                txt_descuento_descripcion.setVisibility(View.GONE);
                 txt_descripcion_producto.setText(result.getString("descripcion_producto"));
                 txt_nombre_producto.setText(result.getString("nombre_producto"));
                 txt_precio_productos.setText(formatea.format(Integer.parseInt(result.getString("precio_producto")))+" Gs");
                 precio_inicial=Integer.parseInt(result.getString("precio_producto")) ;
                 codigo_articulo=result.getString("cod_producto");
-
                 byte[] byteCode=   Base64.getDecoder().decode(result.getString("imagen_producto"));
                 bitmap= BitmapFactory.decodeByteArray(byteCode,0,byteCode.length);
                 imagen.setImageBitmap(bitmap);
+                precio_real=Integer.parseInt(result.getString("precio_producto"));
+                descuentito=0;
               }
         });
         getParentFragmentManager().setFragmentResultListener("keypromo", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-
+                txt_descuento_descripcion.setVisibility(View.VISIBLE);
                 txt_descripcion_producto.setText(result.getString("descripcion_producto"));
                 txt_nombre_producto.setText(result.getString("nombre_producto"));
-                txt_precio_productos.setText(formatea.format(Integer.parseInt(result.getString("precio_producto")))+" Gs");
+                txt_precio_productos.setText(formatea.format(Integer.parseInt(result.getString("descuento_producto")))+" Gs");
                 precio_inicial=Integer.parseInt(result.getString("descuento_producto"));
+                txt_descuento_descripcion.setText("Antes "+formatea.format(Integer.parseInt(result.getString("precio_producto")))+" Gs");
                 codigo_articulo=result.getString("cod_producto");
                 byte[] byteCode=   Base64.getDecoder().decode(result.getString("imagen_producto"));
                 bitmap= BitmapFactory.decodeByteArray(byteCode,0,byteCode.length);
                 imagen.setImageBitmap(bitmap);
+                descuentito=Integer.parseInt(result.getString("descuento_producto"));
+                precio_real=Integer.parseInt(result.getString("precio_producto"));
             }
         });
         button_aumentar.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +147,8 @@ public class FragmentDescripcion extends Fragment {
         pedidos.setPrecio_inicial(precio_inicial);
         pedidos.setCodigo(codigo_articulo);
         pedidos.setNombre(nombre);
+        pedidos.setPrecio_real(precio_real);
+        pedidos.setPrecio_descuento(descuentito);
         Carritos.agregarPedidos(pedidos);
         MotionToast.Companion.createColorToast(getActivity(),//Toast Personalizado
                 "Exito!",

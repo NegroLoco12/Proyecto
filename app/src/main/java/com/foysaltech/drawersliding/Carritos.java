@@ -31,9 +31,29 @@ public class Carritos {
     public static int getPrecioDefinitivo() {
         int suma=0;
         for (int i = 0; i < pedido.size(); i++) {
-            suma =suma+pedido.get(i).getPrecio_total();
+            suma =suma+pedido.get(i).getPrecio_real();
         }
         return suma;
 
+    }
+
+
+    public static int getDescuentoDefinitivo() {
+        int descuento=0;
+        int a=0;
+
+        for (int i = 0; i < pedido.size(); i++) {
+            a=pedido.get(i).getPrecio_real()-pedido.get(i).getPrecio_descuento();
+            descuento =descuento+a;
+        }
+        return descuento;
+
+    }
+    public static int getSubTotalDefinitivo() {
+        int precio=0;
+        for (int i = 0; i < pedido.size(); i++) {
+            precio =precio+pedido.get(i).getPrecio_total();
+        }
+        return precio;
     }
 }

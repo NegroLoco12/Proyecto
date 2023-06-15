@@ -54,7 +54,7 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.ViewHold
     public class ViewHolderDatos extends RecyclerView.ViewHolder {
 
         TextView txt_nombre_pedido;
-        TextView txt_descripcion_pedido;
+        TextView txt_descripcion_pedido,txt_descuento_pedido;
         TextView txt_precio_pedido,txt_precio_inicial;
         TextView txt_cantidad_pedido;
         TextView txt_id_pedido;
@@ -68,16 +68,20 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.ViewHold
             txt_cantidad_pedido=(TextView)itemView.findViewById(R.id.txt_cantidad_pedido);
             imagen=(ImageView) itemView.findViewById(R.id.imagen_pedido);
             txt_precio_inicial=(TextView)itemView.findViewById(R.id.txt_pedido_precio_inicial);
-
+            txt_descuento_pedido=(TextView)itemView.findViewById(R.id.txt_descuento_pedido);
         }
         void bindData(final Pedidos item) {
             int precio=item.getPrecio_total();
             DecimalFormat formatea = new DecimalFormat("###,###.##");
             txt_nombre_pedido.setText(item.getNombre()+"");
-           txt_precio_pedido.setText("Total ₲ "+formatea.format(precio)  );
-          txt_cantidad_pedido.setText(item.getCantidad()+" ");
-          imagen.setImageBitmap(item.getImagen());
+            txt_descuento_pedido.setText(item.getPrecio_real()+"");
+            txt_precio_pedido.setText("Total ₲ "+formatea.format(precio)  );
+            txt_cantidad_pedido.setText(item.getCantidad()+" ");
+            imagen.setImageBitmap(item.getImagen());
             txt_precio_inicial.setText(" ₲ "+item.getPrecio_inicial());
+       //     if(item.getPrecio_descuento()==0){
+             txt_descuento_pedido.setVisibility(View.VISIBLE);
+           // }
            // Toast.makeText(context, item.getPrecio_inicial()+"", Toast.LENGTH_SHORT).show();
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
