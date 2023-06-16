@@ -43,9 +43,13 @@ public class Carritos {
         int a=0;
 
         for (int i = 0; i < pedido.size(); i++) {
+          //  if(pedido.get(i).getPrecio_descuento()<>a){
             a=pedido.get(i).getPrecio_real()-pedido.get(i).getPrecio_descuento();
             descuento =descuento+a;
-        }
+
+     //   }
+    }
+
         return descuento;
 
     }

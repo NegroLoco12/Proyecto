@@ -311,7 +311,7 @@ public void cargarPromo( ){
             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                 productos=dataSnapshot.getValue(Productos.class);
-                // productos.setKey(dataSnapshot.getKey());
+                 productos.setKey(dataSnapshot.getKey());
                 elementsPromo.add(productos);
 
                 //         Toast.makeText(getContext(),elementsProductos+"",Toast.LENGTH_LONG).show();

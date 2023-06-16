@@ -81,14 +81,14 @@ String precio_final;
         DecimalFormat formatea = new DecimalFormat("###,###.##");
         precio_final=formatea.format(Carritos.getPrecioDefinitivo());
         txt_sub_total_carrito.setText(formatea.format(Carritos.getPrecioDefinitivo()) + " ₲");
-        txt_descuento_carrito.setText(formatea.format(Carritos.getDescuentoDefinitivo()) + " ₲");
+    //    txt_descuento_carrito.setText(formatea.format(Carritos.getDescuentoDefinitivo()) + " ₲");
         txt_total_carrito.setText(formatea.format(Carritos.getSubTotalDefinitivo()) + " ₲");
     }
     public void disminuir(Pedidos item) {
         if (item.getCantidad() > 1) {
             Pedidos pedidos = new Pedidos();
             pedidos.setNombre(item.getNombre());
-          //  pedidos.setDescripcion(item.getDescripcion());
+            pedidos.setPrecio_descuento(item.getPrecio_descuento());
             pedidos.setCantidad(item.getCantidad() - 1);
             int cantidad_actual = item.getCantidad() - 1;
             int precio_unitario = item.getPrecio_total() / item.getCantidad();

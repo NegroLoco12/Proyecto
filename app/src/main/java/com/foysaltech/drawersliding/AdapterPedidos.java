@@ -71,17 +71,26 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.ViewHold
             txt_descuento_pedido=(TextView)itemView.findViewById(R.id.txt_descuento_pedido);
         }
         void bindData(final Pedidos item) {
+        if(item.getNombre().length()==21){
+            String otherLetters = item.getNombre().substring(0, 17).toLowerCase();
+            String otherLetter2 = item.getNombre().substring(18, 20).toLowerCase();
+              String nextLetters = otherLetters.replaceAll("[^\\d.]", ".");
+        }
+
+
+
+
             int precio=item.getPrecio_total();
             DecimalFormat formatea = new DecimalFormat("###,###.##");
-            txt_nombre_pedido.setText(item.getNombre()+"");
-            txt_descuento_pedido.setText(item.getPrecio_real()+"");
+            txt_nombre_pedido.setText(item.getNombre()+" ");
+            txt_descuento_pedido.setText(formatea.format(item.getPrecio_real())+"");
             txt_precio_pedido.setText("Total ₲ "+formatea.format(precio)  );
             txt_cantidad_pedido.setText(item.getCantidad()+" ");
             imagen.setImageBitmap(item.getImagen());
-            txt_precio_inicial.setText(" ₲ "+item.getPrecio_inicial());
-       //     if(item.getPrecio_descuento()==0){
-             txt_descuento_pedido.setVisibility(View.VISIBLE);
-           // }
+            txt_precio_inicial.setText(" ₲ "+formatea.format(item.getPrecio_inicial()));
+//           if(item.getPrecio_descuento()==1){
+             txt_descuento_pedido.setVisibility(View.GONE);
+         //  }
            // Toast.makeText(context, item.getPrecio_inicial()+"", Toast.LENGTH_SHORT).show();
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

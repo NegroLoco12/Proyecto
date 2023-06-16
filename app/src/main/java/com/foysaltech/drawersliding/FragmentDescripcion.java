@@ -77,7 +77,7 @@ public class FragmentDescripcion extends Fragment {
                 bitmap= BitmapFactory.decodeByteArray(byteCode,0,byteCode.length);
                 imagen.setImageBitmap(bitmap);
                 precio_real=Integer.parseInt(result.getString("precio_producto"));
-                descuentito=0;
+                descuentito=1;
               }
         });
         getParentFragmentManager().setFragmentResultListener("keypromo", this, new FragmentResultListener() {

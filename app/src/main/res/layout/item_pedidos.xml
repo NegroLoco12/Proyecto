@@ -6,6 +6,9 @@
     android:layout_width="370dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="4dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="100dp"
     app:cardCornerRadius="18dp"
     app:cardElevation="2dp"
     app:cardUseCompatPadding="true">
@@ -13,11 +16,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="370dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/fondo_promo"
+        android:background="@color/white"
         android:paddingStart="14dp"
         android:paddingEnd="4dp"
-        android:paddingBottom="10dp"
-        >
+        android:paddingBottom="10dp">
 
 
         <ImageView
@@ -37,24 +39,25 @@
         <TextView
             android:id="@+id/txt_nombre_pedido"
             android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_height="15dp"
             android:layout_marginTop="5dp"
             android:maxLines="2"
             android:text="Combo de Limpieza"
             android:textColor="@color/textColorPrimary2"
             android:textSize="12sp"
             android:textStyle="bold"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintHorizontal_bias="0.35"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.26" />
 
         <TextView
             android:id="@+id/txt_precio_pedido"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="15dp"
 
             android:maxLines="1"
             android:text="$ 5.98"
@@ -63,19 +66,19 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintHorizontal_bias="0.35"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.84000003" />
 
         <TextView
             android:id="@+id/txt_descuento_pedido"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="7dp"
             android:foreground="@drawable/txt_promo"
             android:maxLines="1"
             android:text="$ 5.98"
-
             android:textColor="@color/textColorSecondary"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -88,8 +91,8 @@
 
         <TextView
             android:id="@+id/txt_pedido_precio_inicial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="15dp"
             android:maxLines="1"
             android:text=" 5.98"
             android:textColor="@color/black"
@@ -100,23 +103,23 @@
             app:layout_constraintHorizontal_bias="0.57"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.836" />
+            app:layout_constraintVertical_bias="0.82" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/QuantityContainer"
-            android:layout_width="100dp"
-            android:layout_height="35dp"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.92"
+            app:layout_constraintHorizontal_bias="0.82"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.62">
 
             <ImageButton
                 android:id="@+id/botton_aumentar_pedido"
-                android:layout_width="32dp"
-                android:layout_height="35dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
 
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_add_detail"
@@ -129,8 +132,8 @@
 
             <TextView
                 android:id="@+id/txt_cantidad_pedido"
-                android:layout_width="40dp"
-                android:layout_height="35dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:gravity="center"
                 android:maxLength="2"
                 android:text="1"
@@ -146,8 +149,8 @@
 
             <ImageButton
                 android:id="@+id/botton_disminuir_pedido"
-                android:layout_width="32dp"
-                android:layout_height="35dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
 
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_minus_detail"
@@ -161,8 +164,8 @@
 
             <ImageButton
                 android:id="@+id/botton_borrar_item"
-                android:layout_width="32dp"
-                android:layout_height="35dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/borrar3"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -173,6 +176,13 @@
                 app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1375" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
