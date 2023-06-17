@@ -13,12 +13,16 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/search_edittext_background"
             android:gravity="center"
             android:text="Carrito"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:textSize="20sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/textColorPrimary2"
             android:elevation="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,14 +35,14 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="270dp"
+            android:layout_height="280dp"
             android:layout_marginEnd="16dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.26">
+            app:layout_constraintVertical_bias="0.19999999">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/contenedorCarrito"
@@ -65,9 +69,10 @@
             android:padding="8dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
+            android:elevation="10dp"
             android:text="Vaciar "
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="#de2a19"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +83,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="190dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -97,32 +102,33 @@
                     android:layout_width="100dp"
                     android:layout_height="20dp"
                     android:text="Total"
-
+                    android:layout_marginRight="20dp"
                     android:textAlignment="viewEnd"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textColor="@color/textColorPrimary2"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_total_carrito"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.938"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.416" />
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView12"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_sub_total_carrito"
+                    app:layout_constraintVertical_bias="0.545" />
 
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Descuento"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textColor="@color/textColorPrimary2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.128"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.42000002" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="86dp"
                     android:layout_height="30dp"
                     android:text="Total"
+                    android:textColor="#00b347"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -137,19 +143,23 @@
                     android:layout_height="40dp"
                     android:text="Sub Total"
                     android:textAlignment="viewEnd"
+                    android:textColor="#00b347"
                     android:textSize="24sp"
+
+                    android:layout_marginRight="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.853"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/textView11"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.572" />
+                    app:layout_constraintVertical_bias="0.58" />
 
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sub Total"
+                    android:textColor="@color/textColorPrimary2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.113"
@@ -163,13 +173,15 @@
                     android:layout_height="wrap_content"
                     android:text="TextView"
 
+                    android:layout_marginRight="20dp"
                     android:textAlignment="viewEnd"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textColor="@color/textColorPrimary2"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_total_carrito"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.938"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView9"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.259" />
+                    app:layout_constraintVertical_bias="0.55" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnCarrito"

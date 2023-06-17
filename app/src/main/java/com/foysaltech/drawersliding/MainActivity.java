@@ -200,8 +200,18 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
         }
         if (position == 5) {
-            Fragment selectedScreen = new FragmentCarrito();
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
+            if (Carritos.pedido.size()>0) {
+                Fragment selectedScreen = new FragmentCarrito();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
+            }else{
+                AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
+
+                View view=getLayoutInflater().inflate(R.layout.carrito_vacio,null);
+                builder.setView(view);
+                builder.setCancelable(true);
+                AlertDialog  alertDialog= builder.create();
+                alertDialog.show();
+            }
         }
         if (position == 4) {
             Fragment selectedScreen = new CuentaFragment();
