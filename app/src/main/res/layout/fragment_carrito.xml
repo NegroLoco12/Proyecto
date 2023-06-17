@@ -56,12 +56,12 @@
             android:id="@+id/borrar_todo"
             android:layout_width="150dp"
             android:layout_height="50dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/btn_borrar"
             android:drawableStart="@drawable/borrar2"
             android:drawablePadding="8dp"
             android:gravity="center"
-            android:onClick="borrar_carrito"
             android:padding="8dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
@@ -71,7 +71,7 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.061"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
             app:layout_constraintVertical_bias="0.0" />
@@ -94,12 +94,14 @@
 
                 <TextView
                     android:id="@+id/txt_descuento_carrito"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="20dp"
                     android:text="Total"
+
+                    android:textAlignment="viewEnd"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.891"
+                    app:layout_constraintHorizontal_bias="0.938"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.416" />
@@ -131,9 +133,10 @@
 
                 <TextView
                     android:id="@+id/txt_total_carrito"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="40dp"
                     android:text="Sub Total"
+                    android:textAlignment="viewEnd"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -156,15 +159,17 @@
 
                 <TextView
                     android:id="@+id/txt_sub_total_carrito"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="TextView"
+
+                    android:textAlignment="viewEnd"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.926"
+                    app:layout_constraintHorizontal_bias="0.938"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.258" />
+                    app:layout_constraintVertical_bias="0.259" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnCarrito"

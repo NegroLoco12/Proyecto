@@ -77,7 +77,7 @@ public class FragmentDescripcion extends Fragment {
                 bitmap= BitmapFactory.decodeByteArray(byteCode,0,byteCode.length);
                 imagen.setImageBitmap(bitmap);
                 precio_real=Integer.parseInt(result.getString("precio_producto"));
-                descuentito=1;
+                descuentito=0;
               }
         });
         getParentFragmentManager().setFragmentResultListener("keypromo", this, new FragmentResultListener() {
@@ -147,8 +147,9 @@ public class FragmentDescripcion extends Fragment {
         pedidos.setPrecio_inicial(precio_inicial);
         pedidos.setCodigo(codigo_articulo);
         pedidos.setNombre(nombre);
-        pedidos.setPrecio_real(precio_real);
+        pedidos.setPrecio_real(precio_real*cantidad);
         pedidos.setPrecio_descuento(descuentito);
+        pedidos.setPrecio_descuento_fijo(precio_real);
         Carritos.agregarPedidos(pedidos);
         MotionToast.Companion.createColorToast(getActivity(),//Toast Personalizado
                 "Exito!",

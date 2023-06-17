@@ -9,8 +9,7 @@
     android:layout_marginTop="2dp"
     android:layout_marginBottom="1dp"
     app:cardCornerRadius="18dp"
-    app:cardElevation="2dp"
-
+    app:cardElevation="10dp"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,34 +43,34 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
 
+            android:layout_marginBottom="8dp"
             android:maxLines="2"
             android:text="Combo de Limpieza"
-            android:textColor="#009CD7"
+            android:textColor="@color/textColorPrimary2"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/txt_precio_promo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.915"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.14" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/txt_precio_actual_promo"
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
-
             android:maxLines="1"
             android:text="$ 5.98"
-            android:textColor="@color/black"
+            android:textColor="#00b347"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.664"
+            app:layout_constraintHorizontal_bias="0.75"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.719" />
+            app:layout_constraintVertical_bias="0.65" />
 
         <TextView
             android:id="@+id/txt_p"
@@ -86,10 +85,9 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.63"
+            app:layout_constraintHorizontal_bias="0.65"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.601" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txt_precio_promo"
@@ -97,18 +95,18 @@
             android:layout_height="wrap_content"
 
 
-            android:foreground="@drawable/txt_promo"
+            android:layout_marginStart="8dp"
 
+            android:foreground="@drawable/txt_promo"
             android:maxLines="1"
             android:text="$ 7.98"
             android:textColor="@color/textColorSecondary"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.806"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.601" />
+            app:layout_constraintHorizontal_bias="0.06"
+            app:layout_constraintStart_toEndOf="@+id/txt_p"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/botton_promo"
@@ -119,10 +117,10 @@
             android:src="@drawable/ic_button_plus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.948"
+            app:layout_constraintHorizontal_bias="0.912"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.72" />
+            app:layout_constraintVertical_bias="0.651" />
 
         <TextView
             android:id="@+id/txt_descripcion_promo"
@@ -131,9 +129,10 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="2dp"
 
-            android:layout_marginBottom="2dp"
+            android:layout_marginBottom="4dp"
             android:text="TextView"
             android:textSize="12sp"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/txt_precio_promo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.96"

@@ -44,6 +44,12 @@ String precio_final;
         txt_sub_total_carrito=view.findViewById(R.id.txt_sub_total_carrito);
         txt_descuento_carrito=view.findViewById(R.id.txt_descuento_carrito);
         txt_total_carrito=view.findViewById(R.id.txt_total_carrito);
+        view.findViewById(R.id.borrar_todo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                borrar_carrito();
+            }
+        });
               return  view;
     }
 
@@ -81,14 +87,19 @@ String precio_final;
         DecimalFormat formatea = new DecimalFormat("###,###.##");
         precio_final=formatea.format(Carritos.getPrecioDefinitivo());
         txt_sub_total_carrito.setText(formatea.format(Carritos.getPrecioDefinitivo()) + " ₲");
-    //    txt_descuento_carrito.setText(formatea.format(Carritos.getDescuentoDefinitivo()) + " ₲");
+       txt_descuento_carrito.setText(formatea.format(Carritos.getDescuentoDefinitivo()) + " ₲");
         txt_total_carrito.setText(formatea.format(Carritos.getSubTotalDefinitivo()) + " ₲");
     }
     public void disminuir(Pedidos item) {
         if (item.getCantidad() > 1) {
             Pedidos pedidos = new Pedidos();
             pedidos.setNombre(item.getNombre());
+            pedidos.setPrecio_inicial(item.getPrecio_inicial());
+            pedidos.setPrecio_real((item.getPrecio_real()/item.getCantidad())*(item.getCantidad() - 1));
+            pedidos.setImagen(item.getImagen());
             pedidos.setPrecio_descuento(item.getPrecio_descuento());
+
+            pedidos.setPrecio_descuento_fijo(item.getPrecio_descuento_fijo());
             pedidos.setCantidad(item.getCantidad() - 1);
             int cantidad_actual = item.getCantidad() - 1;
             int precio_unitario = item.getPrecio_total() / item.getCantidad();
@@ -102,7 +113,11 @@ String precio_final;
     public void aumentar(Pedidos item) {
         Pedidos pedidos = new Pedidos();
         pedidos.setNombre(item.getNombre());
-      //  pedidos.setDescripcion(item.getDescripcion());
+        pedidos.setImagen(item.getImagen());
+        pedidos.setPrecio_descuento_fijo(item.getPrecio_descuento_fijo());
+        pedidos.setPrecio_real((item.getPrecio_real()/item.getCantidad())*(item.getCantidad() + 1));
+        pedidos.setPrecio_inicial(item.getPrecio_inicial());
+        pedidos.setPrecio_descuento(item.getPrecio_descuento());
         pedidos.setCantidad(item.getCantidad() + 1);
         int cantidad_actual = item.getCantidad() + 1;
         int precio_unitario = item.getPrecio_total() / item.getCantidad();
@@ -122,7 +137,7 @@ String precio_final;
     }
 
 
-    public void borrar_carrito(View vieew){
+    public void borrar_carrito(){
         Carritos.pedido.clear();
         cargar();
         precio();

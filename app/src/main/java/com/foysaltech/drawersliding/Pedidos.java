@@ -24,6 +24,16 @@ public class Pedidos {
     }
 
     Integer precio_descuento;
+    Integer precio_descuento_fijo;
+
+    public Integer getPrecio_descuento_fijo() {
+        return precio_descuento_fijo;
+    }
+
+    public void setPrecio_descuento_fijo(Integer precio_descuento_fijo) {
+        this.precio_descuento_fijo = precio_descuento_fijo;
+    }
+
     public int getCantidad() {
         return cantidad;
     }

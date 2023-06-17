@@ -83,14 +83,14 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.ViewHold
             int precio=item.getPrecio_total();
             DecimalFormat formatea = new DecimalFormat("###,###.##");
             txt_nombre_pedido.setText(item.getNombre()+" ");
-            txt_descuento_pedido.setText(formatea.format(item.getPrecio_real())+"");
+            txt_descuento_pedido.setText(formatea.format(item.getPrecio_descuento_fijo())+"");
             txt_precio_pedido.setText("Total ₲ "+formatea.format(precio)  );
             txt_cantidad_pedido.setText(item.getCantidad()+" ");
             imagen.setImageBitmap(item.getImagen());
             txt_precio_inicial.setText(" ₲ "+formatea.format(item.getPrecio_inicial()));
-//           if(item.getPrecio_descuento()==1){
+       if(item.getPrecio_descuento()==0){
              txt_descuento_pedido.setVisibility(View.GONE);
-         //  }
+         }
            // Toast.makeText(context, item.getPrecio_inicial()+"", Toast.LENGTH_SHORT).show();
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
