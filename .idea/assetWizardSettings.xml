@@ -319,8 +319,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="carro_vacio__1_" />
-                            <entry key="sourceFile" value="C:\Users\Matias\Downloads\carro-vacio-_1_.svg" />
+                            <entry key="outputName" value="flecha_hacia_abajo" />
+                            <entry key="sourceFile" value="C:\Users\Matias\Downloads\flecha-hacia-abajo.svg" />
                           </map>
                         </option>
                       </PersistentState>

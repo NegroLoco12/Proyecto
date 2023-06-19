@@ -50,6 +50,17 @@ String precio_final;
                 borrar_carrito();
             }
         });
+
+        view.findViewById(R.id.btnCarrito).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment selectedScreen = new FragmentDetallePedido();
+                getParentFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
+
+            }
+        });
+
+
               return  view;
     }
 
