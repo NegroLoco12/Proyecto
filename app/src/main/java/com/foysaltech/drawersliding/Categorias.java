@@ -37,6 +37,11 @@ public class Categorias {
     Bitmap imagen2;
     String imagen;
 
+
+
+
+
+
     public String getKey() {
         return key;
     }
@@ -48,3 +53,4 @@ public class Categorias {
     String key;
 
 }
+
