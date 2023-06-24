@@ -19,8 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 import java.util.logging.Handler;
-
 public class AdapterUbicaciones  extends RecyclerView.Adapter<AdapterUbicaciones.MyViewHolder> {
+
 
     private List<Ubicaciones> mData;
     private Context context;

@@ -19,6 +19,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
+
             <TextView
                 android:id="@+id/cabecera2"
                 android:layout_width="match_parent"
@@ -34,14 +35,32 @@
                 android:textSize="19sp"
                 android:textStyle="bold" />
 
+
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/cargador2"
+                style="@style/SpinKitView.Large.Circle"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="100dp"
+                app:SpinKit_Color="@color/pinkColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.722" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/contenedorPromo"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:layout_marginStart="4dp"
+
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
                 android:orientation="vertical"
+                android:visibility="gone"
                 tools:listitem="@layout/menu_promo" />
 
         </LinearLayout>
@@ -82,7 +101,7 @@
                 android:layout_marginTop="10dp"
 
                 android:orientation="horizontal"
-                android:visibility="visible"
+                android:visibility="gone"
                 tools:listitem="@layout/menu_item">
 
             </androidx.recyclerview.widget.RecyclerView>
@@ -98,6 +117,24 @@
                 android:orientation="horizontal"
                 android:visibility="gone"
                 tools:listitem="@layout/item_producto" />
+
+
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/cargador1"
+                style="@style/SpinKitView.Large.Circle"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="100dp"
+                app:SpinKit_Color="@color/pinkColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.722" />
+
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

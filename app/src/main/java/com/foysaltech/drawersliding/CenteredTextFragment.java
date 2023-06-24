@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -44,7 +45,7 @@ import javax.mail.MessagingException;
 
 public class CenteredTextFragment extends Fragment implements SearchView.OnQueryTextListener {
     RecyclerView contenedorMenu;
-
+    private SpinKitView cargador1,cargador2;
     RecyclerView contenedorTodo,contenedorPromo;
     private DatabaseReference mDatabase;
    AdapterCategoria listAdapter;
@@ -78,6 +79,8 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
                 contenedorMenu=view.findViewById(R.id.contenedorMenu);
         contenedorTodo=view.findViewById(R.id.contenedorTodos);
         contenedorPromo=view.findViewById(R.id.contenedorPromo);
+        cargador1=view.findViewById(R.id.cargador1);
+        cargador2=view.findViewById(R.id.cargador2);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         return view;
@@ -132,9 +135,8 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
                      categorias=dataSnapshot.getValue(Categorias.class);
                     categorias.setKey(dataSnapshot.getKey());
                     elements.add(categorias);
-
-                    //   Toast.makeText(getContext(),elements+"",Toast.LENGTH_LONG).show();
-
+                    cargador1.setVisibility(View.GONE);
+                      contenedorMenu.setVisibility(View.VISIBLE);
 
                 }
                  listAdapter.notifyDataSetChanged();
@@ -314,8 +316,8 @@ public void cargarPromo( ){
                  productos.setKey(dataSnapshot.getKey());
                 elementsPromo.add(productos);
 
-                //         Toast.makeText(getContext(),elementsProductos+"",Toast.LENGTH_LONG).show();
-
+                cargador2.setVisibility(View.GONE);
+                contenedorPromo.setVisibility(View.VISIBLE);
 
             }
             listaAdapterPromo.notifyDataSetChanged();
