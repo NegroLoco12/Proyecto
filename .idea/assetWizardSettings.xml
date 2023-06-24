@@ -319,8 +319,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="pago_con_tarjeta" />
-                            <entry key="sourceFile" value="C:\Users\Matias\Downloads\pago-con-tarjeta.svg" />
+                            <entry key="outputName" value="comercio" />
+                            <entry key="sourceFile" value="C:\Users\Matias\Downloads\comercio.svg" />
                           </map>
                         </option>
                       </PersistentState>
