@@ -70,8 +70,10 @@ public class FragmentDetallePedido extends Fragment {
         imageView2=view.findViewById(R.id.imageView2);
         cardView1=view.findViewById(R.id.cardView1);
         cardView22=view.findViewById(R.id.cardView22);
+        mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
-////        mAuth.setLanguageCode("es");
+        mAuth.setLanguageCode("es");
+        mDatabase= FirebaseDatabase.getInstance().getReference();
 
         cargarUbi();
         cargar_metodo();

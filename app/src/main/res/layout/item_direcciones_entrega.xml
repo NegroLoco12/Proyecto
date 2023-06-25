@@ -7,9 +7,10 @@
     android:layout_height="50dp"
     android:layout_marginStart="4dp"
     android:layout_marginTop="2dp"
-    android:layout_marginBottom="5dp"
-
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="18dp"
     app:cardElevation="2dp"
+    android:paddingRight="2dp"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,23 +25,20 @@
 
 
         <ImageView
-            android:id="@+id/imagen_direccion"
+            android:id="@+id/imagen_direccion_entrega"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginStart="1dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="3dp"
             android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/nombre_direccion"
-            app:layout_constraintHorizontal_bias="0.84"
-            app:layout_constraintStart_toEndOf="@+id/txt_contador"
+            app:layout_constraintEnd_toStartOf="@+id/nombre_direccion_entrega"
+            app:layout_constraintStart_toEndOf="@+id/group_ubi_entrega"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.3"
             tools:srcCompat="@drawable/casa" />
 
         <TextView
-            android:id="@+id/nombre_direccion"
+            android:id="@+id/nombre_direccion_entrega"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -52,23 +50,24 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.555"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.406" />
+            app:layout_constraintVertical_bias="0.687" />
 
         <RadioGroup
-            android:id="@+id/group_entrega"
+            android:id="@+id/group_ubi_entrega"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginEnd="6dp"
-            android:layout_marginBottom="15dp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <RadioButton
-                android:id="@+id/radio_entrega"
+                android:id="@+id/radio_ubi_entrega"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"

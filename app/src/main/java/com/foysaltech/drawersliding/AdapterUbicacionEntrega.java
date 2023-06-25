@@ -69,17 +69,14 @@ public class AdapterUbicacionEntrega  extends RecyclerView.Adapter<AdapterUbicac
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            txt_contador=itemView.findViewById(R.id.txt_contador);
-            itemName=itemView.findViewById(R.id.nombre_direccion);
-            itemDescripcion=itemView.findViewById(R.id.textView2);
-            imagen_direccion=itemView.findViewById(R.id.imagen_direccion);
-            linear_menu=itemView.findViewById(R.id.linear_menu);
+
+            itemName=itemView.findViewById(R.id.nombre_direccion_entrega);
+
         }
         void bindData(final Ubicaciones item) {
 
             itemName.setText(item.getNombre_direccion());
-            itemDescripcion.setText(item.getCalle1());
-            imagen_direccion.setImageResource(R.drawable.casa);
+
 
         }
     }
