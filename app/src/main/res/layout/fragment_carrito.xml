@@ -83,7 +83,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="190dp"
+            android:layout_height="180dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +102,7 @@
                     android:layout_width="100dp"
                     android:layout_height="20dp"
                     android:text="Total"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="22dp"
                     android:textAlignment="viewEnd"
                     android:textColor="@color/textColorPrimary2"
                     app:layout_constraintBottom_toTopOf="@+id/txt_total_carrito"
@@ -146,6 +146,7 @@
                     android:textColor="#00b347"
                     android:textSize="24sp"
 
+                    android:fontFamily="@font/montserrat_bold"
                     android:layout_marginRight="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -193,6 +194,8 @@
                     android:text="Comprar"
                     android:textColor="@color/pinkColor"
                     android:textSize="15sp"
+
+                    android:fontFamily="@font/montserrat_bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.496"

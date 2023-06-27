@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -23,26 +24,29 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class FragmentDetallePedido extends Fragment {
 
-
+private TextView txt_total_compra;
     private List<MetodoEntrega> elements_metodo;
     private List<Ubicaciones> elements_ubicacion;
    private RecyclerView contenedorMetodoEntrega;
+  private LinearLayout contenedorInstrucciones;
     private RecyclerView contenedorUbicacionEntrega;
    private AdapterMetodoEntrega listAdapterMedodo;
     private AdapterUbicacionEntrega listAdapterUbiEntrega;
-   private ImageView imageView1,imageView2;
-   private CardView cardView1,cardView22;
+   private ImageView imageView1,imageView2,imageView3;
+   private CardView cardView1,cardView22,cardView3;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     Ubicaciones ubicaciones=new Ubicaciones();
    int a=0;
     int b=0;
+    int c=0;
     public FragmentDetallePedido() {
 
     }
@@ -66,10 +70,15 @@ public class FragmentDetallePedido extends Fragment {
        View view= inflater.inflate(R.layout.fragment_detalle_pedido, container, false);
         contenedorMetodoEntrega=view.findViewById(R.id.contenedorMetodoEntrega);
         contenedorUbicacionEntrega=view.findViewById(R.id.contenedorUbicacionEntrega);
+        contenedorInstrucciones=view.findViewById(R.id.contenedorInstrucciones);
         imageView1=view.findViewById(R.id.imageView1);
         imageView2=view.findViewById(R.id.imageView2);
+        imageView3=view.findViewById(R.id.imageView3);
         cardView1=view.findViewById(R.id.cardView1);
         cardView22=view.findViewById(R.id.cardView22);
+        cardView3=view.findViewById(R.id.cardView3);
+        txt_total_compra=view.findViewById(R.id.txt_total_compra);
+
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
         mAuth.setLanguageCode("es");
@@ -77,6 +86,7 @@ public class FragmentDetallePedido extends Fragment {
 
         cargarUbi();
         cargar_metodo();
+        precio();
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,6 +125,24 @@ public class FragmentDetallePedido extends Fragment {
             }
         });
 
+        imageView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (c == 0) {
+                    contenedorInstrucciones.setVisibility(View.VISIBLE);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 700);
+                    cardView3.setLayoutParams(lparams);
+                    c= 1;
+                    imageView3.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
+                }else{
+                    contenedorInstrucciones.setVisibility(View.GONE);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
+                    cardView3.setLayoutParams(lparams);
+                    c = 0;
+                    imageView3.setImageResource(R.drawable.flecha_hacia_abajo);
+                }
+            }
+        });
 
         return view;
     }
@@ -185,5 +213,8 @@ public class FragmentDetallePedido extends Fragment {
 
         });
     }
-
+    public void precio() {
+        DecimalFormat formatea = new DecimalFormat("###,###.##");
+        txt_total_compra.setText(formatea.format(Carritos.getSubTotalDefinitivo()) + " ₲");
+    }
 }

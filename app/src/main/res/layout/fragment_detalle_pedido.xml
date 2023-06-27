@@ -28,31 +28,12 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@drawable/search_edittext_background"
-                        android:elevation="3dp"
-                        android:gravity="center"
-                        android:text="Detalle de mi Pedido"
-                        android:textColor="@color/textColorPrimary2"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.023" />
-
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardView2"
                         android:layout_width="match_parent"
                         android:layout_height="210dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="10dp"
                         app:cardCornerRadius="25dp"
 
                         app:cardElevation="1dp"
@@ -72,28 +53,42 @@
                                 android:id="@+id/txt_descuento_compra"
                                 android:layout_width="100dp"
                                 android:layout_height="20dp"
-                                android:layout_marginRight="20dp"
-                                android:text="Total"
+                                android:layout_marginEnd="36dp"
+                                android:text="0"
                                 android:textAlignment="viewEnd"
                                 android:textColor="@color/textColorPrimary2"
+                                android:textSize="16sp"
                                 app:layout_constraintBottom_toTopOf="@+id/txt_delivery_compra"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.916"
-                                app:layout_constraintStart_toEndOf="@+id/textView12"
-                                app:layout_constraintVertical_bias="0.545" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.976" />
 
                             <TextView
                                 android:id="@+id/textView12"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:text="Descuento"
+                                android:textSize="16sp"
                                 android:textColor="@color/textColorPrimary2"
-                                app:layout_constraintBottom_toTopOf="@+id/tt"
-                                app:layout_constraintEnd_toStartOf="@+id/txt_sub_total_compra"
-                                app:layout_constraintHorizontal_bias="0.209"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/txt_descuento_compra"
+                                app:layout_constraintHorizontal_bias="0.211"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.86" />
+                                app:layout_constraintVertical_bias="0.458" />
+
+                            <LinearLayout
+
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/raya"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.74"></LinearLayout>
 
                             <TextView
                                 android:id="@+id/textView11"
@@ -104,15 +99,15 @@
                                 android:textSize="24sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.107"
+                                app:layout_constraintHorizontal_bias="0.104"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.792" />
+                                app:layout_constraintVertical_bias="0.899" />
 
                             <TextView
                                 android:id="@+id/txt_total_compra"
                                 android:layout_width="150dp"
-                                android:layout_height="40dp"
+                                android:layout_height="30dp"
                                 android:layout_marginRight="20dp"
                                 android:text="Sub Total"
                                 android:textAlignment="viewEnd"
@@ -120,45 +115,49 @@
                                 android:textSize="24sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.833"
+                                app:layout_constraintHorizontal_bias="0.87"
                                 app:layout_constraintStart_toEndOf="@+id/textView11"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.845" />
+                                app:layout_constraintVertical_bias="0.893" />
 
                             <TextView
                                 android:id="@+id/tt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Sub Total"
+                                android:textSize="16sp"
                                 android:textColor="@color/textColorPrimary2"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/txt_descuento_compra"
-                                app:layout_constraintHorizontal_bias="0.173"
+                                app:layout_constraintEnd_toStartOf="@+id/txt_sub_total_compra"
+                                app:layout_constraintHorizontal_bias="0.172"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.364" />
+                                app:layout_constraintVertical_bias="0.305" />
 
                             <TextView
                                 android:id="@+id/txt_sub_total_compra"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginRight="20dp"
-
-                                android:text="TextView"
+                                android:textSize="16sp"
+                                android:layout_marginEnd="36dp"
+                                android:text="0"
                                 android:textAlignment="viewEnd"
                                 android:textColor="@color/textColorPrimary2"
                                 app:layout_constraintBottom_toTopOf="@+id/txt_descuento_compra"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.55" />
+                                app:layout_constraintVertical_bias="0.805" />
 
                             <TextView
                                 android:id="@+id/txt_delivery_compra"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="36dp"
-                                android:text="TextView"
-                                app:layout_constraintBottom_toTopOf="@+id/txt_total_compra"
+                                android:text="0"
+                                android:layout_marginBottom="70dp"
+                                android:textColor="@color/textColorPrimary2"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent" />
 
                             <TextView
@@ -166,12 +165,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Delivery"
-                                app:layout_constraintBottom_toTopOf="@+id/textView11"
+                                android:textColor="@color/textColorPrimary2"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/txt_delivery_compra"
-                                app:layout_constraintHorizontal_bias="0.209"
+                                app:layout_constraintHorizontal_bias="0.109"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/tt"
-                                app:layout_constraintVertical_bias="0.692" />
+                                app:layout_constraintVertical_bias="0.265" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -265,11 +266,13 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardView22"
                         android:layout_width="match_parent"
-                        android:layout_height="110dp"
+                        android:layout_height="90dp"
                         android:layout_gravity="center"
                         app:cardCornerRadius="25dp"
                         app:cardElevation="1dp"
-                        app:cardUseCompatPadding="true">
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        app:cardUseCompatPadding="false">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -302,7 +305,8 @@
                                 android:id="@+id/imageView2"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
-                                android:layout_marginTop="20dp"
+                                android:layout_marginTop="28dp"
+                                android:layout_marginEnd="32dp"
                                 android:src="@drawable/flecha_hacia_abajo"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -311,7 +315,8 @@
                                 android:id="@+id/check2"
                                 android:layout_width="28dp"
                                 android:layout_height="28dp"
-                                android:layout_marginTop="20dp"
+                                android:layout_marginTop="28dp"
+                                android:layout_marginEnd="12dp"
                                 android:src="@drawable/comprobado_adobe_express"
                                 app:layout_constraintEnd_toStartOf="@+id/imageView2"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -338,7 +343,7 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardView3"
                         android:layout_width="match_parent"
-                        android:layout_height="110dp"
+                        android:layout_height="240dp"
                         android:layout_gravity="center"
                         app:cardCornerRadius="25dp"
                         app:cardElevation="1dp"
@@ -349,12 +354,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
+
                             <ImageView
                                 android:id="@+id/imagen3"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
+                                android:layout_marginTop="20dp"
+
                                 android:src="@drawable/google_docs"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/textView15"
                                 app:layout_constraintHorizontal_bias="0.767"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -364,10 +371,11 @@
                                 android:id="@+id/textView15"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="36dp"
+
                                 android:text="Instrucciones de entrega:"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.333"
+                                app:layout_constraintHorizontal_bias="0.448"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -375,9 +383,9 @@
                                 android:id="@+id/imageView3"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
+                                android:layout_marginTop="30dp"
                                 android:layout_marginRight="20dp"
                                 android:src="@drawable/flecha_hacia_abajo"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -385,13 +393,85 @@
                                 android:id="@+id/check3"
                                 android:layout_width="28dp"
                                 android:layout_height="28dp"
+                                android:layout_marginTop="30dp"
+
                                 android:src="@drawable/comprobado_adobe_express"
-                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:visibility="gone"
                                 app:layout_constraintEnd_toStartOf="@+id/imageView3"
-                                app:layout_constraintHorizontal_bias="0.807"
+                                app:layout_constraintHorizontal_bias="0.607"
                                 app:layout_constraintStart_toEndOf="@+id/textView15"
                                 app:layout_constraintTop_toTopOf="parent" />
 
+                            <ImageView
+                                android:id="@+id/chec3_bien"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_marginTop="30dp"
+                                android:src="@drawable/exclamacion"
+                                app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                                app:layout_constraintHorizontal_bias="0.607"
+                                app:layout_constraintStart_toEndOf="@+id/textView15"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <LinearLayout
+                                android:id="@+id/contenedorInstrucciones"
+                                android:layout_width="match_parent"
+                                android:layout_height="130dp"
+                                android:layout_marginTop="20dp"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/textView15"
+                                app:layout_constraintVertical_bias="0.6">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_marginRight="50dp"
+                                    app:cardCornerRadius="18dp"
+
+                                    app:cardElevation="2dp"
+
+                                    >
+
+                                    <CheckBox
+                                        android:id="@+id/checkBox3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+
+                                        android:text="Llamar al llegar"
+                                        android:textColor="@color/pinkColor"
+
+                                        android:textSize="13sp" />
+
+                                </androidx.cardview.widget.CardView>
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginRight="50dp"
+                                    app:cardCornerRadius="18dp"
+
+                                    app:cardElevation="2dp">
+
+                                    <CheckBox
+                                        android:id="@+id/checkBox2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:text="Tocar el Timbre"
+                                        android:textColor="@color/pinkColor"
+
+                                        android:textSize="13sp" />
+
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>
 
