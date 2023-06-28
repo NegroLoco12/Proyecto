@@ -61,34 +61,35 @@
                                 app:layout_constraintBottom_toTopOf="@+id/txt_delivery_compra"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.976" />
+                                app:layout_constraintVertical_bias="0.842" />
 
                             <TextView
                                 android:id="@+id/textView12"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:text="Descuento"
-                                android:textSize="16sp"
                                 android:textColor="@color/textColorPrimary2"
+                                android:textSize="16sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/txt_descuento_compra"
-                                app:layout_constraintHorizontal_bias="0.211"
+                                app:layout_constraintHorizontal_bias="0.198"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.458" />
+                                app:layout_constraintVertical_bias="0.371" />
 
                             <LinearLayout
 
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/raya"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
+                                android:background="@drawable/raya"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.526"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.74"></LinearLayout>
+                                app:layout_constraintVertical_bias="0.681"></LinearLayout>
 
                             <TextView
                                 android:id="@+id/textView11"
@@ -125,14 +126,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Sub Total"
-                                android:textSize="16sp"
                                 android:textColor="@color/textColorPrimary2"
+                                android:textSize="16sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/txt_sub_total_compra"
-                                app:layout_constraintHorizontal_bias="0.172"
+                                app:layout_constraintHorizontal_bias="0.169"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.305" />
+                                app:layout_constraintVertical_bias="0.203" />
 
                             <TextView
                                 android:id="@+id/txt_sub_total_compra"
@@ -171,8 +172,8 @@
                                 app:layout_constraintEnd_toStartOf="@+id/txt_delivery_compra"
                                 app:layout_constraintHorizontal_bias="0.109"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/tt"
-                                app:layout_constraintVertical_bias="0.265" />
+                                app:layout_constraintTop_toBottomOf="@+id/textView12"
+                                app:layout_constraintVertical_bias="0.154" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -204,8 +205,8 @@
 
                             <ImageView
                                 android:id="@+id/imagen1"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
                                 android:layout_marginStart="8dp"
                                 android:src="@drawable/entrega"
                                 android:layout_marginTop="20dp"
@@ -282,11 +283,11 @@
                                 android:id="@+id/imagen2"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
-                                android:layout_marginLeft="8dp"
+
                                 android:layout_marginTop="20dp"
                                 android:src="@drawable/ubicacion__1_"
                                 app:layout_constraintEnd_toStartOf="@+id/textView10"
-                                app:layout_constraintHorizontal_bias="0.416"
+
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -297,7 +298,7 @@
                                 android:layout_marginTop="30dp"
                                 android:text="Dirección de entrega"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.361"
+                                app:layout_constraintHorizontal_bias="0.403"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -306,7 +307,7 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:layout_marginTop="28dp"
-                                android:layout_marginEnd="32dp"
+                                android:layout_marginEnd="20dp"
                                 android:src="@drawable/flecha_hacia_abajo"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -315,8 +316,8 @@
                                 android:id="@+id/check2"
                                 android:layout_width="28dp"
                                 android:layout_height="28dp"
-                                android:layout_marginTop="28dp"
-                                android:layout_marginEnd="12dp"
+                                android:layout_marginTop="30dp"
+                                android:layout_marginEnd="20dp"
                                 android:src="@drawable/comprobado_adobe_express"
                                 app:layout_constraintEnd_toStartOf="@+id/imageView2"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -363,7 +364,7 @@
 
                                 android:src="@drawable/google_docs"
                                 app:layout_constraintEnd_toStartOf="@+id/textView15"
-                                app:layout_constraintHorizontal_bias="0.767"
+                                app:layout_constraintHorizontal_bias="0.628"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -371,7 +372,7 @@
                                 android:id="@+id/textView15"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="36dp"
+                                android:layout_marginTop="30dp"
 
                                 android:text="Instrucciones de entrega:"
                                 app:layout_constraintEnd_toEndOf="parent"
