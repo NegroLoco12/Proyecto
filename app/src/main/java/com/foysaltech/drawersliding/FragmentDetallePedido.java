@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,10 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,27 +30,34 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 
 public class FragmentDetallePedido extends Fragment {
-
-private TextView txt_total_compra;
+Button btn_enviarPedido;
     private List<MetodoEntrega> elements_metodo;
+    private TextView txt_sub_total_compra,txt_descuento_compra,txt_delivery_compra,txt_total_compra;
     private List<Ubicaciones> elements_ubicacion;
    private RecyclerView contenedorMetodoEntrega;
   private LinearLayout contenedorInstrucciones;
     private RecyclerView contenedorUbicacionEntrega;
    private AdapterMetodoEntrega listAdapterMedodo;
     private AdapterUbicacionEntrega listAdapterUbiEntrega;
-   private ImageView imageView1,imageView2,imageView3;
-   private CardView cardView1,cardView22,cardView3;
+   private ImageView imageView1,imageView2,imageView3,imageView4,imageView5;
+   private CardView cardView1,cardView22,cardView3,cardView4;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     Ubicaciones ubicaciones=new Ubicaciones();
    int a=0;
     int b=0;
     int c=0;
+    int d=0;
+    int e=0;
     public FragmentDetallePedido() {
 
     }
@@ -74,10 +85,17 @@ private TextView txt_total_compra;
         imageView1=view.findViewById(R.id.imageView1);
         imageView2=view.findViewById(R.id.imageView2);
         imageView3=view.findViewById(R.id.imageView3);
+        imageView4=view.findViewById(R.id.imageView4);
+        imageView5=view.findViewById(R.id.imageView5);
         cardView1=view.findViewById(R.id.cardView1);
         cardView22=view.findViewById(R.id.cardView22);
         cardView3=view.findViewById(R.id.cardView3);
+        cardView4=view.findViewById(R.id.cardView4);
         txt_total_compra=view.findViewById(R.id.txt_total_compra);
+        txt_delivery_compra=view.findViewById(R.id.txt_delivery_compra);
+        txt_descuento_compra=view.findViewById(R.id.txt_descuento_compra);
+        txt_sub_total_compra=view.findViewById(R.id.txt_sub_total_compra);
+        btn_enviarPedido=view.findViewById(R.id.btn_enviarPedido);
 
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
@@ -117,7 +135,7 @@ private TextView txt_total_compra;
                     imageView2.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
                 }else{
                     contenedorUbicacionEntrega.setVisibility(View.GONE);
-                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 250);
                     cardView22.setLayoutParams(lparams);
                     b = 0;
                     imageView2.setImageResource(R.drawable.flecha_hacia_abajo);
@@ -141,6 +159,33 @@ private TextView txt_total_compra;
                     c = 0;
                     imageView3.setImageResource(R.drawable.flecha_hacia_abajo);
                 }
+            }
+        });
+        imageView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (d == 0) {
+                    contenedorUbicacionEntrega.setVisibility(View.VISIBLE);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 700);
+                    cardView4.setLayoutParams(lparams);
+                    d = 1;
+                    imageView4.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
+                }else{
+                    contenedorUbicacionEntrega.setVisibility(View.GONE);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 250);
+                    cardView4.setLayoutParams(lparams);
+                    d = 0;
+                    imageView4.setImageResource(R.drawable.flecha_hacia_abajo);
+                }
+            }
+        });
+
+        btn_enviarPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                cargar_pedido_cabecera();
+                cargar_pedido_detalle();
             }
         });
 
@@ -216,5 +261,71 @@ private TextView txt_total_compra;
     public void precio() {
         DecimalFormat formatea = new DecimalFormat("###,###.##");
         txt_total_compra.setText(formatea.format(Carritos.getSubTotalDefinitivo()) + " ₲");
+    }
+
+    public void cargar_pedido_cabecera(){
+
+        String cod_usuario,nombre,total, descuento,delivery;
+        nombre="Oscar";
+        total=txt_total_compra.getText().toString();
+        descuento=txt_descuento_compra.getText().toString();
+        delivery=txt_delivery_compra.getText().toString();
+
+        cod_usuario=mAuth.getCurrentUser().getUid();
+
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("cod_usuario", cod_usuario);
+        map.put("nombre", nombre);
+        map.put("total", total);
+        map.put("descuento", descuento);
+        map.put("delivery", delivery);
+
+        mDatabase.child("Pedidos").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    MotionToast.Companion.createColorToast(getActivity(),
+                            "Registrado",
+                            "Registrado sin problemas!",
+                            MotionToastStyle.SUCCESS,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(getContext(), www.sanju.motiontoast.R.font.helvetica_regular));
+
+                }
+            }
+        });
+    }
+    public void cargar_pedido_detalle() {
+        for (int i = 0; i <= Carritos.pedido.size(); i++) {
+            String cod_usuario, nombre, total, descuento, delivery;
+            nombre = Carritos.pedido.get(i).getNombre();
+
+            cod_usuario = mAuth.getCurrentUser().getUid();
+
+            Map<String, Object> map = new HashMap<>();
+
+
+            map.put("nombre_producto", nombre);
+
+
+            mDatabase.child("Pedidos_detalles").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                   //     MotionToast.Companion.createColorToast(getActivity(),
+                     //           "Registrado",
+                       //         "Registrado sin problemas!",
+                         //       MotionToastStyle.SUCCESS,
+                           //     MotionToast.GRAVITY_BOTTOM,
+                             //   MotionToast.LONG_DURATION,
+                               // ResourcesCompat.getFont(getContext(), www.sanju.motiontoast.R.font.helvetica_regular));
+
+                    }
+                }
+            });
+        }
+
     }
 }

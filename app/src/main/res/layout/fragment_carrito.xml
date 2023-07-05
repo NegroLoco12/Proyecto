@@ -188,13 +188,10 @@
                     android:id="@+id/btnCarrito"
                     android:layout_width="230dp"
                     android:layout_height="wrap_content"
-
-
                     android:background="@drawable/search_edittext_background"
                     android:text="Comprar"
                     android:textColor="@color/pinkColor"
                     android:textSize="15sp"
-
                     android:fontFamily="@font/montserrat_bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
