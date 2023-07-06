@@ -289,14 +289,16 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
+                Log.w(TAG, "NO FUNCIONAAAAA  ", e);
+
             //si es que falla
-                MotionToast.Companion.createColorToast(LoginActivity.this,//Toast Personalizado
-                        "Advertencia",
-                        "Problemas con el Nro de Teléfono",
-                        MotionToastStyle.WARNING,
-                        MotionToast.GRAVITY_BOTTOM,
-                        MotionToast.LONG_DURATION,
-                        ResourcesCompat.getFont(LoginActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
+              //      MotionToast.Companion.createColorToast(LoginActivity.this,//Toast Personalizado
+                    //    "Advertencia",
+                      //  "Problemas con el Nro de Teléfono",
+                        //MotionToastStyle.WARNING,
+                        //MotionToast.GRAVITY_BOTTOM,
+                        //MotionToast.LONG_DURATION,
+                        //ResourcesCompat.getFont(LoginActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
                 singIn.setVisibility(View.VISIBLE);
                 spinKitView.setVisibility(View.GONE);
             }

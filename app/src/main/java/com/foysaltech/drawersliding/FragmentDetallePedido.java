@@ -298,7 +298,7 @@ Button btn_enviarPedido;
         });
     }
     public void cargar_pedido_detalle() {
-        for (int i = 0; i <= Carritos.pedido.size(); i++) {
+        for (int i = 0; i >= Carritos.pedido.size(); i++) {
             String cod_usuario, nombre, total, descuento, delivery;
             nombre = Carritos.pedido.get(i).getNombre();
 
