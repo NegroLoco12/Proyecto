@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -37,12 +38,16 @@ public class AdapterMetodoEntrega extends RecyclerView.Adapter<AdapterMetodoEntr
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.bindData(mData.get(position));
+     for (int i = 0; i < mData.size(); i++) {
+
+            holder.bindData(mData.get(i));
+    }
+
     }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return 1;
     }
 
 
@@ -60,9 +65,19 @@ public class AdapterMetodoEntrega extends RecyclerView.Adapter<AdapterMetodoEntr
         radio_entrega=itemView.findViewById(R.id.radio_entrega);
         group_entrega=itemView.findViewById(R.id.group_entrega);
     }
+        //for (int i = 1; i <= 2; i++) {
         void bindData(final MetodoEntrega item) {
             itemName.setText(item.getNombre());
             img.setImageResource(R.drawable.entrega);
+            group_entrega.setOrientation(LinearLayout.VERTICAL);
+            //
+            //for (int i = 1; i <= 2; i++) {
+                RadioButton rdbtn = new RadioButton(context.getApplicationContext());
+                rdbtn.setId(View.generateViewId());
+                rdbtn.setText(item.getNombre());
+               // rdbtn.setOnClickListener(this);
+                group_entrega.addView(rdbtn);
+           // }
             if(item.getNombre()=="Pickup"){
                 img.setImageResource(R.drawable.comercio);
             }

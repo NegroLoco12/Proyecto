@@ -209,9 +209,10 @@
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
                                 android:layout_marginStart="8dp"
-                                android:src="@drawable/entrega"
                                 android:layout_marginTop="20dp"
+                                android:src="@drawable/entrega"
                                 app:layout_constraintEnd_toStartOf="@+id/textVie"
+                                app:layout_constraintHorizontal_bias="0.42"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -223,7 +224,7 @@
                                 android:layout_marginTop="32dp"
                                 android:text="Método de entrega"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.354"
+                                app:layout_constraintHorizontal_bias="0.32"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -271,6 +272,7 @@
                                 android:layout_height="28dp"
                                 android:layout_marginTop="28dp"
                                 android:src="@drawable/exclamacion"
+                                android:visibility="gone"
                                 app:layout_constraintEnd_toStartOf="@+id/imageView1"
                                 app:layout_constraintHorizontal_bias="0.80"
                                 app:layout_constraintStart_toEndOf="@+id/textVie"
@@ -434,6 +436,7 @@
                                 android:layout_height="28dp"
                                 android:layout_marginTop="28dp"
                                 android:src="@drawable/exclamacion"
+                                android:visibility="gone"
                                 app:layout_constraintEnd_toStartOf="@+id/imageView3"
                                 app:layout_constraintHorizontal_bias="0.676"
                                 app:layout_constraintStart_toEndOf="@+id/textView15"
@@ -465,13 +468,12 @@
                                     >
 
                                     <CheckBox
-                                        android:id="@+id/checkBox3"
+                                        android:id="@+id/check_llamar"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="50dp"
 
                                         android:text="Llamar al llegar"
-                                        android:textColor="@color/pinkColor"
 
                                         android:textSize="13sp" />
 
@@ -488,12 +490,11 @@
                                     app:cardElevation="2dp">
 
                                     <CheckBox
-                                        android:id="@+id/checkBox2"
+                                        android:id="@+id/check_timbre"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="50dp"
                                         android:text="Tocar el Timbre"
-                                        android:textColor="@color/pinkColor"
 
                                         android:textSize="13sp" />
 
@@ -576,7 +577,7 @@ android:layout_marginTop="10dp"
                                 android:text="Datos de Facturación"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.377"
+                                app:layout_constraintHorizontal_bias="0.35"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 

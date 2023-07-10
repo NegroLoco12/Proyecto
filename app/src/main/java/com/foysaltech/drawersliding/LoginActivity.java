@@ -404,12 +404,23 @@ public class LoginActivity extends AppCompatActivity {
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void updateUI(FirebaseUser user) {
-          FirebaseUser user1= FirebaseAuth.getInstance().getCurrentUser();
-         if (user1!=null){
-            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
-           }
+        FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
+        if (user1 != null) {
+            if (!user1.isEmailVerified()) {
+                MotionToast.Companion.createColorToast(LoginActivity.this,//Toast Personalizado
+                        "Advertencia",
+                        "Correo Electrònico no verificado",
+                        MotionToastStyle.WARNING,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(LoginActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
+
+            } else {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -499,8 +510,21 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task5) {
                     if (task5.isSuccessful()) {
+                        FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
+                        if (!user1.isEmailVerified()) {
+                            MotionToast.Companion.createColorToast(LoginActivity.this,//Toast Personalizado
+                                    "Advertencia",
+                                    "Correo Electrònico no verificado",
+                                    MotionToastStyle.WARNING,
+                                    MotionToast.GRAVITY_BOTTOM,
+                                    MotionToast.LONG_DURATION,
+                                    ResourcesCompat.getFont(LoginActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
 
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        } else {
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     }else{
                         MotionToast.Companion.createColorToast(LoginActivity.this,//Toast Personalizado
                                 "Advertencia",
@@ -526,21 +550,62 @@ public class LoginActivity extends AppCompatActivity {
        }
        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    public void validar_telefono(View v){
-       ocultar();
 
+        singIn.setVisibility(View.GONE);
+       spinKitView.setVisibility(View.VISIBLE);
+       ocultar();
+       String nombre,apellido,numero,correo, clave;
+       nombre=txt_nombre.getText().toString();
+       apellido=txt_apellido.getText().toString();
+       numero=txt_telefono.getText().toString();
+       correo=txt_mail.getText().toString();
+       clave=txt_clave.getText().toString();
        if (validar_registro()) {
-           singIn.setVisibility(View.GONE);
-           spinKitView.setVisibility(View.VISIBLE);
-           String numero = "+595" + txt_telefono.getText().toString();
-           PhoneAuthOptions options =
-                   PhoneAuthOptions.newBuilder(mAuth)
-                           .setPhoneNumber(numero)
-                           .setTimeout(60L, TimeUnit.SECONDS)
-                           .setActivity(LoginActivity.this)
-                           .setCallbacks(mCallbacks)
-                           .build();
-           PhoneAuthProvider.verifyPhoneNumber(options);
-       }
+           mAuth.createUserWithEmailAndPassword(correo, clave).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+               @Override
+               public void onComplete(@NonNull Task<AuthResult> task2) {
+                   if (task2.isSuccessful()) {
+                   FirebaseUser user= mAuth.getCurrentUser();
+                       user.sendEmailVerification();
+                       Map<String, Object> map = new HashMap<>();
+                       map.put("nombre", nombre);
+                       map.put("apellido", apellido);
+                       map.put("telefono", "+595"+ numero);
+                       map.put("correo", correo);
+                       map.put("clave", clave);
+
+                       String id = mAuth.getCurrentUser().getUid();
+                       mDatabase.child("Usuarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                           @Override
+                           public void onComplete(@NonNull Task<Void> task3) {
+                               if (task3.isSuccessful()) {
+
+                                   singIn.setVisibility(View.VISIBLE);
+                                   spinKitView.setVisibility(View.GONE);
+                                   iniciarHome();
+                                   MotionToast.Companion.createColorToast(LoginActivity.this,//Toast Personalizado
+                                           "Registrado",
+                                           "Registrado sin problemas!",
+                                           MotionToastStyle.SUCCESS,
+                                           MotionToast.GRAVITY_BOTTOM,
+                                           MotionToast.LONG_DURATION,
+                                           ResourcesCompat.getFont(LoginActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
+                                   limpiar();
+                               }
+                           }
+                       });
+                   }
+               }
+           });
+          // String numero = "+595" + txt_telefono.getText().toString();
+         //  PhoneAuthOptions options =
+           //        PhoneAuthOptions.newBuilder(mAuth)
+             //              .setPhoneNumber(numero)
+               //            .setTimeout(60L, TimeUnit.SECONDS)
+                 //          .setActivity(LoginActivity.this)
+                   //        .setCallbacks(mCallbacks)
+                     //      .build();
+             }
    }
    /////////////////////////////////////////////////////////////////////////////////////////////////
     private void iniciarSesion(PhoneAuthCredential credential){

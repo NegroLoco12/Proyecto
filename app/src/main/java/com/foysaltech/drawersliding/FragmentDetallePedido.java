@@ -14,9 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,26 +31,33 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
 
 
 public class FragmentDetallePedido extends Fragment {
-Button btn_enviarPedido;
+    Button btn_enviarPedido;
+    private String Instrucciones;
     private List<MetodoEntrega> elements_metodo;
     private TextView txt_sub_total_compra,txt_descuento_compra,txt_delivery_compra,txt_total_compra;
     private List<Ubicaciones> elements_ubicacion;
    private RecyclerView contenedorMetodoEntrega;
   private LinearLayout contenedorInstrucciones;
+  private CheckBox check_timbre,check_llamar;
     private RecyclerView contenedorUbicacionEntrega;
    private AdapterMetodoEntrega listAdapterMedodo;
     private AdapterUbicacionEntrega listAdapterUbiEntrega;
-   private ImageView imageView1,imageView2,imageView3,imageView4,imageView5;
+   private ImageView imageView1,imageView2,imageView3,imageView4,imageView5,chec3_bien,check3;
    private CardView cardView1,cardView22,cardView3,cardView4;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
@@ -96,6 +105,10 @@ Button btn_enviarPedido;
         txt_descuento_compra=view.findViewById(R.id.txt_descuento_compra);
         txt_sub_total_compra=view.findViewById(R.id.txt_sub_total_compra);
         btn_enviarPedido=view.findViewById(R.id.btn_enviarPedido);
+        check_llamar=view.findViewById(R.id.check_llamar);
+        check_timbre=view.findViewById(R.id.check_timbre);
+        chec3_bien=view.findViewById(R.id.chec3_bien);
+        check3=view.findViewById(R.id.check3);
 
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
@@ -183,9 +196,38 @@ Button btn_enviarPedido;
         btn_enviarPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                validacion();
+                //cargar_pedido_cabecera();
+                //cargar_pedido_detalle();
+            }
+        });
+        check_timbre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(check_timbre.isChecked()){
+                    chec3_bien.setVisibility(View.GONE);
+                    check3.setVisibility(View.VISIBLE);
 
-                cargar_pedido_cabecera();
-                cargar_pedido_detalle();
+                }else{
+                    chec3_bien.setVisibility(View.VISIBLE);
+                    check3.setVisibility(View.GONE);
+
+                }
+            }
+        });
+        check_llamar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(check_llamar.isChecked()){
+                    chec3_bien.setVisibility(View.GONE);
+                    check3.setVisibility(View.VISIBLE);
+
+                }else{
+                    chec3_bien.setVisibility(View.VISIBLE);
+                    check3.setVisibility(View.GONE);
+
+                }
+
             }
         });
 
@@ -265,6 +307,15 @@ Button btn_enviarPedido;
 
     public void cargar_pedido_cabecera(){
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+        String hora = simpleDateFormat.format(new Date());
+        Calendar cal = new GregorianCalendar();
+
+        Date date = cal.getTime();
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+        String fecha = df.format(date);
         String cod_usuario,nombre,total, descuento,delivery;
         nombre="Oscar";
         total=txt_total_compra.getText().toString();
@@ -277,6 +328,8 @@ Button btn_enviarPedido;
 
         map.put("cod_usuario", cod_usuario);
         map.put("nombre", nombre);
+        map.put("hora", hora);
+        map.put("fecha", fecha);
         map.put("total", total);
         map.put("descuento", descuento);
         map.put("delivery", delivery);
@@ -298,7 +351,7 @@ Button btn_enviarPedido;
         });
     }
     public void cargar_pedido_detalle() {
-        for (int i = 0; i >= Carritos.pedido.size(); i++) {
+        for (int i = 0; i < Carritos.pedido.size(); i++) {
             String cod_usuario, nombre, total, descuento, delivery;
             nombre = Carritos.pedido.get(i).getNombre();
 
@@ -307,9 +360,10 @@ Button btn_enviarPedido;
             Map<String, Object> map = new HashMap<>();
 
 
+            map.put("cod_producto", Carritos.pedido.get(i).getCodigo());
             map.put("nombre_producto", nombre);
-
-
+            map.put("cantidad_producto", Carritos.pedido.get(i).getCantidad());
+            map.put("subTotal_producto", nombre);
             mDatabase.child("Pedidos_detalles").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -328,4 +382,27 @@ Button btn_enviarPedido;
         }
 
     }
+    public boolean validacion(){
+        boolean retorno = true;
+    if (check_timbre.isChecked()){
+        check3.setVisibility(View.VISIBLE);
+        chec3_bien.setVisibility(View.GONE);
+    }else{
+        chec3_bien.setVisibility(View.VISIBLE);
+        check3.setVisibility(View.GONE);
+         retorno = false;
+    }
+        if (check_llamar.isChecked()){
+
+            check3.setVisibility(View.VISIBLE);
+            chec3_bien.setVisibility(View.GONE);
+        }else{
+
+            chec3_bien.setVisibility(View.VISIBLE);
+            check3.setVisibility(View.GONE);
+            retorno = false;
+        }
+        return retorno;
+    }
+
 }
