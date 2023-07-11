@@ -1,6 +1,7 @@
 package com.foysaltech.drawersliding;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ public class AdapterMetodoEntrega extends RecyclerView.Adapter<AdapterMetodoEntr
     private Context context;
     final AdapterMetodoEntrega.OnItemClickListener listene;
     public interface OnItemClickListener{
-        void onItemClick(Categorias item);
+        void onItemClick();
     }
     public AdapterMetodoEntrega(Context context, List<MetodoEntrega> mData, AdapterMetodoEntrega.OnItemClickListener listener ) {
         this.context = context;
@@ -75,24 +76,18 @@ public class AdapterMetodoEntrega extends RecyclerView.Adapter<AdapterMetodoEntr
                 RadioButton rdbtn = new RadioButton(context.getApplicationContext());
                 rdbtn.setId(View.generateViewId());
                 rdbtn.setText(item.getNombre());
-               // rdbtn.setOnClickListener(this);
+                rdbtn.setTextColor(Color.GRAY);
+                rdbtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listene.onItemClick();
+                    }
+                });
                 group_entrega.addView(rdbtn);
            // }
             if(item.getNombre()=="Pickup"){
                 img.setImageResource(R.drawable.comercio);
             }
-      radio_entrega.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              if(a==0) {
-                  a=1;
-              //    Toast.makeText(context,"s",Toast.LENGTH_LONG).show();
-              }else{
-                  a=0;
-                  group_entrega.clearCheck();
-              }
-          }
-      });
             }
 
         }

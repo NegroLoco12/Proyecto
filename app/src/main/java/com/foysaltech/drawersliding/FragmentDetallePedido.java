@@ -123,7 +123,7 @@ public class FragmentDetallePedido extends Fragment {
             public void onClick(View v) {
                 if (a == 0) {
                     contenedorMetodoEntrega.setVisibility(View.VISIBLE);
-                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 700);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 550);
                     cardView1.setLayoutParams(lparams);
                     a = 1;
                     imageView1.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
@@ -244,7 +244,12 @@ public class FragmentDetallePedido extends Fragment {
         elements_metodo.add(1,metodoEntrega1);
         listAdapterMedodo = new AdapterMetodoEntrega(getContext(), elements_metodo, new AdapterMetodoEntrega.OnItemClickListener()  {
             @Override
-            public void onItemClick(Categorias item) {
+            public void onItemClick() {
+                contenedorMetodoEntrega.setVisibility(View.GONE);
+                LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
+                cardView1.setLayoutParams(lparams);
+                a = 0;
+                imageView1.setImageResource(R.drawable.flecha_hacia_abajo);
 
             }
         });

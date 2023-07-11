@@ -252,11 +252,12 @@
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/contenedorMetodoEntrega"
-                                android:layout_width="350dp"
-                                android:layout_height="150dp"
+                                android:layout_width="300dp"
+                                android:layout_height="130dp"
                                 android:orientation="horizontal"
                                 android:paddingLeft="20dp"
-                                android:paddingTop="10dp"
+                                android:paddingTop="20dp"
+                               android:layout_marginTop="15dp"
                                 android:paddingRight="30dp"
                                 android:visibility="gone"
                                 app:layout_constraintBottom_toBottomOf="parent"
