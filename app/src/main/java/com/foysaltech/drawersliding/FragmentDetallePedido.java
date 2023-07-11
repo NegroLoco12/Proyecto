@@ -57,7 +57,7 @@ public class FragmentDetallePedido extends Fragment {
     private RecyclerView contenedorUbicacionEntrega;
    private AdapterMetodoEntrega listAdapterMedodo;
     private AdapterUbicacionEntrega listAdapterUbiEntrega;
-   private ImageView imageView1,imageView2,imageView3,imageView4,imageView5,chec3_bien,check3;
+   private ImageView imageView1,imageView2,imageView3,imageView4,imageView5,chec3_bien,check3,check1,check2;
    private CardView cardView1,cardView22,cardView3,cardView4;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
@@ -109,6 +109,8 @@ public class FragmentDetallePedido extends Fragment {
         check_timbre=view.findViewById(R.id.check_timbre);
         chec3_bien=view.findViewById(R.id.chec3_bien);
         check3=view.findViewById(R.id.check3);
+        check2=view.findViewById(R.id.check2);
+        check1=view.findViewById(R.id.check1);
 
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
@@ -142,7 +144,7 @@ public class FragmentDetallePedido extends Fragment {
             public void onClick(View v) {
                 if (b == 0) {
                     contenedorUbicacionEntrega.setVisibility(View.VISIBLE);
-                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 700);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 550);
                     cardView22.setLayoutParams(lparams);
                     b = 1;
                     imageView2.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
@@ -266,7 +268,12 @@ public class FragmentDetallePedido extends Fragment {
         listAdapterUbiEntrega = new AdapterUbicacionEntrega(getContext(), elements_ubicacion, new AdapterUbicacionEntrega.OnItemClickListener() {
             @Override
             public void onItemClick(Ubicaciones item) {
-                //borrarUbi(item);
+                contenedorUbicacionEntrega.setVisibility(View.GONE);
+                LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 250);
+                cardView22.setLayoutParams(lparams);
+                b = 0;
+                imageView2.setImageResource(R.drawable.flecha_hacia_abajo);
+check2.setVisibility(View.VISIBLE);
             }
 
 

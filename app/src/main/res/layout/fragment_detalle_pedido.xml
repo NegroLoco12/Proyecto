@@ -354,7 +354,7 @@
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/contenedorUbicacionEntrega"
                                 android:layout_width="350dp"
-                                android:layout_height="150dp"
+                                android:layout_height="130dp"
                                 android:orientation="horizontal"
                                 android:paddingLeft="20dp"
                                 android:paddingTop="10dp"
