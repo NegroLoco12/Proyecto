@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,12 +53,12 @@ public class FragmentDetallePedido extends Fragment {
     private TextView txt_sub_total_compra,txt_descuento_compra,txt_delivery_compra,txt_total_compra;
     private List<Ubicaciones> elements_ubicacion;
    private RecyclerView contenedorMetodoEntrega;
-  private LinearLayout contenedorInstrucciones;
+  private ConstraintLayout contenedorInstrucciones;
   private CheckBox check_timbre,check_llamar;
     private RecyclerView contenedorUbicacionEntrega;
    private AdapterMetodoEntrega listAdapterMedodo;
     private AdapterUbicacionEntrega listAdapterUbiEntrega;
-   private ImageView imageView1,imageView2,imageView3,imageView4,imageView5,chec3_bien,check3,check1,check2;
+   private ImageView imageView1,imageView2,imageView3,imageView4,imageView5,chec3_bien,check3,check1,check2,chec2_bien;
    private CardView cardView1,cardView22,cardView3,cardView4;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
@@ -111,6 +112,8 @@ public class FragmentDetallePedido extends Fragment {
         check3=view.findViewById(R.id.check3);
         check2=view.findViewById(R.id.check2);
         check1=view.findViewById(R.id.check1);
+        chec2_bien=view.findViewById(R.id.chec2_bien);
+
 
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
@@ -144,7 +147,7 @@ public class FragmentDetallePedido extends Fragment {
             public void onClick(View v) {
                 if (b == 0) {
                     contenedorUbicacionEntrega.setVisibility(View.VISIBLE);
-                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 550);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 500);
                     cardView22.setLayoutParams(lparams);
                     b = 1;
                     imageView2.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
@@ -163,7 +166,7 @@ public class FragmentDetallePedido extends Fragment {
             public void onClick(View v) {
                 if (c == 0) {
                     contenedorInstrucciones.setVisibility(View.VISIBLE);
-                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 700);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 600);
                     cardView3.setLayoutParams(lparams);
                     c= 1;
                     imageView3.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
@@ -274,6 +277,7 @@ public class FragmentDetallePedido extends Fragment {
                 b = 0;
                 imageView2.setImageResource(R.drawable.flecha_hacia_abajo);
 check2.setVisibility(View.VISIBLE);
+                chec2_bien.setVisibility(View.GONE);
             }
 
 
