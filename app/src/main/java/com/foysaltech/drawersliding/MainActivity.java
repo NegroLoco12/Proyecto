@@ -279,7 +279,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                             Map<String, Object> map = new HashMap<>();
                             map.put("razon_social", nombre);
                             map.put("documento", ruc);
-                            map.put("cod_cliente", cod_usuario);
+                            map.put("cod_usuario", cod_usuario);
                             String id = mAuth.getCurrentUser().getUid();
                             mDatabase.child("Contribuyentes").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -575,7 +575,7 @@ public void cargarContribuyentes( ){
     // Toast.makeText(getContext(),codigo+"",Toast.LENGTH_LONG).show();
 
     DatabaseReference correo = mDatabase.child("Contribuyentes");
-    Query nombre = correo.orderByChild("cod_cliente").equalTo(mAuth.getCurrentUser().getUid());
+    Query nombre = correo.orderByChild("cod_usuario").equalTo(mAuth.getCurrentUser().getUid());
 
     nombre.addValueEventListener(new ValueEventListener() {
         @Override

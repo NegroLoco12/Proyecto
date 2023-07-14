@@ -389,11 +389,11 @@
                                 android:id="@+id/imagen3"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
-                                android:layout_marginTop="16dp"
+                                android:layout_marginTop="24dp"
 
                                 android:src="@drawable/google_docs"
                                 app:layout_constraintEnd_toStartOf="@+id/textView15"
-                                app:layout_constraintHorizontal_bias="0.485"
+                                app:layout_constraintHorizontal_bias="0.426"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -519,7 +519,7 @@ android:layout_marginTop="10dp"
                             android:layout_height="match_parent">
 
                             <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/contenedorMetodoEntrega"
+                                android:id="@+id/contenedorDatosFacturacion"
                                 android:layout_width="350dp"
                                 android:layout_height="150dp"
                                 android:orientation="horizontal"
@@ -539,6 +539,7 @@ android:layout_marginTop="10dp"
                                 android:layout_height="28dp"
                                 android:layout_marginTop="30dp"
                                 android:src="@drawable/exclamacion"
+                                android:visibility="gone"
                                 app:layout_constraintEnd_toStartOf="@+id/imageView4"
                                 app:layout_constraintHorizontal_bias="0.809"
                                 app:layout_constraintStart_toEndOf="@+id/textView62"

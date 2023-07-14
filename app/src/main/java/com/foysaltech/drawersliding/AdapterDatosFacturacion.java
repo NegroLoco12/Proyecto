@@ -16,14 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class AdapterMetodoEntrega extends RecyclerView.Adapter<AdapterMetodoEntrega.MyViewHolder> {
-    private List<MetodoEntrega> mData;
+public class AdapterDatosFacturacion extends RecyclerView.Adapter<AdapterDatosFacturacion.MyViewHolder> {
+    private List<Contribuyentes> mData;
     private Context context;
-    final AdapterMetodoEntrega.OnItemClickListener listene;
+    final AdapterDatosFacturacion.OnItemClickListener listene;
     public interface OnItemClickListener{
         void onItemClick();
     }
-    public AdapterMetodoEntrega(Context context, List<MetodoEntrega> mData, AdapterMetodoEntrega.OnItemClickListener listener ) {
+    public AdapterDatosFacturacion(Context context, List<Contribuyentes> mData, AdapterDatosFacturacion.OnItemClickListener listener ) {
         this.context = context;
         this.mData = mData;
         this.listene=listener;
@@ -32,7 +32,7 @@ public class AdapterMetodoEntrega extends RecyclerView.Adapter<AdapterMetodoEntr
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(context).inflate(R.layout.item_entrega,null,false);
+        View v= LayoutInflater.from(context).inflate(R.layout.item_datosfactura,null,false);
         return new MyViewHolder(v);
     }
 
@@ -52,29 +52,22 @@ public class AdapterMetodoEntrega extends RecyclerView.Adapter<AdapterMetodoEntr
 
 
     public  class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView itemName;
-        ImageView img;
-        RadioButton radio_entrega;
+
         RadioGroup group_entrega;
-        int a=0;
+
 
     public MyViewHolder(@NonNull View itemView) {
         super(itemView);
-        itemName=itemView.findViewById(R.id.nombre_metodo_entrega);
-        img=itemView.findViewById(R.id.imagen_metodo);
-        radio_entrega=itemView.findViewById(R.id.radio_entrega);
         group_entrega=itemView.findViewById(R.id.group_factura);
     }
         //for (int i = 1; i <= 2; i++) {
-        void bindData(final MetodoEntrega item) {
-            itemName.setText(item.getNombre());
-            img.setImageResource(R.drawable.entrega);
-            group_entrega.setOrientation(LinearLayout.VERTICAL);
+        void bindData(final Contribuyentes item) {
+             group_entrega.setOrientation(LinearLayout.VERTICAL);
             //
             //for (int i = 1; i <= 2; i++) {
                 RadioButton rdbtn = new RadioButton(context.getApplicationContext());
                 rdbtn.setId(View.generateViewId());
-                rdbtn.setText(item.getNombre());
+                rdbtn.setText(item.getRazon_social());
                 rdbtn.setTextColor(Color.GRAY);
                 rdbtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -84,9 +77,7 @@ public class AdapterMetodoEntrega extends RecyclerView.Adapter<AdapterMetodoEntr
                 });
                 group_entrega.addView(rdbtn);
            // }
-            if(item.getNombre()=="Pickup"){
-                img.setImageResource(R.drawable.comercio);
-            }
+
             }
 
         }

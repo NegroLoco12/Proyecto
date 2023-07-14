@@ -52,17 +52,20 @@ public class FragmentDetallePedido extends Fragment {
     private List<MetodoEntrega> elements_metodo;
     private TextView txt_sub_total_compra,txt_descuento_compra,txt_delivery_compra,txt_total_compra;
     private List<Ubicaciones> elements_ubicacion;
+    private List<Contribuyentes> elements_datosFac;
    private RecyclerView contenedorMetodoEntrega;
   private ConstraintLayout contenedorInstrucciones;
   private CheckBox check_timbre,check_llamar;
-    private RecyclerView contenedorUbicacionEntrega;
+    private RecyclerView contenedorUbicacionEntrega,contenedorDatosFacturacion;
    private AdapterMetodoEntrega listAdapterMedodo;
+    private AdapterDatosFacturacion listAdapterDatosFacturacion;
     private AdapterUbicacionEntrega listAdapterUbiEntrega;
-   private ImageView imageView1,imageView2,imageView3,imageView4,imageView5,chec3_bien,check3,check1,check2,chec2_bien;
+   private ImageView imageView1,imageView2,imageView3,imageView4,imageView5,chec3_bien,check3,check1,check2,chec2_bien,chec4_bien;
    private CardView cardView1,cardView22,cardView3,cardView4;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     Ubicaciones ubicaciones=new Ubicaciones();
+    Contribuyentes contribuyentes=new Contribuyentes();
    int a=0;
     int b=0;
     int c=0;
@@ -91,6 +94,7 @@ public class FragmentDetallePedido extends Fragment {
        View view= inflater.inflate(R.layout.fragment_detalle_pedido, container, false);
         contenedorMetodoEntrega=view.findViewById(R.id.contenedorMetodoEntrega);
         contenedorUbicacionEntrega=view.findViewById(R.id.contenedorUbicacionEntrega);
+        contenedorDatosFacturacion=view.findViewById(R.id.contenedorDatosFacturacion);
         contenedorInstrucciones=view.findViewById(R.id.contenedorInstrucciones);
         imageView1=view.findViewById(R.id.imageView1);
         imageView2=view.findViewById(R.id.imageView2);
@@ -113,7 +117,7 @@ public class FragmentDetallePedido extends Fragment {
         check2=view.findViewById(R.id.check2);
         check1=view.findViewById(R.id.check1);
         chec2_bien=view.findViewById(R.id.chec2_bien);
-
+        chec4_bien=view.findViewById(R.id.chec4_bien);
 
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
@@ -183,13 +187,13 @@ public class FragmentDetallePedido extends Fragment {
             @Override
             public void onClick(View v) {
                 if (d == 0) {
-                    contenedorUbicacionEntrega.setVisibility(View.VISIBLE);
+                    contenedorDatosFacturacion.setVisibility(View.VISIBLE);
                     LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 700);
                     cardView4.setLayoutParams(lparams);
                     d = 1;
                     imageView4.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
                 }else{
-                    contenedorUbicacionEntrega.setVisibility(View.GONE);
+                    contenedorDatosFacturacion.setVisibility(View.GONE);
                     LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 250);
                     cardView4.setLayoutParams(lparams);
                     d = 0;
@@ -419,6 +423,50 @@ check2.setVisibility(View.VISIBLE);
             retorno = false;
         }
         return retorno;
+    }
+
+    public void cargarDatosFacturacion( ){
+
+        elements_datosFac = new ArrayList<>();
+        listAdapterDatosFacturacion = new AdapterDatosFacturacion(getContext(), elements_datosFac, new AdapterDatosFacturacion.OnItemClickListener() {
+            @Override
+            public void onItemClick() {
+
+            }
+        });
+        contenedorDatosFacturacion.setHasFixedSize(true);
+        contenedorDatosFacturacion.setLayoutManager(new LinearLayoutManager(getContext()));
+        contenedorDatosFacturacion.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        contenedorDatosFacturacion.setAdapter(listAdapterDatosFacturacion);
+        // Toast.makeText(getContext(),codigo+"",Toast.LENGTH_LONG).show();
+
+        DatabaseReference correo = mDatabase.child("Contribuyentes");
+        Query nombre = correo.orderByChild("cod_usuario").equalTo(mAuth.getCurrentUser().getUid());
+
+        nombre.addValueEventListener(new ValueEventListener() {
+            @Override
+
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                    ubicaciones=dataSnapshot.getValue(Ubicaciones.class);
+                    ubicaciones.setKey(dataSnapshot.getKey());
+                    elements_datosFac.add(contribuyentes);
+
+                    //   Toast.makeText(getApplicationContext(),elementsUbi+"",Toast.LENGTH_LONG).show();
+
+
+                }
+                listAdapterDatosFacturacion.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
     }
 
 }
