@@ -47,7 +47,7 @@ import www.sanju.motiontoast.MotionToastStyle;
 
 
 public class FragmentDetallePedido extends Fragment {
-    Button btn_enviarPedido;
+    Button btn_enviarPedido,btn_agg_ubi;
     private String Instrucciones;
     private List<MetodoEntrega> elements_metodo;
     private TextView txt_sub_total_compra,txt_descuento_compra,txt_delivery_compra,txt_total_compra;
@@ -110,6 +110,7 @@ public class FragmentDetallePedido extends Fragment {
         txt_descuento_compra=view.findViewById(R.id.txt_descuento_compra);
         txt_sub_total_compra=view.findViewById(R.id.txt_sub_total_compra);
         btn_enviarPedido=view.findViewById(R.id.btn_enviarPedido);
+        btn_agg_ubi=view.findViewById(R.id.btn_agg_ubi);
         check_llamar=view.findViewById(R.id.check_llamar);
         check_timbre=view.findViewById(R.id.check_timbre);
         chec3_bien=view.findViewById(R.id.chec3_bien);
@@ -127,6 +128,7 @@ public class FragmentDetallePedido extends Fragment {
         cargarUbi();
         cargar_metodo();
         precio();
+        cargarDatosFacturacion();
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,12 +153,14 @@ public class FragmentDetallePedido extends Fragment {
             public void onClick(View v) {
                 if (b == 0) {
                     contenedorUbicacionEntrega.setVisibility(View.VISIBLE);
-                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 500);
+                    btn_agg_ubi.setVisibility(View.VISIBLE);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 700);
                     cardView22.setLayoutParams(lparams);
                     b = 1;
                     imageView2.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
                 }else{
                     contenedorUbicacionEntrega.setVisibility(View.GONE);
+                    btn_agg_ubi.setVisibility(View.GONE);
                     LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 250);
                     cardView22.setLayoutParams(lparams);
                     b = 0;
@@ -188,7 +192,7 @@ public class FragmentDetallePedido extends Fragment {
             public void onClick(View v) {
                 if (d == 0) {
                     contenedorDatosFacturacion.setVisibility(View.VISIBLE);
-                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 700);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 600);
                     cardView4.setLayoutParams(lparams);
                     d = 1;
                     imageView4.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
@@ -243,6 +247,8 @@ public class FragmentDetallePedido extends Fragment {
         return view;
     }
 
+/////////////////////////////7//////////////////////////////////////////////////////////////////////////////////////
+
     public void cargar_metodo(){
         MetodoEntrega metodoEntrega=new MetodoEntrega();
         MetodoEntrega metodoEntrega1=new MetodoEntrega();
@@ -268,6 +274,7 @@ public class FragmentDetallePedido extends Fragment {
         contenedorMetodoEntrega.setAdapter(listAdapterMedodo);
     }
 
+/////////////////////////////7//////////////////////////////////////////////////////////////////////////////////////
 
     public void cargarUbi( ){
 
@@ -325,6 +332,7 @@ check2.setVisibility(View.VISIBLE);
         txt_total_compra.setText(formatea.format(Carritos.getSubTotalDefinitivo()) + " ₲");
     }
 
+    /////////////////////////////7//////////////////////////////////////////////////////////////////////////////////////
     public void cargar_pedido_cabecera(){
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
@@ -370,6 +378,8 @@ check2.setVisibility(View.VISIBLE);
             }
         });
     }
+
+    /////////////////////////////7//////////////////////////////////////////////////////////////////////////////////////
     public void cargar_pedido_detalle() {
         for (int i = 0; i < Carritos.pedido.size(); i++) {
             String cod_usuario, nombre, total, descuento, delivery;
@@ -402,6 +412,8 @@ check2.setVisibility(View.VISIBLE);
         }
 
     }
+
+    /////////////////////////////7//////////////////////////////////////////////////////////////////////////////////////
     public boolean validacion(){
         boolean retorno = true;
     if (check_timbre.isChecked()){
@@ -424,7 +436,7 @@ check2.setVisibility(View.VISIBLE);
         }
         return retorno;
     }
-
+/////////////////////////////7//////////////////////////////////////////////////////////////////////////////////////
     public void cargarDatosFacturacion( ){
 
         elements_datosFac = new ArrayList<>();
