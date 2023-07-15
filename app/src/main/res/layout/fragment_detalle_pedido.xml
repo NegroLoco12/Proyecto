@@ -292,10 +292,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         app:cardCornerRadius="25dp"
                         app:cardElevation="1dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
                         app:cardUseCompatPadding="false">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -360,17 +360,19 @@
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/contenedorUbicacionEntrega"
-                                android:layout_width="350dp"
+                                android:layout_width="300dp"
                                 android:layout_height="120dp"
+
                                 android:orientation="horizontal"
                                 android:paddingLeft="20dp"
                                 android:paddingTop="10dp"
                                 android:paddingRight="30dp"
                                 android:visibility="gone"
-                                app:layout_constraintBottom_toBottomOf="parent"
+                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/textView10"
+                                app:layout_constraintVertical_bias="0.120000005"
                                 tools:listitem="@layout/item_entrega" />
 
                             <Button
@@ -378,14 +380,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="50dp"
                                 android:layout_gravity="center"
+                                android:layout_marginBottom="5dp"
                                 android:elevation="10dp"
                                 android:gravity="center"
                                 android:text="Agregar nueva Ubicación"
                                 android:textAllCaps="false"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="15sp"
+
                                 android:visibility="gone"
-                                android:layout_marginBottom="2dp"
                                 app:backgroundTint="@color/pinkColor"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -548,7 +551,7 @@ android:layout_marginTop="10dp"
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/contenedorDatosFacturacion"
                                 android:layout_width="350dp"
-                                android:layout_height="150dp"
+                                android:layout_height="120dp"
                                 android:orientation="horizontal"
                                 android:paddingLeft="20dp"
                                 android:paddingTop="10dp"
@@ -557,7 +560,7 @@ android:layout_marginTop="10dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                tools:listitem="@layout/item_entrega" />
+                                tools:listitem="@layout/item_datosfactura" />
 
                             <ImageView
                                 android:id="@+id/chec4_bien"
@@ -613,6 +616,30 @@ android:layout_marginTop="10dp"
                                 app:layout_constraintHorizontal_bias="0.831"
                                 app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <Button
+                            android:id="@+id/btn_add_datos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="5dp"
+                            android:elevation="10dp"
+                            android:gravity="center"
+                            android:text="Agregar nueva Ubicación"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="15sp"
+
+                            android:visibility="gone"
+                            app:backgroundTint="@color/pinkColor"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/contenedorDatosFacturacion"
+                            app:shapeAppearanceOverlay="@style/Button4" />
+
+
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -696,7 +723,7 @@ android:layout_marginTop="10dp"
                     android:elevation="15dp"
                     android:gravity="center"
                     android:layout_marginBottom="10dp"
-                    android:text="Guardar"
+                    android:text="Comprar"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="17sp"

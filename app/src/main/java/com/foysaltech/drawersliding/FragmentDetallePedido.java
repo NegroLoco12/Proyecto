@@ -8,6 +8,7 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,7 +48,8 @@ import www.sanju.motiontoast.MotionToastStyle;
 
 
 public class FragmentDetallePedido extends Fragment {
-    Button btn_enviarPedido,btn_agg_ubi;
+    int validacion1,validacion2=0;
+    private Button btn_enviarPedido,btn_agg_ubi,btn_add_datos;
     private String Instrucciones;
     private List<MetodoEntrega> elements_metodo;
     private TextView txt_sub_total_compra,txt_descuento_compra,txt_delivery_compra,txt_total_compra;
@@ -60,12 +62,13 @@ public class FragmentDetallePedido extends Fragment {
    private AdapterMetodoEntrega listAdapterMedodo;
     private AdapterDatosFacturacion listAdapterDatosFacturacion;
     private AdapterUbicacionEntrega listAdapterUbiEntrega;
-   private ImageView imageView1,imageView2,imageView3,imageView4,imageView5,chec3_bien,check3,check1,check2,chec2_bien,chec4_bien;
+   private ImageView imageView1,imageView2,imageView3,imageView4,imageView5,chec3_bien,check3,check1,check2,chec2_bien,chec4_bien,chec1_bien;
    private CardView cardView1,cardView22,cardView3,cardView4;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     Ubicaciones ubicaciones=new Ubicaciones();
     Contribuyentes contribuyentes=new Contribuyentes();
+
    int a=0;
     int b=0;
     int c=0;
@@ -111,6 +114,7 @@ public class FragmentDetallePedido extends Fragment {
         txt_sub_total_compra=view.findViewById(R.id.txt_sub_total_compra);
         btn_enviarPedido=view.findViewById(R.id.btn_enviarPedido);
         btn_agg_ubi=view.findViewById(R.id.btn_agg_ubi);
+        btn_add_datos=view.findViewById(R.id.btn_add_datos);
         check_llamar=view.findViewById(R.id.check_llamar);
         check_timbre=view.findViewById(R.id.check_timbre);
         chec3_bien=view.findViewById(R.id.chec3_bien);
@@ -119,7 +123,7 @@ public class FragmentDetallePedido extends Fragment {
         check1=view.findViewById(R.id.check1);
         chec2_bien=view.findViewById(R.id.chec2_bien);
         chec4_bien=view.findViewById(R.id.chec4_bien);
-
+        chec1_bien=view.findViewById(R.id.chec1_bien);
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
         mAuth.setLanguageCode("es");
@@ -154,7 +158,7 @@ public class FragmentDetallePedido extends Fragment {
                 if (b == 0) {
                     contenedorUbicacionEntrega.setVisibility(View.VISIBLE);
                     btn_agg_ubi.setVisibility(View.VISIBLE);
-                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 700);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 670);
                     cardView22.setLayoutParams(lparams);
                     b = 1;
                     imageView2.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
@@ -165,6 +169,7 @@ public class FragmentDetallePedido extends Fragment {
                     cardView22.setLayoutParams(lparams);
                     b = 0;
                     imageView2.setImageResource(R.drawable.flecha_hacia_abajo);
+
                 }
             }
         });
@@ -196,12 +201,14 @@ public class FragmentDetallePedido extends Fragment {
                     cardView4.setLayoutParams(lparams);
                     d = 1;
                     imageView4.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
+                    btn_add_datos.setVisibility(View.VISIBLE);
                 }else{
                     contenedorDatosFacturacion.setVisibility(View.GONE);
                     LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 250);
                     cardView4.setLayoutParams(lparams);
                     d = 0;
                     imageView4.setImageResource(R.drawable.flecha_hacia_abajo);
+                    btn_add_datos.setVisibility(View.GONE);
                 }
             }
         });
@@ -243,7 +250,21 @@ public class FragmentDetallePedido extends Fragment {
 
             }
         });
+        btn_agg_ubi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MapaFragment fragment = new MapaFragment();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.container, fragment, "fragment_meters");
+                ft.addToBackStack(null);  //opcional, si quieres agregarlo a la pila
+                ft.commit();
+                Bundle data = new Bundle();
+                data.putString("dato", "Nuevo");
 
+                fragment.setArguments(data);;
+
+            }
+        });
         return view;
     }
 
@@ -265,7 +286,9 @@ public class FragmentDetallePedido extends Fragment {
                 cardView1.setLayoutParams(lparams);
                 a = 0;
                 imageView1.setImageResource(R.drawable.flecha_hacia_abajo);
-
+                validacion1=1;
+                check1.setVisibility(View.VISIBLE);
+                chec1_bien.setVisibility(View.GONE);
             }
         });
         contenedorMetodoEntrega.setHasFixedSize(true);
@@ -287,8 +310,10 @@ public class FragmentDetallePedido extends Fragment {
                 cardView22.setLayoutParams(lparams);
                 b = 0;
                 imageView2.setImageResource(R.drawable.flecha_hacia_abajo);
-check2.setVisibility(View.VISIBLE);
+                check2.setVisibility(View.VISIBLE);
                 chec2_bien.setVisibility(View.GONE);
+                validacion2=1;
+                btn_agg_ubi.setVisibility(View.GONE);
             }
 
 
@@ -432,6 +457,29 @@ check2.setVisibility(View.VISIBLE);
 
             chec3_bien.setVisibility(View.VISIBLE);
             check3.setVisibility(View.GONE);
+            retorno = false;
+        }
+
+
+        if (validacion1==1){
+
+            check1.setVisibility(View.VISIBLE);
+            chec1_bien.setVisibility(View.GONE);
+        }else{
+
+            chec1_bien.setVisibility(View.VISIBLE);
+            check1.setVisibility(View.GONE);
+            retorno = false;
+        }
+
+        if (validacion2==1){
+
+            check2.setVisibility(View.VISIBLE);
+            chec2_bien.setVisibility(View.GONE);
+        }else{
+
+            chec2_bien.setVisibility(View.VISIBLE);
+            check2.setVisibility(View.GONE);
             retorno = false;
         }
         return retorno;
