@@ -245,8 +245,8 @@
 
                             <ImageView
                                 android:id="@+id/check1"
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
                                 android:layout_marginTop="30dp"
                                 android:src="@drawable/comprobado_adobe_express"
                                 android:visibility="gone"
@@ -337,8 +337,8 @@
 
                             <ImageView
                                 android:id="@+id/check2"
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
                                 android:layout_marginTop="30dp"
                                 android:layout_marginEnd="20dp"
                                 android:src="@drawable/comprobado_adobe_express"
@@ -451,8 +451,8 @@
 
                             <ImageView
                                 android:id="@+id/check3"
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
                                 android:layout_marginTop="30dp"
 
                                 android:src="@drawable/comprobado_adobe_express"
@@ -534,14 +534,13 @@
                         android:id="@+id/cardView4"
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
-android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
                         app:cardCornerRadius="25dp"
                         app:cardElevation="1dp"
                         app:cardUseCompatPadding="false">
-
 
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -550,7 +549,7 @@ android:layout_marginTop="10dp"
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/contenedorDatosFacturacion"
-                                android:layout_width="350dp"
+                                android:layout_width="300dp"
                                 android:layout_height="120dp"
                                 android:orientation="horizontal"
                                 android:paddingLeft="20dp"
@@ -560,6 +559,8 @@ android:layout_marginTop="10dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/textView62"
+                                app:layout_constraintVertical_bias="0.100000024"
                                 tools:listitem="@layout/item_datosfactura" />
 
                             <ImageView
@@ -608,36 +609,37 @@ android:layout_marginTop="10dp"
 
                             <ImageView
                                 android:id="@+id/check4"
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
                                 android:src="@drawable/comprobado_adobe_express"
                                 android:visibility="gone"
                                 app:layout_constraintEnd_toStartOf="@+id/imageView4"
                                 app:layout_constraintHorizontal_bias="0.831"
                                 app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/btn_add_datos"
+                                android:layout_width="wrap_content"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="5dp"
+                                android:elevation="10dp"
+                                android:gravity="center"
+                                android:text="Agregar nuevos Datos"
+                                android:textAllCaps="false"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="15sp"
+
+                                android:visibility="gone"
+                                app:backgroundTint="@color/pinkColor"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.509"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/contenedorDatosFacturacion"
+                                app:layout_constraintVertical_bias="0.055"
+                                app:shapeAppearanceOverlay="@style/Button4" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                        <Button
-                            android:id="@+id/btn_add_datos"
-                            android:layout_width="wrap_content"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="5dp"
-                            android:elevation="10dp"
-                            android:gravity="center"
-                            android:text="Agregar nueva Ubicación"
-                            android:textAllCaps="false"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="15sp"
-
-                            android:visibility="gone"
-                            app:backgroundTint="@color/pinkColor"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/contenedorDatosFacturacion"
-                            app:shapeAppearanceOverlay="@style/Button4" />
 
 
                     </androidx.cardview.widget.CardView>
@@ -687,21 +689,22 @@ android:layout_marginTop="10dp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-                            <ImageView
-                                android:id="@+id/chec5_bien"
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:layout_marginTop="32dp"
-                                android:src="@drawable/exclamacion"
-                                app:layout_constraintEnd_toStartOf="@+id/imageView5"
-                                app:layout_constraintHorizontal_bias="0.805"
-                                app:layout_constraintStart_toEndOf="@+id/textView65"
-                                app:layout_constraintTop_toTopOf="parent" />
+                        <ImageView
+                            android:id="@+id/chec5_bien"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_marginTop="32dp"
+                            android:src="@drawable/exclamacion"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView5"
+                            app:layout_constraintHorizontal_bias="0.805"
+                            app:layout_constraintStart_toEndOf="@+id/textView65"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                             <ImageView
                                 android:id="@+id/check5"
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
                                 android:src="@drawable/comprobado_adobe_express"
                                 android:visibility="gone"
                                 app:layout_constraintBottom_toBottomOf="parent"

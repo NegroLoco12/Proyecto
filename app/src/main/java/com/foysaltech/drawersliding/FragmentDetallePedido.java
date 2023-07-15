@@ -1,6 +1,7 @@
 
 package com.foysaltech.drawersliding;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -197,7 +199,7 @@ public class FragmentDetallePedido extends Fragment {
             public void onClick(View v) {
                 if (d == 0) {
                     contenedorDatosFacturacion.setVisibility(View.VISIBLE);
-                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 600);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 670);
                     cardView4.setLayoutParams(lparams);
                     d = 1;
                     imageView4.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
@@ -265,6 +267,58 @@ public class FragmentDetallePedido extends Fragment {
 
             }
         });
+        btn_add_datos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+
+                View view1=getLayoutInflater().inflate(R.layout.custom_dialog_contribuyente,null);
+                builder.setView(view1);
+                builder.setCancelable(true);
+                AlertDialog  alertDialog= builder.create();
+                alertDialog.show();
+                view1.findViewById(R.id.btn_guardar_contri).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String cod_usuario=mAuth.getCurrentUser().getUid();
+                        EditText txt_ruc=view1.findViewById(R.id.txt_ruc);
+                        EditText txt_razonsocial=view1.findViewById(R.id.txt_razonsocial);
+                        String nombre=txt_razonsocial.getText().toString();
+                        String ruc=txt_ruc.getText().toString();
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("razon_social", nombre);
+                        map.put("documento", ruc);
+                        map.put("cod_usuario", cod_usuario);
+                        String id = mAuth.getCurrentUser().getUid();
+                        mDatabase.child("Contribuyentes").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task2) {
+                                if (task2.isSuccessful()) {
+                                    MotionToast.Companion.createColorToast(getActivity(),//Toast Personalizado
+                                            "Registrado",
+                                            "Registrado sin problemas!",
+                                            MotionToastStyle.SUCCESS,
+                                            MotionToast.GRAVITY_BOTTOM,
+                                            MotionToast.LONG_DURATION,
+                                            ResourcesCompat.getFont(getContext(), www.sanju.motiontoast.R.font.helvetica_regular));
+                                    alertDialog.dismiss();
+                                }
+                            }
+                        });
+                    }
+                });
+
+                // alertDialog.setCanceledOnTouchOutside(false);
+                // bottomSheetDialog.dismiss();
+
+            }
+        });
+
+
+
+
         return view;
     }
 
@@ -355,6 +409,8 @@ public class FragmentDetallePedido extends Fragment {
     public void precio() {
         DecimalFormat formatea = new DecimalFormat("###,###.##");
         txt_total_compra.setText(formatea.format(Carritos.getSubTotalDefinitivo()) + " ₲");
+        txt_descuento_compra.setText(formatea.format(Carritos.getDescuentoDefinitivo()) + " ₲");
+        txt_sub_total_compra.setText(formatea.format(Carritos.getPrecioDefinitivo()) + " ₲");
     }
 
     /////////////////////////////7//////////////////////////////////////////////////////////////////////////////////////
@@ -491,6 +547,12 @@ public class FragmentDetallePedido extends Fragment {
         listAdapterDatosFacturacion = new AdapterDatosFacturacion(getContext(), elements_datosFac, new AdapterDatosFacturacion.OnItemClickListener() {
             @Override
             public void onItemClick() {
+                contenedorDatosFacturacion.setVisibility(View.VISIBLE);
+                LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 670);
+                cardView4.setLayoutParams(lparams);
+                d = 1;
+                imageView4.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
+                btn_add_datos.setVisibility(View.VISIBLE);
 
             }
         });
@@ -509,8 +571,8 @@ public class FragmentDetallePedido extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                    ubicaciones=dataSnapshot.getValue(Ubicaciones.class);
-                    ubicaciones.setKey(dataSnapshot.getKey());
+                    contribuyentes=dataSnapshot.getValue(Contribuyentes.class);
+                    contribuyentes.setKey(dataSnapshot.getKey());
                     elements_datosFac.add(contribuyentes);
 
                     //   Toast.makeText(getApplicationContext(),elementsUbi+"",Toast.LENGTH_LONG).show();
