@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardViewpago"
+    android:layout_width="300dp"
+    android:layout_height="130dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="2dp"
+    android:paddingRight="2dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="300dp"
+        android:layout_height="130dp"
+        android:background="#00F6FBF7"
+        android:paddingStart="14dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="10dp"
+
+        >
+
+
+        <RadioGroup
+            android:id="@+id/group_metodopago"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/radio_pos"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:text="POS"
+                android:visibility="visible" />
+
+            <RadioButton
+                android:id="@+id/radio_efectivo"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:text="Efectivo"
+                android:visibility="visible" />
+
+            <RadioButton
+                android:id="@+id/radio_online"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:text="Pago Online"
+                android:visibility="visible" />
+        </RadioGroup>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

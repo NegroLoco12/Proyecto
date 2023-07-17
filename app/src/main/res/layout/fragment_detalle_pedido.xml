@@ -47,7 +47,7 @@
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:id="@+id/txt_descuento_compra"
@@ -647,14 +647,31 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardView5"
                         android:layout_width="match_parent"
-                        android:layout_height="110dp"
+                        android:layout_height="310dp"
                         android:layout_gravity="center"
                         app:cardCornerRadius="25dp"
                         app:cardElevation="1dp"
                         app:cardUseCompatPadding="true">
-                    <androidx.constraintlayout.widget.ConstraintLayout
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/contenedorMetodoPago"
+                                android:layout_width="300dp"
+                                android:layout_height="120dp"
+                                android:orientation="horizontal"
+                                android:paddingLeft="20dp"
+                                android:paddingTop="10dp"
+                                android:paddingRight="30dp"
+                                android:visibility="visible"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/textView65"
+                                app:layout_constraintVertical_bias="0.100000024"
+                                tools:listitem="@layout/item_datosfactura" />
 
                             <ImageView
                                 android:id="@+id/imageView9"
@@ -662,10 +679,8 @@
                                 android:layout_height="40dp"
                                 android:layout_marginStart="40dp"
                                 android:src="@drawable/pago_con_tarjeta"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.435" />
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/textView65"
@@ -673,7 +688,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:text="Método de pago"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.377"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -685,21 +699,20 @@
                                 android:layout_height="25dp"
                                 android:layout_marginRight="20dp"
                                 android:src="@drawable/flecha_hacia_abajo"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageView
-                            android:id="@+id/chec5_bien"
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:layout_marginTop="32dp"
-                            android:src="@drawable/exclamacion"
-                            android:visibility="gone"
-                            app:layout_constraintEnd_toStartOf="@+id/imageView5"
-                            app:layout_constraintHorizontal_bias="0.805"
-                            app:layout_constraintStart_toEndOf="@+id/textView65"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            <ImageView
+                                android:id="@+id/chec5_bien"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_marginTop="32dp"
+                                android:src="@drawable/exclamacion"
+                                android:visibility="gone"
+                                app:layout_constraintEnd_toStartOf="@+id/imageView5"
+                                app:layout_constraintHorizontal_bias="0.805"
+                                app:layout_constraintStart_toEndOf="@+id/textView65"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <ImageView
                                 android:id="@+id/check5"

@@ -62,6 +62,7 @@ public class FragmentDetallePedido extends Fragment {
   private CheckBox check_timbre,check_llamar;
     private RecyclerView contenedorUbicacionEntrega,contenedorDatosFacturacion;
    private AdapterMetodoEntrega listAdapterMedodo;
+    private AdapterMetodoPago listAdapterMedodoPago;
     private AdapterDatosFacturacion listAdapterDatosFacturacion;
     private AdapterUbicacionEntrega listAdapterUbiEntrega;
    private ImageView imageView1,imageView2,imageView3,imageView4,imageView5,chec3_bien,check3,check1,check2,chec2_bien,chec4_bien,chec1_bien;
@@ -590,5 +591,18 @@ public class FragmentDetallePedido extends Fragment {
 
         });
     }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public void cargar_metodo_pago(){
+    listAdapterMedodoPago = new AdapterMetodoPago(getContext(), new AdapterMetodoPago.OnItemClickListener() {
+        @Override
+        public void onItemClick() {
+
+        }
+    })
+    contenedorMetodoEntrega.setHasFixedSize(true);
+    contenedorMetodoEntrega.setLayoutManager(new LinearLayoutManager(getContext()));
+    contenedorMetodoEntrega.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+    contenedorMetodoEntrega.setAdapter(listAdapterMedodo);
+}
 
 }
