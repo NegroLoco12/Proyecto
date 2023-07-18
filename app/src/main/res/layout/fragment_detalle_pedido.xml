@@ -661,7 +661,7 @@
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/contenedorMetodoPago"
                                 android:layout_width="300dp"
-                                android:layout_height="120dp"
+                                android:layout_height="122dp"
                                 android:orientation="horizontal"
                                 android:paddingLeft="20dp"
                                 android:paddingTop="10dp"

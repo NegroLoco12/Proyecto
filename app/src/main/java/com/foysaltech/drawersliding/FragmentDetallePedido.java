@@ -619,11 +619,21 @@ public class FragmentDetallePedido extends Fragment {
 public void cargar_metodo_pago(){
     listAdapterMedodoPago = new AdapterMetodoPago(getContext(), new AdapterMetodoPago.OnItemClickListener() {
         @Override
-        public void onItemClick() {
+        public void onItemClickPos() {
+
+        }
+
+        @Override
+        public void onItemClickEfectivo() {
+
+        }
+
+        @Override
+        public void onItemClickOline() {
 
         }
     });
-    contenedorMetodoPago.setHasFixedSize(true);
+            contenedorMetodoPago.setHasFixedSize(true);
     contenedorMetodoPago.setLayoutManager(new LinearLayoutManager(getContext()));
     contenedorMetodoPago.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     contenedorMetodoPago.setAdapter(listAdapterMedodoPago);
