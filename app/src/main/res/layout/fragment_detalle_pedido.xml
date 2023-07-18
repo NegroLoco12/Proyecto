@@ -47,7 +47,8 @@
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp">
 
                             <TextView
                                 android:id="@+id/txt_descuento_compra"
@@ -61,7 +62,7 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.359" />
+                                app:layout_constraintVertical_bias="0.322" />
 
                             <TextView
                                 android:id="@+id/textView12"
@@ -159,7 +160,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="36dp"
-                                android:layout_marginBottom="55dp"
+                                android:layout_marginBottom="40dp"
                                 android:text="0"
                                 android:textColor="@color/textColorPrimary2"
                                 android:textSize="16sp"
@@ -423,7 +424,7 @@
 
                                 android:src="@drawable/google_docs"
                                 app:layout_constraintEnd_toStartOf="@+id/textView15"
-                                app:layout_constraintHorizontal_bias="0.426"
+                                app:layout_constraintHorizontal_bias="0.44"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -435,7 +436,7 @@
 
                                 android:text="Instrucciones de entrega:"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.41"
+                                app:layout_constraintHorizontal_bias="0.38"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -579,7 +580,7 @@
                                 android:id="@+id/imageView444"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:layout_marginStart="36dp"
+                                android:layout_marginStart="24dp"
                                 android:layout_marginTop="20dp"
                                 android:src="@drawable/ruc"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -647,7 +648,7 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardView5"
                         android:layout_width="match_parent"
-                        android:layout_height="310dp"
+                        android:layout_height="110dp"
                         android:layout_gravity="center"
                         app:cardCornerRadius="25dp"
                         app:cardElevation="1dp"
@@ -665,7 +666,7 @@
                                 android:paddingLeft="20dp"
                                 android:paddingTop="10dp"
                                 android:paddingRight="30dp"
-                                android:visibility="visible"
+                                android:visibility="gone"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -677,7 +678,8 @@
                                 android:id="@+id/imageView9"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:layout_marginStart="40dp"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginTop="20dp"
                                 android:src="@drawable/pago_con_tarjeta"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -686,10 +688,10 @@
                                 android:id="@+id/textView65"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="30dp"
                                 android:text="Método de pago"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.377"
+                                app:layout_constraintHorizontal_bias="0.334"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -697,6 +699,7 @@
                                 android:id="@+id/imageView5"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
+                                android:layout_marginTop="30dp"
                                 android:layout_marginRight="20dp"
                                 android:src="@drawable/flecha_hacia_abajo"
                                 app:layout_constraintEnd_toEndOf="parent"

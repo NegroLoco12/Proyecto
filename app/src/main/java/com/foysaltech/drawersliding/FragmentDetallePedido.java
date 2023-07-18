@@ -57,7 +57,8 @@ public class FragmentDetallePedido extends Fragment {
     private TextView txt_sub_total_compra,txt_descuento_compra,txt_delivery_compra,txt_total_compra;
     private List<Ubicaciones> elements_ubicacion;
     private List<Contribuyentes> elements_datosFac;
-   private RecyclerView contenedorMetodoEntrega;
+   private RecyclerView contenedorMetodoEntrega,contenedorMetodoPago;
+
   private ConstraintLayout contenedorInstrucciones;
   private CheckBox check_timbre,check_llamar;
     private RecyclerView contenedorUbicacionEntrega,contenedorDatosFacturacion;
@@ -66,7 +67,7 @@ public class FragmentDetallePedido extends Fragment {
     private AdapterDatosFacturacion listAdapterDatosFacturacion;
     private AdapterUbicacionEntrega listAdapterUbiEntrega;
    private ImageView imageView1,imageView2,imageView3,imageView4,imageView5,chec3_bien,check3,check1,check2,chec2_bien,chec4_bien,chec1_bien;
-   private CardView cardView1,cardView22,cardView3,cardView4;
+   private CardView cardView1,cardView22,cardView3,cardView4,cardView5;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     Ubicaciones ubicaciones=new Ubicaciones();
@@ -102,6 +103,7 @@ public class FragmentDetallePedido extends Fragment {
         contenedorUbicacionEntrega=view.findViewById(R.id.contenedorUbicacionEntrega);
         contenedorDatosFacturacion=view.findViewById(R.id.contenedorDatosFacturacion);
         contenedorInstrucciones=view.findViewById(R.id.contenedorInstrucciones);
+        contenedorMetodoPago=view.findViewById(R.id.contenedorMetodoPago);
         imageView1=view.findViewById(R.id.imageView1);
         imageView2=view.findViewById(R.id.imageView2);
         imageView3=view.findViewById(R.id.imageView3);
@@ -111,6 +113,7 @@ public class FragmentDetallePedido extends Fragment {
         cardView22=view.findViewById(R.id.cardView22);
         cardView3=view.findViewById(R.id.cardView3);
         cardView4=view.findViewById(R.id.cardView4);
+        cardView5=view.findViewById(R.id.cardView5);
         txt_total_compra=view.findViewById(R.id.txt_total_compra);
         txt_delivery_compra=view.findViewById(R.id.txt_delivery_compra);
         txt_descuento_compra=view.findViewById(R.id.txt_descuento_compra);
@@ -136,6 +139,7 @@ public class FragmentDetallePedido extends Fragment {
         cargar_metodo();
         precio();
         cargarDatosFacturacion();
+        cargar_metodo_pago();
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,6 +216,26 @@ public class FragmentDetallePedido extends Fragment {
                     d = 0;
                     imageView4.setImageResource(R.drawable.flecha_hacia_abajo);
                     btn_add_datos.setVisibility(View.GONE);
+                }
+            }
+        });
+        imageView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (e == 0) {
+                    contenedorMetodoPago.setVisibility(View.VISIBLE);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 600);
+                    cardView5.setLayoutParams(lparams);
+                    e = 1;
+                    imageView5.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
+
+                }else{
+                    contenedorMetodoPago.setVisibility(View.GONE);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
+                    cardView5.setLayoutParams(lparams);
+                    e = 0;
+                    imageView5.setImageResource(R.drawable.flecha_hacia_abajo);
+
                 }
             }
         });
@@ -598,11 +622,11 @@ public void cargar_metodo_pago(){
         public void onItemClick() {
 
         }
-    })
-    contenedorMetodoEntrega.setHasFixedSize(true);
-    contenedorMetodoEntrega.setLayoutManager(new LinearLayoutManager(getContext()));
-    contenedorMetodoEntrega.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-    contenedorMetodoEntrega.setAdapter(listAdapterMedodo);
+    });
+    contenedorMetodoPago.setHasFixedSize(true);
+    contenedorMetodoPago.setLayoutManager(new LinearLayoutManager(getContext()));
+    contenedorMetodoPago.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+    contenedorMetodoPago.setAdapter(listAdapterMedodoPago);
 }
 
 }
