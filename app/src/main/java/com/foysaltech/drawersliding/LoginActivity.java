@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
           txt_olvidar_clave.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
-                  Intent intent=new Intent(LoginActivity.this,Login2Activity.class);
+                  Intent intent=new Intent(LoginActivity.this,RecuperarActivity.class);
                   startActivity(intent);
               }
           });
@@ -322,6 +322,7 @@ public class LoginActivity extends AppCompatActivity {
            },1000);
             }
         };
+
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
