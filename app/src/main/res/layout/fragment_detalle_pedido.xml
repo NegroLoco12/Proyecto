@@ -612,10 +612,10 @@
                                 android:id="@+id/check4"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
+                                android:layout_marginTop="30dp"
                                 android:src="@drawable/comprobado_adobe_express"
                                 android:visibility="gone"
                                 app:layout_constraintEnd_toStartOf="@+id/imageView4"
-                                app:layout_constraintHorizontal_bias="0.831"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <Button

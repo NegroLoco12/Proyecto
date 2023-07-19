@@ -66,7 +66,7 @@ public class FragmentDetallePedido extends Fragment {
     private AdapterMetodoPago listAdapterMedodoPago;
     private AdapterDatosFacturacion listAdapterDatosFacturacion;
     private AdapterUbicacionEntrega listAdapterUbiEntrega;
-   private ImageView imageView1,imageView2,imageView3,imageView4,imageView5,chec3_bien,check3,check1,check2,chec2_bien,chec4_bien,chec1_bien;
+   private ImageView imageView1,imageView2,imageView3,imageView4,imageView5,chec3_bien,check3,check1,check4,check2,chec2_bien,chec4_bien,chec1_bien,chec5_bien,check5;
    private CardView cardView1,cardView22,cardView3,cardView4,cardView5;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
@@ -125,10 +125,14 @@ public class FragmentDetallePedido extends Fragment {
         check_timbre=view.findViewById(R.id.check_timbre);
         chec3_bien=view.findViewById(R.id.chec3_bien);
         check3=view.findViewById(R.id.check3);
+        check5=view.findViewById(R.id.check5);
         check2=view.findViewById(R.id.check2);
+        check4=view.findViewById(R.id.check4);
         check1=view.findViewById(R.id.check1);
         chec2_bien=view.findViewById(R.id.chec2_bien);
         chec4_bien=view.findViewById(R.id.chec4_bien);
+
+        chec5_bien=view.findViewById(R.id.chec5_bien);
         chec1_bien=view.findViewById(R.id.chec1_bien);
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
@@ -224,7 +228,7 @@ public class FragmentDetallePedido extends Fragment {
             public void onClick(View view) {
                 if (e == 0) {
                     contenedorMetodoPago.setVisibility(View.VISIBLE);
-                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 600);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 610);
                     cardView5.setLayoutParams(lparams);
                     e = 1;
                     imageView5.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
@@ -572,12 +576,14 @@ public class FragmentDetallePedido extends Fragment {
         listAdapterDatosFacturacion = new AdapterDatosFacturacion(getContext(), elements_datosFac, new AdapterDatosFacturacion.OnItemClickListener() {
             @Override
             public void onItemClick() {
-                contenedorDatosFacturacion.setVisibility(View.VISIBLE);
-                LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 670);
+                contenedorDatosFacturacion.setVisibility(View.GONE);
+                LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 250);
                 cardView4.setLayoutParams(lparams);
-                d = 1;
+                d = 0;
                 imageView4.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
-                btn_add_datos.setVisibility(View.VISIBLE);
+                btn_add_datos.setVisibility(View.GONE);
+                check4.setVisibility(View.VISIBLE);
+                chec4_bien.setVisibility(View.GONE);
 
             }
         });
@@ -620,20 +626,42 @@ public void cargar_metodo_pago(){
     listAdapterMedodoPago = new AdapterMetodoPago(getContext(), new AdapterMetodoPago.OnItemClickListener() {
         @Override
         public void onItemClickPos() {
+            contenedorMetodoPago.setVisibility(View.GONE);
+            LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
+            cardView5.setLayoutParams(lparams);
+            d = 0;
+            imageView5.setImageResource(R.drawable.flecha_hacia_abajo);
+            check5.setVisibility(View.VISIBLE);
+            chec5_bien.setVisibility(View.GONE);
+
 
         }
 
         @Override
         public void onItemClickEfectivo() {
+            contenedorMetodoPago.setVisibility(View.GONE);
+            LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
+            cardView5.setLayoutParams(lparams);
+            d = 0;
+            imageView5.setImageResource(R.drawable.flecha_hacia_abajo);
+            check5.setVisibility(View.VISIBLE);
+            chec5_bien.setVisibility(View.GONE);
 
         }
 
         @Override
         public void onItemClickOline() {
+            contenedorMetodoPago.setVisibility(View.GONE);
+            LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
+            cardView5.setLayoutParams(lparams);
+            d = 0;
+            imageView5.setImageResource(R.drawable.flecha_hacia_abajo);
+            check5.setVisibility(View.VISIBLE);
+            chec5_bien.setVisibility(View.GONE);
 
         }
     });
-            contenedorMetodoPago.setHasFixedSize(true);
+    contenedorMetodoPago.setHasFixedSize(true);
     contenedorMetodoPago.setLayoutManager(new LinearLayoutManager(getContext()));
     contenedorMetodoPago.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     contenedorMetodoPago.setAdapter(listAdapterMedodoPago);
