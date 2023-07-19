@@ -6,6 +6,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,7 +28,7 @@ public class RecuperarActivity extends AppCompatActivity {
         view_correito=findViewById(R.id.recuperar_mail);
 
     }
-    public void recuperar(){
+    public void recuperar(View view){
         String mail=txt_correo.getText().toString().trim();
         if(mail.isEmpty()||  !Patterns.EMAIL_ADDRESS.matcher(mail).matches()){
             view_correito.setError("Correo Invalido");

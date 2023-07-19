@@ -229,7 +229,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
             @Override
             public void onItemClick(Productos item) {
 
-                //pasar(item);
+                pasarP(item);
             }
         });
         contenedorTodo.setHasFixedSize(true);
@@ -344,4 +344,17 @@ public void pasar_promo(Productos item){
     manager.beginTransaction().replace(R.id.container, new FragmentDescripcion()).addToBackStack(null).commit();
     getParentFragmentManager().setFragmentResult("keypromo",bundle);
 }
+    public void pasarP(Productos item){
+
+        // Toast.makeText(getContext(), categorias.getKey(0)+ " ", Toast.LENGTH_LONG).show();
+        Bundle bundle=new Bundle();
+        bundle.putString("cod_producto",item.getKey());
+        bundle.putString("nombre_producto",item.getNombre());
+        bundle.putString("descripcion_producto",item.getDescripcion());
+        bundle.putString("precio_producto",item.getPrecio());
+        bundle.putString("imagen_producto",item.getImagen());
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.container, new FragmentDescripcion()).addToBackStack(null).commit();
+        getParentFragmentManager().setFragmentResult("keypro",bundle);
+    }
 }

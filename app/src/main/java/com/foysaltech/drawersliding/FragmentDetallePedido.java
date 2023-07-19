@@ -61,13 +61,13 @@ public class FragmentDetallePedido extends Fragment {
 
   private ConstraintLayout contenedorInstrucciones;
   private CheckBox check_timbre,check_llamar;
-    private RecyclerView contenedorUbicacionEntrega,contenedorDatosFacturacion;
+    private RecyclerView contenedorUbicacionEntrega,contenedorDatosFacturacion,contenedorMetodoPagoOnline;
    private AdapterMetodoEntrega listAdapterMedodo;
     private AdapterMetodoPago listAdapterMedodoPago;
     private AdapterDatosFacturacion listAdapterDatosFacturacion;
     private AdapterUbicacionEntrega listAdapterUbiEntrega;
-   private ImageView imageView1,imageView2,imageView3,imageView4,imageView5,chec3_bien,check3,check1,check4,check2,chec2_bien,chec4_bien,chec1_bien,chec5_bien,check5;
-   private CardView cardView1,cardView22,cardView3,cardView4,cardView5;
+   private ImageView imageView1,imageView2,imageView3,imageView4,imageView5,imageView6,chec3_bien,check3,check1,check4,check2,chec2_bien,chec4_bien,chec1_bien,chec5_bien,check5,chec6_bien,check6;
+   private CardView cardView1,cardView22,cardView3,cardView4,cardView5,cardView6;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     Ubicaciones ubicaciones=new Ubicaciones();
@@ -78,6 +78,7 @@ public class FragmentDetallePedido extends Fragment {
     int c=0;
     int d=0;
     int e=0;
+    int f=0;
     public FragmentDetallePedido() {
 
     }
@@ -103,17 +104,20 @@ public class FragmentDetallePedido extends Fragment {
         contenedorUbicacionEntrega=view.findViewById(R.id.contenedorUbicacionEntrega);
         contenedorDatosFacturacion=view.findViewById(R.id.contenedorDatosFacturacion);
         contenedorInstrucciones=view.findViewById(R.id.contenedorInstrucciones);
+        contenedorMetodoPagoOnline=view.findViewById(R.id.contenedorMetodoPagoOnline);
         contenedorMetodoPago=view.findViewById(R.id.contenedorMetodoPago);
         imageView1=view.findViewById(R.id.imageView1);
         imageView2=view.findViewById(R.id.imageView2);
         imageView3=view.findViewById(R.id.imageView3);
         imageView4=view.findViewById(R.id.imageView4);
         imageView5=view.findViewById(R.id.imageView5);
+        imageView6=view.findViewById(R.id.imageView6);
         cardView1=view.findViewById(R.id.cardView1);
         cardView22=view.findViewById(R.id.cardView22);
         cardView3=view.findViewById(R.id.cardView3);
         cardView4=view.findViewById(R.id.cardView4);
         cardView5=view.findViewById(R.id.cardView5);
+        cardView6=view.findViewById(R.id.cardView6);
         txt_total_compra=view.findViewById(R.id.txt_total_compra);
         txt_delivery_compra=view.findViewById(R.id.txt_delivery_compra);
         txt_descuento_compra=view.findViewById(R.id.txt_descuento_compra);
@@ -131,7 +135,8 @@ public class FragmentDetallePedido extends Fragment {
         check1=view.findViewById(R.id.check1);
         chec2_bien=view.findViewById(R.id.chec2_bien);
         chec4_bien=view.findViewById(R.id.chec4_bien);
-
+        chec6_bien=view.findViewById(R.id.chec6_bien);
+        check6=view.findViewById(R.id.check6);
         chec5_bien=view.findViewById(R.id.chec5_bien);
         chec1_bien=view.findViewById(R.id.chec1_bien);
         mAuth=FirebaseAuth.getInstance();
@@ -243,7 +248,26 @@ public class FragmentDetallePedido extends Fragment {
                 }
             }
         });
+        imageView6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (f == 0) {
+                    contenedorMetodoPagoOnline.setVisibility(View.VISIBLE);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 610);
+                    cardView6.setLayoutParams(lparams);
+                    f = 1;
+                    imageView6.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
 
+                }else{
+                    contenedorMetodoPagoOnline.setVisibility(View.GONE);
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
+                    cardView6.setLayoutParams(lparams);
+                    f = 0;
+                    imageView6.setImageResource(R.drawable.flecha_hacia_abajo);
+
+                }
+            }
+        });
         btn_enviarPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -471,7 +495,9 @@ public class FragmentDetallePedido extends Fragment {
         map.put("total", total);
         map.put("descuento", descuento);
         map.put("delivery", delivery);
-
+        map.put("estado", delivery);
+        map.put("delivery", delivery);
+        map.put("delivery", delivery);
         mDatabase.child("Pedidos").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

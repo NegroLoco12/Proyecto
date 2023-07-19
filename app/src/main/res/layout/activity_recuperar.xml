@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecuperarActivity">
+    tools:context=".RecuperarActivity"
+    android:background="@drawable/fondo_login">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
@@ -88,7 +89,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
             <Button
                 android:id="@+id/singIn2"
                 android:layout_width="match_parent"
@@ -100,7 +100,7 @@
                 android:elevation="15dp"
                 android:gravity="center"
 
-                android:onClick="ingresar"
+                android:onClick="recuperar"
                 android:text="Recuperar"
                 android:textAllCaps="false"
                 android:textColor="@color/textColor"
