@@ -21,7 +21,7 @@ public class AdapterDatosFacturacion extends RecyclerView.Adapter<AdapterDatosFa
     private Context context;
     final AdapterDatosFacturacion.OnItemClickListener listene;
     public interface OnItemClickListener{
-        void onItemClick();
+        void onItemClick(Contribuyentes item);
     }
     public AdapterDatosFacturacion(Context context, List<Contribuyentes> mData, AdapterDatosFacturacion.OnItemClickListener listener ) {
         this.context = context;
@@ -72,7 +72,7 @@ public class AdapterDatosFacturacion extends RecyclerView.Adapter<AdapterDatosFa
                 rdbtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        listene.onItemClick();
+                        listene.onItemClick(item);
                     }
                 });
                 group_entrega.addView(rdbtn);

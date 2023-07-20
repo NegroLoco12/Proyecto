@@ -50,7 +50,7 @@ import www.sanju.motiontoast.MotionToastStyle;
 
 
 public class FragmentDetallePedido extends Fragment {
-    int validacion1,validacion2=0;
+    int validacion1,validacion2,validacion3,validacion4=0;
     private Button btn_enviarPedido,btn_agg_ubi,btn_add_datos;
     private String metodo_entrega, direccion_entrega,instrucciones_entrega,datos_facturacion,metodo_pago,metodo_pago_online;
     private List<MetodoEntrega> elements_metodo;
@@ -58,6 +58,7 @@ public class FragmentDetallePedido extends Fragment {
     private List<Ubicaciones> elements_ubicacion;
     private List<Contribuyentes> elements_datosFac;
    private RecyclerView contenedorMetodoEntrega,contenedorMetodoPago;
+
 
   private ConstraintLayout contenedorInstrucciones;
   private CheckBox check_timbre,check_llamar;
@@ -271,10 +272,11 @@ public class FragmentDetallePedido extends Fragment {
         btn_enviarPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validacion();
-                //cargar_pedido_cabecera();
-                //cargar_pedido_detalle();
-            }
+             if(validacion()){
+
+                cargar_pedido_cabecera();
+                cargar_pedido_detalle();
+            }}
         });
         check_timbre.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -282,6 +284,7 @@ public class FragmentDetallePedido extends Fragment {
                 if(check_timbre.isChecked()){
                     chec3_bien.setVisibility(View.GONE);
                     check3.setVisibility(View.VISIBLE);
+
 
                 }else{
                     chec3_bien.setVisibility(View.VISIBLE);
@@ -422,6 +425,7 @@ public class FragmentDetallePedido extends Fragment {
                 chec2_bien.setVisibility(View.GONE);
                 validacion2=1;
                 btn_agg_ubi.setVisibility(View.GONE);
+                direccion_entrega=item.getKey();
             }
 
 
@@ -484,7 +488,12 @@ public class FragmentDetallePedido extends Fragment {
         total=txt_total_compra.getText().toString();
         descuento=txt_descuento_compra.getText().toString();
         delivery=txt_delivery_compra.getText().toString();
-
+        if (check_timbre.isChecked()){
+        instrucciones_entrega="Tocar el Timbre";
+        }
+        if (check_llamar.isChecked()){
+            instrucciones_entrega=instrucciones_entrega+"LLamar allegar ";
+        }
         cod_usuario=mAuth.getCurrentUser().getUid();
 
         Map<String, Object> map = new HashMap<>();
@@ -495,13 +504,13 @@ public class FragmentDetallePedido extends Fragment {
         map.put("total", total);
         map.put("descuento", descuento);
         map.put("delivery", delivery);
-        map.put("estado", delivery);
-        map.put("metodo_entrega", delivery);
-        map.put("direccion_entrega", delivery);
-        map.put("instrucciones_entrega", delivery);
-        map.put("datos_facturacion", delivery);
-        map.put("metodo_pago", delivery);
-        map.put("metodo_pago_online", delivery);
+        map.put("estado", true);
+        map.put("metodo_entrega", metodo_entrega);
+        map.put("direccion_entrega", direccion_entrega);
+        map.put("instrucciones_entrega", instrucciones_entrega);
+        map.put("datos_facturacion", datos_facturacion);
+        map.put("metodo_pago", metodo_pago);
+        map.put("metodo_pago_online", metodo_pago_online);
         mDatabase.child("Pedidos").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -549,24 +558,16 @@ public class FragmentDetallePedido extends Fragment {
     /////////////////////////////7//////////////////////////////////////////////////////////////////////////////////////
     public boolean validacion(){
         boolean retorno = true;
-    if (check_timbre.isChecked()){
+    if (check_timbre.isChecked() || check_llamar.isChecked()){
         check3.setVisibility(View.VISIBLE);
         chec3_bien.setVisibility(View.GONE);
+
     }else{
         chec3_bien.setVisibility(View.VISIBLE);
         check3.setVisibility(View.GONE);
          retorno = false;
     }
-        if (check_llamar.isChecked()){
 
-            check3.setVisibility(View.VISIBLE);
-            chec3_bien.setVisibility(View.GONE);
-        }else{
-
-            chec3_bien.setVisibility(View.VISIBLE);
-            check3.setVisibility(View.GONE);
-            retorno = false;
-        }
 
 
         if (validacion1==1){
@@ -590,6 +591,26 @@ public class FragmentDetallePedido extends Fragment {
             check2.setVisibility(View.GONE);
             retorno = false;
         }
+        if (validacion3==1){
+
+            check4.setVisibility(View.VISIBLE);
+            chec4_bien.setVisibility(View.GONE);
+        }else{
+
+            chec4_bien.setVisibility(View.VISIBLE);
+            check4.setVisibility(View.GONE);
+            retorno = false;
+        }
+        if (validacion4==1){
+
+            check5.setVisibility(View.VISIBLE);
+            chec5_bien.setVisibility(View.GONE);
+        }else{
+
+            chec5_bien.setVisibility(View.VISIBLE);
+            check5.setVisibility(View.GONE);
+            retorno = false;
+        }
         return retorno;
     }
 /////////////////////////////7//////////////////////////////////////////////////////////////////////////////////////
@@ -598,7 +619,7 @@ public class FragmentDetallePedido extends Fragment {
         elements_datosFac = new ArrayList<>();
         listAdapterDatosFacturacion = new AdapterDatosFacturacion(getContext(), elements_datosFac, new AdapterDatosFacturacion.OnItemClickListener() {
             @Override
-            public void onItemClick() {
+            public void onItemClick(Contribuyentes item) {
                 contenedorDatosFacturacion.setVisibility(View.GONE);
                 LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 250);
                 cardView4.setLayoutParams(lparams);
@@ -607,7 +628,8 @@ public class FragmentDetallePedido extends Fragment {
                 btn_add_datos.setVisibility(View.GONE);
                 check4.setVisibility(View.VISIBLE);
                 chec4_bien.setVisibility(View.GONE);
-
+                datos_facturacion=item.getKey();
+                validacion3=1;
             }
         });
         contenedorDatosFacturacion.setHasFixedSize(true);
@@ -658,6 +680,7 @@ public void cargar_metodo_pago(){
             chec5_bien.setVisibility(View.GONE);
 
             cardView6.setVisibility(View.GONE);
+            metodo_pago="POS";
         }
 
         @Override
@@ -670,6 +693,7 @@ public void cargar_metodo_pago(){
             check5.setVisibility(View.VISIBLE);
             chec5_bien.setVisibility(View.GONE);
             cardView6.setVisibility(View.GONE);
+            metodo_pago="EFECTIVO";
         }
 
         @Override
@@ -682,6 +706,7 @@ public void cargar_metodo_pago(){
             check5.setVisibility(View.VISIBLE);
             chec5_bien.setVisibility(View.GONE);
             cardView6.setVisibility(View.VISIBLE);
+            metodo_pago="ONLINE";
 
         }
     });
