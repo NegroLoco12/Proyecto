@@ -21,7 +21,7 @@ public class AdapterMetodoEntrega extends RecyclerView.Adapter<AdapterMetodoEntr
     private Context context;
     final AdapterMetodoEntrega.OnItemClickListener listene;
     public interface OnItemClickListener{
-        void onItemClick();
+        void onItemClick(MetodoEntrega item);
     }
     public AdapterMetodoEntrega(Context context, List<MetodoEntrega> mData, AdapterMetodoEntrega.OnItemClickListener listener ) {
         this.context = context;
@@ -79,7 +79,7 @@ public class AdapterMetodoEntrega extends RecyclerView.Adapter<AdapterMetodoEntr
                 rdbtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        listene.onItemClick();
+                        listene.onItemClick(item );
                     }
                 });
                 group_entrega.addView(rdbtn);

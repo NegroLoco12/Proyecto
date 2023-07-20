@@ -730,13 +730,12 @@
                     </androidx.cardview.widget.CardView>
 
 
-
-
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardView6"
                         android:layout_width="match_parent"
                         android:layout_height="110dp"
                         android:layout_gravity="center"
+                        android:visibility="gone"
                         app:cardCornerRadius="25dp"
                         app:cardElevation="1dp"
                         app:cardUseCompatPadding="true">

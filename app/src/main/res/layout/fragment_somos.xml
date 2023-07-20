@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentSomos">
+    tools:context=".FragmentSomos"
+    android:background="@drawable/fondo_login">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,10 +15,10 @@
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
             app:srcCompat="@drawable/prodiser"/>
 
         <TextView
@@ -26,9 +27,10 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
+
             android:layout_marginTop="50dp"
-            android:text="Somos una empresa dedicada a la fabricación y comercialización de productos de limpieza e higiene, brindamos al cliente satisfacción plena, ofreciendo productos de calidad, con un servicio eficiente y eficaz en el momento oportuno." />
+            android:text="        Somos una empresa dedicada a la fabricación y comercialización de productos de limpieza e higiene, brindamos al cliente satisfacción plena, ofreciendo productos de calidad, con un servicio eficiente y eficaz en el momento oportuno." />
 
         <TextView
             android:id="@+id/textView5"
@@ -36,15 +38,23 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:layout_marginTop="40dp"
-            android:text="Ser una empresa líder y reconocida por su alto estándar de calidad en el rubro dentro del mercado nacional."/>
+            android:text="        Ser una empresa líder y reconocida por su alto estándar de calidad en el rubro dentro del mercado nacional."/>
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="Fabricamos y distribuimos" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:gravity="center"
-            android:layout_marginTop="40dp"
             android:orientation="horizontal">
 
             <ImageView

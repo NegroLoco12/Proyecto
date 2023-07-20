@@ -52,7 +52,7 @@ import www.sanju.motiontoast.MotionToastStyle;
 public class FragmentDetallePedido extends Fragment {
     int validacion1,validacion2=0;
     private Button btn_enviarPedido,btn_agg_ubi,btn_add_datos;
-    private String Instrucciones;
+    private String metodo_entrega, direccion_entrega,instrucciones_entrega,datos_facturacion,metodo_pago,metodo_pago_online;
     private List<MetodoEntrega> elements_metodo;
     private TextView txt_sub_total_compra,txt_descuento_compra,txt_delivery_compra,txt_total_compra;
     private List<Ubicaciones> elements_ubicacion;
@@ -387,7 +387,7 @@ public class FragmentDetallePedido extends Fragment {
         elements_metodo.add(1,metodoEntrega1);
         listAdapterMedodo = new AdapterMetodoEntrega(getContext(), elements_metodo, new AdapterMetodoEntrega.OnItemClickListener()  {
             @Override
-            public void onItemClick() {
+            public void onItemClick(MetodoEntrega item) {
                 contenedorMetodoEntrega.setVisibility(View.GONE);
                 LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
                 cardView1.setLayoutParams(lparams);
@@ -396,6 +396,7 @@ public class FragmentDetallePedido extends Fragment {
                 validacion1=1;
                 check1.setVisibility(View.VISIBLE);
                 chec1_bien.setVisibility(View.GONE);
+                metodo_entrega=item.getNombre();
             }
         });
         contenedorMetodoEntrega.setHasFixedSize(true);
@@ -478,8 +479,8 @@ public class FragmentDetallePedido extends Fragment {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
         String fecha = df.format(date);
-        String cod_usuario,nombre,total, descuento,delivery;
-        nombre="Oscar";
+        String cod_usuario,total, descuento,delivery;
+
         total=txt_total_compra.getText().toString();
         descuento=txt_descuento_compra.getText().toString();
         delivery=txt_delivery_compra.getText().toString();
@@ -489,15 +490,18 @@ public class FragmentDetallePedido extends Fragment {
         Map<String, Object> map = new HashMap<>();
 
         map.put("cod_usuario", cod_usuario);
-        map.put("nombre", nombre);
         map.put("hora", hora);
         map.put("fecha", fecha);
         map.put("total", total);
         map.put("descuento", descuento);
         map.put("delivery", delivery);
         map.put("estado", delivery);
-        map.put("delivery", delivery);
-        map.put("delivery", delivery);
+        map.put("metodo_entrega", delivery);
+        map.put("direccion_entrega", delivery);
+        map.put("instrucciones_entrega", delivery);
+        map.put("datos_facturacion", delivery);
+        map.put("metodo_pago", delivery);
+        map.put("metodo_pago_online", delivery);
         mDatabase.child("Pedidos").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -534,13 +538,6 @@ public class FragmentDetallePedido extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                   //     MotionToast.Companion.createColorToast(getActivity(),
-                     //           "Registrado",
-                       //         "Registrado sin problemas!",
-                         //       MotionToastStyle.SUCCESS,
-                           //     MotionToast.GRAVITY_BOTTOM,
-                             //   MotionToast.LONG_DURATION,
-                               // ResourcesCompat.getFont(getContext(), www.sanju.motiontoast.R.font.helvetica_regular));
 
                     }
                 }
@@ -660,7 +657,7 @@ public void cargar_metodo_pago(){
             check5.setVisibility(View.VISIBLE);
             chec5_bien.setVisibility(View.GONE);
 
-
+            cardView6.setVisibility(View.GONE);
         }
 
         @Override
@@ -672,7 +669,7 @@ public void cargar_metodo_pago(){
             imageView5.setImageResource(R.drawable.flecha_hacia_abajo);
             check5.setVisibility(View.VISIBLE);
             chec5_bien.setVisibility(View.GONE);
-
+            cardView6.setVisibility(View.GONE);
         }
 
         @Override
@@ -684,6 +681,7 @@ public void cargar_metodo_pago(){
             imageView5.setImageResource(R.drawable.flecha_hacia_abajo);
             check5.setVisibility(View.VISIBLE);
             chec5_bien.setVisibility(View.GONE);
+            cardView6.setVisibility(View.VISIBLE);
 
         }
     });
