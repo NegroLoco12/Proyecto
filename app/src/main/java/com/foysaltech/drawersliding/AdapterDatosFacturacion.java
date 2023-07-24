@@ -47,7 +47,7 @@ public class AdapterDatosFacturacion extends RecyclerView.Adapter<AdapterDatosFa
 
     @Override
     public int getItemCount() {
-        return 1;
+        return mData.size();
     }
 
 

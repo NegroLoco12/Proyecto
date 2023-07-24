@@ -557,6 +557,7 @@
                                 android:paddingTop="10dp"
                                 android:paddingRight="30dp"
                                 android:visibility="gone"
+                                android:background="#808080"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"

@@ -651,7 +651,7 @@ public class FragmentDetallePedido extends Fragment {
                     contribuyentes.setKey(dataSnapshot.getKey());
                     elements_datosFac.add(contribuyentes);
 
-                    //   Toast.makeText(getApplicationContext(),elementsUbi+"",Toast.LENGTH_LONG).show();
+                      Toast.makeText(getActivity().getApplicationContext(), elements_datosFac+"",Toast.LENGTH_LONG).show();
 
 
                 }

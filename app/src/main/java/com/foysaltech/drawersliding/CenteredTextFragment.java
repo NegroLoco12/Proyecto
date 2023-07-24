@@ -94,7 +94,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
         Bundle args = getArguments();
         final String text = args != null ? args.getString(EXTRA_TEXT) : "";
         TextView textView = view.findViewById(R.id.cabecera);
-        cabecera2=view.findViewById(R.id.cabecera2);
+   ///     cabecera2=view.findViewById(R.id.cabecera2);
         txtBuscar=view.findViewById(R.id.MenuSearch);
         if (text.equals("Usuario")){
                   FirebaseAuth.getInstance().signOut();
@@ -102,14 +102,9 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
                  startActivity(intent);
 
 }
-        textView.setText(text);
-
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+      ///  textView.setText(text);
 
 
-            }
-        });
         txtBuscar.setOnQueryTextListener(this);
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
