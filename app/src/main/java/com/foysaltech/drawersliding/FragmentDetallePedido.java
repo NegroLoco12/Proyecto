@@ -44,6 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.UUID;
 
 import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
@@ -58,7 +59,7 @@ public class FragmentDetallePedido extends Fragment {
     private List<Ubicaciones> elements_ubicacion;
     private List<Contribuyentes> elements_datosFac;
    private RecyclerView contenedorMetodoEntrega,contenedorMetodoPago;
-
+    private String clave;
 
   private ConstraintLayout contenedorInstrucciones;
   private CheckBox check_timbre,check_llamar;
@@ -348,7 +349,7 @@ public class FragmentDetallePedido extends Fragment {
                         map.put("documento", ruc);
                         map.put("cod_usuario", cod_usuario);
                         String id = mAuth.getCurrentUser().getUid();
-                        mDatabase.child("Contribuyentes").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        mDatabase.child("Contribuyentes").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task2) {
                                 if (task2.isSuccessful()) {
@@ -360,6 +361,9 @@ public class FragmentDetallePedido extends Fragment {
                                             MotionToast.LONG_DURATION,
                                             ResourcesCompat.getFont(getContext(), www.sanju.motiontoast.R.font.helvetica_regular));
                                     alertDialog.dismiss();
+                                    //elements_datosFac.clear();
+                                    //cargarDatosFacturacion();
+
                                 }
                             }
                         });
@@ -464,6 +468,7 @@ public class FragmentDetallePedido extends Fragment {
 
         });
     }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void precio() {
         DecimalFormat formatea = new DecimalFormat("###,###.##");
         txt_total_compra.setText(formatea.format(Carritos.getSubTotalDefinitivo()) + " ₲");
@@ -473,7 +478,7 @@ public class FragmentDetallePedido extends Fragment {
 
     /////////////////////////////7//////////////////////////////////////////////////////////////////////////////////////
     public void cargar_pedido_cabecera(){
-
+        clave= UUID.randomUUID().toString();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
         String hora = simpleDateFormat.format(new Date());
         Calendar cal = new GregorianCalendar();
@@ -497,7 +502,7 @@ public class FragmentDetallePedido extends Fragment {
         cod_usuario=mAuth.getCurrentUser().getUid();
 
         Map<String, Object> map = new HashMap<>();
-
+        map.put("clave_pk", clave);
         map.put("cod_usuario", cod_usuario);
         map.put("hora", hora);
         map.put("fecha", fecha);
@@ -510,7 +515,7 @@ public class FragmentDetallePedido extends Fragment {
         map.put("instrucciones_entrega", instrucciones_entrega);
         map.put("datos_facturacion", datos_facturacion);
         map.put("metodo_pago", metodo_pago);
-        map.put("metodo_pago_online", metodo_pago_online);
+       // map.put("metodo_pago_online", metodo_pago_online);
         mDatabase.child("Pedidos").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -538,11 +543,13 @@ public class FragmentDetallePedido extends Fragment {
 
             Map<String, Object> map = new HashMap<>();
 
-
+            map.put("clave_fk", clave);
             map.put("cod_producto", Carritos.pedido.get(i).getCodigo());
             map.put("nombre_producto", nombre);
             map.put("cantidad_producto", Carritos.pedido.get(i).getCantidad());
-            map.put("subTotal_producto", nombre);
+
+            map.put("descuento_producto", Carritos.pedido.get(i).getPrecio_descuento());
+            map.put("subTotal_producto",  Carritos.pedido.get(i).getPrecio_inicial());
             mDatabase.child("Pedidos_detalles").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -621,10 +628,10 @@ public class FragmentDetallePedido extends Fragment {
             @Override
             public void onItemClick(Contribuyentes item) {
                 contenedorDatosFacturacion.setVisibility(View.GONE);
-                LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 250);
+                LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 240);
                 cardView4.setLayoutParams(lparams);
                 d = 0;
-                imageView4.setImageResource(R.drawable.punta_de_flecha_hacia_arriba);
+                imageView4.setImageResource(R.drawable.flecha_hacia_abajo);
                 btn_add_datos.setVisibility(View.GONE);
                 check4.setVisibility(View.VISIBLE);
                 chec4_bien.setVisibility(View.GONE);
@@ -645,17 +652,20 @@ public class FragmentDetallePedido extends Fragment {
             @Override
 
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                elements_datosFac.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+       //             Toast.makeText(getActivity().getApplicationContext(),dataSnapshot.getKey()+ "",Toast.LENGTH_LONG).show();
 
                     contribuyentes=dataSnapshot.getValue(Contribuyentes.class);
                     contribuyentes.setKey(dataSnapshot.getKey());
                     elements_datosFac.add(contribuyentes);
-
-                      Toast.makeText(getActivity().getApplicationContext(), elements_datosFac+"",Toast.LENGTH_LONG).show();
-
+                //    filter(dataSnapshot.getKey());
+               ///
 
                 }
-                listAdapterDatosFacturacion.notifyDataSetChanged();
+              //  Toast.makeText(getActivity().getApplicationContext(), "ENTRA",Toast.LENGTH_LONG).show();
+
+                 //   listAdapterDatosFacturacion.notifyDataSetChanged();
             }
 
             @Override
@@ -681,6 +691,7 @@ public void cargar_metodo_pago(){
 
             cardView6.setVisibility(View.GONE);
             metodo_pago="POS";
+            validacion4=1;
         }
 
         @Override
@@ -694,6 +705,7 @@ public void cargar_metodo_pago(){
             chec5_bien.setVisibility(View.GONE);
             cardView6.setVisibility(View.GONE);
             metodo_pago="EFECTIVO";
+            validacion4=1;
         }
 
         @Override
@@ -707,6 +719,7 @@ public void cargar_metodo_pago(){
             chec5_bien.setVisibility(View.GONE);
             cardView6.setVisibility(View.VISIBLE);
             metodo_pago="ONLINE";
+            validacion4=1;
 
         }
     });
@@ -715,5 +728,7 @@ public void cargar_metodo_pago(){
     contenedorMetodoPago.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     contenedorMetodoPago.setAdapter(listAdapterMedodoPago);
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }

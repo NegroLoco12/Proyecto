@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                             map.put("documento", ruc);
                             map.put("cod_usuario", cod_usuario);
                             String id = mAuth.getCurrentUser().getUid();
-                            mDatabase.child("Contribuyentes").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            mDatabase.child("Contribuyentes").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task2) {
                                     if (task2.isSuccessful()) {

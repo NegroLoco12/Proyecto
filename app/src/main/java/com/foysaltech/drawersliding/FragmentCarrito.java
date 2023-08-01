@@ -55,7 +55,7 @@ String precio_final;
             @Override
             public void onClick(View v) {
                 Fragment selectedScreen = new FragmentDetallePedido();
-                getParentFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).addToBackStack(null).commit();
 
             }
         });

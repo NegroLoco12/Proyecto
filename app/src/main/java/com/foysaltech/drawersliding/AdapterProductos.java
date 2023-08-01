@@ -34,8 +34,8 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.MyVi
         listaOriginal.addAll(mData);
     }
     public void setFilter(List<Productos> filtered){
-this.mData=filtered;
-notifyDataSetChanged();
+        this.mData=filtered;
+        notifyDataSetChanged();
     }
 
     @NonNull

@@ -27,6 +27,11 @@ public class AdapterDatosFacturacion extends RecyclerView.Adapter<AdapterDatosFa
         this.context = context;
         this.mData = mData;
         this.listene=listener;
+      //  notifyDataSetChanged();
+    }
+    public void setFilter(List<Contribuyentes> filtered){
+        this.mData=filtered;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -47,7 +52,7 @@ public class AdapterDatosFacturacion extends RecyclerView.Adapter<AdapterDatosFa
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return 1;
     }
 
 
