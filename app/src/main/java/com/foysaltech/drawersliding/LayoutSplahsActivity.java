@@ -1,6 +1,8 @@
 package com.foysaltech.drawersliding;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +12,17 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-public class LayoutSplahsActivity extends AppCompatActivity {
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
+public class LayoutSplahsActivity extends AppCompatActivity {
+    Productos productos=new Productos();
+    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +32,7 @@ public class LayoutSplahsActivity extends AppCompatActivity {
         Animation animation1= AnimationUtils.loadAnimation(this, R.anim.arriba);
         ImageView logo =findViewById(R.id.imageView2);
         logo.setAnimation(animation1);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -30,5 +42,39 @@ public class LayoutSplahsActivity extends AppCompatActivity {
                 finish();
             }
         }, 4000);
+        cargarTodo();
     }
+    public void cargarTodo( ){
+
+
+        // Toast.makeText(getContext(),codigo+"",Toast.LENGTH_LONG).show();
+
+        mDatabase.child("Productos").addValueEventListener(new ValueEventListener() {
+            @Override
+
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                    productos=dataSnapshot.getValue(Productos.class);
+                    // productos.setKey(dataSnapshot.getKey());
+                //    elementsProductos.add(productos);
+
+                    //         Toast.makeText(getContext(),elementsProductos+"",Toast.LENGTH_LONG).show();
+
+
+                }
+                //listaAdapterProducto.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
+    }
+
+
+
 }
