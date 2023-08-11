@@ -176,7 +176,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
             contenedorTodo.setVisibility(View.GONE);
             contenedorMenu.setVisibility(View.VISIBLE);
             contenedorPromo.setVisibility(View.VISIBLE);
-            cabecera2.setVisibility(View.VISIBLE);
+//            cabecera2.setVisibility(View.VISIBLE);
             }
         if (longitud>0) {
            if (filter(newText) == false) {

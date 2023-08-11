@@ -199,6 +199,10 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             Fragment selectedScreen = new FragmentSomos();
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
         }
+        if (position == 2) {
+            Fragment selectedScreen = new FragmentHistorial();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
+        }
         if (position == 5) {
             if (Carritos.pedido.size()>0) {
                 Fragment selectedScreen = new FragmentCarrito();
