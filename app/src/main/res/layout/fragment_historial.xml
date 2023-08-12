@@ -28,8 +28,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contenedorHistorial"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="match_parent"
 
+        android:layout_marginTop="55dp"
         android:orientation="horizontal"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"

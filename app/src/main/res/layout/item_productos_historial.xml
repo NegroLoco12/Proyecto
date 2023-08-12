@@ -2,19 +2,20 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardViewHistorial"
-    android:layout_width="380dp"
-    android:layout_height="110dp"
+    android:id="@+id/cardView"
+    android:layout_width="370dp"
+    android:layout_height="wrap_content"
     android:layout_marginStart="4dp"
     android:layout_marginLeft="10dp"
     android:layout_marginBottom="10dp"
+
     app:cardCornerRadius="10dp"
     app:cardElevation="2dp"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="380dp"
-        android:layout_height="110dp"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:paddingStart="14dp"
         android:paddingEnd="4dp"
@@ -22,57 +23,60 @@
 
 
         <ImageView
-            android:id="@+id/imagen_historial"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:id="@+id/imagen_pedido"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.006"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.475"
+            app:layout_constraintVertical_bias="0.228"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/txt_estado_historial"
-            android:layout_width="200dp"
-            android:layout_height="15dp"
-            android:maxLines="1"
-            android:text=" 5.98"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.366"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_total_historial"
-            app:layout_constraintVertical_bias="0.272" />
 
         <TextView
-            android:id="@+id/txt_nro_historial"
-            android:layout_width="200dp"
-            android:layout_height="17dp"
+            android:id="@+id/txt_nombre_pedido"
+            android:layout_width="220dp"
+            android:layout_height="30dp"
             android:layout_marginTop="5dp"
             android:maxLines="2"
             android:text="Combo de Limpieza"
-            android:textColor="@color/black"
+            android:textColor="@color/textColorPrimary2"
             android:textSize="14sp"
             android:textStyle="bold"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.366"
+            app:layout_constraintHorizontal_bias="0.56"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.09" />
+            app:layout_constraintVertical_bias="0.111" />
 
         <TextView
-            android:id="@+id/txt_fecha_historial"
-            android:layout_width="250dp"
+            android:id="@+id/txt_precio_pedido"
+            android:layout_width="150dp"
             android:layout_height="15dp"
 
+            android:maxLines="1"
+            android:text="$ 5.98"
+            android:textColor="#00b347"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.35"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.84000003" />
+
+        <TextView
+            android:id="@+id/txt_descuento_pedido"
+            android:layout_width="50dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="7dp"
+            android:foreground="@drawable/txt_promo"
             android:maxLines="1"
             android:text="$ 5.98"
             android:textColor="@color/textColorSecondary"
@@ -80,26 +84,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.53"
+            app:layout_constraintHorizontal_bias="0.921"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_nro_historial"
-            app:layout_constraintVertical_bias="0.106" />
-
-        <TextView
-            android:id="@+id/txt_total_historial"
-            android:layout_width="200dp"
-            android:layout_height="15dp"
-            android:maxLines="1"
-            android:text="$ 5.98"
-            android:textColor="@color/textColorSecondary"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.366"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_fecha_historial"
-            app:layout_constraintVertical_bias="0.204" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.827" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
