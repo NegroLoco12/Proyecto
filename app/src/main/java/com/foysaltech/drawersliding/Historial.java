@@ -49,4 +49,14 @@ public class Historial {
     }
 
     private String key;
+
+    public String getClave_pk() {
+        return clave_pk;
+    }
+
+    public void setClave_pk(String clave_pk) {
+        this.clave_pk = clave_pk;
+    }
+
+    private String clave_pk;
 }

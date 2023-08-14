@@ -547,6 +547,7 @@ public class FragmentDetallePedido extends Fragment {
             map.put("cod_producto", Carritos.pedido.get(i).getCodigo());
             map.put("nombre_producto", nombre);
             map.put("cantidad_producto", Carritos.pedido.get(i).getCantidad());
+         //   map.put("precio_uni_producto", Carritos.pedido.get(i).getPrecio_inicial());
 
             map.put("descuento_producto", Carritos.pedido.get(i).getPrecio_descuento());
             map.put("subTotal_producto",  Carritos.pedido.get(i).getPrecio_total());

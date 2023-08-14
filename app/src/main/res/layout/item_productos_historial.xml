@@ -23,7 +23,7 @@
 
 
         <ImageView
-            android:id="@+id/imagen_pedido"
+            android:id="@+id/imagen_ph"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
@@ -37,7 +37,7 @@
 
 
         <TextView
-            android:id="@+id/txt_nombre_pedido"
+            android:id="@+id/txt_nombre_ph"
             android:layout_width="220dp"
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
@@ -55,7 +55,7 @@
             app:layout_constraintVertical_bias="0.111" />
 
         <TextView
-            android:id="@+id/txt_precio_pedido"
+            android:id="@+id/txt_precio_ph"
             android:layout_width="150dp"
             android:layout_height="15dp"
 
@@ -72,11 +72,11 @@
             app:layout_constraintVertical_bias="0.84000003" />
 
         <TextView
-            android:id="@+id/txt_descuento_pedido"
-            android:layout_width="50dp"
+            android:id="@+id/txt_cantidad_ph"
+            android:layout_width="100dp"
             android:layout_height="15dp"
             android:layout_marginTop="7dp"
-            android:foreground="@drawable/txt_promo"
+            android:layout_marginEnd="8dp"
             android:maxLines="1"
             android:text="$ 5.98"
             android:textColor="@color/textColorSecondary"

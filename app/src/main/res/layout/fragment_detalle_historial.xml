@@ -35,7 +35,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView7"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_margin="20dp"
         android:layout_marginStart="1dp"
         app:cardCornerRadius="10dp"
@@ -59,9 +59,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.366"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_fecha_cabecera"
-                app:layout_constraintVertical_bias="0.204" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/txt_fecha_cabecera"
@@ -73,12 +71,12 @@
                 android:textColor="@color/textColorSecondary"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/txt_estado_cabecera"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.53"
+                app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_estado_cabecera"
-                app:layout_constraintVertical_bias="0.35000002" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.47" />
 
             <TextView
                 android:id="@+id/txt_estado_cabecera"
@@ -91,10 +89,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.366"
+                app:layout_constraintHorizontal_bias="0.368"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.272" />
+                app:layout_constraintVertical_bias="0.753" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

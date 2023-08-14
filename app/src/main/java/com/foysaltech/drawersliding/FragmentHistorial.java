@@ -58,7 +58,6 @@ public class FragmentHistorial extends Fragment {
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
         mAuth.setLanguageCode("es");
-        mDatabase= FirebaseDatabase.getInstance().getReference();
         cargar();
         return view;
     }
@@ -69,11 +68,13 @@ public class FragmentHistorial extends Fragment {
             @Override
             public void onItemClick(Historial item) {
 
-             ///   Bundle bundle=new Bundle();
-             //   bundle.putString("imagen_producto",item.getImagen());
+              Bundle bundle=new Bundle();
+                bundle.putString("clave_fk",item.getClave_pk());
+                bundle.putString("total",item.getTotal());
+                bundle.putString("fecha",item.getFecha());
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 manager.beginTransaction().replace(R.id.container, new FragmentDetalleHistorial()).addToBackStack(null).commit();
-               // getParentFragmentManager().setFragmentResult("keypro",bundle);
+                getParentFragmentManager().setFragmentResult("keyhistorial",bundle);
 
             }
         });
