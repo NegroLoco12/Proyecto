@@ -134,7 +134,7 @@
                     android:layout_width="280dp"
                     android:layout_height="400dp" />
 
- <Button
+                <Button
                     android:id="@+id/btn_1"
                     android:layout_width="250dp"
                     android:layout_height="60dp"
@@ -172,9 +172,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:layout_marginLeft="20dp">
+                        android:orientation="vertical">
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/view_calle1"
@@ -279,6 +279,45 @@
                                 android:textColor="@color/black"
                                 android:textSize="13sp"
                                 android:textStyle="normal" />
+
+                            <TextView
+                                android:id="@+id/textView16"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="1"
+                                android:text="Elegí un ícono para esta dirección:" />
+
+                            <RadioGroup
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/radioButton5"
+                                    android:layout_width="60dp"
+                                    android:layout_height="wrap_content"
+                                    android:button="@drawable/casa" />
+
+                                <RadioButton
+                                    android:id="@+id/radioButton4"
+                                    android:layout_width="60dp"
+                                    android:layout_height="wrap_content"
+                                    android:button="@drawable/corazon" />
+
+                                <RadioButton
+                                    android:id="@+id/radioButton3"
+                                    android:layout_width="60dp"
+                                    android:layout_height="wrap_content"
+                                    android:button="@drawable/maleta" />
+
+                                <RadioButton
+                                    android:id="@+id/radioButton2"
+                                    android:layout_width="60dp"
+                                    android:layout_height="wrap_content"
+                                    android:button="@drawable/etiqueta" />
+                            </RadioGroup>
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout

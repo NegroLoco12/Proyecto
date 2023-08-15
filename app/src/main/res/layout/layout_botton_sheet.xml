@@ -12,10 +12,9 @@
         android:layout_width="60dp"
         android:layout_height="5dp"
         android:background="@drawable/iconito"
-android:layout_marginLeft="155dp"
+        android:layout_marginLeft="155dp"
         android:layout_marginTop="2dp"
         android:gravity="center"
-
         />
 
 
