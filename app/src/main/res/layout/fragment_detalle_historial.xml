@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f8f8ff"
+    android:orientation="vertical"
     tools:context=".FragmentDetalleHistorial">
 
 
@@ -11,45 +13,30 @@
         android:id="@+id/txt_pedido"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="TextView"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:layout_marginLeft="30dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/cardView7"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.473" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/contenedorDetalleHistorial"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-
-        android:orientation="horizontal"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView7"
-        app:layout_constraintVertical_bias="0.55"
-        tools:listitem="@layout/item_historial"></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintVertical_bias="0.056" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView7"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_margin="20dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="72dp"
         app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/contenedorDetalleHistorial"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.120000005">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -106,4 +93,20 @@
 
     </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/contenedorDetalleHistorial"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:listitem="@layout/item_historial"></androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>
