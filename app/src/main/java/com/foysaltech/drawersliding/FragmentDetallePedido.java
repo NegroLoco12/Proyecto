@@ -527,6 +527,9 @@ public class FragmentDetallePedido extends Fragment {
                             MotionToast.GRAVITY_BOTTOM,
                             MotionToast.LONG_DURATION,
                             ResourcesCompat.getFont(getContext(), www.sanju.motiontoast.R.font.helvetica_regular));
+                    Fragment selectedScreen = new CenteredTextFragment();
+                    getParentFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
+                    Carritos.pedido.clear();
 
                 }
             }
@@ -547,7 +550,6 @@ public class FragmentDetallePedido extends Fragment {
             map.put("cod_producto", Carritos.pedido.get(i).getCodigo());
             map.put("nombre_producto", nombre);
             map.put("cantidad_producto", Carritos.pedido.get(i).getCantidad());
-         //   map.put("precio_uni_producto", Carritos.pedido.get(i).getPrecio_inicial());
 
             map.put("descuento_producto", Carritos.pedido.get(i).getPrecio_descuento());
             map.put("subTotal_producto",  Carritos.pedido.get(i).getPrecio_total());

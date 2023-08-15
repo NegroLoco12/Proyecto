@@ -66,11 +66,13 @@ public class FragmentHistorial extends Fragment {
         elementsHistorial = new ArrayList<>();
         listAdapterHistrial = new AdapterHistorial( elementsHistorial,getContext(), new AdapterHistorial.OnItemClickListener() {
             @Override
-            public void onItemClick(Historial item) {
+            public void onItemClick(Historial item,int a) {
 
               Bundle bundle=new Bundle();
                 bundle.putString("clave_fk",item.getClave_pk());
                 bundle.putString("total",item.getTotal());
+                bundle.putInt("numero",a);
+
                 bundle.putString("fecha",item.getFecha());
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 manager.beginTransaction().replace(R.id.container, new FragmentDetalleHistorial()).addToBackStack(null).commit();

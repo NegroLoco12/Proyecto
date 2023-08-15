@@ -25,7 +25,7 @@ public class AdapterHistorial extends RecyclerView.Adapter<AdapterHistorial.MyVi
 
     final AdapterHistorial.OnItemClickListener listene;
     public interface OnItemClickListener{
-        void onItemClick(Historial item);
+        void onItemClick(Historial item, int posi);
     }
     @NonNull
     @Override
@@ -37,7 +37,7 @@ public class AdapterHistorial extends RecyclerView.Adapter<AdapterHistorial.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull AdapterHistorial.MyViewHolder holder, int position) {
-        holder.bindData(mData.get(position));
+        holder.bindData(mData.get(position),position);
     }
 
     @Override
@@ -59,16 +59,16 @@ private CardView cardViewHistorial;
 
             cardViewHistorial=itemView.findViewById(R.id.cardViewHistorial);
         }
-        void bindData(final Historial item) {
+        void bindData(final Historial item,int posi) {
             imagen_historial.setImageResource(R.drawable.ic_cart_outline_grey600_24dp);
-            txt_nro.setText("Número de Pedido: ");
+            txt_nro.setText("Número de Pedido: "+(posi+1));
             txt_fecha.setText("Fecha del pedido: "+item.getFecha()+" "+item.getHora());
             txt_total.setText("Total del pedido: "+item.getTotal());
             txt_estado.setText("Estado: ");
             cardViewHistorial.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listene.onItemClick(item);
+                    listene.onItemClick(item,posi);
 
                 }
             });

@@ -40,7 +40,7 @@
             android:layout_marginLeft="20dp"
             android:textSize="16sp"
             android:layout_marginTop="40dp"
-            android:text="        Ser una empresa líder y reconocida por su alto estándar de calidad en el rubro dentro del mercado nacional."/>
+            android:text="       Nuestra visión es ser una empresa líder y reconocida por su alto estándar de calidad en el rubro dentro del mercado nacional."/>
 
         <TextView
             android:id="@+id/textView13"

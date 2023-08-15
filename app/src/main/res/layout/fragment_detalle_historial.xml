@@ -8,14 +8,20 @@
 
 
     <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
+        android:id="@+id/txt_pedido"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="353dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/cardView7"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.473" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contenedorDetalleHistorial"
@@ -38,10 +44,12 @@
         android:layout_height="80dp"
         android:layout_margin="20dp"
         android:layout_marginStart="1dp"
+        android:layout_marginBottom="72dp"
         app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/contenedorDetalleHistorial"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -49,17 +57,18 @@
 
             <TextView
                 android:id="@+id/txt_total_cabecera"
-                android:layout_width="200dp"
+                android:layout_width="250dp"
                 android:layout_height="15dp"
                 android:maxLines="1"
                 android:text="$ 5.98"
                 android:textColor="@color/textColorSecondary"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/txt_estado_cabecera"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.366"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintHorizontal_bias="0.368"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_fecha_cabecera" />
 
             <TextView
                 android:id="@+id/txt_fecha_cabecera"
@@ -71,16 +80,16 @@
                 android:textColor="@color/textColorSecondary"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/txt_estado_cabecera"
+                app:layout_constraintBottom_toTopOf="@+id/txt_total_cabecera"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintHorizontal_bias="0.371"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.47" />
+                app:layout_constraintVertical_bias="0.17000002" />
 
             <TextView
                 android:id="@+id/txt_estado_cabecera"
-                android:layout_width="200dp"
+                android:layout_width="250dp"
                 android:layout_height="15dp"
                 android:maxLines="1"
                 android:text=" 5.98"
@@ -89,10 +98,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.368"
+                app:layout_constraintHorizontal_bias="0.37"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.753" />
+                app:layout_constraintTop_toBottomOf="@+id/txt_total_cabecera"
+                app:layout_constraintVertical_bias="0.77" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

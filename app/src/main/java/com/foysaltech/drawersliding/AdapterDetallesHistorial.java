@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class AdapterDetallesHistorial  extends RecyclerView.Adapter<AdapterDetallesHistorial.MyViewHolder> {
@@ -73,18 +74,19 @@ public class AdapterDetallesHistorial  extends RecyclerView.Adapter<AdapterDetal
 
 
 
+            DecimalFormat formatea = new DecimalFormat("###,###.##");
+
+         //  formatea.format(Integer.parseInt(item.getPrecio()))+" ₲ ");
 
             txt_cantidad_ph.setText("Cantidad: "+item.getCantidad_producto());
-            txt_precio_ph.setText(""+item.getSubTotal_producto());
+            txt_precio_ph.setText(""+formatea.format(item.getSubTotal_producto())+" ₲ ");
 
            // Toast.makeText(context.getApplicationContext(), ""+item.getCod_producto(),Toast.LENGTH_LONG).show();
             if(item.getCod_producto().equals(item2.getKey())){
                 imagen_ph.setImageBitmap(item2.getImagen2());
-                txt_nombre_ph.setText(item2.getNombre());
+                txt_nombre_ph.setText(item2.getDescripcion());
 
-          //  }else{
 
-         //        imagen_ph.setImageResource(R.drawable.imagen);
            }
         }
 

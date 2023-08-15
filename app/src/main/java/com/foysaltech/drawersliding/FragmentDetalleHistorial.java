@@ -28,7 +28,7 @@ import java.util.List;
 
 
 public class FragmentDetalleHistorial extends Fragment {
-    private TextView txt_total_cabecera,txt_fecha_cabecera;
+    private TextView txt_total_cabecera,txt_fecha_cabecera,txt_estado_cabecera,txt_pedido;
     private List<productos_historial> elements;
     private List<Productos> elements2;
     AdapterDetallesHistorial listAdapterDetallesHistorial;
@@ -59,7 +59,9 @@ public class FragmentDetalleHistorial extends Fragment {
       View view=inflater.inflate(R.layout.fragment_detalle_historial, container, false);
       txt_total_cabecera= view.findViewById(R.id.txt_total_cabecera);
         txt_fecha_cabecera= view.findViewById(R.id.txt_fecha_cabecera);
-      contenedorDetalleHistorial= view.findViewById(R.id.contenedorDetalleHistorial);
+        txt_estado_cabecera= view.findViewById(R.id.txt_estado_cabecera);
+        txt_pedido= view.findViewById(R.id.txt_pedido);
+        contenedorDetalleHistorial= view.findViewById(R.id.contenedorDetalleHistorial);
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
         mAuth.setLanguageCode("es");
@@ -67,8 +69,10 @@ public class FragmentDetalleHistorial extends Fragment {
         getParentFragmentManager().setFragmentResultListener("keyhistorial", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                txt_pedido.setText("Nro de Pedido: "+(result.getInt("numero")+1));
                 txt_fecha_cabecera.setText("Fecha del Pedido: "+result.getString("fecha"));
                 txt_total_cabecera.setText("Total del Pedido: "+result.getString("total"));
+                txt_estado_cabecera.setText("Estado del Pedido: ");
                 cargar(result.getString("clave_fk"));
 
             }

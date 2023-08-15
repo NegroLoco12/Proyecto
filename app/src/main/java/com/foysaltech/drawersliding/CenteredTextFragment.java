@@ -81,6 +81,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
         contenedorPromo=view.findViewById(R.id.contenedorPromo);
         cargador1=view.findViewById(R.id.cargador1);
         cargador2=view.findViewById(R.id.cargador2);
+        cabecera2=view.findViewById(R.id.cabecera2);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         return view;
@@ -139,6 +140,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+              Toast.makeText(getContext(),"ss",Toast.LENGTH_LONG).show();
 
             }
 
@@ -176,7 +178,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
             contenedorTodo.setVisibility(View.GONE);
             contenedorMenu.setVisibility(View.VISIBLE);
             contenedorPromo.setVisibility(View.VISIBLE);
-//            cabecera2.setVisibility(View.VISIBLE);
+            cabecera2.setVisibility(View.VISIBLE);
             }
         if (longitud>0) {
            if (filter(newText) == false) {
