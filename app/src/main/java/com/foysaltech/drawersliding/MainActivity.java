@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             View bottomSheetView= LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_botton_sheet,(LinearLayout)findViewById(R.id.bottomShetContainer));
             contenedorUbi=bottomSheetView.findViewById(R.id.contenedorUbicaciones);
             txt_nombre_usu_ubi= bottomSheetView.findViewById(R.id.txt_nombre_usu_ubi);
-            txt_nombre_usu_ubi.setText("Hola "+users.getNombre());
+            txt_nombre_usu_ubi.setText("Hola "+users.getNombre()+" !");
 
             bottomSheetView.findViewById(R.id.btnUbi).setOnClickListener(new View.OnClickListener() {
                 @Override

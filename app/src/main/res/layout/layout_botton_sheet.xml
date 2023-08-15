@@ -30,6 +30,7 @@ android:layout_marginLeft="155dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:text="Hola Negro"></TextView>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -38,6 +39,7 @@ android:layout_marginLeft="155dp"
 android:textColor="@color/black"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
             android:text="¿A dónde enviamos tu pedido?"
             android:textStyle="bold"></androidx.appcompat.widget.AppCompatTextView>
 
@@ -55,15 +57,17 @@ android:textColor="@color/black"
         android:id="@+id/btnUbi"
         android:layout_width="400dp"
         android:layout_height="50dp"
-        android:background="@color/white"
-        android:drawableStart="@drawable/anadir"
-android:paddingTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/search_edittext_background"
         android:text="Añadir nueva dirección"
-
         android:textColor="@color/pinkColor"
         android:textSize="15sp"
-        android:layout_marginBottom="5dp"
-        android:elevation="10dp"
- />
+        android:drawableStart="@drawable/anadir"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.906" />
 
 </LinearLayout>

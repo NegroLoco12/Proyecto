@@ -415,51 +415,32 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     public void editar_ubi(){
         if(validar()){
             String calle1, calle2,nro_casa,referencia,nombre_direccion,cod_usuario;
-            double latitud,longitud;
+          //  double latitud,longitud;
 
             calle1 = txt_calle1.getText().toString();
             calle2 = txt_calle2.getText().toString();
             nro_casa = txt_nro_casa.getText().toString();
             referencia = txt_referencia.getText().toString();
             nombre_direccion = txt_nombre_direccion.getText().toString();
-            latitud=Ubicaciones.guardado.get(0).getLatitudActual();
-            longitud=Ubicaciones.guardado.get(0).getLongitulActual();
-            cod_usuario=mAuth.getCurrentUser().getUid();
-            mDatabase.child("Direcciones").child(KeyUbi).child("calle1").setValue(txt_calle1.getText());
-            mDatabase.child("Direcciones").child(KeyUbi).child("calle2").setValue(txt_calle2.getText());
+             cod_usuario=mAuth.getCurrentUser().getUid();
+            mDatabase.child("Direcciones").child(KeyUbi).child("calle1").setValue(calle1);
+            mDatabase.child("Direcciones").child(KeyUbi).child("calle2").setValue(calle2);
+            mDatabase.child("Direcciones").child(KeyUbi).child("latitud").setValue(latitud);
+           mDatabase.child("Direcciones").child(KeyUbi).child("longitud").setValue(longitu);
+           mDatabase.child("Direcciones").child(KeyUbi).child("nombre_direccion").setValue(nombre_direccion);
+          mDatabase.child("Direcciones").child(KeyUbi).child("nro_casa").setValue(nro_casa);
+          mDatabase.child("Direcciones").child(KeyUbi).child("referencia").setValue(referencia);
 
-           // mDatabase.child("Direcciones").child(KeyUbi).child("latitud").setValue(txt_nombre.getText());
-          //  mDatabase.child("Direcciones").child(KeyUbi).child("longitud").setValue(txt_nombre.getText());
 
-            mDatabase.child("Direcciones").child(KeyUbi).child("nombre_direccion").setValue(txt_nombre_direccion);
-            mDatabase.child("Direcciones").child(KeyUbi).child("nro_casa").setValue(txt_nro_casa);
 
-            mDatabase.child("Direcciones").child(KeyUbi).child("referencia").setValue(txt_referencia);
-            Map<String, Object> map = new HashMap<>();
-            map.put("calle1", calle1);
-            map.put("calle2", calle2);
-            map.put("nro_casa", nro_casa);
-            map.put("referencia", referencia);
-            map.put("nombre_direccion", nombre_direccion);
-            map.put("latitud", latitud);
-            map.put("longitud", longitud);
-            map.put("cod_usuario", cod_usuario);
-
-            mDatabase.child("Direcciones").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
                         MotionToast.Companion.createColorToast(getActivity(),
-                                "Registrado",
-                                "Registrado sin problemas!",
+                                "SUCCESS",
+                                "Editado sin problemas!",
                                 MotionToastStyle.SUCCESS,
                                 MotionToast.GRAVITY_BOTTOM,
                                 MotionToast.LONG_DURATION,
                                 ResourcesCompat.getFont(getContext(), www.sanju.motiontoast.R.font.helvetica_regular));
-                        limpiar();
-                    }
-                }
-            });
+
         }
     }
 
