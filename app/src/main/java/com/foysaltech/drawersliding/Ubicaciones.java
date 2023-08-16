@@ -23,6 +23,16 @@ public class Ubicaciones {
 
     String key;
 
+    public int getIcono() {
+        return icono;
+    }
+
+    public void setIcono(int icono) {
+        this.icono = icono;
+    }
+
+    int icono;
+
 
     public String getNombre_direccion() {
         return nombre_direccion;

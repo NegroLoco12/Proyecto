@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,9 +66,11 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     SupportMapFragment mapFragment;
     GoogleMap mMap;
     Marker marker;
+    private  int iconoo;
     private TextView txt_paso1,txt_paso2, ViewPaso1,ViewPaso2;
     private EditText txt_calle1, txt_calle2, txt_referencia,txt_nro_casa,txt_nombre_direccion;
     private LinearLayout seccion1,seccion2;
+    private RadioButton radio0,radio1,radio2,radio3;
     private Button btn_siguiente;
     double latitud ;
     String KeyUbi;
@@ -122,7 +125,13 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
         view_nombre=view.findViewById(R.id.view_nombre);
         imageView2=view.findViewById(R.id.imageView22);
 
-       String data =getArguments().getString("dato");
+        radio0=view.findViewById(R.id.radio0);
+        radio1=view.findViewById(R.id.radio1);
+        radio2=view.findViewById(R.id.radio2);
+        radio3=view.findViewById(R.id.radio3);
+
+
+        String data =getArguments().getString("dato");
        if(data.equals("Editar")){
            KeyUbi=getArguments().getString("key");
            txt_calle1.setText(getArguments().getString("calle1"));
@@ -132,7 +141,19 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
            txt_nro_casa.setText(getArguments().getString("nro_casa"));
            latitud=getArguments().getDouble("latitud");
            longitu=getArguments().getDouble("longitud");
-
+           iconoo=getArguments().getInt("icono");
+        if (iconoo==0){
+        radio0.setChecked(true);
+        }
+           if (iconoo==1){
+               radio1.setChecked(true);
+           }
+           if (iconoo==2){
+               radio2.setChecked(true);
+           }
+           if (iconoo==3){
+               radio3.setChecked(true);
+           }
            view.findViewById(R.id.btn_2).setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {editar_ubi();
@@ -366,6 +387,17 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
     public void guardar_ubi(){
         if(validar()){
             String calle1, calle2,nro_casa,referencia,nombre_direccion,cod_usuario;
+            int icono=0;
+            if(radio0.isChecked()){
+                icono=0;
+            } else if (radio1.isChecked()) {
+                icono=1;
+
+              } else if (radio2.isChecked()) {
+                icono=2;
+            } else if (radio3.isChecked()) {
+                icono=3;
+            }
 
 
             calle1 = txt_calle1.getText().toString();
@@ -384,6 +416,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
             map.put("latitud", latitud);
             map.put("longitud", longitu);
             map.put("cod_usuario", cod_usuario);
+            map.put("icono", icono);
 
             mDatabase.child("Direcciones").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -416,7 +449,17 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
         if(validar()){
             String calle1, calle2,nro_casa,referencia,nombre_direccion,cod_usuario;
           //  double latitud,longitud;
+            int icono=0;
+            if(radio0.isChecked()){
+                icono=0;
+            } else if (radio1.isChecked()) {
+                icono=1;
 
+            } else if (radio2.isChecked()) {
+                icono=2;
+            } else if (radio3.isChecked()) {
+                icono=3;
+            }
             calle1 = txt_calle1.getText().toString();
             calle2 = txt_calle2.getText().toString();
             nro_casa = txt_nro_casa.getText().toString();
@@ -430,6 +473,7 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
            mDatabase.child("Direcciones").child(KeyUbi).child("nombre_direccion").setValue(nombre_direccion);
           mDatabase.child("Direcciones").child(KeyUbi).child("nro_casa").setValue(nro_casa);
           mDatabase.child("Direcciones").child(KeyUbi).child("referencia").setValue(referencia);
+            mDatabase.child("Direcciones").child(KeyUbi).child("icono").setValue(icono);
 
 
 

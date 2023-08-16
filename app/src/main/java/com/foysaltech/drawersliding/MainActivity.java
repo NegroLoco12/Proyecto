@@ -555,6 +555,7 @@ private void EditarUbi(Ubicaciones item) {
     data.putDouble("latitud", item.getLatitud());
     data.putDouble("longitud", item.getLongitud());
     data.putString("referencia", item.getReferencia());
+    data.putInt("icono", item.getIcono());
 
     fragment1.setArguments(data);;
     bottomSheetDialog.dismiss();
