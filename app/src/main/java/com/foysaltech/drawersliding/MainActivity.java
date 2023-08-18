@@ -581,6 +581,19 @@ public void cargarContribuyentes( ){
     listContri = new AdapterContribuyente(elementsContri, this, new AdapterContribuyente.OnItemClickListener() {
         @Override
         public void onItemClick(Contribuyentes item) {
+            mDatabase.child("Contribuyentes").child(item.getKey()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    MotionToast.Companion.createColorToast(MainActivity.this,//Toast Personalizado
+                            "Exito!",
+                            "Se ha Borrado",
+                            MotionToastStyle.DELETE,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(MainActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
+
+                }
+            });
 
         }
         public void onItemClick2(Contribuyentes item) {
@@ -599,6 +612,21 @@ public void cargarContribuyentes( ){
             txt_razon.setText(item.getRazon_social()+"");
             txt_ruc.setText(item.getDocumento()+"");
             btn_guardar_contri.setText("Modificar");
+            btn_guardar_contri.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mDatabase.child("Contribuyentes").child(item.getKey()).child("documento").setValue(txt_ruc.getText().toString());
+                    mDatabase.child("Contribuyentes").child(item.getKey()).child("razon_social").setValue(txt_razon.getText().toString());
+                    MotionToast.Companion.createColorToast(MainActivity.this,//Toast Personalizado
+                            "Exito!",
+                            "Se ha Modificado",
+                            MotionToastStyle.SUCCESS,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(MainActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
+                    alertDialog.dismiss();
+                }
+            });
         }
     });
     contenedorContri.setHasFixedSize(true);
