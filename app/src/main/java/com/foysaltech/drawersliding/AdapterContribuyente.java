@@ -54,6 +54,7 @@ public class AdapterContribuyente extends RecyclerView.Adapter<AdapterContribuye
         TextView item_nombre,item_ruc,txt_contador;
         ImageButton botton_borrar_menu,botton_editar_contri,botton_menu_contri;
         LinearLayout linear_menu_contri;
+        ImageView imagen_contri;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -64,8 +65,11 @@ public class AdapterContribuyente extends RecyclerView.Adapter<AdapterContribuye
             txt_contador=itemView.findViewById(R.id.txt_contador);
             linear_menu_contri=itemView.findViewById(R.id.linear_menu_contri);
             botton_menu_contri=itemView.findViewById(R.id.menu_contri);
+            imagen_contri=itemView.findViewById(R.id.imagen_contri);
         }
         void bindData(final Contribuyentes item) {
+
+            imagen_contri.setImageResource(R.drawable.factura);
             item_nombre.setText(item.getRazon_social());
             item_ruc.setText(item.getDocumento());
             PorterDuffColorFilter redFilter = new PorterDuffColorFilter(Color.TRANSPARENT, PorterDuff.Mode.MULTIPLY);

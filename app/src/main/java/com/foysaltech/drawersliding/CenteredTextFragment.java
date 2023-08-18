@@ -1,7 +1,14 @@
 package com.foysaltech.drawersliding;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -41,6 +49,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.mail.MessagingException;
+
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 
 public class CenteredTextFragment extends Fragment implements SearchView.OnQueryTextListener {
@@ -88,10 +99,44 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        String provider = Settings.Secure.getString(
+                getActivity().getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+        System.out.println("Provider contains=> " + provider);
+        if (provider.contains("gps") ){
+
+        }else {
+            alertGps();
+        }
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
        cargar();
         cargarTodo();
         cargarPromo();
+        ConnectivityManager con=(ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=con.getActiveNetworkInfo();
+        if(networkInfo!=null && networkInfo.isConnected()){
+
+        }else{
+            MotionToast.Companion.createColorToast(getActivity(),
+                    "ADVERTENCIA",
+                    "Sin conexión a Internet",
+                    MotionToastStyle.NO_INTERNET,
+                    MotionToast.GRAVITY_BOTTOM,
+                    105000,
+                    ResourcesCompat.getFont(getContext(), www.sanju.motiontoast.R.font.helvetica_regular));
+        }
+        String provider = Settings.Secure.getString(
+                getActivity().getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+        System.out.println("Provider contains=> " + provider);
+        if (provider.contains("gps") ){
+
+        }else {
+            alertGps();
+        }
         Bundle args = getArguments();
         final String text = args != null ? args.getString(EXTRA_TEXT) : "";
         TextView textView = view.findViewById(R.id.cabecera);
@@ -353,5 +398,23 @@ public void pasar_promo(Productos item){
         FragmentManager manager = getActivity().getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.container, new FragmentDescripcion()).addToBackStack(null).commit();
         getParentFragmentManager().setFragmentResult("keypro",bundle);
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    private void alertGps(){
+        AlertDialog alert=null;
+      final AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+      builder.setMessage("El sistema GPS está desactivado, ¿Desea activarlo?").setCancelable(false).setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialogInterface, int i) {
+              startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+          }
+      }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialogInterface, int i) {
+              dialogInterface.cancel();
+          }
+      });
+      alert=builder.create();
+      alert.show();
     }
 }

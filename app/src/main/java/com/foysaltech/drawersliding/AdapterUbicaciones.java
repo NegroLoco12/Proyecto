@@ -84,7 +84,20 @@ public class AdapterUbicaciones  extends RecyclerView.Adapter<AdapterUbicaciones
 
             itemName.setText(item.getNombre_direccion());
             itemDescripcion.setText(item.getCalle1());
-            imagen_direccion.setImageResource(R.drawable.casa);
+
+            if(item.icono==0){
+                imagen_direccion.setImageResource(R.drawable.casa);
+
+            } else if (item.icono==1) {
+                imagen_direccion.setImageResource(R.drawable.corazon);
+
+            } else if (item.icono==2) {
+                imagen_direccion.setImageResource(R.drawable.maleta);
+
+            } else if (item.icono==3) {
+                imagen_direccion.setImageResource(R.drawable.etiqueta);
+
+            }
 
             botton_menu_ubi.setOnClickListener(new View.OnClickListener() {
                 @Override

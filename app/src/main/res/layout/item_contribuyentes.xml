@@ -23,9 +23,20 @@
         >
 
 
+        <ImageView
+            android:id="@+id/imagen_contri"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="4dp"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/casa" />
+
         <LinearLayout
             android:id="@+id/linear_menu_contri"
-            android:layout_width="55dp"
+            android:layout_width="65dp"
             android:layout_height="35dp"
             android:orientation="horizontal"
             android:visibility="gone"
@@ -54,6 +65,7 @@
                 android:id="@+id/botton_borrar_contri"
                 android:layout_width="25dp"
                 android:layout_height="35dp"
+                android:layout_marginLeft="5dp"
                 android:src="@drawable/borrar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +102,7 @@
             android:lines="2"
             android:minLines="2"
             android:text="12345678"
-            android:textSize="11sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.305"

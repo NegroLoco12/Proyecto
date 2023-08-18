@@ -28,6 +28,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,6 +45,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -236,14 +238,19 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 @Override
                 public void onClick(View v) {
                     bottomSheetDialog.dismiss();
-                    MapaFragment fragment1=new MapaFragment();
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.container, fragment1).addToBackStack(null).commit();
+                    if (Ubicaciones.guardado.size() == 0) {
 
-                    Bundle data = new Bundle();
-                    data.putString("dato", "Nuevo");
-                    fragment1.setArguments(data);;
-                    bottomSheetDialog.dismiss();
+                    } else {
+
+                          MapaFragment fragment1=new MapaFragment();
+                           FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.container, fragment1).addToBackStack(null).commit();
+
+                         Bundle data = new Bundle();
+                          data.putString("dato", "Nuevo");
+                        fragment1.setArguments(data);;
+                        bottomSheetDialog.dismiss();
+                    }
                 }
             });
             bottomSheetDialog.setContentView(bottomSheetView);
@@ -393,6 +400,13 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             getCoordenada();
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getCoordenada();
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
     private void getCoordenada() {
 
@@ -570,7 +584,21 @@ public void cargarContribuyentes( ){
 
         }
         public void onItemClick2(Contribuyentes item) {
+            TextInputEditText txt_razon,txt_ruc ;
+            Button btn_guardar_contri;
+            AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
 
+            View view=getLayoutInflater().inflate(R.layout.custom_dialog_contribuyente,null);
+            builder.setView(view);
+            builder.setCancelable(true);
+            AlertDialog  alertDialog= builder.create();
+            alertDialog.show();
+         txt_razon=   view.findViewById(R.id.txt_razonsocial);
+            txt_ruc=   view.findViewById(R.id.txt_ruc);
+            btn_guardar_contri=   view.findViewById(R.id.btn_guardar_contri);
+            txt_razon.setText(item.getRazon_social()+"");
+            txt_ruc.setText(item.getDocumento()+"");
+            btn_guardar_contri.setText("Modificar");
         }
     });
     contenedorContri.setHasFixedSize(true);
@@ -607,5 +635,7 @@ public void cargarContribuyentes( ){
 
     });
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 }
