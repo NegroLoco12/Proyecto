@@ -2,6 +2,7 @@
 package com.foysaltech.drawersliding;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +77,8 @@ public class FragmentDetallePedido extends Fragment {
     Ubicaciones ubicaciones=new Ubicaciones();
     Contribuyentes contribuyentes=new Contribuyentes();
 
-   int a=0;
+
+    int a=0;
     int b=0;
     int c=0;
     int d=0;
@@ -573,6 +576,8 @@ public class FragmentDetallePedido extends Fragment {
         chec3_bien.setVisibility(View.GONE);
 
     }else{
+        Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(1500);
         chec3_bien.setVisibility(View.VISIBLE);
         check3.setVisibility(View.GONE);
          retorno = false;
@@ -585,7 +590,8 @@ public class FragmentDetallePedido extends Fragment {
             check1.setVisibility(View.VISIBLE);
             chec1_bien.setVisibility(View.GONE);
         }else{
-
+            Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(1500);
             chec1_bien.setVisibility(View.VISIBLE);
             check1.setVisibility(View.GONE);
             retorno = false;
@@ -596,7 +602,8 @@ public class FragmentDetallePedido extends Fragment {
             check2.setVisibility(View.VISIBLE);
             chec2_bien.setVisibility(View.GONE);
         }else{
-
+            Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(1500);
             chec2_bien.setVisibility(View.VISIBLE);
             check2.setVisibility(View.GONE);
             retorno = false;
@@ -606,7 +613,8 @@ public class FragmentDetallePedido extends Fragment {
             check4.setVisibility(View.VISIBLE);
             chec4_bien.setVisibility(View.GONE);
         }else{
-
+            Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(1500);
             chec4_bien.setVisibility(View.VISIBLE);
             check4.setVisibility(View.GONE);
             retorno = false;
@@ -616,7 +624,8 @@ public class FragmentDetallePedido extends Fragment {
             check5.setVisibility(View.VISIBLE);
             chec5_bien.setVisibility(View.GONE);
         }else{
-
+            Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(1500);
             chec5_bien.setVisibility(View.VISIBLE);
             check5.setVisibility(View.GONE);
             retorno = false;
