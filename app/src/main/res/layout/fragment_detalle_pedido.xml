@@ -550,7 +550,7 @@
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/contenedorDatosFacturacion"
-                                android:layout_width="300dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="120dp"
                                 android:orientation="horizontal"
                                 android:paddingLeft="20dp"

@@ -577,7 +577,36 @@ private void EditarUbi(Ubicaciones item) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public void cargarContribuyentes( ){
 
+
     elementsContri = new ArrayList<>();
+    DatabaseReference correo = mDatabase.child("Contribuyentes");
+    Query nombre = correo.orderByChild("cod_usuario").equalTo(mAuth.getCurrentUser().getUid());
+
+    nombre.addValueEventListener(new ValueEventListener() {
+        @Override
+
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            elementsContri.clear();
+            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                contribuyentes=dataSnapshot.getValue(Contribuyentes.class);
+                contribuyentes.setKey(dataSnapshot.getKey());
+                elementsContri.add(contribuyentes);
+
+                //   Toast.makeText(getApplicationContext(),elementsUbi+"",Toast.LENGTH_LONG).show();
+
+
+            }
+            listContri.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+
+
+    });
     listContri = new AdapterContribuyente(elementsContri, this, new AdapterContribuyente.OnItemClickListener() {
         @Override
         public void onItemClick(Contribuyentes item) {
@@ -629,39 +658,14 @@ public void cargarContribuyentes( ){
             });
         }
     });
+
     contenedorContri.setHasFixedSize(true);
     contenedorContri.setLayoutManager(new LinearLayoutManager(this));
     contenedorContri.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     contenedorContri.setAdapter(listContri);
     // Toast.makeText(getContext(),codigo+"",Toast.LENGTH_LONG).show();
 
-    DatabaseReference correo = mDatabase.child("Contribuyentes");
-    Query nombre = correo.orderByChild("cod_usuario").equalTo(mAuth.getCurrentUser().getUid());
 
-    nombre.addValueEventListener(new ValueEventListener() {
-        @Override
-
-        public void onDataChange(@NonNull DataSnapshot snapshot) {
-            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                contribuyentes=dataSnapshot.getValue(Contribuyentes.class);
-                contribuyentes.setKey(dataSnapshot.getKey());
-                elementsContri.add(contribuyentes);
-
-                //   Toast.makeText(getApplicationContext(),elementsUbi+"",Toast.LENGTH_LONG).show();
-
-
-            }
-            listContri.notifyDataSetChanged();
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError error) {
-
-        }
-
-
-    });
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 

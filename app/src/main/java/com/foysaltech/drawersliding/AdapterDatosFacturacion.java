@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,7 +53,7 @@ public class AdapterDatosFacturacion extends RecyclerView.Adapter<AdapterDatosFa
 
     @Override
     public int getItemCount() {
-        return 1;
+        return  1;
     }
 
 
@@ -71,6 +72,7 @@ public class AdapterDatosFacturacion extends RecyclerView.Adapter<AdapterDatosFa
             //
             //for (int i = 1; i <= 2; i++) {
                 RadioButton rdbtn = new RadioButton(context.getApplicationContext());
+
                 rdbtn.setId(View.generateViewId());
                 rdbtn.setText(item.getRazon_social());
                 rdbtn.setTextColor(Color.GRAY);
@@ -80,7 +82,8 @@ public class AdapterDatosFacturacion extends RecyclerView.Adapter<AdapterDatosFa
                         listene.onItemClick(item);
                     }
                 });
-                group_entrega.addView(rdbtn);
+             group_entrega.addView(rdbtn);
+
            // }
 
             }

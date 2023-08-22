@@ -668,7 +668,7 @@ public class FragmentDetallePedido extends Fragment {
                 }
               //  Toast.makeText(getActivity().getApplicationContext(), "ENTRA",Toast.LENGTH_LONG).show();
 
-                 //   listAdapterDatosFacturacion.notifyDataSetChanged();
+                   listAdapterDatosFacturacion.notifyDataSetChanged();
             }
 
             @Override
