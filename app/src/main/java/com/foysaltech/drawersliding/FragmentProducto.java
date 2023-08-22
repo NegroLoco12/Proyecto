@@ -113,6 +113,7 @@ Productos productos=new Productos();
             @Override
 
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                elements.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                    productos=dataSnapshot.getValue(Productos.class);

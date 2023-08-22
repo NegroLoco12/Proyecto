@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Carritos {
     public static final ArrayList<Pedidos> pedido = new ArrayList<>();
+
     public static final ArrayList<Categorias> cate = new ArrayList<>();
 
     public static String agregarPedidos(Pedidos pedidos) {

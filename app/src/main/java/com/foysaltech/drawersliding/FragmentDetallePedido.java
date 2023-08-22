@@ -500,7 +500,10 @@ public class FragmentDetallePedido extends Fragment {
         instrucciones_entrega="Tocar el Timbre";
         }
         if (check_llamar.isChecked()){
-            instrucciones_entrega=instrucciones_entrega+"LLamar allegar ";
+            instrucciones_entrega="LLamar al llegar ";
+        }
+        if (check_llamar.isChecked() && check_timbre.isChecked() ){
+            instrucciones_entrega="Tocar el Timbre y LLamar al llegar ";
         }
         cod_usuario=mAuth.getCurrentUser().getUid();
 

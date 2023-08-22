@@ -56,6 +56,7 @@ import www.sanju.motiontoast.MotionToastStyle;
 
 public class CenteredTextFragment extends Fragment implements SearchView.OnQueryTextListener {
     RecyclerView contenedorMenu;
+    RecyclerView contenedorLayouts;
     private SpinKitView cargador1,cargador2;
     RecyclerView contenedorTodo,contenedorPromo;
     private DatabaseReference mDatabase;
@@ -64,6 +65,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
     private TextView cabecera2;
 
     AdapterPromo listaAdapterPromo;
+    AdapterLayouts listaAdapterLayout;
     private List<Categorias> elements;
     private List<Productos> elementsProductos;
 
@@ -90,6 +92,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
                 contenedorMenu=view.findViewById(R.id.contenedorMenu);
         contenedorTodo=view.findViewById(R.id.contenedorTodos);
         contenedorPromo=view.findViewById(R.id.contenedorPromo);
+        contenedorLayouts=view.findViewById(R.id.contenedor_layout);
         cargador1=view.findViewById(R.id.cargador1);
         cargador2=view.findViewById(R.id.cargador2);
         cabecera2=view.findViewById(R.id.cabecera2);
@@ -113,7 +116,8 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-       cargar();
+        cargar();
+        cargarLayout();
         cargarTodo();
         cargarPromo();
         ConnectivityManager con=(ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -171,6 +175,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
             @Override
 
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                elements.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                      categorias=dataSnapshot.getValue(Categorias.class);
@@ -284,6 +289,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
             @Override
 
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                elementsProductos.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                     productos=dataSnapshot.getValue(Productos.class);
@@ -352,6 +358,7 @@ public void cargarPromo( ){
         @Override
 
         public void onDataChange(@NonNull DataSnapshot snapshot) {
+            elementsPromo.clear();
             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                 productos=dataSnapshot.getValue(Productos.class);
@@ -416,5 +423,18 @@ public void pasar_promo(Productos item){
       });
       alert=builder.create();
       alert.show();
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void cargarLayout(){
+        ArrayList<Layouts> data= new ArrayList<>();
+        listaAdapterLayout = new AdapterLayouts(getContext(),data);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        contenedorLayouts.setHasFixedSize(true);
+        contenedorLayouts.setLayoutManager(new LinearLayoutManager(getContext()));
+        contenedorLayouts.setLayoutManager(layoutManager);
+        contenedorLayouts.setAdapter(listaAdapterLayout);
+
+        data.add(new Layouts( R.drawable.imagen1));
+        listaAdapterLayout.notifyDataSetChanged();
     }
 }

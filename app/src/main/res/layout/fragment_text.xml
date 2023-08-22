@@ -11,6 +11,23 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MenuSearchContainer"
+            app:layout_constraintVertical_bias="0.00999999">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/contenedor_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="330dp"
             android:orientation="vertical"
@@ -69,14 +86,13 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="320dp"
-            android:layout_marginTop="14dp"
 
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/MenuSearchContainer"
-            app:layout_constraintVertical_bias="0.18">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+            app:layout_constraintVertical_bias="0.0">
 
             <TextView
                 android:id="@+id/cabecera"
@@ -117,7 +133,6 @@
                 android:orientation="horizontal"
                 android:visibility="gone"
                 tools:listitem="@layout/item_producto" />
-
 
 
             <com.github.ybq.android.spinkit.SpinKitView
