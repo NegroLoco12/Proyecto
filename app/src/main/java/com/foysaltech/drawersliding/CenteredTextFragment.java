@@ -28,7 +28,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.material.badge.BadgeDrawable;
@@ -116,10 +118,10 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        cargar();
+     //   cargar();
         cargarLayout();
-        cargarTodo();
-        cargarPromo();
+      //  cargarTodo();
+      //  cargarPromo();
         ConnectivityManager con=(ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo=con.getActiveNetworkInfo();
         if(networkInfo!=null && networkInfo.isConnected()){
@@ -332,13 +334,13 @@ public void cargarPromo( ){
     timer.schedule(new TimerTask() {
         @Override
         public void run() {
-         //   int primer=layoutManager.findLastCompletelyVisibleItemPosition();
+            //   int primer=layoutManager.findLastCompletelyVisibleItemPosition();
             int primer=0;
             int segundo=listaAdapterPromo.getItemCount();
             if(primer<segundo){
                 primer++;
-               String a=Carritos.pedido.size()+"";
-               String b=(listaAdapterPromo.getItemCount()-1)+"";
+                String a=Carritos.pedido.size()+"";
+                String b=(listaAdapterPromo.getItemCount()-1)+"";
 
                 layoutManager.smoothScrollToPosition(contenedorPromo,new RecyclerView.State(),layoutManager.findFirstVisibleItemPosition()+1);
                 if(primer==segundo)  {
@@ -427,14 +429,50 @@ public void pasar_promo(Productos item){
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void cargarLayout(){
         ArrayList<Layouts> data= new ArrayList<>();
-        listaAdapterLayout = new AdapterLayouts(getContext(),data);
+
+        data.add(new Layouts( R.drawable.imagen1));
+        data.add(new Layouts( R.drawable.imagen2));
+        data.add(new Layouts( R.drawable.imagen3));
+        data.add(new Layouts( R.drawable.imagen4));
+         listaAdapterLayout = new AdapterLayouts(getContext(),data);
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         contenedorLayouts.setHasFixedSize(true);
         contenedorLayouts.setLayoutManager(new LinearLayoutManager(getContext()));
         contenedorLayouts.setLayoutManager(layoutManager);
         contenedorLayouts.setAdapter(listaAdapterLayout);
+     //   SnapHelper snapHelper = new PagerSnapHelper();
 
-        data.add(new Layouts( R.drawable.imagen1));
-        listaAdapterLayout.notifyDataSetChanged();
+       // snapHelper.attachToRecyclerView(contenedorLayouts);
+
+
+
+        LinearSnapHelper linearSnapHelper=new LinearSnapHelper();
+        Timer timer= new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                  int primer=layoutManager.findLastCompletelyVisibleItemPosition();
+             //   int primer=0;
+                int segundo=listaAdapterLayout.getItemCount();
+                if(primer==0) {
+                    layoutManager.smoothScrollToPosition(contenedorLayouts ,new RecyclerView.State(),1);
+
+                }
+                if(primer==1) {
+                    layoutManager.smoothScrollToPosition(contenedorLayouts ,new RecyclerView.State(),2);
+
+                }
+                if(primer==2) {
+                    layoutManager.smoothScrollToPosition(contenedorLayouts ,new RecyclerView.State(),3);
+
+                }
+                    if(primer==3)  {
+                        layoutManager.smoothScrollToPosition(contenedorLayouts,new RecyclerView.State(),0);
+
+                    }
+
+
+            }
+        },0,5000);
     }
 }
