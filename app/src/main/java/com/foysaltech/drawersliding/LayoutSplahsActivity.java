@@ -42,37 +42,7 @@ public class LayoutSplahsActivity extends AppCompatActivity {
                 finish();
             }
         }, 4000);
-        cargarTodo();
-    }
-    public void cargarTodo( ){
 
-
-        // Toast.makeText(getContext(),codigo+"",Toast.LENGTH_LONG).show();
-
-        mDatabase.child("Productos").addValueEventListener(new ValueEventListener() {
-            @Override
-
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                    productos=dataSnapshot.getValue(Productos.class);
-                    // productos.setKey(dataSnapshot.getKey());
-                //    elementsProductos.add(productos);
-
-                    //         Toast.makeText(getContext(),elementsProductos+"",Toast.LENGTH_LONG).show();
-
-
-                }
-                //listaAdapterProducto.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-
-
-        });
     }
 
 

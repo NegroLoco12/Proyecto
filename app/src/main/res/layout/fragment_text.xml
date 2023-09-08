@@ -19,11 +19,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/contenedorTodos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/MenuSearchContainer"
+                    tools:listitem="@layout/item_producto" />
+
                 <LinearLayout
                     android:id="@+id/linearLayout4"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -40,11 +53,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="260dp"
                     android:orientation="vertical"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-                    app:layout_constraintVertical_bias="0.35000002">
+                    app:layout_constraintVertical_bias="0.0">
 
 
                     <TextView
@@ -54,7 +68,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         android:background="@drawable/search_edittext_background"
-                        android:elevation="5dp"
+                        android:elevation="2dp"
                         android:padding="8dp"
                         android:paddingStart="18dp"
                         android:text="Promos"
@@ -94,9 +108,10 @@
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="280dp"
+                    android:layout_height="260dp"
 
                     android:orientation="vertical"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +126,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="5dp"
                         android:background="@drawable/search_edittext_background"
-                        android:elevation="5dp"
+                        android:elevation="2dp"
                         android:padding="8dp"
                         android:paddingStart="20dp"
                         android:text="Categorias"
@@ -122,7 +137,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/contenedorMenu"
                         android:layout_width="match_parent"
-                        android:layout_height="230dp"
+                        android:layout_height="200dp"
                         android:layout_marginTop="10dp"
 
                         android:orientation="horizontal"
@@ -130,18 +145,6 @@
                         tools:listitem="@layout/menu_item">
 
                     </androidx.recyclerview.widget.RecyclerView>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/contenedorTodos"
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:orientation="horizontal"
-                        android:visibility="gone"
-                        tools:listitem="@layout/item_producto" />
 
 
                     <com.github.ybq.android.spinkit.SpinKitView

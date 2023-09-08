@@ -102,9 +102,9 @@ public class LoginActivity extends AppCompatActivity {
         spinKitView=(SpinKitView) findViewById(R.id.spin_kit);
         singIn=(Button) findViewById(R.id.singIn);
 
-        mAuth=FirebaseAuth.getInstance();
-        mDatabase= FirebaseDatabase.getInstance().getReference();
-        mAuth.setLanguageCode("es");
+       // mAuth=FirebaseAuth.getInstance();
+        //mDatabase= FirebaseDatabase.getInstance().getReference();
+      //  mAuth.setLanguageCode("es");
 
 
           findViewById(R.id.boton_correo).setOnClickListener(new View.OnClickListener() {
@@ -371,32 +371,6 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
     //////////////////////////////////////////////////////////////////////////////////////////
-    public void crear(String email, String nombres){
-        Map<String, Object> map = new HashMap<>();
-        map.put("nombre", nombres);
-        map.put("apellido", "");
-        map.put("telefono", "");
-        map.put("correo", email);
-        map.put("clave", "");
-        String id = mAuth.getCurrentUser().getUid();
-        mDatabase.child("Usuarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task2) {
-                if (task2.isSuccessful()) {
-                    MotionToast.Companion.createColorToast(LoginActivity.this,//Toast Personalizado
-                            "Registrado",
-                            "Registrado sin problemas!",
-                            MotionToastStyle.SUCCESS,
-                            MotionToast.GRAVITY_BOTTOM,
-                            MotionToast.LONG_DURATION,
-                            ResourcesCompat.getFont(LoginActivity.this, www.sanju.motiontoast.R.font.helvetica_regular));
-                    limpiar();
-                }
-            }
-        });
-        Toast.makeText(LoginActivity.this,"NO Crear",Toast.LENGTH_LONG).show();
-
-    }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void signIn() {

@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         setContentView(R.layout.activity_main);
        // setContentView(R.layout.layout_botton_sheet);
 
-        ObtenerCoordendasActual();
+      //  ObtenerCoordendasActual();
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
         mAuth.setLanguageCode("es");
@@ -593,7 +593,7 @@ public void cargarContribuyentes( ){
                 contribuyentes.setKey(dataSnapshot.getKey());
                 elementsContri.add(contribuyentes);
 
-                //   Toast.makeText(getApplicationContext(),elementsUbi+"",Toast.LENGTH_LONG).show();
+//                 Toast.makeText(getApplicationContext(),elementsUbi.size()+"",Toast.LENGTH_LONG).show();
 
 
             }

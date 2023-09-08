@@ -62,8 +62,8 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
     private SpinKitView cargador1,cargador2;
     RecyclerView contenedorTodo,contenedorPromo;
     private DatabaseReference mDatabase;
-   AdapterCategoria listAdapter;
-   AdapterProductos listaAdapterProducto;
+    AdapterCategoria listAdapter;
+    AdapterProductos listaAdapterProducto;
     private TextView cabecera2;
 
     AdapterPromo listaAdapterPromo;
@@ -76,7 +76,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
     Categorias categorias=new Categorias();
     Productos productos=new Productos();
     SearchView txtBuscar;
-
+    LinearLayout linearLayout4,linearLayout;
     public static CenteredTextFragment createFor(String text) {
 
         CenteredTextFragment fragment = new CenteredTextFragment();
@@ -89,12 +89,12 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-                View view=inflater.inflate(R.layout.fragment_text, container, false);
-                contenedorMenu=view.findViewById(R.id.contenedorMenu);
+        View view=inflater.inflate(R.layout.fragment_text, container, false);contenedorMenu=view.findViewById(R.id.contenedorMenu);
         contenedorTodo=view.findViewById(R.id.contenedorTodos);
         contenedorPromo=view.findViewById(R.id.contenedorPromo);
         contenedorLayouts=view.findViewById(R.id.contenedor_layout);
+        linearLayout4=view.findViewById(R.id.linearLayout4);
+        linearLayout=view.findViewById(R.id.linearLayout);
         cargador1=view.findViewById(R.id.cargador1);
         cargador2=view.findViewById(R.id.cargador2);
         cabecera2=view.findViewById(R.id.cabecera2);
@@ -118,10 +118,10 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-     //   cargar();
+        cargar();
         cargarLayout();
-      //  cargarTodo();
-      //  cargarPromo();
+        cargarTodo();
+        cargarPromo();
         ConnectivityManager con=(ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo=con.getActiveNetworkInfo();
         if(networkInfo!=null && networkInfo.isConnected()){
@@ -184,8 +184,8 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
                     categorias.setKey(dataSnapshot.getKey());
                     elements.add(categorias);
                     cargador1.setVisibility(View.GONE);
-                      contenedorMenu.setVisibility(View.VISIBLE);
-
+                    contenedorMenu.setVisibility(View.VISIBLE);
+                    linearLayout4.setVisibility(View.VISIBLE);
                 }
                  listAdapter.notifyDataSetChanged();
             }
@@ -226,26 +226,36 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
         //filter(newText);
          if (longitud==0){
 
-             //Toast.makeText(getContext(),"ss",Toast.LENGTH_LONG).show();
+
             contenedorTodo.setVisibility(View.GONE);
             contenedorMenu.setVisibility(View.VISIBLE);
             contenedorPromo.setVisibility(View.VISIBLE);
             cabecera2.setVisibility(View.VISIBLE);
-            }
+            linearLayout4.setVisibility(View.VISIBLE);
+             linearLayout.setVisibility(View.VISIBLE);
+
+         }
         if (longitud>0) {
            if (filter(newText) == false) {
                 contenedorTodo.setVisibility(View.GONE);
                 contenedorMenu.setVisibility(View.VISIBLE);
                contenedorPromo.setVisibility(View.VISIBLE);
                cabecera2.setVisibility(View.VISIBLE);
-            }
+               linearLayout4.setVisibility(View.VISIBLE);
+               linearLayout.setVisibility(View.VISIBLE);
+
+           }
             if (filter(newText)== true) {
               //  if (longitud != 0) {
+
                   contenedorTodo.setVisibility(View.VISIBLE);
                   contenedorMenu.setVisibility(View.GONE);
                 contenedorPromo.setVisibility(View.GONE);
                      cabecera2.setVisibility(View.GONE);
-               }
+                linearLayout4.setVisibility(View.GONE);
+                linearLayout.setVisibility(View.GONE);
+
+            }
             }
        // }
         return true;
@@ -329,30 +339,6 @@ public void cargarPromo( ){
     contenedorPromo.setLayoutManager(new LinearLayoutManager(getContext()));
     contenedorPromo.setLayoutManager(layoutManager);
     contenedorPromo.setAdapter(listaAdapterPromo);
-    LinearSnapHelper linearSnapHelper=new LinearSnapHelper();
-    Timer timer= new Timer();
-    timer.schedule(new TimerTask() {
-        @Override
-        public void run() {
-            //   int primer=layoutManager.findLastCompletelyVisibleItemPosition();
-            int primer=0;
-            int segundo=listaAdapterPromo.getItemCount();
-            if(primer<segundo){
-                primer++;
-                String a=Carritos.pedido.size()+"";
-                String b=(listaAdapterPromo.getItemCount()-1)+"";
-
-                layoutManager.smoothScrollToPosition(contenedorPromo,new RecyclerView.State(),layoutManager.findFirstVisibleItemPosition()+1);
-                if(primer==segundo)  {
-                    layoutManager.smoothScrollToPosition(contenedorPromo,new RecyclerView.State(),0);
-                    String ab=layoutManager.findFirstVisibleItemPosition()+"Funcionaaa";
-
-                }
-            }
-
-        }
-    },0,5000);
-
     DatabaseReference correo = mDatabase.child("Productos");
     Query nombre = correo.orderByChild("estado_promo").equalTo(true);
 
@@ -466,10 +452,10 @@ public void pasar_promo(Productos item){
                     layoutManager.smoothScrollToPosition(contenedorLayouts ,new RecyclerView.State(),3);
 
                 }
-                    if(primer==3)  {
-                        layoutManager.smoothScrollToPosition(contenedorLayouts,new RecyclerView.State(),0);
+                if(primer==3)  {
+                    layoutManager.smoothScrollToPosition(contenedorLayouts,new RecyclerView.State(),0);
 
-                    }
+                }
 
 
             }

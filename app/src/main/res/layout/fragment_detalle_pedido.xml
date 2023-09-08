@@ -816,6 +816,8 @@
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
+
+
                 <Button
                     android:id="@+id/btn_enviarPedido"
                     android:layout_width="match_parent"
@@ -833,6 +835,15 @@
                     android:textSize="17sp"
                     app:backgroundTint="@color/pinkColor"
                     app:shapeAppearanceOverlay="@style/Button4" />
+                <com.paypal.checkout.paymentbutton.PayPalButton
+                    android:id="@+id/payment_button_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:paypal_button_color="silver"
+                    app:paypal_button_label="pay"
+                    app:paypal_button_shape="rectangle"
+                    app:paypal_button_size="large"
+                    app:paypal_button_enabled="true" />
             </LinearLayout>
         </ScrollView>
 

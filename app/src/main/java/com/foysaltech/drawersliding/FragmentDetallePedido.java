@@ -1,11 +1,14 @@
 
 package com.foysaltech.drawersliding;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
@@ -15,7 +18,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.PixelCopy;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -26,6 +31,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,7 +46,36 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
+import com.paypal.checkout.PayPalCheckout;
+import com.paypal.checkout.approve.Approval;
+import com.paypal.checkout.approve.OnApprove;
+import com.paypal.checkout.config.CheckoutConfig;
+import com.paypal.checkout.config.Environment;
+import com.paypal.checkout.createorder.CreateOrder;
+import com.paypal.checkout.createorder.CreateOrderActions;
+import com.paypal.checkout.createorder.CurrencyCode;
+import com.paypal.checkout.createorder.OrderIntent;
+import com.paypal.checkout.createorder.UserAction;
+import com.paypal.checkout.order.Amount;
+import com.paypal.checkout.order.AppContext;
+import com.paypal.checkout.order.CaptureOrderResult;
+import com.paypal.checkout.order.OnCaptureComplete;
 
+
+import com.paypal.checkout.order.PurchaseUnit;
+import com.paypal.checkout.paymentbutton.PaymentButton;
+
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,6 +83,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
@@ -53,6 +94,11 @@ import www.sanju.motiontoast.MotionToastStyle;
 
 
 public class FragmentDetallePedido extends Fragment {
+    private RequestQueue queue;
+    int PAYPAL_REQUEST_CODE=123;
+    public  static PayPalConfiguration configuration;
+    Object moneda_america,moneda_paragua;
+    PaymentButton paymentButtonContainer;
     int validacion1,validacion2,validacion3,validacion4=0;
     private Button btn_enviarPedido,btn_agg_ubi,btn_add_datos;
     private String metodo_entrega, direccion_entrega,instrucciones_entrega,datos_facturacion,metodo_pago,metodo_pago_online;
@@ -97,6 +143,7 @@ public class FragmentDetallePedido extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
         }
     }
@@ -144,10 +191,18 @@ public class FragmentDetallePedido extends Fragment {
         check6=view.findViewById(R.id.check6);
         chec5_bien=view.findViewById(R.id.chec5_bien);
         chec1_bien=view.findViewById(R.id.chec1_bien);
+        queue= Volley.newRequestQueue(getActivity());
+        calcularCambio();
         mAuth=FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
         mAuth.setLanguageCode("es");
         mDatabase= FirebaseDatabase.getInstance().getReference();
+        paymentButtonContainer=view.findViewById(R.id.payment_button_container);
+        configuration=new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX).clientId("AQ-XwepAEfVeRbs57LsQ5hP1TaOkuV3ECVWD7T8cjW8N-rPmlekqffWaISmKMfLyjqT5H3vrEYYIaRqo");
+
+
+
+
 
         cargarUbi();
         cargar_metodo();
@@ -273,15 +328,15 @@ public class FragmentDetallePedido extends Fragment {
                 }
             }
         });
-        btn_enviarPedido.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-             if(validacion()){
-
-                cargar_pedido_cabecera();
-                cargar_pedido_detalle();
-            }}
-        });
+//        btn_enviarPedido.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//             if(validacion()){
+//
+//                cargar_pedido_cabecera();
+//                cargar_pedido_detalle();
+//            }}
+//        });
         check_timbre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -746,4 +801,55 @@ public void cargar_metodo_pago(){
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+    private void calcularCambio(){
+        String apiKey="ff0ceedeeda8e7ef572244613b0dfd00";
+        String symbolos="PYG,USD";
+        String url="http://data.fixer.io/api/latest?access_key="+apiKey+"&symbols="+symbolos+"&format=1";
+        final JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+        try {
+           // String base=response.getString("name");
+            JSONObject rates= response.getJSONObject("rates");
+            Iterator<String> itr=rates.keys();
+          //  while(itr.hasNext()){
+                String key =itr.next();
+                 moneda_paragua =rates.get("PYG");
+                 moneda_america =rates.get("USD");
+              //  Toast.makeText(getContext(),moneda_america+" "+modeda_paragua,Toast.LENGTH_SHORT).show();
+           // }
+        }catch (JSONException e){
+            Toast.makeText(getContext(),e+"",Toast.LENGTH_SHORT).show();
+        }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+             //   Toast.makeText(getContext(),error+"",Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(request);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==PAYPAL_REQUEST_CODE){
+            PaymentConfirmation paymentConfirmation=data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+            if (paymentConfirmation!=null){
+
+                try {
+                    String paymentDetails=paymentConfirmation.toJSONObject().toString();
+                    JSONObject object=new JSONObject(paymentDetails);
+                } catch (JSONException ex) {
+                    Toast.makeText(getContext(),ex.getLocalizedMessage()+"",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        } else if (requestCode== Activity.RESULT_CANCELED) {
+
+            Toast.makeText(getContext(),"error",Toast.LENGTH_SHORT).show();
+        }
+    }
 }
