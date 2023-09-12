@@ -185,7 +185,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
                     elements.add(categorias);
                     cargador1.setVisibility(View.GONE);
                     contenedorMenu.setVisibility(View.VISIBLE);
-                    linearLayout4.setVisibility(View.VISIBLE);
+
                 }
                  listAdapter.notifyDataSetChanged();
             }
@@ -355,7 +355,7 @@ public void cargarPromo( ){
 
                 cargador2.setVisibility(View.GONE);
                 contenedorPromo.setVisibility(View.VISIBLE);
-
+                linearLayout4.setVisibility(View.VISIBLE);
             }
             listaAdapterPromo.notifyDataSetChanged();
         }

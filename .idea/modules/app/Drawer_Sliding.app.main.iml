@@ -71,6 +71,7 @@
     <orderEntry type="library" name="Gradle: com.sun.mail:android-mail:1.6.7" level="project" />
     <orderEntry type="library" name="Gradle: com.sun.mail:android-activation:1.6.7" level="project" />
     <orderEntry type="library" name="Gradle: androidx.collection:collection-ktx:1.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: cz.msebera.android:httpclient:4.5.8" level="project" />
     <orderEntry type="library" name="Gradle: androidx.appcompat:appcompat:1.6.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.activity:activity:1.8.0-alpha06@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.core:core:1.9.0@aar" level="project" />
@@ -156,8 +157,7 @@
     <orderEntry type="library" name="Gradle: androidx.slidingpanelayout:slidingpanelayout:1.2.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.navigation:navigation-ui:2.7.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.paypal.checkout:android-sdk:1.1.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.paypal.sdk:paypal-android-sdk:2.16.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: io.card:android-sdk:5.5.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.volley:volley:1.2.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.loopj.android:android-async-http:1.4.11@aar" level="project" />
   </component>
 </module>

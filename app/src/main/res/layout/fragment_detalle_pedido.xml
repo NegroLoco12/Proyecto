@@ -817,7 +817,6 @@
 
                 </LinearLayout>
 
-
                 <Button
                     android:id="@+id/btn_enviarPedido"
                     android:layout_width="match_parent"
@@ -835,15 +834,27 @@
                     android:textSize="17sp"
                     app:backgroundTint="@color/pinkColor"
                     app:shapeAppearanceOverlay="@style/Button4" />
-                <com.paypal.checkout.paymentbutton.PayPalButton
-                    android:id="@+id/payment_button_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:paypal_button_color="silver"
-                    app:paypal_button_label="pay"
-                    app:paypal_button_shape="rectangle"
-                    app:paypal_button_size="large"
-                    app:paypal_button_enabled="true" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnPaypal"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+
+                    android:drawableStart="@drawable/pp_h_rgb_logo_tn"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="Añadir"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.92"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
             </LinearLayout>
         </ScrollView>
 

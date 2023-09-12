@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.paypal.checkout.paymentbutton.PayPalButton;
+import com.paypal.checkout.paymentbutton.PaymentButtonContainer;
 
 import java.util.ArrayList;
 import java.util.Base64;

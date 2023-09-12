@@ -34,17 +34,20 @@
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
+
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="http"
-                    android:host="example.com" />
+                    android:scheme="https"
+                    android:host="closed-chaplain.000webhostapp.com"
+                    android:pathPattern="/usuario" />
             </intent-filter>
         </activity>
         <activity

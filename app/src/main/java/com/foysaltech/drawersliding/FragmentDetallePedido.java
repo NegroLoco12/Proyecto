@@ -5,10 +5,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
@@ -31,6 +33,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Header;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -47,11 +50,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.NotNull;
-import com.paypal.android.sdk.payments.PayPalConfiguration;
-import com.paypal.android.sdk.payments.PayPalPayment;
-import com.paypal.android.sdk.payments.PayPalService;
-import com.paypal.android.sdk.payments.PaymentActivity;
-import com.paypal.android.sdk.payments.PaymentConfirmation;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.paypal.checkout.PayPalCheckout;
 import com.paypal.checkout.approve.Approval;
 import com.paypal.checkout.approve.OnApprove;
@@ -70,8 +71,10 @@ import com.paypal.checkout.order.OnCaptureComplete;
 
 import com.paypal.checkout.order.PurchaseUnit;
 import com.paypal.checkout.paymentbutton.PaymentButton;
+import com.paypal.checkout.paymentbutton.PaymentButtonContainer;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -79,6 +82,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -89,18 +93,20 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.UUID;
 
+import cz.msebera.android.httpclient.HttpEntity;
+import cz.msebera.android.httpclient.entity.StringEntity;
 import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
 
 
 public class FragmentDetallePedido extends Fragment {
     private RequestQueue queue;
-    int PAYPAL_REQUEST_CODE=123;
-    public  static PayPalConfiguration configuration;
+    private static String accessToken;
+
     Object moneda_america,moneda_paragua;
-    PaymentButton paymentButtonContainer;
+
     int validacion1,validacion2,validacion3,validacion4=0;
-    private Button btn_enviarPedido,btn_agg_ubi,btn_add_datos;
+    private Button btn_enviarPedido,btn_agg_ubi,btn_add_datos,btnPaypal;
     private String metodo_entrega, direccion_entrega,instrucciones_entrega,datos_facturacion,metodo_pago,metodo_pago_online;
     private List<MetodoEntrega> elements_metodo;
     private TextView txt_sub_total_compra,txt_descuento_compra,txt_delivery_compra,txt_total_compra;
@@ -177,6 +183,7 @@ public class FragmentDetallePedido extends Fragment {
         btn_enviarPedido=view.findViewById(R.id.btn_enviarPedido);
         btn_agg_ubi=view.findViewById(R.id.btn_agg_ubi);
         btn_add_datos=view.findViewById(R.id.btn_add_datos);
+        btnPaypal=view.findViewById(R.id.btnPaypal);
         check_llamar=view.findViewById(R.id.check_llamar);
         check_timbre=view.findViewById(R.id.check_timbre);
         chec3_bien=view.findViewById(R.id.chec3_bien);
@@ -197,8 +204,15 @@ public class FragmentDetallePedido extends Fragment {
         mDatabase= FirebaseDatabase.getInstance().getReference();
         mAuth.setLanguageCode("es");
         mDatabase= FirebaseDatabase.getInstance().getReference();
-        paymentButtonContainer=view.findViewById(R.id.payment_button_container);
-        configuration=new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX).clientId("AQ-XwepAEfVeRbs57LsQ5hP1TaOkuV3ECVWD7T8cjW8N-rPmlekqffWaISmKMfLyjqT5H3vrEYYIaRqo");
+        getAccessToken();
+
+        btnPaypal.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                createOrder(); //this will trigger the checkout flow
+            }
+        });
 
 
 
@@ -831,25 +845,104 @@ public void cargar_metodo_pago(){
         });
         queue.add(request);
     }
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==PAYPAL_REQUEST_CODE){
-            PaymentConfirmation paymentConfirmation=data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
-            if (paymentConfirmation!=null){
 
+    String encodeStringToBase64(){
+        String input = "AQ-XwepAEfVeRbs57LsQ5hP1TaOkuV3ECVWD7T8cjW8N-rPmlekqffWaISmKMfLyjqT5H3vrEYYIaRqo:EKj5Onvud9DN1-fj6KHMt8WCxCF1gmSIne4HFPS9rH45DGhno_0RzoeiXcITFwMxhLvgUsw-krEWm4u_";
+        String encodedString = Base64.getEncoder().encodeToString(input.getBytes());
+        return encodedString;
+    }
+
+    void getAccessToken(){
+        String AUTH = encodeStringToBase64();
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.addHeader("Accept", "application/json");
+        client.addHeader("Content-type", "application/x-www-form-urlencoded");
+        client.addHeader("Authorization", "Basic "+ AUTH);
+        String jsonString = "grant_type=client_credentials";
+
+        HttpEntity entity = new StringEntity(jsonString, "utf-8");
+
+        client.post(getContext(), "https://api-m.sandbox.paypal.com/v1/oauth2/token", entity, "application/x-www-form-urlencoded",new TextHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, String responseString, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, String responseString) {
                 try {
-                    String paymentDetails=paymentConfirmation.toJSONObject().toString();
-                    JSONObject object=new JSONObject(paymentDetails);
-                } catch (JSONException ex) {
-                    Toast.makeText(getContext(),ex.getLocalizedMessage()+"",Toast.LENGTH_SHORT).show();
+                    JSONObject jobj = new JSONObject(responseString);
+
+                    accessToken = jobj.getString("access_token");
+                    Log.e("accessToken", accessToken);
+                } catch (JSONException e) {
+                    //    e.printStackTrace();
                 }
             }
 
-        } else if (requestCode== Activity.RESULT_CANCELED) {
-
-            Toast.makeText(getContext(),"error",Toast.LENGTH_SHORT).show();
-        }
+        });
     }
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+public void createOrder(){
+    AsyncHttpClient client = new AsyncHttpClient();
+    client.addHeader("Accept", "application/json");
+    client.addHeader("Content-type", "application/json");
+    client.addHeader("Authorization", "Bearer " + accessToken);
+
+    String order = "{"
+            + "\"intent\": \"CAPTURE\","
+            + "\"purchase_units\": [\n" +
+            "      {\n" +
+            "        \"amount\": {\n" +
+            "          \"currency_code\": \"USD\",\n" +
+            "          \"value\": \"500.00\"\n" +
+            "        }\n" +
+            "      }\n" +
+            "    ],\"application_context\": {\n" +
+            "        \"brand_name\": \"TEST_STORE\",\n" +
+            "        \"return_url\": \"https://closed-chaplain.000webhostapp.com/usuario\",\n" +
+            "        \"cancel_url\": \"http://example.com\"\n" +
+            "    }}";
+    HttpEntity entity = new StringEntity(order, "utf-8");
+
+    client.post(getContext(), "https://api-m.sandbox.paypal.com/v2/checkout/orders", entity, "application/json",new TextHttpResponseHandler() {
+
+        @Override
+        public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, String responseString, Throwable throwable) {
+            Log.e("RESPONSE", responseString);
+        }
+
+        @Override
+        public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, String responseString) {
+            Log.e("RESPONSE", responseString);
+            try {
+                JSONArray links = new JSONObject(responseString).getJSONArray("links");
+
+                //iterate the array to get the approval link
+                for (int i = 0; i < links.length(); ++i) {
+                    String rel = links.getJSONObject(i).getString("rel");
+                    if (rel.equals("approve")){
+                        JSONArray linkObj=new JSONArray();
+                        String link = links.getJSONObject(i).getString("href");
+                        //redirect to this link via CCT
+                        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                        CustomTabsIntent customTabsIntent = builder.build();
+                        customTabsIntent.launchUrl(getContext(), Uri.parse(link));
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    });
+}
+
 }
