@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             manager.beginTransaction().add(R.id.container, new FragmentPago()).addToBackStack(null).commit();
             getSupportFragmentManager().setFragmentResult("keytoquen", bundle);
 
-            Toast.makeText(MainActivity.this, users.getNombre() + "", Toast.LENGTH_LONG).show();
+       //     Toast.makeText(MainActivity.this, redirectUri.getQueryParameter("token")+ "", Toast.LENGTH_LONG).show();
         }else {
             adapter.setSelected(POS_DASHBOARD);
         }

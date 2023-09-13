@@ -342,15 +342,15 @@ public class FragmentDetallePedido extends Fragment {
                 }
             }
         });
-//        btn_enviarPedido.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//             if(validacion()){
-//
-//                cargar_pedido_cabecera();
-//                cargar_pedido_detalle();
-//            }}
-//        });
+        btn_enviarPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            if(validacion()){
+
+                cargar_pedido_cabecera();
+                cargar_pedido_detalle();
+         }}
+        });
         check_timbre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

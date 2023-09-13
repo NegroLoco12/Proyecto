@@ -25,7 +25,7 @@
 
         <ImageView
             android:id="@+id/imagen_promo"
-            android:layout_width="160dp"
+            android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.android.volley.Header;
 import com.loopj.android.http.AsyncHttpClient;
@@ -51,7 +52,8 @@ public class FragmentPago extends Fragment {
         getParentFragmentManager().setFragmentResultListener("keytoquen", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-               order= result.getString("keytoquen");
+                order= result.getString("token");
+                Toast.makeText(getContext(),""+order,Toast.LENGTH_SHORT).show();
             }
         });
         btn_pago.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +75,7 @@ public class FragmentPago extends Fragment {
         client.addHeader("Content-type", "application/json");
         client.addHeader("Authorization", "Bearer " + accessToken);
 
-        client.post("https://api-m.sandbox.paypal.com/v2/checkout/orders/"+orderID+"/capture", new TextHttpResponseHandler() {
+        client.post("https://api.sandbox.paypal.com/v2/checkout/orders/"+orderID+"/capture", new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, String responseString, Throwable throwable) {
                 Log.e("RESPONSE", responseString);
@@ -84,7 +86,7 @@ public class FragmentPago extends Fragment {
                 try {
                     JSONObject jobj = new JSONObject(responseString);
                     //redirect back to home page of app
-                    Fragment selectedScreen = new FragmentHistorial();
+                    Fragment selectedScreen = new CenteredTextFragment() ;
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
 
                 } catch (JSONException e) {
