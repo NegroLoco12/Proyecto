@@ -108,94 +108,99 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       // setContentView(R.layout.layout_botton_sheet);
-
-      //  ObtenerCoordendasActual();
-        mAuth=FirebaseAuth.getInstance();
-        mDatabase= FirebaseDatabase.getInstance().getReference();
-        mAuth.setLanguageCode("es");
-        mDatabase= FirebaseDatabase.getInstance().getReference();
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri redirectUri = appLinkIntent.getData();
-        if(redirectUri!=null) {
-            Log.e("TOKEEEN", redirectUri.getQueryParameter("token"));
+
+
+            ObtenerCoordendasActual();
+            mAuth = FirebaseAuth.getInstance();
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            mAuth.setLanguageCode("es");
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+            slidingRootNav = new SlidingRootNavBuilder(this)
+                    .withToolbarMenuToggle(toolbar)
+                    .withMenuOpened(false)
+                    .withContentClickableWhenMenuOpened(false)
+                    .withSavedState(savedInstanceState)
+                    .withMenuLayout(R.layout.menu_left_drawer)
+                    .inject();
+
+            screenIcons = loadScreenIcons();
+            screenTitles = loadScreenTitles();
+
+            DrawerAdapter adapter = new DrawerAdapter(Arrays.asList(
+                    createItemFor(0).setChecked(true),
+                    createItemFor(1),
+
+                    createItemFor(2),
+                    createItemFor(3),
+                    createItemFor(4),
+                    createItemFor(5),
+                    createItemFor(6),
+
+                    createItemFor(7)));
+            adapter.setListener(this);
+
+            list = findViewById(R.id.lista);
+            list.setNestedScrollingEnabled(false);
+            list.setLayoutManager(new LinearLayoutManager(this));
+            list.setAdapter(adapter);
+        if (redirectUri != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("token", redirectUri.getQueryParameter("token"));
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().add(R.id.container, new FragmentPago()).addToBackStack(null).commit();
+            getSupportFragmentManager().setFragmentResult("keytoquen", bundle);
+
+            Toast.makeText(MainActivity.this, users.getNombre() + "", Toast.LENGTH_LONG).show();
+        }else {
+            adapter.setSelected(POS_DASHBOARD);
         }
-        slidingRootNav = new SlidingRootNavBuilder(this)
-                .withToolbarMenuToggle(toolbar)
-                .withMenuOpened(false)
-                .withContentClickableWhenMenuOpened(false)
-                .withSavedState(savedInstanceState)
-                .withMenuLayout(R.layout.menu_left_drawer)
-                .inject();
+            ///////////////////////////////////////////////////////////////////////////////
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String name = user.getEmail();
+            DatabaseReference correo = mDatabase.child("Usuarios");
+            Query nombre = correo.orderByChild("correo").equalTo(name);
 
-        screenIcons = loadScreenIcons();
-        screenTitles = loadScreenTitles();
+            nombre.addValueEventListener(new ValueEventListener() {
 
-        DrawerAdapter adapter = new DrawerAdapter(Arrays.asList(
-                createItemFor(0).setChecked(true),
-                createItemFor(1),
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                createItemFor(2),
-                createItemFor(3),
-                createItemFor(4),
-                createItemFor(5),
-                createItemFor(6),
+                        users = dataSnapshot.getValue(User.class);
+                        // productos.setKey(dataSnapshot.getKey());
+                        // elements.add(users); // try {
+                        //    String a =     datos.getValue().toString();
+                        //  JSONObject obj = new JSONObject(a);
+                        //  aa=obj.getString("nombre");
+                        //    Toast.makeText(MainActivity.this,users.getNombre()+"",Toast.LENGTH_LONG).show();
+                        DrawerAdapter adapter2 = new DrawerAdapter(Arrays.asList(createItemFor2(8, users.getNombre())));
 
-                createItemFor(7)));
-        adapter.setListener(this);
+                        RecyclerView list2 = findViewById(R.id.list2);
+                        list2.setNestedScrollingEnabled(false);
+                        list2.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                        list2.setAdapter(adapter2);
+                        //   } catch (JSONException e) {
 
-         list = findViewById(R.id.lista);
-        list.setNestedScrollingEnabled(false);
-        list.setLayoutManager(new LinearLayoutManager(this));
-        list.setAdapter(adapter);
-
-        adapter.setSelected(POS_DASHBOARD);
-        ///////////////////////////////////////////////////////////////////////////////
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String name=user.getEmail();
-        DatabaseReference correo = mDatabase.child("Usuarios");
-        Query nombre = correo.orderByChild("correo").equalTo(name);
-
-        nombre.addValueEventListener(new ValueEventListener() {
-
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                    users=dataSnapshot.getValue(User.class);
-                    // productos.setKey(dataSnapshot.getKey());
-                    // elements.add(users); // try {
-                    //    String a =     datos.getValue().toString();
-                    //  JSONObject obj = new JSONObject(a);
-                    //  aa=obj.getString("nombre");
-                    //    Toast.makeText(MainActivity.this,users.getNombre()+"",Toast.LENGTH_LONG).show();
-                    DrawerAdapter adapter2 = new DrawerAdapter(Arrays.asList(createItemFor2(8,users.getNombre())));
-
-                    RecyclerView list2 = findViewById(R.id.list2);
-                    list2.setNestedScrollingEnabled(false);
-                    list2.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                    list2.setAdapter(adapter2);
-                    //   } catch (JSONException e) {
-
-                    //  }
+                        //  }
 
 
-
-
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
 
 
 /////////////////////////////////////////////////////////////////////////////////////
+
     }
 
     @Override
