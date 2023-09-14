@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+
 public class FragmentPago extends Fragment {
 
     Button btn_pago;
@@ -66,6 +67,7 @@ public class FragmentPago extends Fragment {
     }
 
 
+
     void captureOrder(String orderID){
         //get the accessToken from MainActivity
         String accessToken = FragmentDetallePedido.getMyAccessToken();
@@ -86,8 +88,8 @@ public class FragmentPago extends Fragment {
                 try {
                     JSONObject jobj = new JSONObject(responseString);
                     //redirect back to home page of app
-                    Fragment selectedScreen = new CenteredTextFragment() ;
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
+                    //  Fragment selectedScreen = new CenteredTextFragment() ;
+                    //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
 
                 } catch (JSONException e) {
 
@@ -99,7 +101,5 @@ public class FragmentPago extends Fragment {
 
         });
     }
-
 }
-
 

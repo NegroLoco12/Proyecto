@@ -1,5 +1,7 @@
 package com.foysaltech.drawersliding;
 
+import static com.loopj.android.http.AsyncHttpClient.log;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class LayoutSplahsActivity extends AppCompatActivity {
@@ -32,9 +36,7 @@ public class LayoutSplahsActivity extends AppCompatActivity {
         Animation animation1= AnimationUtils.loadAnimation(this, R.anim.arriba);
         ImageView logo =findViewById(R.id.imageView2);
         logo.setAnimation(animation1);
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        new Handler().postDelayed(new Runnable() {
+         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent=new Intent(LayoutSplahsActivity.this, LoginActivity.class);

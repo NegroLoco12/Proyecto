@@ -56,6 +56,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
@@ -151,16 +153,17 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             list.setLayoutManager(new LinearLayoutManager(this));
             list.setAdapter(adapter);
         if (redirectUri != null) {
-            Bundle bundle = new Bundle();
-            bundle.putString("token", redirectUri.getQueryParameter("token"));
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().add(R.id.container, new FragmentPago()).addToBackStack(null).commit();
-            getSupportFragmentManager().setFragmentResult("keytoquen", bundle);
+            captureOrder(redirectUri.getQueryParameter("token"));
+//            Bundle bundle = new Bundle();
+//            bundle.putString("token", redirectUri.getQueryParameter("token"));
+//            FragmentManager manager = getSupportFragmentManager();
+//            manager.beginTransaction().add(R.id.container, new FragmentPago()).addToBackStack(null).commit();
+//            getSupportFragmentManager().setFragmentResult("keytoquen", bundle);
 
        //     Toast.makeText(MainActivity.this, redirectUri.getQueryParameter("token")+ "", Toast.LENGTH_LONG).show();
-        }else {
-            adapter.setSelected(POS_DASHBOARD);
         }
+            adapter.setSelected(POS_DASHBOARD);
+
             ///////////////////////////////////////////////////////////////////////////////
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String name = user.getEmail();
@@ -680,6 +683,40 @@ public void cargarContribuyentes( ){
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
+void captureOrder(String orderID){
+    //get the accessToken from MainActivity
+    String accessToken = FragmentDetallePedido.getMyAccessToken();
 
+    AsyncHttpClient client = new AsyncHttpClient();
+    client.addHeader("Accept", "application/json");
+    client.addHeader("Content-type", "application/json");
+    client.addHeader("Authorization", "Bearer " + accessToken);
+
+    client.post("https://api.sandbox.paypal.com/v2/checkout/orders/"+orderID+"/capture", new TextHttpResponseHandler() {
+        @Override
+        public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, String responseString, Throwable throwable) {
+            Log.e("RESPONSE", responseString);
+        }
+
+        @Override
+        public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, String responseString) {
+            try {
+                JSONObject jobj = new JSONObject(responseString);
+              //  Toast.makeText(getApplicationContext(),responseString+"",Toast.LENGTH_LONG).show();
+Log.e("esteeeeeeeeeeee",responseString);
+                //redirect back to home page of app
+                //  Fragment selectedScreen = new CenteredTextFragment() ;
+                //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
+
+            } catch (JSONException e) {
+
+            }
+        }
+
+
+
+
+    });
+}
 
 }

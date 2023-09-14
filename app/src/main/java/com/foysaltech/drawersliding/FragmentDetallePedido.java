@@ -102,6 +102,7 @@ import www.sanju.motiontoast.MotionToastStyle;
 public class FragmentDetallePedido extends Fragment {
     private RequestQueue queue;
     private static String accessToken;
+    double cambio=0.00014;
 
     Object moneda_america,moneda_paragua;
 
@@ -206,13 +207,13 @@ public class FragmentDetallePedido extends Fragment {
         mDatabase= FirebaseDatabase.getInstance().getReference();
         getAccessToken();
 
-        btnPaypal.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-
-                createOrder(); //this will trigger the checkout flow
-            }
-        });
+//        btnPaypal.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+//
+//                createOrder(); //this will trigger the checkout flow
+//            }
+//        });
 
 
 
@@ -346,9 +347,10 @@ public class FragmentDetallePedido extends Fragment {
             @Override
             public void onClick(View v) {
             if(validacion()){
-
+//createOrder();
                 cargar_pedido_cabecera();
                 cargar_pedido_detalle();
+               enviarPago();
          }}
         });
         check_timbre.setOnClickListener(new View.OnClickListener() {
@@ -583,7 +585,7 @@ public class FragmentDetallePedido extends Fragment {
         map.put("fecha", fecha);
         map.put("total", total);
         map.put("descuento", descuento);
-        map.put("delivery", delivery);
+
         map.put("estado", true);
         map.put("metodo_entrega", metodo_entrega);
         map.put("direccion_entrega", direccion_entrega);
@@ -595,9 +597,12 @@ public class FragmentDetallePedido extends Fragment {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
+                    if (metodo_pago=="ONLINE"){
+
+                    }else{
                     MotionToast.Companion.createColorToast(getActivity(),
-                            "Registrado",
-                            "Registrado sin problemas!",
+                            "ENVIADO",
+                            "Enviado sin problemas!",
                             MotionToastStyle.SUCCESS,
                             MotionToast.GRAVITY_BOTTOM,
                             MotionToast.LONG_DURATION,
@@ -606,6 +611,7 @@ public class FragmentDetallePedido extends Fragment {
                     getParentFragmentManager().beginTransaction().replace(R.id.container, selectedScreen).commit();
                     Carritos.pedido.clear();
 
+                }
                 }
             }
         });
@@ -890,10 +896,19 @@ public void cargar_metodo_pago(){
 
     //////////////////////////////////////////////////////////////////////////////////////////////
 public void createOrder(){
-    AsyncHttpClient client = new AsyncHttpClient();
+   AsyncHttpClient client = new AsyncHttpClient();
     client.addHeader("Accept", "application/json");
     client.addHeader("Content-type", "application/json");
     client.addHeader("Authorization", "Bearer " + accessToken);
+
+    int total=Carritos.getSubTotalDefinitivo();
+    DecimalFormat df = new DecimalFormat("#.00");
+    double b=total * cambio;
+    String letra= String.valueOf("          \""+"value"+"\""+":"+"\""+df.format(b).replaceAll(",", ".")+"\""+"\n");
+
+
+
+
 
     String order = "{"
             + "\"intent\": \"CAPTURE\","
@@ -901,7 +916,7 @@ public void createOrder(){
             "      {\n" +
             "        \"amount\": {\n" +
             "          \"currency_code\": \"USD\",\n" +
-            "          \"value\": \"500.00\"\n" +
+            letra +
             "        }\n" +
             "      }\n" +
             "    ],\"application_context\": {\n" +
@@ -924,7 +939,7 @@ public void createOrder(){
             try {
                 JSONArray links = new JSONObject(responseString).getJSONArray("links");
 
-                //iterate the array to get the approval link
+//                //iterate the array to get the approval link
                 for (int i = 0; i < links.length(); ++i) {
                     String rel = links.getJSONObject(i).getString("rel");
                     if (rel.equals("approve")){
@@ -946,6 +961,13 @@ public void createOrder(){
 }
     public static String getMyAccessToken(){
         return accessToken;
+    }
+
+    public void enviarPago(){
+        if(metodo_pago=="ONLINE"){
+            createOrder();
+
+        }
     }
 
 
