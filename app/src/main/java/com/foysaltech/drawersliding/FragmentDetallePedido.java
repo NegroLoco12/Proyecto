@@ -801,7 +801,7 @@ public void cargar_metodo_pago(){
             imageView5.setImageResource(R.drawable.flecha_hacia_abajo);
             check5.setVisibility(View.VISIBLE);
             chec5_bien.setVisibility(View.GONE);
-            cardView6.setVisibility(View.VISIBLE);
+            cardView6.setVisibility(View.GONE);
             metodo_pago="ONLINE";
             validacion4=1;
 
