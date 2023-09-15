@@ -562,11 +562,11 @@ public class FragmentDetallePedido extends Fragment {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
         String fecha = df.format(date);
-        String cod_usuario,total, descuento,delivery;
+        String cod_usuario,total, descuento,subTotal;
 
         total=txt_total_compra.getText().toString();
         descuento=txt_descuento_compra.getText().toString();
-        delivery=txt_delivery_compra.getText().toString();
+        subTotal=txt_sub_total_compra.getText().toString();
         if (check_timbre.isChecked()){
         instrucciones_entrega="Tocar el Timbre";
         }
@@ -585,8 +585,9 @@ public class FragmentDetallePedido extends Fragment {
         map.put("fecha", fecha);
         map.put("total", total);
         map.put("descuento", descuento);
+        map.put("subTotal", subTotal);
 
-        map.put("estado", true);
+        map.put("estado", 0);
         map.put("metodo_entrega", metodo_entrega);
         map.put("direccion_entrega", direccion_entrega);
         map.put("instrucciones_entrega", instrucciones_entrega);

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -64,7 +65,12 @@ private CardView cardViewHistorial;
             txt_nro.setText("Número de Pedido: "+(posi+1));
             txt_fecha.setText("Fecha del pedido: "+item.getFecha()+" "+item.getHora());
             txt_total.setText("Total del pedido: "+item.getTotal());
-            txt_estado.setText("Estado: ");
+            if (item.getEstado()==0){
+              txt_estado.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.estado_proceso) );
+                txt_estado.setText("En proceso");
+            }
+
+
             cardViewHistorial.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

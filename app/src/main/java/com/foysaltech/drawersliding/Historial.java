@@ -19,16 +19,19 @@ public class Historial {
         this.fecha = fecha;
     }
 
-    public Boolean getEstado() {
+
+
+    private String fecha;
+
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 
-    private String fecha;
-  private Boolean estado;
+    private int estado;
 
     public String getHora() {
         return hora;
