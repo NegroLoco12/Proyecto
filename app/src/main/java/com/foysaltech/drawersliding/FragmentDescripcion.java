@@ -27,6 +27,7 @@ public class FragmentDescripcion extends Fragment {
     TextView txt_nombre_producto,txt_descripcion_producto,txt_precio_productos,txt_cantidad,txt_descuento_descripcion;
      ImageView imagen;
     int precio_inicial,precio_real;
+    int descuentoUni;
     Bitmap bitmap;
     int descuentito;
      String codigo_articulo;
@@ -78,6 +79,7 @@ public class FragmentDescripcion extends Fragment {
                 imagen.setImageBitmap(bitmap);
                 precio_real=Integer.parseInt(result.getString("precio_producto"));
                 descuentito=0;
+                descuentoUni=0;
               }
         });
         getParentFragmentManager().setFragmentResultListener("keypromo", this, new FragmentResultListener() {
@@ -95,6 +97,8 @@ public class FragmentDescripcion extends Fragment {
                 imagen.setImageBitmap(bitmap);
                 descuentito=Integer.parseInt(result.getString("descuento_producto"));
                 precio_real=Integer.parseInt(result.getString("precio_producto"));
+                descuentoUni=Integer.parseInt(result.getString("precio_producto"))-Integer.parseInt(result.getString("descuento_producto"));
+;
             }
         });
         button_aumentar.setOnClickListener(new View.OnClickListener() {
@@ -146,10 +150,11 @@ public class FragmentDescripcion extends Fragment {
         pedidos.setImagen(bitmap);
         pedidos.setPrecio_inicial(precio_inicial);
         pedidos.setCodigo(codigo_articulo);
-        pedidos.setNombre(nombre);
+        pedidos.setNombre(descripcion);
         pedidos.setPrecio_real(precio_real*cantidad);
         pedidos.setPrecio_descuento(descuentito);
         pedidos.setPrecio_descuento_fijo(precio_real);
+        pedidos.setDescuentoUni(descuentoUni);
         Carritos.agregarPedidos(pedidos);
         MotionToast.Companion.createColorToast(getActivity(),//Toast Personalizado
                 "Exito!",

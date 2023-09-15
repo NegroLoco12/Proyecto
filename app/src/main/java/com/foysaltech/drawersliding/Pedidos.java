@@ -15,6 +15,16 @@ public class Pedidos {
     String nombre;
     String codigo;
 
+    public int getDescuentoUni() {
+        return descuentoUni;
+    }
+
+    public void setDescuentoUni(int descuentoUni) {
+        this.descuentoUni = descuentoUni;
+    }
+
+    int descuentoUni;
+
     public Integer getPrecio_descuento() {
         return precio_descuento;
     }

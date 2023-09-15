@@ -631,8 +631,8 @@ public class FragmentDetallePedido extends Fragment {
             map.put("cod_producto", Carritos.pedido.get(i).getCodigo());
             map.put("nombre_producto", nombre);
             map.put("cantidad_producto", Carritos.pedido.get(i).getCantidad());
-
-            map.put("descuento_producto", Carritos.pedido.get(i).getPrecio_descuento());
+            map.put("precioUni_producto", Carritos.pedido.get(i).getPrecio_inicial());
+            map.put("descuento_producto", Carritos.pedido.get(i).getDescuentoUni());
             map.put("subTotal_producto",  Carritos.pedido.get(i).getPrecio_total());
             mDatabase.child("Pedidos_detalles").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
