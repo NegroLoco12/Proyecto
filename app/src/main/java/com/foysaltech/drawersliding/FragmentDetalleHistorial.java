@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,7 +31,7 @@ import java.util.List;
 
 
 public class FragmentDetalleHistorial extends Fragment {
-    private TextView txt_total_cabecera,txt_fecha_cabecera,txt_estado_cabecera,txt_pedido;
+    private TextView txt_total_cabecera,txt_fecha_cabecera,txt_estado_historial_detalle,txt_pedido;
     private List<productos_historial> elements;
     private List<Productos> elements2;
     AdapterDetallesHistorial listAdapterDetallesHistorial;
@@ -61,7 +62,7 @@ public class FragmentDetalleHistorial extends Fragment {
       View view=inflater.inflate(R.layout.fragment_detalle_historial, container, false);
       txt_total_cabecera= view.findViewById(R.id.txt_total_cabecera);
         txt_fecha_cabecera= view.findViewById(R.id.txt_fecha_cabecera);
-
+        txt_estado_historial_detalle= view.findViewById(R.id.txt_estado_historial_detalle);
         txt_pedido= view.findViewById(R.id.txt_pedido);
         contenedorDetalleHistorial= view.findViewById(R.id.contenedorDetalleHistorial);
         mAuth=FirebaseAuth.getInstance();
@@ -74,7 +75,18 @@ public class FragmentDetalleHistorial extends Fragment {
                 txt_pedido.setText("Nro de Pedido: "+(result.getInt("numero")+1));
                 txt_fecha_cabecera.setText("Fecha del Pedido: "+result.getString("fecha"));
                 txt_total_cabecera.setText("Total del Pedido: "+result.getString("total"));
-
+            if(result.getInt("estado")==0){
+                txt_estado_historial_detalle.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.estado_proceso) );
+                txt_estado_historial_detalle.setText("En Proceso");
+            }
+                if(result.getInt("estado")==1){
+                    txt_estado_historial_detalle.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.estado_procesado) );
+                    txt_estado_historial_detalle.setText("Procesado");
+                }
+                if(result.getInt("estado")==2){
+                    txt_estado_historial_detalle.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.estado_cancelado) );
+                    txt_estado_historial_detalle.setText("Cancelado");
+                }
                 cargar(result.getString("clave_fk"));
 
             }

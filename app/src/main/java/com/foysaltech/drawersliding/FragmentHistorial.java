@@ -72,7 +72,7 @@ public class FragmentHistorial extends Fragment {
                 bundle.putString("clave_fk",item.getClave_pk());
                 bundle.putString("total",item.getTotal());
                 bundle.putInt("numero",a);
-
+                bundle.putInt("estado",item.getEstado());
                 bundle.putString("fecha",item.getFecha());
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 manager.beginTransaction().replace(R.id.container, new FragmentDetalleHistorial()).addToBackStack(null).commit();
@@ -93,6 +93,7 @@ public class FragmentHistorial extends Fragment {
             @Override
 
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                elementsHistorial.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                     historial=dataSnapshot.getValue(Historial.class);

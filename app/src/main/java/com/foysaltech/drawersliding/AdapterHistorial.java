@@ -48,7 +48,7 @@ public class AdapterHistorial extends RecyclerView.Adapter<AdapterHistorial.MyVi
     public  class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView txt_fecha, txt_nro,txt_estado,txt_total;
         private ImageView imagen_historial;
-private CardView cardViewHistorial;
+        private CardView cardViewHistorial;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -68,6 +68,14 @@ private CardView cardViewHistorial;
             if (item.getEstado()==0){
               txt_estado.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.estado_proceso) );
                 txt_estado.setText("En proceso");
+            }
+            if (item.getEstado()==1){
+                txt_estado.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.estado_procesado) );
+                txt_estado.setText("Procesado");
+            }
+            if (item.getEstado()==2){
+                txt_estado.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.estado_cancelado) );
+                txt_estado.setText("Cancelado");
             }
 
 
