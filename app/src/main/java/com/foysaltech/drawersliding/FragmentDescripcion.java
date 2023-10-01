@@ -110,7 +110,7 @@ public class FragmentDescripcion extends Fragment {
                 int c = b + 1;
                 txt_cantidad.setText(c + "");
                 int suma = (b + 1) * precio_inicial;
-                txt_precio_productos.setText(formatea.format(suma )+ " ₲");
+                txt_precio_productos.setText(formatea.format(suma )+ " Gs");
             }
         });
         button_disminuir.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +124,7 @@ public class FragmentDescripcion extends Fragment {
                     int c = b - 1;
                     txt_cantidad.setText(c + "");
                     int suma = (b - 1) * precio_inicial;
-                    txt_precio_productos.setText(formatea.format(suma )+ " ₲");
+                    txt_precio_productos.setText(formatea.format(suma )+ " Gs");
                 }
             }
         });

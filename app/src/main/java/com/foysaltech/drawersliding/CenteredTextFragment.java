@@ -119,7 +119,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         cargar();
-        cargarLayout();
+        //cargarLayout();
         cargarTodo();
         cargarPromo();
         ConnectivityManager con=(ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -231,7 +231,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
             contenedorMenu.setVisibility(View.VISIBLE);
             contenedorPromo.setVisibility(View.VISIBLE);
             cabecera2.setVisibility(View.VISIBLE);
-            linearLayout4.setVisibility(View.VISIBLE);
+         //   linearLayout4.setVisibility(View.VISIBLE);
              linearLayout.setVisibility(View.VISIBLE);
 
          }
@@ -241,7 +241,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
                 contenedorMenu.setVisibility(View.VISIBLE);
                contenedorPromo.setVisibility(View.VISIBLE);
                cabecera2.setVisibility(View.VISIBLE);
-               linearLayout4.setVisibility(View.VISIBLE);
+              // linearLayout4.setVisibility(View.VISIBLE);
                linearLayout.setVisibility(View.VISIBLE);
 
            }
@@ -355,7 +355,7 @@ public void cargarPromo( ){
 
                 cargador2.setVisibility(View.GONE);
                 contenedorPromo.setVisibility(View.VISIBLE);
-                linearLayout4.setVisibility(View.VISIBLE);
+             //   linearLayout4.setVisibility(View.VISIBLE);
             }
             listaAdapterPromo.notifyDataSetChanged();
         }
