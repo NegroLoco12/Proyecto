@@ -231,7 +231,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
             contenedorMenu.setVisibility(View.VISIBLE);
             contenedorPromo.setVisibility(View.VISIBLE);
             cabecera2.setVisibility(View.VISIBLE);
-         //   linearLayout4.setVisibility(View.VISIBLE);
+            linearLayout4.setVisibility(View.VISIBLE);
              linearLayout.setVisibility(View.VISIBLE);
 
          }
@@ -241,7 +241,7 @@ public class CenteredTextFragment extends Fragment implements SearchView.OnQuery
                 contenedorMenu.setVisibility(View.VISIBLE);
                contenedorPromo.setVisibility(View.VISIBLE);
                cabecera2.setVisibility(View.VISIBLE);
-              // linearLayout4.setVisibility(View.VISIBLE);
+               linearLayout4.setVisibility(View.VISIBLE);
                linearLayout.setVisibility(View.VISIBLE);
 
            }
@@ -352,10 +352,10 @@ public void cargarPromo( ){
                 productos=dataSnapshot.getValue(Productos.class);
                  productos.setKey(dataSnapshot.getKey());
                 elementsPromo.add(productos);
-
+                cargarLayout();
                 cargador2.setVisibility(View.GONE);
                 contenedorPromo.setVisibility(View.VISIBLE);
-             //   linearLayout4.setVisibility(View.VISIBLE);
+                linearLayout4.setVisibility(View.VISIBLE);
             }
             listaAdapterPromo.notifyDataSetChanged();
         }
